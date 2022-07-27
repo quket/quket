@@ -1,0 +1,14 @@
+basis = sto-3G
+multiplicity = 1
+charge = 0
+n_electrons = 4
+n_orbitals = 5
+geometry 
+  B 0 0 0 
+  H 1.232 0 0
+maxiter = 100
+method = vqe
+ansatz = adapt
+1rdm = True
+2rdm = True
+adapt_eps = 0.1

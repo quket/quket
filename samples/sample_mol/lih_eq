@@ -1,0 +1,9 @@
+### LiH equilibrium geometry (experiment)
+### Point group D2h
+
+basis        = sto-6G
+n_electrons  = 4
+n_orbitals   = 6
+geometry     
+  Li  0  0  1.595
+  H   0  0  0 

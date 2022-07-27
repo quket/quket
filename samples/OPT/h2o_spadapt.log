@@ -1,0 +1,415 @@
+///////////////////////////////////////////////////////////////////////////////////
+///                                                                             ///
+///                                                                             ///
+///              QQQ       UUU  UUU    KKK   KK    EEEEEEE    TTTTTTT           ///
+///             Q   Q       u    U      K   K       E    E    T  T  T           ///
+///            Q     Q      U    U      K  K        E  E         T              ///
+///            Q     Q      U    U      KKK         EEEE         T              ///
+///            Q QQQ Q      U    U      K  K        E  E         T              ///
+///             Q   Q       U    U      K   K       E    E       T              ///
+///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
+///                                                                             ///
+///                      Quantum Computing Simulator Ver 0.9                    ///
+///                                                                             ///
+///        Copyright 2019-2022                                                  ///
+///        The Quket Developers                                                 ///
+///        All rights Reserved.                                                 ///
+///                                                                             ///
+///////////////////////////////////////////////////////////////////////////////////
+2022-07-27 20:01:22.465203: 
+8 processes x 4 = Total 32 cores
+
+##################### INPUT ########################
+ basis        = STO-6G
+ multiplicity = 1
+ charge       = 0
+ n_electrons  = 6
+ n_orbitals   = 5
+ method       = vqe
+ ansatz       = adapt
+ spinproj = true
+ euler = 5,2,1
+ adapt_mode = spin
+ adapt_max    = 5
+ geometry
+ O  0.1  0  0
+ H 0 -0.757 0.687
+ H 0  0.757 0.587
+ 1rdm         = True
+ maxiter      = 100
+ opt = true
+####################################################
+
++-------------+
+|  Job #   1  |
++-------------+
+Basis set = STO-6G
+
+*** Geometry ******************************
+  O     0.1000000    0.0000000    0.0000000
+  H     0.0000000   -0.7570000    0.6870000
+  H     0.0000000    0.7570000    0.5870000
+*******************************************
+
+Symmetry Cs : Cs(Abelian)
+E[FCI]    = -75.719215312767     (Spin = 1   Ms = 0)
+E[HF]     = -75.678679186538     (Spin = 1   Ms = 0)
+Projecting to spin space : s = 0.0    Ms = 0 
+             Grid points : (alpha, beta, gamma) = (5, 2, 1)
+Projecting to spin space : s = 0.0    Ms = 0 
+             Grid points : (alpha, beta, gamma) = (5, 2, 1)
+NBasis = 7
+
+[Molecular Orbitals]
+---+-------+------------+------------------
+ # |  Sym  |   energy   |     category
+---+-------+------------+------------------
+ 0 |   A'  |   -20.5152 | Frozen Core
+ 1 |   A'  |    -1.2644 | Frozen Core
+ 2 |   A'  |    -0.5931 | Active (occupied)
+ 3 |   A'  |    -0.4664 | Active (occupied)
+ 4 |   A"  |    -0.3991 | Active (occupied)
+ 5 |   A'  |     0.5604 | Active (virtual)
+ 6 |   A'  |     0.6834 | Active (virtual)
+---+-------+------------+------------------
+
+Performing ADAPT-VQE (spin-projection) [spin]
+ADAPT Convergence criterion = 1E-01
+Initial configuration: | 0000111111 >
+VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
+Number of operators in pool: 410
+    1:   E[adapt] = -75.691694254762   <S**2> =  0.00000000000000   Grad = 5.11e-01   Fidelity = 0.000000   CPU Time =  0.16   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
+    2:   E[adapt] = -75.696811707285   <S**2> =  0.00000000000000   Grad = 4.02e-01   Fidelity = 0.000000   CPU Time =  0.15   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 26
+    3:   E[adapt] = -75.707034574819   <S**2> = -0.00000000000000   Grad = 3.56e-01   Fidelity = 0.000000   CPU Time =  0.19   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 75
+    4:   E[adapt] = -75.710391129920   <S**2> = -0.00000000000000   Grad = 2.72e-01   Fidelity = 0.000000   CPU Time =  0.21   <N> =  6.00000000000000   <Sz> = -0.00000000000000   CNOT = 88
+    5:   E[adapt] = -75.713280689853   <S**2> =  0.00000000000000   Grad = 2.30e-01   Fidelity = 0.000000   CPU Time =  0.25   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 101
+adapt_max = ndim = 0.1
+
+-----------ADAPT-VQE finished----------
+number of parameter is  5
+Final: E[adapt] = -75.713280689853   <S**2> = 0.000000000000000   Fidelity = 0.000000
+     Basis             Coef
+| 0000111111 > : +0.9896 +0.0000i
+
+
+ Done: CPU Time =            1.7888
+adapt (vqe) 
+     Basis             Coef
+| 0000111111 > : +0.9896 +0.0000i
+
+ === Computing 1RDM === 
+ === Computing 2RDM === 
+
+Dipole moment from 1RDM (in Debye):
+x = -0.26269  y = 0.09036  z = 1.66736
+| mu | = 1.69035
+
+Dipole moment from relaxed 1RDM (in Debye):
+x = -0.25033     y = -0.12315    z = 1.60273
+| mu | = 1.62683
+
+*** Nuclear Gradients *********************
+            x            y            z
+  O    -0.0063760    0.1228638    0.0324999
+  H    -0.0049272   -0.0402740    0.0340462
+  H     0.0113032   -0.0825898   -0.0665462
+*******************************************
+
+"""""""""""""""""""
+     Cycle 0
+"""""""""""""""""""
+Basis set = STO-6G
+
+*** Geometry ******************************
+  O     0.0048289   -0.0579061   -0.0269355
+  H    -0.0950335   -0.7443112    0.6545250
+  H    -0.1025492    0.7991818    0.6004523
+*******************************************
+
+Symmetry Cs : Cs(Abelian)
+E[FCI]    = -75.718955693020     (Spin = 1   Ms = 0)
+E[HF]     = -75.674345007958     (Spin = 1   Ms = 0)
+Projecting to spin space : s = 0.0    Ms = 0 
+             Grid points : (alpha, beta, gamma) = (5, 2, 1)
+Projecting to spin space : s = 0.0    Ms = 0 
+             Grid points : (alpha, beta, gamma) = (5, 2, 1)
+Performing ADAPT-VQE (spin-projection) [spin]
+ADAPT Convergence criterion = 1E-01
+Initial configuration: | 0000111111 >
+VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
+Number of operators in pool: 410
+    1:   E[adapt] = -75.687241030558   <S**2> =  0.00000000000000   Grad = 5.25e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
+    2:   E[adapt] = -75.694048472943   <S**2> = -0.00000000000000   Grad = 4.25e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 26
+    3:   E[adapt] = -75.703474786808   <S**2> = -0.00000000000000   Grad = 3.74e-01   Fidelity = 0.000000   CPU Time =  0.19   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 75
+    4:   E[adapt] = -75.707234274506   <S**2> =  0.00000000000000   Grad = 3.02e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 88
+    5:   E[adapt] = -75.709778050844   <S**2> = -0.00000000000000   Grad = 2.59e-01   Fidelity = 0.000000   CPU Time =  0.21   <N> =  6.00000000000001   <Sz> = -0.00000000000000   CNOT = 101
+adapt_max = ndim = 0.1
+
+-----------ADAPT-VQE finished----------
+number of parameter is  5
+Final: E[adapt] = -75.709778050844   <S**2> = -0.000000000000000   Fidelity = 0.000000
+     Basis             Coef
+| 0000111111 > : +0.9890 -0.0000i
+
+
+ Done: CPU Time =            1.7152
+ === Computing 1RDM === 
+ === Computing 2RDM === 
+
+*** Nuclear Gradients *********************
+            x            y            z
+  O    -0.0011930   -0.1322211    0.0163328
+  H     0.0095342    0.0670774   -0.0651636
+  H    -0.0083412    0.0651438    0.0488308
+*******************************************
+
+"""""""""""""""""""
+     Cycle 1
+"""""""""""""""""""
+Basis set = STO-6G
+
+*** Geometry ******************************
+  O     0.0050354   -0.0285125   -0.0301925
+  H    -0.0971019   -0.7630282    0.6689370
+  H    -0.1006873    0.7885051    0.5892974
+*******************************************
+
+Symmetry Cs : Cs(Abelian)
+E[FCI]    = -75.723094718418     (Spin = 1   Ms = 0)
+E[HF]     = -75.678139628986     (Spin = 1   Ms = 0)
+Projecting to spin space : s = 0.0    Ms = 0 
+             Grid points : (alpha, beta, gamma) = (5, 2, 1)
+Projecting to spin space : s = 0.0    Ms = 0 
+             Grid points : (alpha, beta, gamma) = (5, 2, 1)
+Performing ADAPT-VQE (spin-projection) [spin]
+ADAPT Convergence criterion = 1E-01
+Initial configuration: | 0000111111 >
+VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
+Number of operators in pool: 410
+    1:   E[adapt] = -75.693680027942   <S**2> = -0.00000000000000   Grad = 5.28e-01   Fidelity = 0.000000   CPU Time =  0.16   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
+    2:   E[adapt] = -75.708710951004   <S**2> = -0.00000000000000   Grad = 4.03e-01   Fidelity = 0.000000   CPU Time =  0.19   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 62
+    3:   E[adapt] = -75.713573153669   <S**2> = -0.00000000000000   Grad = 2.87e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 75
+    4:   E[adapt] = -75.717009931989   <S**2> = -0.00000000000000   Grad = 2.36e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 88
+    5:   E[adapt] = -75.720277277769   <S**2> =  0.00000000000000   Grad = 2.05e-01   Fidelity = 0.000000   CPU Time =  0.22   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 101
+adapt_max = ndim = 0.1
+
+-----------ADAPT-VQE finished----------
+number of parameter is  5
+Final: E[adapt] = -75.720277277769   <S**2> = 0.000000000000000   Fidelity = 0.000000
+     Basis             Coef
+| 0000111111 > : +0.9869 -0.0000i
+
+
+ Done: CPU Time =            1.8441
+ === Computing 1RDM === 
+ === Computing 2RDM === 
+
+*** Nuclear Gradients *********************
+            x            y            z
+  O    -0.0015202   -0.0311596    0.0117418
+  H     0.0029035    0.0087584   -0.0190739
+  H    -0.0013833    0.0224011    0.0073321
+*******************************************
+
+"""""""""""""""""""
+     Cycle 2
+"""""""""""""""""""
+Basis set = STO-6G
+
+*** Geometry ******************************
+  O     0.0078674   -0.0253594   -0.0484402
+  H    -0.0988579   -0.7414146    0.6786955
+  H    -0.1017632    0.7637384    0.5977865
+*******************************************
+
+Symmetry Cs : Cs(Abelian)
+E[FCI]    = -75.723455502987     (Spin = 1   Ms = 0)
+E[HF]     = -75.677175304141     (Spin = 1   Ms = 0)
+Projecting to spin space : s = 0.0    Ms = 0 
+             Grid points : (alpha, beta, gamma) = (5, 2, 1)
+Projecting to spin space : s = 0.0    Ms = 0 
+             Grid points : (alpha, beta, gamma) = (5, 2, 1)
+Performing ADAPT-VQE (spin-projection) [spin]
+ADAPT Convergence criterion = 1E-01
+Initial configuration: | 0000111111 >
+VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
+Number of operators in pool: 410
+    1:   E[adapt] = -75.693389749775   <S**2> =  0.00000000000000   Grad = 5.36e-01   Fidelity = 0.000000   CPU Time =  0.13   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 13
+    2:   E[adapt] = -75.709235732075   <S**2> = -0.00000000000000   Grad = 4.09e-01   Fidelity = 0.000000   CPU Time =  0.17   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 62
+    3:   E[adapt] = -75.714334671515   <S**2> = -0.00000000000000   Grad = 2.86e-01   Fidelity = 0.000000   CPU Time =  0.22   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 75
+    4:   E[adapt] = -75.717911911652   <S**2> =  0.00000000000000   Grad = 2.31e-01   Fidelity = 0.000000   CPU Time =  0.23   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 88
+    5:   E[adapt] = -75.720923351563   <S**2> =  0.00000000000000   Grad = 1.97e-01   Fidelity = 0.000000   CPU Time =  0.21   <N> =  5.99999999999999   <Sz> = -0.00000000000000   CNOT = 101
+adapt_max = ndim = 0.1
+
+-----------ADAPT-VQE finished----------
+number of parameter is  5
+Final: E[adapt] = -75.720923351563   <S**2> = 0.000000000000001   Fidelity = 0.000000
+     Basis             Coef
+| 0000111111 > : +0.9864 +0.0000i
+
+
+ Done: CPU Time =            1.8278
+ === Computing 1RDM === 
+ === Computing 2RDM === 
+
+*** Nuclear Gradients *********************
+            x            y            z
+  O     0.0003398    0.0008119   -0.0022180
+  H    -0.0002403    0.0015790    0.0014265
+  H    -0.0000995   -0.0023909    0.0007915
+*******************************************
+
+"""""""""""""""""""
+     Cycle 3
+"""""""""""""""""""
+Basis set = STO-6G
+
+*** Geometry ******************************
+  O     0.0071942   -0.0248286   -0.0441870
+  H    -0.0985313   -0.7478298    0.6770385
+  H    -0.1014167    0.7696228    0.5951904
+*******************************************
+
+Symmetry Cs : Cs(Abelian)
+E[FCI]    = -75.723513949749     (Spin = 1   Ms = 0)
+E[HF]     = -75.677508514247     (Spin = 1   Ms = 0)
+Projecting to spin space : s = 0.0    Ms = 0 
+             Grid points : (alpha, beta, gamma) = (5, 2, 1)
+Projecting to spin space : s = 0.0    Ms = 0 
+             Grid points : (alpha, beta, gamma) = (5, 2, 1)
+Performing ADAPT-VQE (spin-projection) [spin]
+ADAPT Convergence criterion = 1E-01
+Initial configuration: | 0000111111 >
+VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
+Number of operators in pool: 410
+    1:   E[adapt] = -75.693582975687   <S**2> = -0.00000000000000   Grad = 5.34e-01   Fidelity = 0.000000   CPU Time =  0.15   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
+    2:   E[adapt] = -75.709279515252   <S**2> =  0.00000000000000   Grad = 4.08e-01   Fidelity = 0.000000   CPU Time =  0.19   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 62
+    3:   E[adapt] = -75.714322312432   <S**2> =  0.00000000000000   Grad = 2.86e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000001   <Sz> = -0.00000000000000   CNOT = 75
+    4:   E[adapt] = -75.717874247463   <S**2> = -0.00000000000000   Grad = 2.32e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000000   <Sz> = -0.00000000000000   CNOT = 88
+    5:   E[adapt] = -75.720948213282   <S**2> = -0.00000000000000   Grad = 1.98e-01   Fidelity = 0.000000   CPU Time =  0.23   <N> =  5.99999999999999   <Sz> = -0.00000000000000   CNOT = 101
+adapt_max = ndim = 0.1
+
+-----------ADAPT-VQE finished----------
+number of parameter is  5
+Final: E[adapt] = -75.720948213282   <S**2> = -0.000000000000000   Fidelity = 0.000000
+     Basis             Coef
+| 0000111111 > : +0.9865 -0.0000i
+
+
+ Done: CPU Time =            1.8226
+ === Computing 1RDM === 
+ === Computing 2RDM === 
+
+*** Nuclear Gradients *********************
+            x            y            z
+  O    -0.0000883    0.0037383    0.0003154
+  H    -0.0002170   -0.0022658    0.0015322
+  H     0.0003053   -0.0014725   -0.0018476
+*******************************************
+
+"""""""""""""""""""
+     Cycle 4
+"""""""""""""""""""
+Basis set = STO-6G
+
+*** Geometry ******************************
+  O     0.0073065   -0.0255047   -0.0448579
+  H    -0.0985443   -0.7464480    0.6770304
+  H    -0.1015159    0.7689171    0.5958694
+*******************************************
+
+Symmetry Cs : Cs(Abelian)
+E[FCI]    = -75.723510396265     (Spin = 1   Ms = 0)
+E[HF]     = -75.677464496345     (Spin = 1   Ms = 0)
+Projecting to spin space : s = 0.0    Ms = 0 
+             Grid points : (alpha, beta, gamma) = (5, 2, 1)
+Projecting to spin space : s = 0.0    Ms = 0 
+             Grid points : (alpha, beta, gamma) = (5, 2, 1)
+Performing ADAPT-VQE (spin-projection) [spin]
+ADAPT Convergence criterion = 1E-01
+Initial configuration: | 0000111111 >
+VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
+Number of operators in pool: 410
+    1:   E[adapt] = -75.693561547508   <S**2> =  0.00000000000000   Grad = 5.34e-01   Fidelity = 0.000000   CPU Time =  0.15   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
+    2:   E[adapt] = -75.709281601282   <S**2> = -0.00000000000000   Grad = 4.08e-01   Fidelity = 0.000000   CPU Time =  0.19   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 62
+    3:   E[adapt] = -75.714332564058   <S**2> =  0.00000000000000   Grad = 2.86e-01   Fidelity = 0.000000   CPU Time =  0.22   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 75
+    4:   E[adapt] = -75.717888713524   <S**2> = -0.00000000000000   Grad = 2.32e-01   Fidelity = 0.000000   CPU Time =  0.22   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 88
+    5:   E[adapt] = -75.720951652085   <S**2> =  0.00000000000000   Grad = 1.98e-01   Fidelity = 0.000000   CPU Time =  0.21   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 101
+adapt_max = ndim = 0.1
+
+-----------ADAPT-VQE finished----------
+number of parameter is  5
+Final: E[adapt] = -75.720951652085   <S**2> = 0.000000000000000   Fidelity = 0.000000
+     Basis             Coef
+| 0000111111 > : +0.9865 -0.0000i
+
+
+ Done: CPU Time =            1.7965
+ === Computing 1RDM === 
+ === Computing 2RDM === 
+
+*** Nuclear Gradients *********************
+            x            y            z
+  O    -0.0000110   -0.0022437    0.0002182
+  H     0.0001649    0.0010122   -0.0011173
+  H    -0.0001539    0.0012314    0.0008991
+*******************************************
+
+"""""""""""""""""""
+     Cycle 5
+"""""""""""""""""""
+Basis set = STO-6G
+
+*** Geometry ******************************
+  O     0.0073380   -0.0252630   -0.0450743
+  H    -0.0985785   -0.7463027    0.6772382
+  H    -0.1015133    0.7685302    0.5958780
+*******************************************
+
+Symmetry Cs : Cs(Abelian)
+E[FCI]    = -75.723509389180     (Spin = 1   Ms = 0)
+E[HF]     = -75.677447723821     (Spin = 1   Ms = 0)
+Projecting to spin space : s = 0.0    Ms = 0 
+             Grid points : (alpha, beta, gamma) = (5, 2, 1)
+Projecting to spin space : s = 0.0    Ms = 0 
+             Grid points : (alpha, beta, gamma) = (5, 2, 1)
+Performing ADAPT-VQE (spin-projection) [spin]
+ADAPT Convergence criterion = 1E-01
+Initial configuration: | 0000111111 >
+VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
+Number of operators in pool: 410
+    1:   E[adapt] = -75.693552134605   <S**2> = -0.00000000000000   Grad = 5.34e-01   Fidelity = 0.000000   CPU Time =  0.13   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
+    2:   E[adapt] = -75.709280841872   <S**2> = -0.00000000000000   Grad = 4.08e-01   Fidelity = 0.000000   CPU Time =  0.17   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 62
+    3:   E[adapt] = -75.714334850128   <S**2> = -0.00000000000000   Grad = 2.86e-01   Fidelity = 0.000000   CPU Time =  0.22   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 75
+    4:   E[adapt] = -75.717892394650   <S**2> =  0.00000000000000   Grad = 2.32e-01   Fidelity = 0.000000   CPU Time =  0.22   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 88
+    5:   E[adapt] = -75.720952651540   <S**2> = -0.00000000000000   Grad = 1.98e-01   Fidelity = 0.000000   CPU Time =  0.20   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 101
+adapt_max = ndim = 0.1
+
+-----------ADAPT-VQE finished----------
+number of parameter is  5
+Final: E[adapt] = -75.720952651540   <S**2> = -0.000000000000000   Fidelity = 0.000000
+     Basis             Coef
+| 0000111111 > : +0.9864 +0.0000i
+
+
+ Done: CPU Time =            1.7410
+ === Computing 1RDM === 
+ === Computing 2RDM === 
+
+*** Nuclear Gradients *********************
+            x            y            z
+  O     0.0000060    0.0001207   -0.0000462
+  H    -0.0000118   -0.0000179    0.0000762
+  H     0.0000058   -0.0001028   -0.0000301
+*******************************************
+
+Geometry Optimization Converged in 5 cycles
+
+*** Geometry ******************************
+  O     0.0073380   -0.0252630   -0.0450743
+  H    -0.0985785   -0.7463027    0.6772382
+  H    -0.1015133    0.7685302    0.5958780
+*******************************************
+
+Saved in ./h2o_spadapt.qkt.
+Normal termination of quket at 2022-07-27 20:01:39.642673

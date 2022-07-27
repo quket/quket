@@ -1,0 +1,16 @@
+basis = sto-3G
+multiplicity = 1
+charge = 0
+n_electrons = 6
+n_orbitals = 6
+geometry 
+  B 0 0 0 
+  H 1.232 0 0
+maxiter = 100
+method = vqe
+ansatz = uccsd
+rho = 8
+npar = 4
+1RDM = true
+2rdm = True
+theta_guess =read

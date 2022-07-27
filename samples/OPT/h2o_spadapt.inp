@@ -1,0 +1,18 @@
+ basis        = STO-6G
+ multiplicity = 1
+ charge       = 0
+ n_electrons  = 6
+ n_orbitals   = 5
+ method       = vqe
+ ansatz       = adapt
+ spinproj = true
+ euler = 5,2,1
+ adapt_mode = spin
+ adapt_max    = 5
+ geometry
+ O  0.1  0  0
+ H 0 -0.757 0.687
+ H 0  0.757 0.587
+ 1rdm         = True
+ maxiter      = 100
+ opt = true

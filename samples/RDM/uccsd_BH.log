@@ -1,0 +1,110 @@
+///////////////////////////////////////////////////////////////////////////////////
+///                                                                             ///
+///                                                                             ///
+///              QQQ       UUU  UUU    KKK   KK    EEEEEEE    TTTTTTT           ///
+///             Q   Q       u    U      K   K       E    E    T  T  T           ///
+///            Q     Q      U    U      K  K        E  E         T              ///
+///            Q     Q      U    U      KKK         EEEE         T              ///
+///            Q QQQ Q      U    U      K  K        E  E         T              ///
+///             Q   Q       U    U      K   K       E    E       T              ///
+///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
+///                                                                             ///
+///                      Quantum Computing Simulator Ver 0.9                    ///
+///                                                                             ///
+///        Copyright 2019-2022                                                  ///
+///        The Quket Developers                                                 ///
+///        All rights Reserved.                                                 ///
+///                                                                             ///
+///////////////////////////////////////////////////////////////////////////////////
+2022-07-27 19:55:54.299329: 
+8 processes x 4 = Total 32 cores
+
+##################### INPUT ########################
+basis = sto-3G
+multiplicity = 1
+charge = 0
+n_electrons = 6
+n_orbitals = 6
+geometry 
+  B 0 0 0 
+  H 1.232 0 0
+maxiter = 100
+method = vqe
+ansatz = uccsd
+rho = 8
+npar = 4
+1RDM = true
+2rdm = True
+theta_guess =read
+####################################################
+
++-------------+
+|  Job #   1  |
++-------------+
+Basis set = sto-3G
+
+*** Geometry ******************************
+  B     0.0000000    0.0000000    0.0000000
+  H     1.2320000    0.0000000    0.0000000
+*******************************************
+
+Symmetry Coov : C2v(Abelian)
+E[FCI]    = -24.809939983521     (Spin = 1   Ms = 0)
+E[HF]     = -24.752788371681     (Spin = 1   Ms = 0)
+NBasis = 6
+
+[Molecular Orbitals]
+---+-------+------------+------------------
+ # |  Sym  |   energy   |     category
+---+-------+------------+------------------
+ 0 |   A1  |    -7.3394 | Active (occupied)
+ 1 |   A1  |    -0.5735 | Active (occupied)
+ 2 |   A1  |    -0.2465 | Active (occupied)
+ 3 |   B1  |     0.2699 | Active (virtual)
+ 4 |   B2  |     0.2699 | Active (virtual)
+ 5 |   A1  |     0.7015 | Active (virtual)
+---+-------+------------+------------------
+
+Entered VQE driver
+Performing VQE for uccsd
+Number of VQE parameters: 117
+Initial configuration: |000000111111>
+Convergence criteria: ftol = 1E-09, gtol = 1E-05
+Derivatives: Analytical
+Circuit order: Exp[T1] Exp[T2] |0>
+Initial: E[uccsd] = -24.809870151248  <S**2> = +0.000000  rho = 8  
+      1: E[uccsd] = -24.809870151990  <S**2> = +0.000000  Grad = 2.46e-04  CPU Time =   11.33718  (0.23 / step)
+  Final: E[uccsd] = -24.809870151990  <S**2> = +0.000000  rho = 8 
+
+(uccsd state)
+      Basis              Coef
+| 000000111111 > : +0.9569 +0.0000i
+| 000011001111 > : -0.1521 +0.0000i
+| 001100001111 > : -0.1521 +0.0000i
+
+
+VQE Done: CPU Time =         11.5765
+
+uccsd (vqe) 
+      Basis              Coef
+| 000000111111 > : +0.9569 +0.0000i
+| 000011001111 > : -0.1521 +0.0000i
+| 001100001111 > : -0.1521 +0.0000i
+
+ === Computing 1RDM === 
+ === Computing 2RDM === 
+
+ Nuclear-replusion energy: 2.1476347845779227
+1RDM energy: -37.47191250076908
+2RDM energy: 10.514407564200864
+Total energy: -24.80987015199029
+
+Dipole moment from 1RDM (in Debye):
+x = 0.61106  y = 0.00001  z = 0.00001
+| mu | = 0.61106
+
+Dipole moment from relaxed 1RDM (in Debye):
+x = 0.61044     y = 0.00000    z = -0.00000
+| mu | = 0.61044
+Saved in ./uccsd_BH.qkt.
+Normal termination of quket at 2022-07-27 19:56:06.937886

@@ -1,0 +1,90 @@
+///////////////////////////////////////////////////////////////////////////////////
+///                                                                             ///
+///                                                                             ///
+///              QQQ       UUU  UUU    KKK   KK    EEEEEEE    TTTTTTT           ///
+///             Q   Q       u    U      K   K       E    E    T  T  T           ///
+///            Q     Q      U    U      K  K        E  E         T              ///
+///            Q     Q      U    U      KKK         EEEE         T              ///
+///            Q QQQ Q      U    U      K  K        E  E         T              ///
+///             Q   Q       U    U      K   K       E    E       T              ///
+///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
+///                                                                             ///
+///                      Quantum Computing Simulator Ver 0.9                    ///
+///                                                                             ///
+///        Copyright 2019-2022                                                  ///
+///        The Quket Developers                                                 ///
+///        All rights Reserved.                                                 ///
+///                                                                             ///
+///////////////////////////////////////////////////////////////////////////////////
+2022-07-27 19:55:35.709046: 
+8 processes x 4 = Total 32 cores
+
+##################### INPUT ########################
+basis        = sto-3G
+multiplicity = 1
+charge       = 0
+n_electrons  = 6
+n_orbitals   = 6
+geometry     
+N  0  0  0   
+N  0  0  1.6 
+maxiter      = 0
+taper_off = True
+####################################################
+
++-------------+
+|  Job #   1  |
++-------------+
+Basis set = sto-3G
+
+*** Geometry ******************************
+  N     0.0000000    0.0000000    0.0000000
+  N     0.0000000    0.0000000    1.6000000
+*******************************************
+
+Symmetry Dooh : D2h(Abelian)
+E[FCI]    = -107.513395043114     (Spin = 1   Ms = 0)
+E[HF]     = -107.184846460802     (Spin = 1   Ms = 0)
+Tapering-Off Results:
+List of Tapered-off Qubits:  [0, 1, 2, 4, 6]
+Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z7 Z9 Z10]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9 Z11]
+Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5 Z8 Z9 Z10 Z11]
+Qubit: 6    Tau: 1.0 [Z6 Z7 Z8 Z9 Z10 Z11]
+
+States     transformed.
+Operators  transformed.
+NBasis = 10
+
+[Molecular Orbitals]
+---+-------+------------+------------------
+ # |  Sym  |   energy   |     category
+---+-------+------------+------------------
+ 0 |  B1u  |   -15.4187 | Frozen Core
+ 1 |   Ag  |   -15.4183 | Frozen Core
+ 2 |   Ag  |    -1.0936 | Frozen Core
+ 3 |  B1u  |    -0.7917 | Frozen Core
+ 4 |   Ag  |    -0.4144 | Active (occupied)
+ 5 |  B2u  |    -0.3312 | Active (occupied)
+ 6 |  B3u  |    -0.3312 | Active (occupied)
+ 7 |  B2g  |     0.1295 | Active (virtual)
+ 8 |  B3g  |     0.1295 | Active (virtual)
+ 9 |  B1u  |     0.4271 | Active (virtual)
+---+-------+------------+------------------
+
+Tapering-Off Results:
+List of Tapered-off Qubits:  [0, 1, 2, 4, 6]
+Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z7 Z9 Z10]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9 Z11]
+Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5 Z8 Z9 Z10 Z11]
+Qubit: 6    Tau: 1.0 [Z6 Z7 Z8 Z9 Z10 Z11]
+
+Current states are already tapered-off. No transformation done
+Current operators are already tapered-off. No transformation done
+
+   Skipping job since maxiter = 0.
+
+Saved in ./n2_tapered.qkt.
+Normal termination of quket at 2022-07-27 19:55:37.100497

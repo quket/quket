@@ -1,0 +1,16 @@
+basis        = sto-6G
+multiplicity = 1
+charge       = 0
+n_electrons  = 4
+n_orbitals   = 4
+geometry
+H  0  0  0
+H  0  0  1.2
+H  1.0  0  0
+H  1.0  0  1.2
+method       = qite
+ansatz       = cite
+nterm        = 1
+db           = 0.2
+maxiter      = 1000
+det          = 00001111

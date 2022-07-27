@@ -1,0 +1,20 @@
+### H2O equilibrium geometry optimized by B3LYP/cc-pvtz
+### Point group C2v
+### ROH = 0.9614
+### AHOH = 104.5136
+### O 1s and 2s orbitals are frozen
+
+basis        = sto-6G
+n_electrons  = 6
+n_orbitals   = 5
+geometry:
+O 0.000000    0.000000    0.117698
+H 0.000000    0.760230   -0.470791
+H 0.000000   -0.760230   -0.470791
+
+
+### Same result can be obtained by Zmatrix
+#   geometry:
+#   O
+#   H 1 0.9614
+#   H 1 0.9614 2 104.5136

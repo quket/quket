@@ -1,0 +1,49 @@
+### This sample performs VQE with a modified Kitaev Hamiltonian and Hamiltonian Variational Ansatz of arXiv:2108.13375.
+#
+#                
+#  0           3 
+#  Z \   X   / Z
+#      1 - 2  
+#    Y |   |  Y
+#      6 - 4  
+#    /   X   \
+#  7 Z      Z  5 
+#                
+#
+#  Eg = -4.0100  (TCz in Table I)
+#  Eg = -4.2476  (TCz+h in Table I)
+#
+
+### Parameters for TCz+h
+Jx = -0.1
+Jy = Jx
+Jz = -1
+hx = 0.05/np.sqrt(3)
+hy = hx 
+hz = hx 
+
+### User-defined Hamiltonian in the OpenFermion format.
+### Use \ to indicate a break. 
+hamiltonian =  Jx [X1 X2] + Jx [X4 X6] \
+             + Jy [Y1 Y6] + Jy [Y2 Y4] \
+             + Jz [Z0 Z1] + Jz [Z2 Z3] + Jz [Z4 Z5] + Jz [Z6 Z7] \ 
+             + hx [X0] + hx [X1] + hx [X2] + hx [X3] \
+             + hx [X4] + hx [X5] + hx [X6] + hx [X7] \
+             + hy [Y0] + hy [Y1] + hy [Y2] + hy [Y3] \
+             + hy [Y4] + hy [Y5] + hy [Y6] + hy [Y7] \
+             + hz [Z0] + hz [Z1] + hz [Z2] + hz [Z3] \
+             + hz [Z4] + hz [Z5] + hz [Z6] + hz [Z7] 
+
+### Exact state
+fci2qubit = True
+
+### VQE
+method = vqe
+### HVA (Hamiltonian Variational Ansatz
+ansatz = hva 
+### 4 Layers
+layers = 4
+
+### A little tighter tolerance for BFGS
+ftol = 1e-12
+maxiter = 2000

@@ -1,0 +1,12 @@
+basis        = sto-3G
+multiplicity = 1
+charge       = 0
+n_electrons  = 6
+n_orbitals   = 6
+geometry     
+N  0  0  0
+N  0  0  1.4
+maxiter      = 10000
+ansatz       = 3-upccgsd
+theta_guess  = read
+rho          = 1

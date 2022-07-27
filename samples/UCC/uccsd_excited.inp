@@ -1,0 +1,35 @@
+basis        = sto-3G
+multiplicity = 1
+charge       = 0
+n_electrons  = 4
+n_orbitals   = 6
+geometry:
+Li  0  0.  0
+H   0. 0.  1.6
+excited:
+00011011
+method       = vqe
+ansatz       = uccsd
+rho          = 1
+theta_guess  = zero
+maxiter      = 100
+
+@@@
+
+clear
+basis        = sto-3G
+multiplicity = 1
+charge       = 0
+n_electrons  = 4
+n_orbitals   = 6
+geometry:
+Li  0  0.  0
+H   0. 0.  1.6
+excited:
+00110011
+#theta_guess  = read
+method       = vqe
+ansatz       = uccsd
+rho          = 1
+maxiter      = 30
+gtol = 1e-3

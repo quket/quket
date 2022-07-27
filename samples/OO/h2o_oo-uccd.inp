@@ -1,0 +1,15 @@
+basis       = 6-31g**
+ansatz      = uccd
+oo          = True
+maxiter     = 100
+n_orbitals  = 5
+n_electrons = 6
+multiplicity = 1
+charge       = 0
+taper_off   = True
+#n_secondary_orbitals = 0
+geometry:
+   O
+   H 1 0.9614
+   H 1 0.9614 2 104.5136
+

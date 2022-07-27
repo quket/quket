@@ -1,0 +1,25 @@
+
+basis        = sto-3G
+multiplicity = 1
+charge       = 0
+n_electrons  = 4
+n_orbitals   = 4
+geometry
+H  0  0  0.
+H  0  0  1.0
+H  1.  0.  0
+H  1.  0  1.0
+method       = qite
+ansatz       = anti-hamiltonian 
+msqite        = TRUE
+nterm        = 1
+db           = .1
+maxiter      = 250
+det          = 00001111
+multi:
+00001111   0.5
+00011011   0.5
+00100111   0.5
+00110011   0.5
+nroots = 4
+symmetry_subgroup = C2h

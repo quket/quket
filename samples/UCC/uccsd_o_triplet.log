@@ -1,0 +1,95 @@
+///////////////////////////////////////////////////////////////////////////////////
+///                                                                             ///
+///                                                                             ///
+///              QQQ       UUU  UUU    KKK   KK    EEEEEEE    TTTTTTT           ///
+///             Q   Q       u    U      K   K       E    E    T  T  T           ///
+///            Q     Q      U    U      K  K        E  E         T              ///
+///            Q     Q      U    U      KKK         EEEE         T              ///
+///            Q QQQ Q      U    U      K  K        E  E         T              ///
+///             Q   Q       U    U      K   K       E    E       T              ///
+///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
+///                                                                             ///
+///                      Quantum Computing Simulator Ver 0.9                    ///
+///                                                                             ///
+///        Copyright 2019-2022                                                  ///
+///        The Quket Developers                                                 ///
+///        All rights Reserved.                                                 ///
+///                                                                             ///
+///////////////////////////////////////////////////////////////////////////////////
+2022-07-27 19:53:04.999887: 
+8 processes x 4 = Total 32 cores
+
+##################### INPUT ########################
+basis        = 6-31g
+multiplicity = 3
+charge       = 0
+geometry     
+O 0 0 0
+n_electrons  = 4
+#n_orbitals   = 6
+method       = vqe
+ansatz       = uccsd
+rho          = 1
+spin         = 3
+maxiter      = 100
+####################################################
+
++-------------+
+|  Job #   1  |
++-------------+
+Basis set = 6-31g
+
+*** Geometry ******************************
+  O     0.0000000    0.0000000    0.0000000
+*******************************************
+
+Symmetry SO3 : D2h(Abelian)
+E[FCI]    = -74.809436800453     (Spin = 3   Ms = 2)
+E[HF]     = -74.778234213341     (Spin = 3   Ms = 2)
+NBasis = 9
+
+[Molecular Orbitals]
+---+-------+------------+------------------
+ # |  Sym  |   energy   |     category
+---+-------+------------+------------------
+ 0 |   Ag  |   -20.6744 | Frozen Core
+ 1 |   Ag  |    -1.2388 | Frozen Core
+ 2 |  B1u  |    -0.5609 | Active (occupied)
+ 3 |  B2u  |    -0.2607 | Active (singly-occupied)
+ 4 |  B3u  |    -0.2607 | Active (singly-occupied)
+ 5 |  B1u  |     1.1165 | Active (virtual)
+ 6 |  B2u  |     1.1203 | Active (virtual)
+ 7 |  B3u  |     1.1203 | Active (virtual)
+ 8 |   Ag  |     1.2045 | Active (virtual)
+---+-------+------------+------------------
+
+Entered VQE driver
+Performing VQE for uccsd
+Number of VQE parameters: 108
+Initial configuration: |00000000010111>
+Convergence criteria: ftol = 1E-09, gtol = 1E-05
+Derivatives: Analytical
+Circuit order: Exp[T1] Exp[T2] |0>
+Initial: E[uccsd] = -74.778234213341  <S**2> = +2.000000  rho = 1  
+      1: E[uccsd] = -74.808359460532  <S**2> = +2.000000  Grad = 8.04e-02  CPU Time =    0.29500  (0.01 / step)
+      2: E[uccsd] = -74.809089698053  <S**2> = +2.000001  Grad = 2.81e-02  CPU Time =    0.07741  (0.01 / step)
+      3: E[uccsd] = -74.809231082591  <S**2> = +2.000002  Grad = 1.34e-02  CPU Time =    0.07671  (0.01 / step)
+      4: E[uccsd] = -74.809264885272  <S**2> = +2.000001  Grad = 2.43e-03  CPU Time =    0.07680  (0.01 / step)
+      5: E[uccsd] = -74.809265405338  <S**2> = +2.000001  Grad = 1.27e-03  CPU Time =    0.07686  (0.01 / step)
+      6: E[uccsd] = -74.809265559932  <S**2> = +2.000001  Grad = 2.33e-04  CPU Time =    0.07751  (0.01 / step)
+      7: E[uccsd] = -74.809265568886  <S**2> = +2.000001  Grad = 1.08e-04  CPU Time =    0.07754  (0.01 / step)
+  Final: E[uccsd] = -74.809265568886  <S**2> = +2.000001  rho = 1 
+
+(uccsd state)
+       Basis               Coef
+| 00000000010111 > : +0.9943 +0.0000i
+
+
+VQE Done: CPU Time =          0.7838
+
+uccsd (vqe) 
+       Basis               Coef
+| 00000000010111 > : +0.9943 +0.0000i
+
+ === Computing 1RDM === 
+ === Computing 2RDM === 

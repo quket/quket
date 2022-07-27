@@ -1,0 +1,154 @@
+///////////////////////////////////////////////////////////////////////////////////
+///                                                                             ///
+///                                                                             ///
+///              QQQ       UUU  UUU    KKK   KK    EEEEEEE    TTTTTTT           ///
+///             Q   Q       u    U      K   K       E    E    T  T  T           ///
+///            Q     Q      U    U      K  K        E  E         T              ///
+///            Q     Q      U    U      KKK         EEEE         T              ///
+///            Q QQQ Q      U    U      K  K        E  E         T              ///
+///             Q   Q       U    U      K   K       E    E       T              ///
+///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
+///                                                                             ///
+///                      Quantum Computing Simulator Ver 0.9                    ///
+///                                                                             ///
+///        Copyright 2019-2022                                                  ///
+///        The Quket Developers                                                 ///
+///        All rights Reserved.                                                 ///
+///                                                                             ///
+///////////////////////////////////////////////////////////////////////////////////
+2022-07-27 19:55:23.566754: 
+8 processes x 4 = Total 32 cores
+
+##################### INPUT ########################
+basis        = sto-3G
+multiplicity = 1
+charge       = 0
+n_electrons  = 4
+n_orbitals   = 4
+geometry     
+  H  0.0  0.    0.
+  H  0.0  0.    1.23
+  H  0.0  1.23  0.
+  H  0.0  1.23  1.23
+maxiter      = 0
+taper_off = True
+
+@@@
+
+basis        = 6-31G
+multiplicity = 1
+charge       = 0
+n_electrons  = 4
+n_orbitals   = 8
+geometry     
+  H  0.0  0.    0.
+  H  0.0  0.    1.23
+  H  0.0  1.23  0.
+  H  0.0  1.23  1.23
+maxiter      = 0
+taper_off = True
+####################################################
+
++-------------+
+|  Job #   1  |
++-------------+
+Basis set = sto-3G
+
+*** Geometry ******************************
+  H     0.0000000    0.0000000    0.0000000
+  H     0.0000000    0.0000000    1.2300000
+  H     0.0000000    1.2300000    0.0000000
+  H     0.0000000    1.2300000    1.2300000
+*******************************************
+
+Symmetry D4h : D2h(Abelian)
+E[FCI]    = -1.821877145774     (Spin = 1   Ms = 0)
+E[HF]     = -1.701489363280     (Spin = 1   Ms = 0)
+Tapering-Off Results:
+List of Tapered-off Qubits:  [0, 1, 2, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z6]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7]
+Qubit: 2    Tau: 1.0 [Z2 Z3]
+Qubit: 4    Tau: 1.0 [Z4 Z5]
+
+States     transformed.
+Operators  transformed.
+NBasis = 4
+
+[Molecular Orbitals]
+---+-------+------------+------------------
+ # |  Sym  |   energy   |     category
+---+-------+------------+------------------
+ 0 |   Ag  |    -0.5708 | Active (occupied)
+ 1 |  B2u  |    -0.1244 | Active (occupied)
+ 2 |  B3u  |     0.0831 | Active (virtual)
+ 3 |   Ag  |     0.5717 | Active (virtual)
+---+-------+------------+------------------
+
+Tapering-Off Results:
+List of Tapered-off Qubits:  [0, 1, 2, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z6]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7]
+Qubit: 2    Tau: 1.0 [Z2 Z3]
+Qubit: 4    Tau: 1.0 [Z4 Z5]
+
+Current states are already tapered-off. No transformation done
+Current operators are already tapered-off. No transformation done
+
+   Skipping job since maxiter = 0.
+
+Saved in ./h4_tapered.qkt.
++-------------+
+|  Job #   2  |
++-------------+
+Basis set = 6-31G
+
+*** Geometry ******************************
+  H     0.0000000    0.0000000    0.0000000
+  H     0.0000000    0.0000000    1.2300000
+  H     0.0000000    1.2300000    0.0000000
+  H     0.0000000    1.2300000    1.2300000
+*******************************************
+
+Symmetry D4h : D2h(Abelian)
+E[FCI]    = -1.976664866622     (Spin = 1   Ms = 0)
+E[HF]     = -1.894729211957     (Spin = 1   Ms = 0)
+Tapering-Off Results:
+List of Tapered-off Qubits:  [0, 1, 2, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z6 Z9 Z10 Z13 Z14]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9 Z11 Z13 Z15]
+Qubit: 2    Tau: 1.0 [Z2 Z3 Z12 Z13]
+Qubit: 4    Tau: 1.0 [Z4 Z5 Z8 Z9]
+
+States     transformed.
+Operators  transformed.
+NBasis = 8
+
+[Molecular Orbitals]
+---+-------+------------+------------------
+ # |  Sym  |   energy   |     category
+---+-------+------------+------------------
+ 0 |   Ag  |    -0.6652 | Active (occupied)
+ 1 |  B2u  |    -0.2903 | Active (occupied)
+ 2 |  B3u  |    -0.0645 | Active (virtual)
+ 3 |   Ag  |     0.2442 | Active (virtual)
+ 4 |  B3u  |     0.9120 | Active (virtual)
+ 5 |   Ag  |     0.9908 | Active (virtual)
+ 6 |  B2u  |     1.0386 | Active (virtual)
+ 7 |   Ag  |     1.1517 | Active (virtual)
+---+-------+------------+------------------
+
+Tapering-Off Results:
+List of Tapered-off Qubits:  [0, 1, 2, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z6 Z9 Z10 Z13 Z14]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9 Z11 Z13 Z15]
+Qubit: 2    Tau: 1.0 [Z2 Z3 Z12 Z13]
+Qubit: 4    Tau: 1.0 [Z4 Z5 Z8 Z9]
+
+Current states are already tapered-off. No transformation done
+Current operators are already tapered-off. No transformation done
+
+   Skipping job since maxiter = 0.
+
+Saved in ./h4_tapered.qkt.
+Normal termination of quket at 2022-07-27 19:55:27.576716

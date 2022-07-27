@@ -1,0 +1,17 @@
+# H2O equilibrium geometry optimized by B3LYP/cc-pvtz
+# Point group C3v
+# RNH = 1.01393
+# AHNH = 106.429
+# O 1s and 2s orbitals are frozen
+# 'X' is a dummy atom
+
+basis        = sto-6G
+n_electrons  = 6
+n_orbitals   = 6
+geometry:
+ N
+ X 1 1.01393
+ H 1 1.01393 2 106.429
+ H 1 1.01393 2 106.429 3  120.0
+ H 1 1.01393 2 106.429 3 -120.0
+

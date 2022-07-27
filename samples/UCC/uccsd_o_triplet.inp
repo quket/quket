@@ -1,0 +1,12 @@
+basis        = 6-31g
+multiplicity = 3
+charge       = 0
+geometry     
+O 0 0 0
+n_electrons  = 4
+#n_orbitals   = 6
+method       = vqe
+ansatz       = uccsd
+rho          = 1
+spin         = 3
+maxiter      = 100

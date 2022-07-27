@@ -1,0 +1,6 @@
+pyscf >= 1.7.5
+openfermion >= 0.10.0
+openfermionpyscf >= 0.4
+qulacs >= 0.1.9
+numpy 
+scipy

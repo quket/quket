@@ -1,0 +1,22 @@
+#
+#  H2O_qlanczos.inp
+#  
+#  Perform QLanczos in the basis of Exact Classical Imaginary Time-Evolution.
+#  Expected outcome: Final 
+#
+basis        = sto-3G
+multiplicity = 1
+charge       = 0
+n_electrons  = 6
+n_orbitals   = 5
+geometry
+H   1.818585887 1.250512313 0
+O   0   -0.157587329    0
+H   -1.818585887    1.250512313 0
+method       = qite
+ansatz       = cite_qlanz
+nterm        = 1
+db           = 1
+maxiter      = 1000
+det          = 00001111
+truncate     = 0

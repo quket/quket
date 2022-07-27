@@ -1,0 +1,14 @@
+basis        = 6-31G
+multiplicity = 1
+charge       = 0
+n_electrons  = 4
+n_orbitals   = 7
+spinproj     = true
+spin         = 3
+euler        = 4, 2, 0
+geometry
+O  0  0  0
+maxiter      = 10000
+ansatz       = 2-epccgsd
+rho          = 1
+theta_guess  = read

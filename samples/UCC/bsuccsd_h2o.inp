@@ -1,0 +1,30 @@
+basis        = sto-6G
+multiplicity = 1
+charge       = 0
+n_electrons  = 6
+n_orbitals   = 5
+method       = vqe
+ansatz       = uccsd
+geometry
+H   1.818585887 1.250512313 0
+O   0   -0.157587329    0
+H   -1.818585887    1.250512313 0
+maxiter      = 0
+
+@@@
+maxiter      = 1000
+pyscf_guess  = read
+geometry
+H   1.976723791 1.359252514 0
+O   0   -0.171290575    0
+H   -1.976723791    1.359252514 0
+kappa_guess  = read
+ansatz       = uhf
+
+@@@
+theta_guess  = zero
+kappa_to_T1  = 1
+kappa_guess  = read
+ansatz       = uccsd
+rho          = 1
+

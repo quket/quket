@@ -1,0 +1,12 @@
+basis       = cc-pvtz
+ansatz      = sauccgd
+oo          = True
+maxiter     = 100
+n_orbitals  = 6
+n_electrons = 6
+multiplicity = 1
+charge       = 0
+taper_off   = True
+geometry:
+   N
+   N 1 1.0975

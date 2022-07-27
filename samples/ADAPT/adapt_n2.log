@@ -1,0 +1,120 @@
+///////////////////////////////////////////////////////////////////////////////////
+///                                                                             ///
+///                                                                             ///
+///              QQQ       UUU  UUU    KKK   KK    EEEEEEE    TTTTTTT           ///
+///             Q   Q       u    U      K   K       E    E    T  T  T           ///
+///            Q     Q      U    U      K  K        E  E         T              ///
+///            Q     Q      U    U      KKK         EEEE         T              ///
+///            Q QQQ Q      U    U      K  K        E  E         T              ///
+///             Q   Q       U    U      K   K       E    E       T              ///
+///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
+///                                                                             ///
+///                      Quantum Computing Simulator Ver 0.9                    ///
+///                                                                             ///
+///        Copyright 2019-2022                                                  ///
+///        The Quket Developers                                                 ///
+///        All rights Reserved.                                                 ///
+///                                                                             ///
+///////////////////////////////////////////////////////////////////////////////////
+2022-07-27 19:53:46.805485: 
+8 processes x 4 = Total 32 cores
+
+##################### INPUT ########################
+basis        = sto-3G
+multiplicity = 1
+charge       = 0
+n_electrons  = 6
+n_orbitals   = 6
+geometry     
+  N  1.0 0. 0.
+  N  0.0 0. 0.
+maxiter      = 100
+ansatz       = adapt
+adapt_max   = 1000
+adapt_eps    = 0.05
+adapt_mode = original 
+comment ADAPT N2 mode original
+####################################################
+
++-------------+
+|  Job #   1  |
++-------------+
+Basis set = sto-3G
+
+*** Geometry ******************************
+  N     1.0000000    0.0000000    0.0000000
+  N     0.0000000    0.0000000    0.0000000
+*******************************************
+
+Symmetry Dooh : D2h(Abelian)
+E[FCI]    = -107.520461272524     (Spin = 1   Ms = 0)
+E[HF]     = -107.419532451682     (Spin = 1   Ms = 0)
+NBasis = 10
+
+[Molecular Orbitals]
+---+-------+------------+------------------
+ # |  Sym  |   energy   |     category
+---+-------+------------+------------------
+ 0 |   Ag  |   -15.5593 | Frozen Core
+ 1 |  B1u  |   -15.5545 | Frozen Core
+ 2 |   Ag  |    -1.5401 | Frozen Core
+ 3 |  B1u  |    -0.7100 | Frozen Core
+ 4 |  B2u  |    -0.6461 | Active (occupied)
+ 5 |  B3u  |    -0.6461 | Active (occupied)
+ 6 |   Ag  |    -0.5650 | Active (occupied)
+ 7 |  B2g  |     0.3294 | Active (virtual)
+ 8 |  B3g  |     0.3294 | Active (virtual)
+ 9 |  B1u  |     1.3855 | Active (virtual)
+---+-------+------------+------------------
+
+Performing ADAPT-VQE [original]
+ADAPT Convergence criterion = 5E-02
+Initial configuration: | 000000111111 >
+VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
+Number of operators in pool: 450
+    1:   E[adapt] = -107.447042561269   <S**2> = -0.00000000000000   Grad = 1.51e+00   Fidelity = 0.000000   CPU Time =  0.11   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
+    2:   E[adapt] = -107.474535044054   <S**2> =  0.00000000000000   Grad = 1.23e+00   Fidelity = 0.000000   CPU Time =  0.11   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 26
+    3:   E[adapt] = -107.494254224302   <S**2> =  0.03453996047504   Grad = 8.81e-01   Fidelity = 0.000000   CPU Time =  0.13   <N> =  6.00000000000002   <Sz> =  0.00000000000000   CNOT = 60
+    4:   E[adapt] = -107.496534605146   <S**2> =  0.03454121871732   Grad = 7.28e-01   Fidelity = 0.000000   CPU Time =  0.13   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 73
+    5:   E[adapt] = -107.501419937677   <S**2> =  0.03827487451412   Grad = 6.26e-01   Fidelity = 0.000000   CPU Time =  0.21   <N> =  5.99999999999998   <Sz> = -0.00000000000000   CNOT = 115
+    6:   E[adapt] = -107.505780811952   <S**2> =  0.04109146072042   Grad = 5.28e-01   Fidelity = 0.000000   CPU Time =  0.23   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 157
+    7:   E[adapt] = -107.508294173432   <S**2> =  0.03577062187702   Grad = 4.37e-01   Fidelity = 0.000000   CPU Time =  0.32   <N> =  5.99999999999997   <Sz> = -0.00000000000000   CNOT = 199
+    8:   E[adapt] = -107.513117097632   <S**2> =  0.00726141610435   Grad = 3.86e-01   Fidelity = 0.000000   CPU Time =  0.29   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 233
+    9:   E[adapt] = -107.515378365647   <S**2> =  0.00334722558348   Grad = 3.42e-01   Fidelity = 0.000000   CPU Time =  0.25   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 275
+   10:   E[adapt] = -107.516685468593   <S**2> =  0.00330391829091   Grad = 2.88e-01   Fidelity = 0.000000   CPU Time =  0.22   <N> =  5.99999999999998   <Sz> =  0.00000000000000   CNOT = 288
+   11:   E[adapt] = -107.517928094995   <S**2> =  0.00327452443122   Grad = 2.51e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 301
+   12:   E[adapt] = -107.518218290540   <S**2> =  0.00326469239734   Grad = 2.12e-01   Fidelity = 0.000000   CPU Time =  0.22   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 314
+   13:   E[adapt] = -107.518503892721   <S**2> =  0.00325686107636   Grad = 1.76e-01   Fidelity = 0.000000   CPU Time =  0.23   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 327
+   14:   E[adapt] = -107.519604307310   <S**2> =  0.00016715426539   Grad = 1.31e-01   Fidelity = 0.000000   CPU Time =  0.50   <N> =  6.00000000000004   <Sz> = -0.00000000000000   CNOT = 361
+   15:   E[adapt] = -107.519862441213   <S**2> =  0.00016700092573   Grad = 1.01e-01   Fidelity = 0.000000   CPU Time =  0.37   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 374
+   16:   E[adapt] = -107.520149874617   <S**2> =  0.00016686962236   Grad = 8.18e-02   Fidelity = 0.000000   CPU Time =  0.29   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 387
+gradient norm = 4.219505e-02 < 5.000000e-02
+
+-----------ADAPT-VQE finished----------
+number of parameter is  16
+Final: E[adapt] = -107.520149874617   <S**2> = 0.000166869622358   Fidelity = 0.000000
+      Basis              Coef
+| 000000111111 > : +0.9727 +0.0000i
+| 000011110011 > : -0.1155 +0.0000i
+| 001100111100 > : -0.1155 +0.0000i
+
+
+ Done: CPU Time =            4.6878
+adapt (vqe) 
+      Basis              Coef
+| 000000111111 > : +0.9727 +0.0000i
+| 000011110011 > : -0.1155 +0.0000i
+| 001100111100 > : -0.1155 +0.0000i
+
+ === Computing 1RDM === 
+ === Computing 2RDM === 
+
+Dipole moment from 1RDM (in Debye):
+x = 0.00000  y = 0.00000  z = -0.00000
+| mu | = 0.00000
+
+Dipole moment from relaxed 1RDM (in Debye):
+x = 0.00000     y = 0.00000    z = 0.00000
+| mu | = 0.00000
+Saved in ./adapt_n2.qkt.
+Normal termination of quket at 2022-07-27 19:53:52.568215

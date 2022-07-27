@@ -1,0 +1,48 @@
+### This sample performs VQE with a user-defined Hamiltonian and user-defined ansatz.
+
+### User-defined Hamiltonian in the OpenFermion format.
+### Use \ to indicate a break. 
+hamiltonian = 0.35 [X0 X1 X2] + 0.4 [Y0 Y1 X2] + 0.4 [Z0 Z1 Z2]\
+              +0.1 [X0 Y1 Z2] + 0.5 [Y0 Z1 X2] + 0.6 [Y2]
+
+### Single layer of some correlator unitary : prod_k exp(i theta[k] pauli_list[k])
+pauli_list = X0 Y1, Y1 X2, X0 X2        \
+             Z0 X1 X2, Z0 Z2, Z0 X1 Z2 
+
+### Because det is not defined, |000> will be used for the initial guess.
+### To avoid being trapped in local minima, use random guess for theta.
+method = vqe
+theta_guess = random
+
+### Perform exact diagonalization for 5 lowest states.
+fci2qubit = True
+nroots = 5
+
+@@@ 
+### Two layers of some correlator unitary 
+pauli_list = X0 Y1, Y1 X2, X0 X2       \
+             Z0 X1 X2, Z0 Z2, Z0 X1 Z2 \
+             X0 Y1, Y1 X2, X0 X2       \
+             Z0 X1 X2, Z0 Z2, Z0 X1 Z2 
+
+@@@ 
+### Three layers of some correlator unitary 
+pauli_list = X0 Y1, Y1 X2, X0 X2       \
+             Z0 X1 X2, Z0 Z2, Z0 X1 Z2 \
+             X0 Y1, Y1 X2, X0 X2       \
+             Z0 X1 X2, Z0 Z2, Z0 X1 Z2 \
+             X0 Y1, Y1 X2, X0 X2       \
+             Z0 X1 X2, Z0 Z2, Z0 X1 Z2 
+
+@@@
+### Random initial qubit guess (Haar random)
+det = random
+
+@@@
+### User-defined initial qubit guess. 
+### State is normalized.
+det = 0.5j*|001>+0.6*|010>-0.5*|110>
+
+@@@
+### This also works. 
+det = 0.5j * 001 + 0.6 * 010 - 0.5 * 110

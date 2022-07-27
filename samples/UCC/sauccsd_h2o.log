@@ -1,0 +1,166 @@
+///////////////////////////////////////////////////////////////////////////////////
+///                                                                             ///
+///                                                                             ///
+///              QQQ       UUU  UUU    KKK   KK    EEEEEEE    TTTTTTT           ///
+///             Q   Q       u    U      K   K       E    E    T  T  T           ///
+///            Q     Q      U    U      K  K        E  E         T              ///
+///            Q     Q      U    U      KKK         EEEE         T              ///
+///            Q QQQ Q      U    U      K  K        E  E         T              ///
+///             Q   Q       U    U      K   K       E    E       T              ///
+///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
+///                                                                             ///
+///                      Quantum Computing Simulator Ver 0.9                    ///
+///                                                                             ///
+///        Copyright 2019-2022                                                  ///
+///        The Quket Developers                                                 ///
+///        All rights Reserved.                                                 ///
+///                                                                             ///
+///////////////////////////////////////////////////////////////////////////////////
+2022-07-27 19:52:35.679496: 
+8 processes x 4 = Total 32 cores
+
+##################### INPUT ########################
+basis        = sto-6G
+multiplicity = 1
+charge       = 0
+n_electrons  = 6
+n_orbitals   = 5
+geometry
+H   1.818585887 1.250512313 0
+O   0   -0.157587329    0
+H   -1.818585887    1.250512313 0
+maxiter      = 0
+ansatz        = sauccsd
+
+@@@
+maxiter      = 1000
+pyscf_guess  = read
+geometry
+H   1.976723791 1.359252514 0
+O   0   -0.171290575    0
+H   -1.976723791    1.359252514 0
+ansatz        = sauccsd
+rho          = 10
+####################################################
+
++-------------+
+|  Job #   1  |
++-------------+
+Basis set = sto-6G
+
+*** Geometry ******************************
+  H     1.8185859    1.2505123    0.0000000
+  O     0.0000000   -0.1575873    0.0000000
+  H    -1.8185859    1.2505123    0.0000000
+*******************************************
+
+Symmetry C2v : C2v(Abelian)
+E[FCI]    = -75.463315580335     (Spin = 1   Ms = 0)
+E[HF]     = -74.990092518846     (Spin = 1   Ms = 0)
+NBasis = 7
+
+[Molecular Orbitals]
+---+-------+------------+------------------
+ # |  Sym  |   energy   |     category
+---+-------+------------+------------------
+ 0 |   A1  |   -20.5644 | Frozen Core
+ 1 |   A1  |    -1.1333 | Frozen Core
+ 2 |   B2  |    -0.4142 | Active (occupied)
+ 3 |   B1  |    -0.2535 | Active (occupied)
+ 4 |   A1  |    -0.2445 | Active (occupied)
+ 5 |   A1  |     0.0585 | Active (virtual)
+ 6 |   B1  |     0.0717 | Active (virtual)
+---+-------+------------+------------------
+
+
+   Skipping job since maxiter = 0.
+
+Saved in ./sauccsd_h2o.qkt.
++-------------+
+|  Job #   2  |
++-------------+
+Basis set = sto-6G
+
+*** Geometry ******************************
+  H     1.9767238    1.3592525    0.0000000
+  O     0.0000000   -0.1712906    0.0000000
+  H    -1.9767238    1.3592525    0.0000000
+*******************************************
+
+Symmetry C2v : C2v(Abelian)
+E[FCI]    = -75.460357183497     (Spin = 1   Ms = 0)
+E[HF]     = -74.926806371698     (Spin = 1   Ms = 0)
+NBasis = 7
+
+[Molecular Orbitals]
+---+-------+------------+------------------
+ # |  Sym  |   energy   |     category
+---+-------+------------+------------------
+ 0 |   A1  |   -20.5576 | Frozen Core
+ 1 |   A1  |    -1.1310 | Frozen Core
+ 2 |   B2  |    -0.4128 | Active (occupied)
+ 3 |   B1  |    -0.2298 | Active (occupied)
+ 4 |   A1  |    -0.2236 | Active (occupied)
+ 5 |   A1  |     0.0390 | Active (virtual)
+ 6 |   B1  |     0.0481 | Active (virtual)
+---+-------+------------+------------------
+
+Entered VQE driver
+Performing VQE for sauccsd
+Number of VQE parameters: 27
+Initial configuration: |0000111111>
+Convergence criteria: ftol = 1E-09, gtol = 1E-05
+Derivatives: Analytical
+Circuit order: Exp[T1] Exp[T2] |0>
+Initial: E[sauccsd] = -74.926806371698  <S**2> = +0.000000  rho = 10  
+      1: E[sauccsd] = -75.199036103309  <S**2> = +0.000085  Grad = 1.09e+00  CPU Time =    0.19132  (0.01 / step)
+      2: E[sauccsd] = -75.337981976491  <S**2> = +0.000037  Grad = 8.38e-01  CPU Time =    0.08391  (0.01 / step)
+      3: E[sauccsd] = -75.434502916027  <S**2> = +0.000007  Grad = 2.75e-01  CPU Time =    0.15380  (0.01 / step)
+      4: E[sauccsd] = -75.446254319867  <S**2> = +0.000041  Grad = 1.91e-01  CPU Time =    0.08435  (0.01 / step)
+      5: E[sauccsd] = -75.452407245164  <S**2> = +0.000061  Grad = 6.66e-02  CPU Time =    0.08415  (0.01 / step)
+      6: E[sauccsd] = -75.453643098681  <S**2> = +0.000070  Grad = 4.77e-02  CPU Time =    0.08437  (0.01 / step)
+      7: E[sauccsd] = -75.454878354985  <S**2> = +0.000087  Grad = 2.95e-02  CPU Time =    0.08430  (0.01 / step)
+      8: E[sauccsd] = -75.454974631790  <S**2> = +0.000082  Grad = 1.40e-02  CPU Time =    0.15364  (0.01 / step)
+      9: E[sauccsd] = -75.455009046688  <S**2> = +0.000078  Grad = 5.09e-03  CPU Time =    0.08443  (0.01 / step)
+     10: E[sauccsd] = -75.455011243968  <S**2> = +0.000080  Grad = 1.23e-03  CPU Time =    0.08430  (0.01 / step)
+     11: E[sauccsd] = -75.455011457133  <S**2> = +0.000080  Grad = 4.05e-04  CPU Time =    0.08475  (0.01 / step)
+     12: E[sauccsd] = -75.455011462010  <S**2> = +0.000080  Grad = 4.51e-04  CPU Time =    0.15343  (0.01 / step)
+  Final: E[sauccsd] = -75.455011462010  <S**2> = +0.000080  rho = 10 
+
+(sauccsd state)
+     Basis             Coef
+| 0000111111 > : +0.5780 +0.0000i
+| 0011001111 > : -0.3686 +0.0000i
+| 0110011011 > : -0.1836 +0.0000i
+| 0110100111 > : +0.2583 +0.0000i
+| 1001011011 > : +0.2583 +0.0000i
+| 1001100111 > : -0.1836 +0.0000i
+| 1100110011 > : -0.3516 +0.0000i
+| 1111000011 > : +0.4217 +0.0000i
+
+
+VQE Done: CPU Time =          1.3507
+
+sauccsd (vqe) 
+     Basis             Coef
+| 0000111111 > : +0.5780 +0.0000i
+| 0011001111 > : -0.3686 +0.0000i
+| 0110011011 > : -0.1836 +0.0000i
+| 0110100111 > : +0.2583 +0.0000i
+| 1001011011 > : +0.2583 +0.0000i
+| 1001100111 > : -0.1836 +0.0000i
+| 1100110011 > : -0.3516 +0.0000i
+| 1111000011 > : +0.4217 +0.0000i
+
+ === Computing 1RDM === 
+ === Computing 2RDM === 
+
+Dipole moment from 1RDM (in Debye):
+x = 0.00000  y = 0.01668  z = 0.00000
+| mu | = 0.01668
+
+Dipole moment from relaxed 1RDM (in Debye):
+x = -0.00000     y = -0.00231    z = -0.00000
+| mu | = 0.00231
+Saved in ./sauccsd_h2o.qkt.
+Normal termination of quket at 2022-07-27 19:52:38.601868

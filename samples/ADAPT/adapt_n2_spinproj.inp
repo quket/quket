@@ -1,0 +1,16 @@
+basis        = sto-3G
+multiplicity = 1
+charge       = 0
+n_electrons  = 6
+n_orbitals   = 6
+geometry     
+  N  1.0 0. 0.
+  N  0.0 0. 0.
+maxiter      = 100
+ansatz       = adapt
+adapt_max   = 1000
+adapt_eps    = 0.05
+adapt_mode = original
+SpinProj = True
+Euler = 5, 2
+comment Spin-projection ADAPT N2 mode original

@@ -1,0 +1,27 @@
+basis        = sto-3G
+multiplicity = 1
+charge       = 0
+n_electrons  = 4
+n_orbitals   = 4
+geometry     
+  H  0.0  0.    0.
+  H  0.0  0.    1.23
+  H  0.0  1.23  0.
+  H  0.0  1.23  1.23
+maxiter      = 0
+taper_off = True
+
+@@@
+
+basis        = 6-31G
+multiplicity = 1
+charge       = 0
+n_electrons  = 4
+n_orbitals   = 8
+geometry     
+  H  0.0  0.    0.
+  H  0.0  0.    1.23
+  H  0.0  1.23  0.
+  H  0.0  1.23  1.23
+maxiter      = 0
+taper_off = True

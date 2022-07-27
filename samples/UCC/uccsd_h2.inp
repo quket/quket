@@ -1,0 +1,11 @@
+basis        = sto-3G
+multiplicity = 1
+charge       = 0
+n_electrons  = 2
+n_orbitals   = 2
+geometry     
+H  0  0  0   
+H  0  0  0.74
+maxiter      = 100
+ansatz       = uccsd
+rho          = 1

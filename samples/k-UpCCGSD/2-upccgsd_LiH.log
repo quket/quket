@@ -1,0 +1,101 @@
+///////////////////////////////////////////////////////////////////////////////////
+///                                                                             ///
+///                                                                             ///
+///              QQQ       UUU  UUU    KKK   KK    EEEEEEE    TTTTTTT           ///
+///             Q   Q       u    U      K   K       E    E    T  T  T           ///
+///            Q     Q      U    U      K  K        E  E         T              ///
+///            Q     Q      U    U      KKK         EEEE         T              ///
+///            Q QQQ Q      U    U      K  K        E  E         T              ///
+///             Q   Q       U    U      K   K       E    E       T              ///
+///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
+///                                                                             ///
+///                      Quantum Computing Simulator Ver 0.9                    ///
+///                                                                             ///
+///        Copyright 2019-2022                                                  ///
+///        The Quket Developers                                                 ///
+///        All rights Reserved.                                                 ///
+///                                                                             ///
+///////////////////////////////////////////////////////////////////////////////////
+2022-07-27 19:56:47.573560: 
+8 processes x 4 = Total 32 cores
+
+##################### INPUT ########################
+basis        = sto-3G
+multiplicity = 1
+charge       = 0
+n_electrons  = 4
+n_orbitals   = 6
+geometry     
+Li  0  0  0
+H  0  0  1.595
+maxiter      = 500
+ansatz       = 2-upccgsd
+theta_guess  = read
+rho          = 1
+####################################################
+
++-------------+
+|  Job #   1  |
++-------------+
+Basis set = sto-3G
+
+*** Geometry ******************************
+  Li    0.0000000    0.0000000    0.0000000
+  H     0.0000000    0.0000000    1.5950000
+*******************************************
+
+Symmetry Coov : C2v(Abelian)
+E[FCI]    = -7.882401932289     (Spin = 1   Ms = 0)
+E[HF]     = -7.862023860127     (Spin = 1   Ms = 0)
+TODO: Pauli_list is not supported for ansatz = 2-upccgsd.
+TODO: Pauli_list is not supported for ansatz = 2-upccgsd.
+NBasis = 6
+
+[Molecular Orbitals]
+---+-------+------------+------------------
+ # |  Sym  |   energy   |     category
+---+-------+------------+------------------
+ 0 |   A1  |    -2.3486 | Active (occupied)
+ 1 |   A1  |    -0.2857 | Active (occupied)
+ 2 |   A1  |     0.0783 | Active (virtual)
+ 3 |   B1  |     0.1639 | Active (virtual)
+ 4 |   B2  |     0.1639 | Active (virtual)
+ 5 |   A1  |     0.5491 | Active (virtual)
+---+-------+------------+------------------
+
+Entered VQE driver
+Number of parameters: Singles 15    Doubles 15    Total 60
+Performing VQE for 2-upccgsd
+Number of VQE parameters: 60
+Initial configuration: |000000001111>
+Convergence criteria: ftol = 1E-09, gtol = 1E-05
+Derivatives: Analytical
+Circuit order: Exp[T1] Exp[T2] |0>
+    1: E[2-UpCCGSD] = -7.882395917018  <S**2> = -0.000000000000001  Grad = 1.36e-04  CPU Time =  0.88  (0.02 / step)
+Final: E[2-UpCCGSD] = -7.882395917018  <S**2> = -0.000000000000001
+
+(2-UpCCGSD state)
+      Basis              Coef
+| 000000001111 > : +0.9871 +0.0000i
+| 110000000011 > : -0.1136 +0.0000i
+
+
+VQE Done: CPU Time =          0.9106
+
+2-upccgsd (vqe) 
+      Basis              Coef
+| 000000001111 > : +0.9871 +0.0000i
+| 110000000011 > : -0.1136 +0.0000i
+
+ === Computing 1RDM === 
+ === Computing 2RDM === 
+
+Dipole moment from 1RDM (in Debye):
+x = 0.00027  y = -0.00011  z = -4.62090
+| mu | = 4.62090
+
+Dipole moment from relaxed 1RDM (in Debye):
+x = -0.00004     y = -0.00020    z = -4.62084
+| mu | = 4.62084
+Saved in ./2-upccgsd_LiH.qkt.
+Normal termination of quket at 2022-07-27 19:56:49.628405

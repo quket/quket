@@ -1,0 +1,15 @@
+### Linear H6 (model optimized with ccsd/sto-6g) 
+### Separated by 1
+### Point group D2h
+
+basis        = sto-6G
+n_electrons  = 6
+n_orbitals   = 6
+geometry:
+H 0 0 0 
+H 0 0 0.733
+H 0 0 1.466
+H 0 0 2.199
+H 0 0 2.932
+H 0 0 3.665
+

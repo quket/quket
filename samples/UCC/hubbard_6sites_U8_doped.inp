@@ -1,0 +1,12 @@
+basis        = hubbard
+n_electrons  = 7
+multiplicity = 2
+hubbard_nx   = 6
+hubbard_u    = 8
+method       = vqe
+ansatz       = uhf
+run_fci      = 0
+
+@@@
+method       = vqe
+ansatz       = uccsd

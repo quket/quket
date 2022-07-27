@@ -1,0 +1,9 @@
+### N2 equilibrium geometry (experiment)
+### Point group D2h
+### N 1s and 2s orbitals are frozen
+basis        = sto-6G
+n_electrons  = 6
+n_orbitals   = 6
+geometry     
+  N  0  0  1.0975
+  N  0  0  0 

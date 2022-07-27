@@ -1,0 +1,26 @@
+basis        = sto-3G
+multiplicity = 1
+charge       = 0
+n_electrons  = 6
+n_orbitals   = 6
+geometry
+N  0  0  0
+N  0  0  1.6
+method       = qite
+ansatz       = cite
+nterm        = 1
+shift = step
+db           = 0.1
+maxiter      = 1000
+det          = 0000111111
+multi:
+0000111111  0.5
+0011001111  0.5
+1100110011  0.5
+1100001111  0.5
+0011110011  0.5
+msite = True
+nroots = 8
+#debug = True
+#symmetry = False
+#run_qubitfci = true
