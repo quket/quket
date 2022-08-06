@@ -16,8 +16,10 @@
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-07-27 19:55:35.709046: 
+2022-08-06 23:23:15.252447: 
 8 processes x 4 = Total 32 cores
+API for qulacs: None
+Number of cpus in the main node (pinode01): 8
 
 ##################### INPUT ########################
 basis        = sto-3G
@@ -46,7 +48,7 @@ Symmetry Dooh : D2h(Abelian)
 E[FCI]    = -107.513395043114     (Spin = 1   Ms = 0)
 E[HF]     = -107.184846460802     (Spin = 1   Ms = 0)
 Tapering-Off Results:
-List of Tapered-off Qubits:  [0, 1, 2, 4, 6]
+List of redundant qubits:  [0, 1, 2, 4, 6]
 Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z7 Z9 Z10]
 Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9 Z11]
 Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
@@ -74,7 +76,7 @@ NBasis = 10
 ---+-------+------------+------------------
 
 Tapering-Off Results:
-List of Tapered-off Qubits:  [0, 1, 2, 4, 6]
+List of redundant qubits:  [0, 1, 2, 4, 6]
 Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z7 Z9 Z10]
 Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9 Z11]
 Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
@@ -87,4 +89,4 @@ Current operators are already tapered-off. No transformation done
    Skipping job since maxiter = 0.
 
 Saved in ./n2_tapered.qkt.
-Normal termination of quket at 2022-07-27 19:55:37.100497
+Normal termination of quket at 2022-08-06 23:23:16.668898

@@ -25,8 +25,6 @@ import qulacs
 from qulacs import DensityMatrix
 try:
     from mpi4py import MPI
-    
-    
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     nprocs = comm.Get_size()
@@ -65,13 +63,13 @@ except ImportError as error:
     MPI = MPI()
     rank = 0
     nprocs = 1
+    name = 'dummy'
 
+
+main_rank = 0
 if rank == 0:
     main_rank = 1
-else:
-    main_rank = 0
 
-# Wrappers
 def bcast(buf, root=0):
     from quket.lib import QuantumState
     if nprocs == 1:
@@ -117,14 +115,32 @@ def allgather(sendobj, root=0):
     return bcast(recvobj, root=root)
 
 def send(obj, dest, tag=0):
+    from quket.lib import QuantumState
     if nprocs == 1:
         pass
-    comm.send(obj, dest, tag)
+    if isinstance(obj, (QuantumState, qulacs.QuantumState)):
+        vec = obj.get_vector()
+        comm.send(vec, dest, tag)
+    else:
+        comm.send(obj, dest, tag)
+
 
 def recv(buf=None, source=0, tag=0):
+    from quket.lib import QuantumState
+    def recv_wrapper(source=0, tag=0):
+        if nprocs == 1:
+            return buf
+        else:
+            comm.recv(source, tag)
     if nprocs == 1:
-        return obj
-    return comm.recv(source, tag)
+        return buf
+    if isinstance(buf, (QuantumState, qulacs.QuantumState)):
+        vec = recv_wrapper(source, tag)
+        buf.load(vec)
+        return buf
+    else:
+        return recv_wrapper(source, tag)
+
 
 def barrier():    
     comm.Barrier()
@@ -167,9 +183,21 @@ def myrange(ndim, backward=False):
         
     return ipos, my_ndim
 
+
+## The main rank of all nodes and the top rank of each node
+proc_list = gather(MPI.Get_processor_name())
+proc_list = bcast(proc_list)
+top_rank = 0
+my_top_rank = proc_list.index(name)
+if my_top_rank == rank:
+    top_rank = 1
+    
+
+# Wrappers
+
 def mem_proc_dict():
-    import quket.utils.memory as mem
-    mem_list = gather(mem.available())
+    import quket._sys as sys
+    mem_list = gather(sys.mem_available())
     proc_list = gather(MPI.Get_processor_name())
     mem_list = bcast(mem_list)
     proc_list = bcast(proc_list)
@@ -178,3 +206,5 @@ def mem_proc_dict():
     for proc, mem in mem_dict.items(): 
         proc_dict[proc] = proc_list.count(proc)
     return mem_dict, proc_dict
+
+

@@ -28,7 +28,7 @@ UCC_test_list = {
 }
 
 Excited_test_list = {
-"UCC/uccsd_excited": [-7.882313805063, +0.000000000105260,  -7.766572162159, +1.999927671243692, -7.882313805063, +0.000000000105260,  -7.749271291916, 0.000125391641885]
+"UCC/uccsd_excited": [-7.882313805326, 0.0, -7.766574315471, 1.999958, -7.882313805326, 0.0, -7.749338511278, 0.000388] 
 }
 # Final: E[uccsd] = -7.882313805063  <S**2> = +0.000000000105260  rho = 1
 # Final: E[uccsd] = -7.766572162159  <S**2> = +1.999927671243692  rho = 1
@@ -161,7 +161,7 @@ OPT_test_list={
 
         }
 OO_test_list={
-        "OO/h2o_oo-uccd":-76.07434929770854,
+        "OO/h2o_oo-uccd":-76.07359608655948,
 # Final: E[uccd] = -76.028435792671  <S**2> = +0.000000000707055  CNOT = 204  rho = 1
 # Final: E[uccd] = -76.068512228342  <S**2> = +0.000000000137134  CNOT = 204  rho = 1
 # Final: E[uccd] = -76.073209797554  <S**2> = +0.000000000064151  CNOT = 204  rho = 1
@@ -552,7 +552,7 @@ if Excited:
                 except:
                     flag = False
             for i in range(len(results)): 
-                if i%2 == 0 and isclose(ref[i], results[i], abs_tol=1e-6):
+                if i%2 == 0 and isclose(ref[i], results[i], abs_tol=1e-5):
                     # Energy criteria
                     pass
                 elif i%2 == 1 and isclose(ref[i], results[i], abs_tol=1e-4):

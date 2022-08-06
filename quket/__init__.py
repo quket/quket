@@ -13,10 +13,13 @@
 
 import os, sys
 from quket import config as cf
+from quket.mpilib import mpilib as mpi
 
 from ._version import __version__
 
-
+from quket.ansatze import(
+    create_exp_state,
+    )
 from quket.fileio import(
     printmat,
     printmath,
@@ -29,9 +32,6 @@ from quket.utils import(
 from quket.opelib import(
     evolve,
     devolve,
-    create_exp_state,
-    )
-from quket.opelib import(
     OpenFermionOperator2QulacsObservable,
     OpenFermionOperator2QulacsGeneralOperator,
     )
@@ -80,7 +80,13 @@ def create(read=None, log=None, job=0, **kwds):
 
     Author(s): Yuma Shimomoto, Takashi Tsuchimochi
     """
+    ### Configure setting for interactive mode
     cf.debug = False
+    cf._user_api = None
+    cf.mem, cf.cpu = mpi.mem_proc_dict()
+    cf.nprocs_my_node = cf.cpu[mpi.name]
+    n_cores_allowed = (cf.nthreads-1)*cf.nprocs_my_node + 1
+
     if read is not None:
         # Setting input name
         read = read.strip()

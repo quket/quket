@@ -34,7 +34,7 @@ from quket.lib import (
     FermionOperator
 )
 from quket.opelib import get_excite_dict, get_excite_dict_sf
-from quket.tapering import tapering_off_operator, transform_pauli_list, transform_pauli
+from quket.tapering import tapering_off_operator
 from quket.opelib import excitation
 import quket.config as cf
 
@@ -1107,10 +1107,10 @@ def get_pauli_list_adapt(Quket):
             pauli_list, allowed_pauli_list =  get_allowed_pauli_list(Quket.tapering, pauli_list)
             ### Then make a list for Ncnot for each pauli
             ncnot_list = NCNOT_list_adapt(pauli_list, Quket.adapt.mode)
-        pauli_list, allowed_pauli_list = transform_pauli_list(Quket.tapering, pauli_list, reduce=True)
+        pauli_list, allowed_pauli_list = Quket.tapering.transform_pauli_list(pauli_list, reduce=True)
         Quket.tapered["pauli_list"] = True
 
-    elif Quket.symmetry_pauli:
+    elif Quket.symmetry:
         pauli_list, allowed_pauli_list =  get_allowed_pauli_list(Quket.tapering, pauli_list)
 
     ### Remove the same operators
@@ -1174,7 +1174,7 @@ def get_allowed_pauli_list(Tapering, pauli_list):
         i+=1
         if type(pauli) is list:
             for pauli_ in pauli:
-                new_pauli_, allowed = transform_pauli(Tapering, pauli_, reduce=False)
+                new_pauli_, allowed = Tapering.transform_pauli(pauli_, reduce=False)
                 #prints(i, allowed)
                 if not allowed:
                     allowed_pauli_list.append(False)
@@ -1186,7 +1186,7 @@ def get_allowed_pauli_list(Tapering, pauli_list):
                 continue
 
         else:
-            new_pauli, allowed = transform_pauli(Tapering, pauli, reduce=False)
+            new_pauli, allowed = Tapering.transform_pauli(pauli, reduce=False)
             if allowed:
                 new_pauli_list.append(pauli)
                 allowed_pauli_list.append(True)

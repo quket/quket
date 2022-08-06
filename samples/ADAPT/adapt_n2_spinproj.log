@@ -16,8 +16,10 @@
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-07-27 19:54:16.775605: 
+2022-08-06 23:22:11.623788: 
 8 processes x 4 = Total 32 cores
+API for qulacs: None
+Number of cpus in the main node (pinode01): 8
 
 ##################### INPUT ########################
 basis        = sto-3G
@@ -49,10 +51,18 @@ Basis set = sto-3G
 *******************************************
 
 Symmetry Dooh : D2h(Abelian)
-E[FCI]    = -107.520461272525     (Spin = 1   Ms = 0)
+E[FCI]    = -107.520461272524     (Spin = 1   Ms = 0)
 E[HF]     = -107.419532451682     (Spin = 1   Ms = 0)
 Projecting to spin space : s = 0.0    Ms = 0 
              Grid points : (alpha, beta, gamma) = (5, 2, 0)
+Tapering-Off Results:
+List of redundant qubits:  [0, 2, 4, 6]
+Qubit: 0    Tau: 1 [Z0 Z1 Z8 Z9]
+Qubit: 2    Tau: 1 [Z2 Z3 Z8 Z9 Z10 Z11]
+Qubit: 4    Tau: 1 [Z4 Z5 Z10 Z11]
+Qubit: 6    Tau: 1 [Z6 Z7 Z8 Z9 Z10 Z11]
+
+pauli_list found.
 Projecting to spin space : s = 0.0    Ms = 0 
              Grid points : (alpha, beta, gamma) = (5, 2, 0)
 NBasis = 10
@@ -73,26 +83,34 @@ NBasis = 10
  9 |  B1u  |     1.3855 | Active (virtual)
 ---+-------+------------+------------------
 
+Tapering-Off Results:
+List of redundant qubits:  [0, 2, 4, 6]
+Qubit: 0    Tau: 1 [Z0 Z1 Z8 Z9]
+Qubit: 2    Tau: 1 [Z2 Z3 Z8 Z9 Z10 Z11]
+Qubit: 4    Tau: 1 [Z4 Z5 Z10 Z11]
+Qubit: 6    Tau: 1 [Z6 Z7 Z8 Z9 Z10 Z11]
+
+pauli_list found.
 Performing ADAPT-VQE (spin-projection) [original]
 ADAPT Convergence criterion = 5E-02
 Initial configuration: | 000000111111 >
 VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
-Number of operators in pool: 450
-    1:   E[adapt] = -107.447042561269   <S**2> =  0.00000000000000   Grad = 1.51e+00   Fidelity = 0.000000   CPU Time =  0.33   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
-    2:   E[adapt] = -107.474535044054   <S**2> = -0.00000000000000   Grad = 1.23e+00   Fidelity = 0.000000   CPU Time =  0.33   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 26
-    3:   E[adapt] = -107.500162692703   <S**2> = -0.00000000000000   Grad = 8.81e-01   Fidelity = 0.000000   CPU Time =  0.48   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 60
-    4:   E[adapt] = -107.502443039806   <S**2> = -0.00000000000000   Grad = 6.97e-01   Fidelity = 0.000000   CPU Time =  0.35   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 73
-    5:   E[adapt] = -107.508988639034   <S**2> = -0.00000000000000   Grad = 5.90e-01   Fidelity = 0.000000   CPU Time =  0.72   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 115
-    6:   E[adapt] = -107.514540192499   <S**2> = -0.00000000000000   Grad = 4.51e-01   Fidelity = 0.000000   CPU Time =  0.68   <N> =  6.00000000000002   <Sz> =  0.00000000000000   CNOT = 157
-    7:   E[adapt] = -107.515827260855   <S**2> = -0.00000000000000   Grad = 3.18e-01   Fidelity = 0.000000   CPU Time =  0.57   <N> =  5.99999999999999   <Sz> = -0.00000000000000   CNOT = 170
-    8:   E[adapt] = -107.517050988224   <S**2> =  0.00000000000000   Grad = 2.87e-01   Fidelity = 0.000000   CPU Time =  0.44   <N> =  6.00000000000002   <Sz> =  0.00000000000000   CNOT = 183
-    9:   E[adapt] = -107.517333943445   <S**2> = -0.00000000000000   Grad = 2.55e-01   Fidelity = 0.000000   CPU Time =  0.37   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 196
-   10:   E[adapt] = -107.517612430891   <S**2> =  0.00000000000000   Grad = 2.26e-01   Fidelity = 0.000000   CPU Time =  0.39   <N> =  5.99999999999998   <Sz> =  0.00000000000000   CNOT = 209
-   11:   E[adapt] = -107.518439685128   <S**2> =  0.00000000000000   Grad = 1.94e-01   Fidelity = 0.000000   CPU Time =  0.74   <N> =  6.00000000000000   <Sz> = -0.00000000000000   CNOT = 251
-   12:   E[adapt] = -107.519230426254   <S**2> =  0.00000000000000   Grad = 1.57e-01   Fidelity = 0.000000   CPU Time =  0.69   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 293
-   13:   E[adapt] = -107.519479636381   <S**2> =  0.00000000000000   Grad = 1.12e-01   Fidelity = 0.000000   CPU Time =  0.61   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 306
-   14:   E[adapt] = -107.519755808291   <S**2> = -0.00000000000000   Grad = 9.56e-02   Fidelity = 0.000000   CPU Time =  0.65   <N> =  6.00000000000002   <Sz> =  0.00000000000000   CNOT = 319
-   15:   E[adapt] = -107.520386372342   <S**2> = -0.00000000000000   Grad = 6.71e-02   Fidelity = 0.000000   CPU Time =  0.79   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 353
+Number of operators in pool: 57
+    1:   E[adapt] = -107.447042561269   <S**2> = -0.00000000000000   Grad = 1.51e+00   Fidelity = 0.000000   CPU Time =  0.27   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
+    2:   E[adapt] = -107.474535044054   <S**2> =  0.00000000000000   Grad = 1.23e+00   Fidelity = 0.000000   CPU Time =  0.27   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 26
+    3:   E[adapt] = -107.500162692703   <S**2> = -0.00000000000000   Grad = 8.81e-01   Fidelity = 0.000000   CPU Time =  0.42   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 60
+    4:   E[adapt] = -107.502443039806   <S**2> = -0.00000000000000   Grad = 6.97e-01   Fidelity = 0.000000   CPU Time =  0.29   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 73
+    5:   E[adapt] = -107.508988639034   <S**2> = -0.00000000000000   Grad = 5.90e-01   Fidelity = 0.000000   CPU Time =  0.68   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 115
+    6:   E[adapt] = -107.514540192499   <S**2> = -0.00000000000000   Grad = 4.51e-01   Fidelity = 0.000000   CPU Time =  0.63   <N> =  6.00000000000003   <Sz> =  0.00000000000000   CNOT = 157
+    7:   E[adapt] = -107.515827260855   <S**2> = -0.00000000000000   Grad = 3.18e-01   Fidelity = 0.000000   CPU Time =  0.40   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 170
+    8:   E[adapt] = -107.517050988224   <S**2> = -0.00000000000000   Grad = 2.87e-01   Fidelity = 0.000000   CPU Time =  0.41   <N> =  6.00000000000002   <Sz> =  0.00000000000000   CNOT = 183
+    9:   E[adapt] = -107.517333943445   <S**2> =  0.00000000000000   Grad = 2.55e-01   Fidelity = 0.000000   CPU Time =  0.34   <N> =  6.00000000000000   <Sz> = -0.00000000000000   CNOT = 196
+   10:   E[adapt] = -107.517612430891   <S**2> = -0.00000000000000   Grad = 2.26e-01   Fidelity = 0.000000   CPU Time =  0.34   <N> =  5.99999999999999   <Sz> = -0.00000000000000   CNOT = 209
+   11:   E[adapt] = -107.518439685128   <S**2> = -0.00000000000000   Grad = 1.94e-01   Fidelity = 0.000000   CPU Time =  0.70   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 251
+   12:   E[adapt] = -107.519230426254   <S**2> = -0.00000000000000   Grad = 1.57e-01   Fidelity = 0.000000   CPU Time =  0.68   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 293
+   13:   E[adapt] = -107.519479636381   <S**2> =  0.00000000000000   Grad = 1.12e-01   Fidelity = 0.000000   CPU Time =  0.59   <N> =  6.00000000000002   <Sz> =  0.00000000000000   CNOT = 306
+   14:   E[adapt] = -107.519755808291   <S**2> = -0.00000000000000   Grad = 9.56e-02   Fidelity = 0.000000   CPU Time =  0.48   <N> =  6.00000000000003   <Sz> = -0.00000000000000   CNOT = 319
+   15:   E[adapt] = -107.520386372342   <S**2> = -0.00000000000000   Grad = 6.71e-02   Fidelity = 0.000000   CPU Time =  0.70   <N> =  5.99999999999999   <Sz> = -0.00000000000000   CNOT = 353
 gradient norm = 1.827007e-03 < 5.000000e-02
 
 -----------ADAPT-VQE finished----------
@@ -104,7 +122,7 @@ Final: E[adapt] = -107.520386372342   <S**2> = -0.000000000000000   Fidelity = 0
 | 001100111100 > : -0.1148 +0.0000i
 
 
- Done: CPU Time =            8.9435
+ Done: CPU Time =            8.9060
 adapt (vqe) 
       Basis              Coef
 | 000000111111 > : +0.9727 +0.0000i
@@ -115,11 +133,11 @@ adapt (vqe)
  === Computing 2RDM === 
 
 Dipole moment from 1RDM (in Debye):
-x = 0.00000  y = 0.00000  z = -0.00000
+x = -0.00000  y = 0.00000  z = -0.00000
 | mu | = 0.00000
 
 Dipole moment from relaxed 1RDM (in Debye):
-x = 0.00000     y = 0.00000    z = 0.00000
+x = -0.00000     y = -0.00000    z = 0.00000
 | mu | = 0.00000
 Saved in ./adapt_n2_spinproj.qkt.
-Normal termination of quket at 2022-07-27 19:54:26.839450
+Normal termination of quket at 2022-08-06 23:22:21.653348

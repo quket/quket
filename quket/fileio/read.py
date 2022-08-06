@@ -98,13 +98,13 @@ bools = {
         "fast_evaluation": "fast_evaluation",
         "numerical_derivative": "finite_difference",
         "finite_difference": "finite_difference",
+        "create_w_1process": "create_w_1process",
         #----- For General -----
         "run_fci": "run_fci",
         "run_mp2": "run_mp2",
         "run_ccsd": "run_ccsd",
         "run_casscf": "run_casscf",
         "symmetry": "symmetry",
-        "symmetry_pauli": "symmetry_pauli",
         "qubit_excitation": "qubit_excitation", "qe": "qubit_excitation",
         "disassemble_pauli":"disassemble_pauli",
         "run_qubitfci": "run_qubitfci",
@@ -175,7 +175,99 @@ comment = {
         }
 
 
+def read_det(string):
+    """
+    Investigate string, which should have the following string format
+        coef*|bit> + coef*|bit> + ...
+    or
+        coef*|bit> + coef*|bit> + ...  weight
+    and extract coef and bit as lists (and weight as float).
+    """
+    ### Treating special cases
+    try:
+        ### Simple bit string without |...>
+        ### e.g.)  00001111 
+        det = int(string, 2)
+        return [det], [1], 1
+    except:
+        ### Simple bit string + weight without |...>
+        ### e.g.)  00001111  0.5
+        try:
+            temp = string.split()
+            if(len(temp) == 2):
+                det = int(temp[0], 2)
+                coef = float(temp[1])
+                return [det], [coef], 1
+
+        except:
+            pass
+
+    ### Treating general case
+    ### e.g)  |00001111> + 0.5 |00110011> - (0.3 + 0.2j) * |11001001>
+    
+    if type(string) is list:
+        tmp = [list(x) for x in string]
+        list_line = [x for tmp_ in tmp for x in tmp_]
+        string = ''.join(list_line)
+    string = string.replace(' ','')
+    index_bar = [n for n, v in enumerate(string) if v == '|']
+    index_bracket = [n for n, v in enumerate(string) if v == '>']
+    
+    dets = []
+    coefs = []
+    
+    ### Check and extract determinants
+    if len(index_bar) != len(index_bracket):
+        raise Exception('Incorrect')
+    
+    for bar, bracket in zip(index_bar, index_bracket):
+        if bar > bracket:
+            raise Exception('Incorrect')
+        dets.append(int(string[bar+1:bracket], 2))
+    
+    ndets = len(dets)
+    
+    ### Delete determinants from string
+    index_bar = index_bar[::-1]
+    index_bracket = index_bracket[::-1]
+    for bar, bracket in zip(index_bar, index_bracket):
+        string = string[:bar+1] + string[bracket:]
+    
+    ### Extract coefficients
+    for i in range(ndets):
+        ind = string.find('|>')
+        coef = string[:ind]
+        if ind != 0:
+            if coef == '+':
+                coef = '1'
+            elif coef == '-':
+                coef = '-1'
+            elif coef[-1] == '*':
+                    coef = coef[:-1]
+        else:
+            coef = '1'
+        coefs.append(complex(eval(coef)))
+        string = string[ind+2:]
+
+    ### Check if `weight` exists
+    try:
+        weight = float(moji)
+    except:
+        weight = 1
+    return dets, coefs, weight
+
 def read_multi(line):
+    dets, coefs, weight = read_det(line)    
+    state = []
+    for det, coef in zip(dets, coefs):
+        state.append((coef, det))
+    # Check if state is single determinant
+    if len(state) == 1:
+        state = state[0][1]
+    return state, weight
+    
+
+def _read_multi(line):
     """
     Investigate line, which should have the following string format
         coef*|bit> + coef*|bit> + ...
@@ -236,7 +328,6 @@ def read_multi(line):
      '00011111',
      '0.25']
     '''
-    prints(value)
     if len(value) == 1:
         ### Should have the regular integer form
         ### e.g.) 00001111 
@@ -557,17 +648,13 @@ def read_input():
             kwds[key] = geom
             i = j - 1
         elif key in ["det", "determinant"]:
-            # e.g.) 000011
-            #if type(value) is int:
-            #    if value.isdecimal() and int(value) >= 0:
-            #        kwds["det"] = int(f"0b{value}", 2)
-            #    else:
-            #        error(f"Invalid determinant description '{value}'")
-            #elif type(value) is list:
-            # e.g.) 0.5 * 000011  + 0.5 * 001100
+            # e.g.) 000011 
+            #       or multi-determinant
+            #       0.5 * |000011>  + 0.5 * |001100>
+            #       A multi-determinant has to have braket |...>
+            state, weight = read_multi(value)
             try:
                 if isinstance(value, str):
-                    prints(value)
                     if value.lower() == 'random':
                         kwds["det"] = 'random'
                         state = True
@@ -583,10 +670,8 @@ def read_input():
                         kwds["det"] = 'random'
                         state = True
                     else:
-                        prints("EHRER")
                         error(f"Invalid determinant description '{value}'")
                 except:
-                    prints("OR EHRER", ''.join(value))
                     error(f"Invalid determinant description '{value}'")
             if not state:
                 error(f"The format of det = {value} is not correct.\n Use the following format:\n   det = coef * bit + coef * bit + ...")
@@ -986,30 +1071,6 @@ def read_input_command_line(kwds_):
         ######################
         # Multi/Excite-state #
         ######################
-        #elif key == "multi":
-        #    # e.g.) multi:
-        #    #       000011 0.25
-        #    #       000110 0.25
-        #    #       001001 0.25
-        #    #       001100 0.25
-        #    #  should be passed as a nested-list 
-        #    #  [["000011", "000110", "001001", "001100"], [0.25, 0.25, 0.25, 0.25]]
-        #    states = []
-        #    weights = value[1]
-        #    if len(value) != 2:
-        #        print('Need two lists: a list of strings for configurations (like "000011") and a list of weights.')
-        #        print(f'Your input = {value}')
-        #        print('Skip multi section...')
-        #        continue
-        #    if len(value[0]) != len(value[1]):
-        #        print('Numbers of configurations and weights have to be equal.')
-        #        print('Skip multi section...')
-        #        continue
-        #    for state in value[0]:
-        #        states.append(int(f"0b{state}", 2))
-        #    # Set states/weights and skip multi's information lines.
-        #    kwds["init_states"] = states
-        #    kwds["weights"] = weights
         elif key == "multi":
             # e.g.) multi_:
             #       000011 0.25

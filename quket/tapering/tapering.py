@@ -37,13 +37,12 @@ np.set_printoptions(precision=15, suppress=True)
 np.set_printoptions(threshold=np.inf)
 np.set_printoptions(linewidth=2000)
 
-
 from quket.mpilib import mpilib as mpi
 from quket import config as cf
-from quket.utils import jw2bk
+from quket.utils import jw2bk, is_1bit
 from quket.opelib.circuit import Pauli2Circuit
-from quket.fileio import prints, tstamp
-from quket.lib import QubitOperator, commutator
+from quket.fileio import prints, tstamp, print_state
+from quket.lib import QubitOperator, commutator, QuantumState
 
 class Z2tapering():
     '''Class
@@ -83,7 +82,6 @@ class Z2tapering():
         self.H_new = None
         self.validity = None
         self.X_eigvals = None
-        self.H_renew = None
 
         self.H_old = H_old
         if n_qubits is None:
@@ -176,10 +174,6 @@ class Z2tapering():
         
     def print_result(self, debug=False):
         prints(f"Tapering-Off Results:")
-        #prints(f"{len(self.redundant_bits)} Qubits ", end='')
-        #prints(f"{'is' if len(self.redundant_bits) <2 else 'are'}", end='')
-        #prints(f" eligible to be tapered off.")
-        
         if debug:
             prints(f"qubit    coeff    commutativity    tau")
             for q, w, e, r in zip(self.redundant_bits,
@@ -187,10 +181,10 @@ class Z2tapering():
                                   filter(lambda x: x[0], self.tau_info),
                                   self.commutative_taus):
                 prints(f"{q:>5} {w:>8}            {e[1]}    {r}")
-            prints(f"\nTapering-off finished in {self.timelog} s\n")
+            prints(f"\nTapering-off algorithm finished in {self.timelog} s\n")
 
         else:
-            prints("List of Tapered-off Qubits: ",self.redundant_bits)
+            prints("List of redundant qubits: ",self.redundant_bits)
 
             
     def print_error(self):
@@ -365,8 +359,8 @@ class Z2tapering():
                                                             det)
             # Replace redundent qubits by those coefficients 
             # and reconstruct Hamiltoian to remove redundent qubits
-            #self.H_renew = tapering_off_operator(self.H_new, self.redundant_bits, 
-            #                                                self.X_eigvals, 1)
+            self.H_renew = tapering_off_operator(self.H_new, self.redundant_bits, 
+                                                            self.X_eigvals, 1)
             self.stage = 9
 
         if self.redundant_bits is not None:
@@ -377,7 +371,322 @@ class Z2tapering():
         self.timelog = t1-t0
         prints(self)
         return None
+
+
+    def check_symmetry(self, bit):
+        ### Checking if the provided bit has the correct symmetry
+        index_list = QubitOperatorInfoExtracter(self.tau_list, 0, tuple)
+        for k, index in enumerate(index_list):
+            exponential = sum(is_1bit(bit, x) for x in index)
+            if (-1)**exponential != self.X_eigvals[k]:
+                return False
+        return True
+        
+    def transform_bit(self, bit, check_symmetry = True):
+        if check_symmetry:
+            if not self.check_symmetry(bit):
+                raise Exception(f'Determinant |{format(bit, f"0{self.n_qubits}b")}> has an incorrect symmetry')
+        
+        # Constructing a reduced-mapping-bit
+        j = 0
+        new_bit = 0
+        parity = 1
+        for i in range(self.n_qubits):
+            if i not in self.redundant_bits:
+                k = bit//2**(i) % 2
+                new_bit += k * 2**j
+                j += 1
+        parity = 1
+        for x, v in zip(self.redundant_bits, self.X_eigvals):
+            parity *= v**is_1bit(bit, x) 
+        return new_bit, parity
+
+    def transform_sparse_state(self, state):
+        """Function
+        Transform a sparse quantum state to the reduced mapping.
     
+        Author(s): Takashi Tsuchimochi
+        """
+        new_vec = np.zeros(2**self.n_qubits_sym, complex)
+        vec = state.get_vector()
+        for i in range(2**self.n_qubits):
+            if abs(vec[i]) > 1e-16:
+                if self.check_symmetry(i): 
+                    new_bit, parity = self.transform_bit(i, check_symmetry = False)
+                    new_vec[new_bit] = parity * vec[i]
+                else:
+                    if abs(vec[i]) < 1e-6:
+                        pass
+                    else:
+                        prints(f'Warning: Determinant |{format(i, f"0{self.n_qubits}b")}> has an incorrect symmetry')
+        
+        new_state = QuantumState(self.n_qubits_sym)
+        new_state.load(new_vec)
+        return new_state
+
+    def transform_state(self, state_old, backtransform=False, reduce=True):
+        """Function
+        This subroutine transforms QuantumState to different represnetation,
+        ruled by the unitary U. In other words, simply apply U to |state>.
+        If qubits have been or are to be tapered-off, redbits and eigvals_list are needed.
+        
+        Forward transformation:
+        U * state_old (n_qubits)  
+        ->  [Tapering-off qubits based on redbits]  
+        ->  state_new (n_qubits_reduced)
+        
+        Back transformation:
+        state_old (n_qubits_reduced) 
+        -> [Recovering qubits based on redbits] 
+        -> U * state_old (n_qubits) 
+        -> state_new (n_qubits)
+        
+        Args:
+            state_old (QuantumState): QuantumState instance to be transformed.
+            U_list (list of QubitOperator): List of QubitOperator instance to apply (has to be unitary!)
+                                            in the original representation (before tapering-off).
+            backtransform (bool): if true, the tapered-off qubits are recovered.
+            redbits (int list): List of tapered-off qubits. If present, taper-off or recover qubits.
+            eigvals_list (int list): Eigenvalues -1 or 1 used to replace X of redbits in the original representation.
+        
+        Returns:
+            transformed_state (QuantumState): QuantumState instance transformed (normalized).
+        
+        """
+        if reduce and not backtransform:
+            return self.transform_sparse_state(state_old)
+
+        nredbits = len(self.clifford_operators)
+        n_qubits_old = state_old.get_qubit_count()
+        reduction = self.redundant_bits is not None
+        if reduce:
+            if backtransform:
+                n_qubits_total = n_qubits_old + nredbits
+                n_qubits_new = n_qubits_total
+            else:
+                n_qubits_total = n_qubits_old
+                n_qubits_new = n_qubits_total - nredbits
+        else:
+            n_qubits_total = n_qubits_old        
+            n_qubits_new = n_qubits_old
+    
+        state_vec_old = state_old.get_vector()
+        state_vec_new = np.zeros(2**n_qubits_new, dtype=complex)
+    
+        if backtransform and reduction:
+            ########################################
+            #  Insert tapered-off qubits           #
+            # (eigvals -> 1/sqrt(2) (|0> +- |1>))  #
+            ########################################
+            for ibit in range(2**n_qubits_old):
+                ibit_base = ibit
+                for k in self.redundant_bits:
+                    jbit_quo = ibit_base // (2**k)
+                    jbit_mod = ibit_base % (2**k)
+                    ibit_base = jbit_quo<<k+1 | jbit_mod
+                for redbit_int in range(2**(nredbits)):
+                    ibit_ = ibit_base
+                    par = 1
+                    for k in range(nredbits):     
+                        if redbit_int & 2**k > 0:
+                            par *= self.X_eigvals[k]
+                            ibit_ += 2**self.redundant_bits[k] 
+                    state_vec_new[ibit_] = state_vec_old[ibit] * par / (np.sqrt(2)**nredbits)
+            state_tmp = QuantumState(n_qubits_new)
+            state_tmp.load(state_vec_new)
+        else:
+            state_tmp = state_old.copy()
+    
+        ########################  
+        # Transform U * state  #
+        ########################    
+        state_new = QuantumState(n_qubits_total)
+    
+        ### MPI ###
+        U = 1
+        for U_ in self.clifford_operators: 
+            U *= U_
+        state_new.multiply_coef(0)
+        k = 0
+        for Pauli, coef in U.terms.items():
+            if k % mpi.nprocs == mpi.rank:
+                circuit = Pauli2Circuit(n_qubits_total, Pauli)
+                state_ = state_tmp.copy()
+                state_.multiply_coef(coef)        
+                circuit.update_quantum_state(state_)
+                state_new.add_state(state_)
+            k += 1
+        new_vector = state_new.get_vector()
+        vector = mpi.allreduce(new_vector)
+        del(new_vector)
+        del(state_tmp)
+        state_new.load(vector)
+    
+        if not backtransform:
+            from quket.opelib import OpenFermionOperator2QulacsObservable
+            ### Check if this state respects symmetry.
+            symmetry_check = []
+            X_expectation_value_list = []
+            for redbit, eigval in zip(self.redundant_bits, self.X_eigvals):
+                X = OpenFermionOperator2QulacsObservable(QubitOperator(f'X{redbit}'), n_qubits_total)
+                X_expectation_value = X.get_expectation_value(state_new)
+                X_expectation_value_list.append(X_expectation_value)
+                if abs(X_expectation_value - eigval) > 1e-6:
+                    symmetry_check.append(False)
+                else:
+                    symmetry_check.append(True)
+            if not all(symmetry_check):
+                print_state(state_old,'Symmetry check failed for the state')
+                for i, (redbit, eigval) in enumerate(zip(self.redundant_bits, self.X_eigvals)):
+                    prints(f'<X{redbit}> = {X_expectation_value_list[i]:+.5f} should be {eigval:+d}  --> ', end='')
+                    if symmetry_check[i]:
+                        prints('OK')
+                    else:
+                        prints('NG')
+                raise Exception()
+                
+        if not reduce:
+            return state_new
+        ######################
+        #  Taper off qubits  #
+        ######################    
+        if not backtransform and (self.redundant_bits is not None and self.X_eigvals is not None):
+            state_vec = state_new.get_vector()
+            red_vec = np.zeros(2**n_qubits_new, dtype=complex)
+            # Reduced bits as integer 
+            redbit_int = 0
+            for redbit in self.redundant_bits:
+                redbit_int += 2**redbit
+            
+            for ibit in range(2**n_qubits_old):
+                if abs(state_vec[ibit]) < 1e-8:
+                    continue
+                ## Check the parity of this bit for redbits
+                parity = ibit & redbit_int
+                #
+                
+                # We want to remove bits from this integer 'ibit'
+                # It is expected that the transformed state has the following structure: 
+                #     a  |jn jn-1 ... jk+1  0  jk-1 ... j0>  +/-  a  |jn jn-1 ... jk+1  1  jk-1 ... j0> 
+                # where a is the coefficient and the sign +/- is already determined by self.X_eigvals.
+                # We then remove this bit to obtain
+                #     sqrt(2) a  |jn jn-1 ... jk+1  jk-1 ... j0>
+                
+                # (1) Let us first determine if the bit to be reduced is 0 or 1.
+                # (2) Separate the integer to two sets of integers
+                #        int1 = |jn jn-1 ... jk+1>   and   int2 = |jk-1 ... j0>
+                # (3) Shift int1 by one bit to right, and add to int2
+    
+                 
+                ibit_ = ibit
+                #prints('Reducing ',bin(ibit)[2:])
+                for redbit in self.redundant_bits[::-1]:
+                    jbit_quo = ibit_ // 2**(redbit)
+                    redbit_val = jbit_quo % 2    # Reduced bit contained in ibit jk 
+                    jbit_quo = jbit_quo // 2     # Left side |jn jn-1 ... jk+1>
+                    jbit_mod = ibit_ % 2**redbit # Right side |jk-1 ... j0>
+                    #prints('int1 = ', bin(jbit_quo)[2:])
+                    #prints('int2 = ', bin(jbit_mod)[2:])
+                    # Produce a new integer eliminating the bit jk
+                    ibit_red = (jbit_quo)<<redbit | jbit_mod
+                    #prints(redbit,'-th bit reduced ->', bin(ibit_red)[2:])
+                    ibit_ = ibit_red
+    
+                if red_vec[ibit_red] == 0:
+                    red_vec[ibit_red] = (state_vec[ibit] *  (np.sqrt(2))**len(self.redundant_bits))
+            state_new = QuantumState(n_qubits_new)
+            state_new.load(red_vec)
+    
+        ### Transformation done. Just in case, normalize...
+        norm=state_new.get_squared_norm()
+        state_new.normalize(norm)  
+        return state_new
+    
+    def transform_operator(self, operator, reduce=True):
+        new_operator = operator
+        for clifford_operator in self.clifford_operators:
+            new_operator  =  (clifford_operator * new_operator * clifford_operator)
+            new_operator.compress()
+        # Clean up some 10e-7 terms especially in the case of NH3
+        new_operator = purify_hamiltonian(new_operator, self.redundant_bits)
+        # Replace redundent qubits by those coefficients 
+        # and reconstruct operator to remove redundent qubits
+        if reduce:
+            new_operator = tapering_off_operator(new_operator, self.redundant_bits, 
+                                                            self.X_eigvals, 1)
+        return new_operator
+    
+    def transform_pauli_list(self, pauli_list, reduce=True):
+        """Function
+            Transform pauli_list to the tapered-off basis by using Tapering.
+        """
+        ndim1 = 0
+        ndim2 = 0
+        # List of transformed pauli operators
+        new_pauli_list = []
+        # List of surviving/discarded operators because of symmetry
+        allowed_pauli_list = []
+        ndim = len(pauli_list)
+        ipos, my_ndim = mpi.myrange(ndim)
+        for pauli in pauli_list[ipos:ipos+my_ndim]:
+            if type(pauli) is list:
+                new_pauli_list_ = []
+                allowed_pauli_list_ = []
+                for pauli_ in pauli:
+                    new_pauli_, allowed_ = self.transform_pauli(pauli_, reduce)
+                    if new_pauli_ is not None and new_pauli_ != QubitOperator('',0):
+                        new_pauli_list_.append(new_pauli_)
+                        allowed_pauli_list_.append(allowed_)
+                # Bug fixed. 
+                allowed = len(allowed_pauli_list_) > 0 and all(allowed_pauli_list_)
+                if allowed: 
+                    ### Quick check for commutativity
+                    new_pauli_list_commute = [new_pauli_list_[0]]
+                    k_ = 0
+                    for k in range(1, len(new_pauli_list_)):
+                        if commutator(new_pauli_list_commute[k_], new_pauli_list_[k]) == QubitOperator('',0):
+                            new_pauli_list_commute[k_] += new_pauli_list_[k]
+                        else:
+                            new_pauli_list_commute.append(new_pauli_list_[k])
+                            k_ += 1
+                    new_pauli_list.append(new_pauli_list_commute)
+                allowed_pauli_list.append(allowed)
+            else:
+                new_pauli, allowed = self.transform_pauli(pauli, reduce)
+                if new_pauli != QubitOperator('',0) and new_pauli is not None:
+                    new_pauli_list.append(new_pauli)
+                allowed_pauli_list.append(allowed)
+        new_pauli_list = mpi.allgather(new_pauli_list)
+        allowed_pauli_list = mpi.allgather(allowed_pauli_list)
+        return new_pauli_list, allowed_pauli_list
+    
+    
+    def transform_pauli(self, pauli, reduce):
+        """Function
+            Transform pauli to the tapered-off basis by using Tapering.
+        """
+        # List of transformed pauli operators
+        # List of surviving/discarded operators because of symmetry
+        new_pauli = pauli
+        for clifford_operator in self.clifford_operators:
+            new_pauli  =  (clifford_operator * new_pauli * clifford_operator)
+            new_pauli.compress()
+    
+        # Check if the transformed operator contains invalid qubit operations
+        allowed_pauli = True
+        for bit in self.redundant_bits:
+            Ybit = "Y"+str(bit)+" "
+            Zbit = "Z"+str(bit)+" "
+            if Ybit in str(new_pauli) or Zbit in str(new_pauli):
+                # invalid operation
+                allowed_pauli = False
+                return None, False
+        if allowed_pauli:
+            if reduce: 
+                new_pauli = tapering_off_operator(new_pauli, self.redundant_bits, 
+                                                                self.X_eigvals, 1)
+        return new_pauli, allowed_pauli
+        
     
 ### Subroutines ###
 def get_parity_matrix_E(H, n_qubits=None, mode='py'):   
@@ -718,7 +1027,6 @@ def get_new_coefficient(commutative_taus, det):
     '''
     index_list = QubitOperatorInfoExtracter(commutative_taus, 0, tuple)
     X_eigvals = []
-    from quket.utils import is_1bit
     for index in index_list:
         exponential = sum( is_1bit(det, x) for x in index )
         X_eigvals.append((-1)**exponential)
@@ -1664,256 +1972,3 @@ def include_pgss(E, pgss, mapping='jordan_wigner'):
 
     return Epgs
 
-
-def transform_state(state_old, U_list, redbits, eigvals_list, backtransform=False, reduce=True):
-    """Function
-    This subroutine transforms QuantumState to different represnetation,
-    ruled by the unitary U. In other words, simply apply U to |state>.
-    If qubits have been or are to be tapered-off, redbits and eigvals_list are needed.
-    
-    Forward transformation:
-    U * state_old (n_qubits)  
-    ->  [Tapering-off qubits based on redbits]  
-    ->  state_new (n_qubits_reduced)
-    
-    Back transformation:
-    state_old (n_qubits_reduced) 
-    -> [Recovering qubits based on redbits] 
-    -> U * state_old (n_qubits) 
-    -> state_new (n_qubits)
-    
-    Args:
-        state_old (QuantumState): QuantumState instance to be transformed.
-        U_list (list of QubitOperator): List of QubitOperator instance to apply (has to be unitary!)
-                                        in the original representation (before tapering-off).
-        backtransform (bool): if true, the tapered-off qubits are recovered.
-        redbits (int list): List of tapered-off qubits. If present, taper-off or recover qubits.
-        eigvals_list (int list): Eigenvalues -1 or 1 used to replace X of redbits in the original representation.
-    
-    Returns:
-        transformed_state (QuantumState): QuantumState instance transformed (normalized).
-    
-    """
-    from quket.lib import QuantumState
-    nredbits = len(U_list)
-    n_qubits_old = state_old.get_qubit_count()
-    reduction = redbits is not None
-    if reduce:
-        if backtransform:
-            n_qubits_total = n_qubits_old + nredbits
-            n_qubits_new = n_qubits_total
-        else:
-            n_qubits_total = n_qubits_old
-            n_qubits_new = n_qubits_total - nredbits
-    else:
-        n_qubits_total = n_qubits_old        
-        n_qubits_new = n_qubits_old
-
-    state_vec_old = state_old.get_vector()
-    state_vec_new = np.zeros(2**n_qubits_new, dtype=complex)
-
-    if backtransform and reduction:
-        ########################################
-        #  Insert tapered-off qubits           #
-        # (eigvals -> 1/sqrt(2) (|0> +- |1>))  #
-        ########################################
-        for ibit in range(2**n_qubits_old):
-            ibit_base = ibit
-            for k in redbits:
-                jbit_quo = ibit_base // (2**k)
-                jbit_mod = ibit_base % (2**k)
-                ibit_base = jbit_quo<<k+1 | jbit_mod
-            for redbit_int in range(2**(nredbits)):
-                ibit_ = ibit_base
-                par = 1
-                for k in range(nredbits):     
-                    if redbit_int & 2**k > 0:
-                        par *= eigvals_list[k]
-                        ibit_ += 2**redbits[k] 
-                state_vec_new[ibit_] = state_vec_old[ibit] * par / (np.sqrt(2)**nredbits)
-        state_tmp = QuantumState(n_qubits_new)
-        state_tmp.load(state_vec_new)
-    else:
-        state_tmp = state_old.copy()
-
-    ########################  
-    # Transform U * state  #
-    ########################    
-    state_new = QuantumState(n_qubits_total)
-
-    ### MPI ###
-    U = 1
-    for U_ in U_list: 
-        U *= U_
-    state_new.multiply_coef(0)
-    k = 0
-    for Pauli, coef in U.terms.items():
-        if k % mpi.nprocs == mpi.rank:
-            circuit = Pauli2Circuit(n_qubits_total, Pauli)
-            state_ = state_tmp.copy()
-            state_.multiply_coef(coef)        
-            circuit.update_quantum_state(state_)
-            state_new.add_state(state_)
-        k += 1
-    new_vector = state_new.get_vector()
-    vector = mpi.allreduce(new_vector)
-    del(new_vector)
-    del(state_tmp)
-    state_new.load(vector)
-
-
-    if not backtransform:
-        from quket.opelib import OpenFermionOperator2QulacsObservable
-        ### Check if this state respects symmetry.
-        for redbit, eigval in zip(redbits, eigvals_list):
-            X = OpenFermionOperator2QulacsObservable(QubitOperator(f'X{redbit}'), n_qubits_total)
-            X_expectation_value = X.get_expectation_value(state_new)
-            if abs(X_expectation_value - eigval) > 1e-6:
-                prints(f'<X{redbit}> = {X_expectation_value}   should be {eigval}')
-
-            
-    if not reduce:
-        return state_new
-    ######################
-    #  Taper off qubits  #
-    ######################    
-    if not backtransform and (redbits is not None and eigvals_list is not None):
-        state_vec = state_new.get_vector()
-        red_vec = np.zeros(2**n_qubits_new, dtype=complex)
-        # Reduced bits as integer 
-        redbit_int = 0
-        for redbit in redbits:
-            redbit_int += 2**redbit
-        
-        for ibit in range(2**n_qubits_old):
-            if abs(state_vec[ibit]) < 1e-8:
-                continue
-            ## Check the parity of this bit for redbits
-            parity = ibit & redbit_int
-            npar = bin(parity).count("1")            
-            #prints(f'{npar=}')
-            #
-            
-            # We want to remove bits from this integer 'ibit'
-            # It is expected that the transformed state has the following structure: 
-            #     a  |jn jn-1 ... jk+1  0  jk-1 ... j0>  +/-  a  |jn jn-1 ... jk+1  1  jk-1 ... j0> 
-            # where a is the coefficient and the sign +/- is already determined by eigvals_list.
-            # We then remove this bit to obtain
-            #     sqrt(2) a  |jn jn-1 ... jk+1  jk-1 ... j0>
-            
-            # (1) Let us first determine if the bit to be reduced is 0 or 1.
-            # (2) Separate the integer to two sets of integers
-            #        int1 = |jn jn-1 ... jk+1>   and   int2 = |jk-1 ... j0>
-            # (3) Shift int1 by one bit to right, and add to int2
-
-             
-            ibit_ = ibit
-            #prints('Reducing ',bin(ibit)[2:])
-            for redbit in redbits[::-1]:
-                jbit_quo = ibit_ // 2**(redbit)
-                redbit_val = jbit_quo % 2    # Reduced bit contained in ibit jk 
-                jbit_quo = jbit_quo // 2     # Left side |jn jn-1 ... jk+1>
-                jbit_mod = ibit_ % 2**redbit # Right side |jk-1 ... j0>
-                #prints('int1 = ', bin(jbit_quo)[2:])
-                #prints('int2 = ', bin(jbit_mod)[2:])
-                # Produce a new integer eliminating the bit jk
-                ibit_red = (jbit_quo)<<redbit | jbit_mod
-                #prints(redbit,'-th bit reduced ->', bin(ibit_red)[2:])
-                ibit_ = ibit_red
-            #prints(bin(ibit_red)[2:], '  ', state_vec[ibit])
-            #red_vec[ibit_red] += state_vec[ibit]  * np.sqrt(2) * (-1)**npar
-
-            if red_vec[ibit_red] == 0:
-                red_vec[ibit_red] = (state_vec[ibit] *  (np.sqrt(2))**len(redbits))
-        state_new = QuantumState(n_qubits_new)
-        state_new.load(red_vec)
-
-    ### Transformation done. Just in case, normalize...
-    norm=state_new.get_squared_norm()
-    state_new.normalize(norm)  
-    return state_new
-
-def transform_operator(operator, clifford_operators, redundant_bits, X_eigvals, reduce=True):
-    new_operator = operator
-    for clifford_operator in clifford_operators:
-        new_operator  =  (clifford_operator * new_operator * clifford_operator)
-        new_operator.compress()
-    # Clean up some 10e-7 terms especially in the case of NH3
-    new_operator = purify_hamiltonian(new_operator, redundant_bits)
-    # Replace redundent qubits by those coefficients 
-    # and reconstruct operator to remove redundent qubits
-    if reduce:
-        new_operator = tapering_off_operator(new_operator, redundant_bits, 
-                                                        X_eigvals, 1)
-    return new_operator
-
-def transform_pauli_list(Tapering, pauli_list, reduce=True):
-    """Function
-        Transform pauli_list to the tapered-off basis by using Tapering.
-    """
-    ndim1 = 0
-    ndim2 = 0
-    # List of transformed pauli operators
-    new_pauli_list = []
-    # List of surviving/discarded operators because of symmetry
-    allowed_pauli_list = []
-    ndim = len(pauli_list)
-    ipos, my_ndim = mpi.myrange(ndim)
-    for pauli in pauli_list[ipos:ipos+my_ndim]:
-        if type(pauli) is list:
-            new_pauli_list_ = []
-            allowed_pauli_list_ = []
-            for pauli_ in pauli:
-                new_pauli_, allowed_ = transform_pauli(Tapering, pauli_, reduce)
-                if new_pauli_ is not None and new_pauli_ != QubitOperator('',0):
-                    new_pauli_list_.append(new_pauli_)
-                    allowed_pauli_list_.append(allowed_)
-            # Bug fixed. 
-            allowed = len(allowed_pauli_list_) > 0 and all(allowed_pauli_list_)
-            if allowed: 
-                ### Quick check for commutativity
-                new_pauli_list_commute = [new_pauli_list_[0]]
-                k_ = 0
-                for k in range(1, len(new_pauli_list_)):
-                    if commutator(new_pauli_list_commute[k_], new_pauli_list_[k]) == QubitOperator('',0):
-                        new_pauli_list_commute[k_] += new_pauli_list_[k]
-                    else:
-                        new_pauli_list_commute.append(new_pauli_list_[k])
-                        k_ += 1
-                new_pauli_list.append(new_pauli_list_commute)
-            allowed_pauli_list.append(allowed)
-        else:
-            new_pauli, allowed = transform_pauli(Tapering, pauli, reduce)
-            if new_pauli != QubitOperator('',0) and new_pauli is not None:
-                new_pauli_list.append(new_pauli)
-            allowed_pauli_list.append(allowed)
-    new_pauli_list = mpi.allgather(new_pauli_list)
-    allowed_pauli_list = mpi.allgather(allowed_pauli_list)
-    return new_pauli_list, allowed_pauli_list
-
-
-def transform_pauli(Tapering, pauli, reduce):
-    """Function
-        Transform pauli to the tapered-off basis by using Tapering.
-    """
-    # List of transformed pauli operators
-    # List of surviving/discarded operators because of symmetry
-    new_pauli = pauli
-    for clifford_operator in Tapering.clifford_operators:
-        new_pauli  =  (clifford_operator * new_pauli * clifford_operator)
-        new_pauli.compress()
-
-    # Check if the transformed operator contains invalid qubit operations
-    allowed_pauli = True
-    for bit in Tapering.redundant_bits:
-        Ybit = "Y"+str(bit)+" "
-        Zbit = "Z"+str(bit)+" "
-        if Ybit in str(new_pauli) or Zbit in str(new_pauli):
-            # invalid operation
-            allowed_pauli = False
-            return None, False
-    if allowed_pauli:
-        if reduce: 
-            new_pauli = tapering_off_operator(new_pauli, Tapering.redundant_bits, 
-                                                            Tapering.X_eigvals, 1)
-    return new_pauli, allowed_pauli

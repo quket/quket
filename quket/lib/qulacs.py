@@ -15,14 +15,47 @@
 """
 Qulacs' QuantumState is extended for further usability
 """
+import numpy as np
 import qulacs
 import copy
-COEFFICIENT_TYPES = (int, float, complex)
+INTEGER_TYPES = (int, np.integer)
+COEFFICIENT_TYPES = (int, float, complex, np.integer)
 import time
 
 class QuantumState(qulacs.QuantumState):
-    def __init__(self, n_qubits):
+    def __init__(self, n_qubits, det=0, normalize=True):
         super().__init__(n_qubits)
+        if det != 0:
+            if isinstance(det, INTEGER_TYPES):
+                self.set_computational_basis(det)
+            elif isinstance(det, str):
+                from quket.fileio.read import read_det
+                dets, coefs, _ = read_det(det)
+                if isinstance(dets, INTEGER_TYPES):
+                    if det < 0:
+                        prints(f"Invalid determinant description '{det}'")
+                    self.set_computational_basis(det)
+                elif type(dets) is list:
+                    self.multiply_coef(0)
+                    for state_, coef_ in zip(dets, coefs):
+                        x = QuantumState(n_qubits, state_)
+                        x.multiply_coef(coef_)
+                        self.add_state(x)
+
+                elif det == "random":
+                    self.set_Haar_random_state()
+            elif isinstance(det, list):
+                # Sparse vector list
+                import numpy as np
+                vec = np.zeros(2**n_qubits, complex)
+                for state_, coef_ in det:
+                    vec[state_] = coef_
+                self.load(vec)
+            if normalize:
+                norm2 = self.get_squared_norm()
+                self.normalize(norm2)
+                
+
     """
     Override
     """
@@ -37,6 +70,15 @@ class QuantumState(qulacs.QuantumState):
     """
     Useful functions
     """
+
+    def get_sparse_vector(self):
+        vec = self.get_vector()
+        sparse_list = []
+        for k, v in enumerate(vec):
+            if v**2 > 1e-30: 
+                sparse_list.append((k, v))
+        return sparse_list
+        
 
     def __add__(self, state):
         if isinstance(state, (qulacs.QuantumState, QuantumState)):

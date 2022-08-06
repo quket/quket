@@ -31,7 +31,6 @@ from .circuit import(
     Gdouble_fswap,
     Gdoubles_pqrs_Ry,
     set_exp_circuit,
-    create_exp_state,
     )
 from .opelib import(
     create_1body_operator,

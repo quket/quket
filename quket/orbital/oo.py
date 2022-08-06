@@ -396,28 +396,29 @@ def oo(Q, maxiter=None, gtol=None, ftol=None):
             #    eig = e[k]
             if abs(v_lowest[0]) < AH_thres:
                 prints(f'Warning: Too small C0 in AH : {v_lowest[0]}')
-                prints(f'This usually means the Hessian is not positive semi-definite and there is a lower state.')
-                v_lowest[0] = 1
+                prints(f'This usually means the Hessian is not positive semi-definite and there is a (maybe symmetry-breaking) lower state.')
+            #    v_lowest[0] = 1
             #    prints(f'Warning: Too small C0 in AH : {v_lowest[0]}')
             #    prints(f'Run Davidson again')
-            #    for kk in range(2,10):
-            #        x1 = np.zeros(nott+1)
-            #        x1[0] = 1
-            #        x0 = np.vstack([c, x1])
-            #        eig, v = davidson(aop, x0, diag, nroots=kk, follow_state =True)
-            #        c = np.array(v)
-            #        k = 0
-            #        k = np.argmax(abs(c[:,0]))
-            #        if abs(c[k,0]) > 0.1:
-            #            v_lowest = c[k,:]
-            #            eig = eig[k]
-            #            break
-            #        else:
-            #            continue
-            #        if kk == 9:
-            #            raise Exception(f'No reasonable eigenvector found for AH after 10 cycles.\n'
-            #                            f'You should check if the system is really reasonable.')
-            #
+                for kk in range(2,10):
+                    x1 = np.zeros(nott+1)
+                    x1[0] = 1
+                    x0 = np.vstack([c, x1])
+                    eig, v = davidson(aop, x0, diag, nroots=kk, follow_state =True)
+                    c = np.array(v)
+                    #printmat(c.T, eig=eig)
+                    k = 0
+                    k = np.argmax(abs(c[:,0]))
+                    if abs(c[k,0]) > 0.1:
+                        v_lowest = c[k,:]
+                        eig = eig[k]
+                        break
+                    else:
+                        continue
+                    if kk == 9:
+                        raise Exception(f'No reasonable eigenvector found for AH after 10 cycles.\n'
+                                        f'You should check if the system is really reasonable.')
+            
             prints(f'Target lowest eigenvalue of augmented Hessian:  {eig}  (C0 = {v_lowest[0]})')
             if cf.debug:
                 printmat(v_lowest, eig=np.array([eig]), name='Davidson')
@@ -468,7 +469,19 @@ def oo(Q, maxiter=None, gtol=None, ftol=None):
         prints(f'Next energy estimation:  {Enext}') 
         if Enext > Eold and method == 'AH':
             raise ValueError(f'Augmented Hessian confused: alpha = {alpha},  Enext = {Enext},  Eold = {Eold}')
+
         # Update kappa
+        if Q.cf.do_taper_off or Q.symmetry:
+            # Force symmetry and do not allow symmetry breaking
+            pq = 0
+            for p in range(Q.n_orbitals):
+                for q in range(p):
+                    if Q.irrep_list[2*p] != Q.irrep_list[2*q]:
+                        if abs(delta_kappa_list[pq]) > 1e-4:
+                            print(f"Warning! Orbitals p={p} and q={q} have different symmetries but delta kappa is {delta_kappa_list[pq]}")
+                        delta_kappa_list[pq] = 0    
+                    pq += 1
+
         kappa_list = vectorize_skew(expAexpB(skew(kappa_list),  skew(delta_kappa_list)*alpha))
 
         Q.kappa_list = kappa_list

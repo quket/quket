@@ -16,8 +16,4 @@ from .pgs import(
 from .tapering import(
     Z2tapering,
     tapering_off_operator,
-    transform_operator,
-    transform_state,
-    transform_pauli_list,
-    transform_pauli
     )

@@ -57,6 +57,8 @@ class Hubbard():
     n_secondary_orbitals: int = 0
     n_core_orbitals: int = 0
     n_frozenv_orbitals: int = 0
+    nroots: int = 1
+    spin: int = 1
 
     natom: int = field(init=False)
     n_orbitals: int = field(init=False)
@@ -79,6 +81,12 @@ class Hubbard():
         else:
             self.Ms = self.multiplicity - 1
 
+        if self.spin is None:
+            spin = self.multiplicity
+            self.spin = spin
+        else:
+            spin = self.spin
+
         self.natom = self.hubbard_nx*self.hubbard_ny
         self.n_orbitals = self.hubbard_nx*self.hubbard_ny
         self.n_qubits = self.n_orbitals*2
@@ -97,9 +105,6 @@ class Hubbard():
 
     @n_active_electrons.setter
     def n_active_electrons(self, value):
-        if cf.debug:
-            prints(f"Claim that 'n_active_electrons' is changed "
-                   f"from {self.n_electrons} to {value}.")
         self.n_electrons = value
 
     #@property
@@ -120,9 +125,6 @@ class Hubbard():
 
     @n_active_orbitals.setter
     def n_active_orbitals(self, value):
-        if cf.debug:
-            prints(f"Claim that 'n_active_orbitals' is changed "
-                   f"from {self.n_orbitals} to {value}.")
         self.n_orbitals = value
 
     #@property

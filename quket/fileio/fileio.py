@@ -131,42 +131,22 @@ def SaveTheta(ndim, save, filepath, opentype="w", offset=0):
     if mpi.main_rank:
         if os.path.isfile(filepath):
             load = np.loadtxt(filepath).reshape(-1)
-            if load.size % ndim != 0:
-                if offset == 0:
-                    #prints(f"Warning: load.shape[0]={load.shape[0]} but ndim={ndim} for {filepath}\n"
-                    #       f"May overwrite")
-                    nstates = 1
-                    load = save
-                else:
-                    prints(f"WARNING!")
-                    prints(f"Length of {filepath} needs to be divisible by ndim={ndim}")
-                    prints(f"Your theta file is screwed up.")
-                    prints(f"Perhaps you switched on/off tapering-off during VQD calculation.")
-                    prints(f"Theta file is not stored, but k-th theta_list can be found in ")
-                    prints(f"   QuketData.lower_states[k]['theta_list']")
-                    return
-            else:
-                nstates = load.size / ndim
         else:
             load = save
             nstates = 1
-        if offset == nstates:
+        if offset == load.size:
             save_ = np.hstack([load, save])
-        elif offset < nstates:
+        elif offset + save.size <= load.size:
             save_ = load
-            save_[offset*ndim:(offset+1)*ndim] = save[0:ndim]
+            save_[offset:offset+save.size] = save[:]
         else:
-            prints(f"offset={offset} but nstates={nstates} for {filepath}")
-            success = False
+            save_ = np.hstack([load[:offset], save])
         if opentype == "w":
             np.savetxt(filepath, save_)
         elif opentype == "a":
             with open(filepath, opentype) as f:
                 np.savetxt(f, save_)
 
-    success = mpi.bcast(success, root=0)
-    if not success:
-        error()
 
 
 def LoadTheta(ndim, filepath, offset=0):

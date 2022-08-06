@@ -29,10 +29,11 @@ from qulacs.gate import PauliRotation
 from qulacs.state import inner_product
 
 from quket import config as cf
+from quket.mpilib import mpilib as mpi
 from quket.fileio import (SaveTheta, print_state, print_amplitudes,
                      print_amplitudes_spinfree, print_amplitudes_listver, 
                      prints)
-from quket.opelib import Gdouble_ope, set_exp_circuit, create_exp_state, single_ope_Pauli, double_ope_Pauli
+from quket.opelib import Gdouble_ope, set_exp_circuit, single_ope_Pauli, double_ope_Pauli
 from quket.utils import orthogonal_constraint, get_occvir_lists, get_unique_list, transform_state_jw2bk
 from quket.projection import S2Proj
 from quket.lib import QuantumState
@@ -407,94 +408,3 @@ def count_CNOT_ucc(Quket, theta_list):
             ncnot += Quket.ncnot_list[k]
     return ncnot
 
-def cost_exp(Quket, print_level, theta_list, parallel=True):
-    """Function:
-    Energy functional of general exponential ansatz. 
-    Generalized to sequential excited state calculations,
-    by projecting out lower_states.
-
-    Author(s): Takashi Tsuchimochi
-    """
-    t1 = time.time()
-
-    ansatz = Quket.ansatz
-    rho = Quket.rho
-    DS = Quket.DS
-    n_qubits = Quket.n_qubits
-    ndim = Quket.ndim
-    init_state = Quket.init_state
-
-    state = create_exp_state(Quket, init_state =init_state, theta_list=theta_list, rho=Quket.rho)
-    #cf.ncnot = count_CNOT_ucc(Quket, theta_list)
-    if Quket.projection.SpinProj:
-        Quket.state_unproj = state.copy()
-        state = S2Proj(Quket, state)
-
-    t2 = time.time()
-    # Store the current wave function
-    Quket.state = state
-    Energy = Quket.get_E(parallel=parallel)
-    if Quket.operators.S2 is not None:
-        S2 = Quket.get_S2(parallel=parallel)
-    else:
-        S2 = 0
-    
-    #prints(f'time for inner_prodcut: {t_inner - t_get}')
-
-    cost = Energy
-    t3 = time.time()
-
-    ### Project out the states contained in 'lower_states'
-    cost += orthogonal_constraint(Quket, state)
-
-    if Quket.constraint_lambda > 0:
-        s = (Quket.spin - 1)/2
-        S4 = Quket.qulacs.S4.get_expectation_value(state)
-        penalty = Quket.constraint_lambda*(S4 - S2*(s*(s+1) + (s*(s+1))**2))
-        cost += penalty
-
-    t2 = time.time()
-    cpu1 = t2 - t1
-    if print_level == -1:
-        prints(f"Initial: E[{ansatz}] = {Energy:+.12f}  "
-               f"<S**2> = {S2:+8.6f}  ", end='')
-        if Quket.fci_states is not None:
-            prints(f"Fidelity = {Quket.fidelity():.6f}  ", end='')
-        prints(f"rho = {rho}  ")
-               #f"CNOT = {cf.ncnot}")
-    if print_level == 1:
-        ## cf.constraint_lambda *= 1.1
-        cput = t2 - cf.t_old
-        cf.t_old = t2
-        cf.icyc += 1
-        prints(f"{cf.icyc:7d}: E[{ansatz}] = {Energy:+.12f}  "
-               f"<S**2> = {S2:+8.6f}  ", end='')
-        if Quket.fci_states is not None:
-            prints(f"Fidelity = {Quket.fidelity():.6f}  ", end='')
-        prints(f"Grad = {cf.grad:4.2e}  "
-               #f"CNOT = {cf.ncnot}  "
-               f"CPU Time = {cput:10.5f}  ({cpu1:2.2f} / step)")
-        if Quket.constraint_lambda != 0:
-            prints(f"lambda = {Quket.constraint_lambda}  "
-                   f"<S**4> = {S4:17.15f}  "
-                   f"Penalty = {penalty:2.15f}")
-        SaveTheta(ndim, theta_list, cf.tmp)
-        Quket.theta_list = theta_list.copy()
-    if print_level > 1:
-        istate = len(Quket.lower_states)
-        if istate > 0:
-            state_str = str(istate) + '-'
-        else:
-            state_str = ''
-        prints(f"  Final: E[{state_str}{ansatz}] = {Energy:+.12f}  "
-               f"<S**2> = {S2:+8.6f}  ", end='')
-        if Quket.fci_states is not None:
-            prints(f"Fidelity = {Quket.fidelity():.6f}  ", end='')
-        prints(f"rho = {rho} ")
-               #f"CNOT = {cf.ncnot}  ")
-        prints(f"\n({ansatz} state)")
-        print_state(state)
-
-    Quket.energy = Energy
-    Quket.s2 = S2
-    return cost, S2

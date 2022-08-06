@@ -30,7 +30,7 @@ from qulacs.state import inner_product
 from openfermion.ops.representations.interaction_operator import InteractionOperator
 
 from quket.fileio import error, prints, print_state
-from .circuit import Gdouble_ope, create_exp_state, single_ope_Pauli
+from .circuit import Gdouble_ope, single_ope_Pauli
 from .excitation import evolve
 import quket.config as cf
 from quket.lib import (
@@ -482,6 +482,7 @@ def pauli_grad(pauli, state , qubit_Hamiltonian, Quket, bs_orbitals=None, numeri
     Numerical or analytical (<[HP,A]>) but the former is faster.
     """
     from quket.projection import S2Proj
+    from quket.ansatze import create_exp_state
     
     n_qubits = Quket.n_qubits
     #ham=create_observable_from_openfermion_text(str(jordan_wigner_hamiltonian))

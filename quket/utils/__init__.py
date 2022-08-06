@@ -10,6 +10,12 @@
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # limitations under the License.
+from .deriv import(
+    cost_mpi,
+    jac_mpi_num,
+    jac_mpi_ana,
+    jac_mpi_deriv_SA
+    )
 from .fci import (
     fci2qubit,
     )
@@ -21,10 +27,6 @@ from .ndims import(
     get_ndims,
     )
 from .utils import(
-    jac_mpi_num,
-    jac_mpi_deriv,
-    jac_mpi_deriv_SA,
-    cost_mpi,
     chkbool,
     chkmethod,
     chkpostmethod,
@@ -38,8 +40,6 @@ from .utils import(
     is_commute,
     fermi_to_str,
     qubit_to_str,
-    FlipBitOrder,
-    is_1bit,
     orthogonal_constraint,
     set_initial_det,
     set_multi_det_state,
@@ -58,10 +58,14 @@ from .utils import(
     get_unique_list,
     get_unique_list,
     prepare_state,
-    append_01qubits,
-    jw2bk,
-    bk2jw,
     transform_state_jw2bk,
     transform_state_bk2jw,
     )
     
+from .bit  import(
+    is_1bit,
+    pauli_bit_multi,
+    jw2bk,
+    bk2jw,
+    append_01qubits,
+    )

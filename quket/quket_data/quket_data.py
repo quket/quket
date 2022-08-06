@@ -38,6 +38,7 @@ from quket.tapering.tapering import Z2tapering
 from quket.utils import chkdet, chkmethod, chkpostmethod, get_func_kwds, set_initial_det, set_multi_det_state, remove_unpicklable
 from quket.utils import fci2qubit, transform_state_jw2bk, transform_state_bk2jw
 from quket.fileio import error, prints, printmat, SaveTheta, print_state, print_geom, tstamp
+from quket.fileio.read import read_det
 from quket import config as cf
 from quket.mpilib import mpilib as mpi
 
@@ -152,12 +153,11 @@ class Config():
     user_defined_pauli_list: List = None
     disassemble_pauli: bool = False
     operator_basis: str = "fermi"
-    # CASCI nroots
-    nroots: int = 1
 
     # Quket options
     mapping: str = 'jordan_wigner'
     finite_difference: bool = False
+    create_w_1process: bool = False
     do_taper_off: bool = False
     oo: bool = False
 
@@ -193,6 +193,9 @@ class Config():
             self.mapping = "jordan_wigner"
         elif self.mapping in ("bk", "bravyi_kitaev"):
             self.mapping = "bravyi_kitaev"
+
+        if cf.nthreads == 1 or mpi.nprocs == 1:
+            create_w_1process = False
 
 @dataclass(repr=False)
 class Qulacs():
@@ -449,10 +452,11 @@ def create_parent_class(self, kwds):
             init_dict["n_active_electrons"] = init_dict["n_electrons"]
         obj = Hubbard(**init_dict)
 
-        prints(f"Hubbard model: nx = {obj.hubbard_nx}  "
-               f"ny = {obj.hubbard_ny}  "
-               f"U = {obj.hubbard_u:2.2f}"
-               f"Ne = {obj.n_electrons}")
+        prints(f"Hubbard model: \n"
+               f"   nx = {obj.hubbard_nx}\n"
+               f"   ny = {obj.hubbard_ny}\n"
+               f"   U  = {obj.hubbard_u:2.2f}\n"
+               f"   Ne = {obj.n_electrons}")
     elif self.model == "heisenberg":
         from .heisenberg import Heisenberg
 
@@ -730,10 +734,6 @@ class QuketData():
     dt: float = 0.1
     truncate: float = 0.
     maxiter: int = 100
-    state: QuantumState = None
-    init_state: QuantumState = None
-    state_unproj: QuantumState = None
-    fci_states: QuantumState = None
     energy: float = 0.
     s2: float = 0.
     geom_opt: bool = False
@@ -742,9 +742,12 @@ class QuketData():
     _n_qubits: int = None
     H_n_qubits: int = None
     _ndim: int = None
+
+    # CASCI nroots
+    nroots: int = 1
+
     converge: bool = False
     symmetry: bool = True
-    symmetry_pauli: bool = False
     qubit_excitation: bool = False
     symmetry_subgroup: str = None
     local: List = field(default_factory=list)
@@ -752,6 +755,7 @@ class QuketData():
     alter_pairs: List = field(default_factory=list)
     # List of orbital indices to be swiched their orderings.
     # (a,b),(c,d),... indicates a <-> b and c <-> d, ...
+
     #----VQE---
     theta_list: np.ndarray = field(init=False, default=None)
     kappa_list: np.ndarray = field(init=False, default=None)
@@ -762,6 +766,7 @@ class QuketData():
     #---Pauli_list---
     pauli_list: List = field(init=False, default=None)
     pauli_list_nlayers: int = 1
+    ncnot_list: List = field(init=False, default=None)
     #----QITE----
     shift: str = "step"
     qlanczos: bool = False
@@ -771,15 +776,9 @@ class QuketData():
     hamiltonian_threshold: float = 0.
     #----OO----
     oo_maxiter: int = 20
-    oo_ftol: float = 1e-9
+    oo_ftol: float = 1e-7
     oo_gtol: float = 1e-4
     #----- For MBE -----
-    #min_use_core: int = 0
-    #max_use_core: int = 0
-    #min_use_secondary: int = 0
-    #max_use_secondary: int = 0
-    #n_secondary_orbitals: int = -1
-    #include: Dict = field(default_factory=dict)
     color: int = None
     later: bool = False
     #mo_basis: str = "hf"
@@ -793,8 +792,15 @@ class QuketData():
     tapered: Dict = field(default_factory=dict)
 
 
+    #---QuantumStates---
+    state: QuantumState = None
+    init_state: QuantumState = None
+    state_unproj: QuantumState = None
+    fci_states: QuantumState = None
     excited_states: List = field(default_factory=list)
 
+
+    #---Subclasses---
     operators: Operators = field(init=False, default=None)
     qulacs: Qulacs = field(init=False, default=None)
     projection: Projection = field(init=False, default=None)
@@ -1180,7 +1186,7 @@ class QuketData():
             self._kwds = kwds
 
             ### Tapering
-            if self.cf.do_taper_off or self.symmetry_pauli:
+            if self.cf.do_taper_off or self.symmetry:
                 self.tapering.run(mapping=self.cf.mapping)
                 if self.cf.do_taper_off and self.method != 'mbe':
                     self.transform_all(reduce=True)
@@ -1252,12 +1258,15 @@ class QuketData():
         ###########################
         # Initialize QuantumState #
         ###########################
-        if self.n_qubits > 24:
-            prints(f"A rather large n_qubits {n_qubits} is detected.")
-            prints(f"This simulation may not be feasible without tapering qubits off.")
-            prints(f"Skipping preparing quantum states in initialize(),")
+        if self.n_qubits > cf._max_n_qubits and self.cf.do_taper_off:
+            prints(f"A rather large n_qubits of {self.n_qubits} is detected.")
+            prints(f"Skipping preparing quantum states in the early stage of initialize(),")
             prints(f"and initial quantum states with tapered-off representation will be handled later.")
         else:
+            if self.n_qubits > cf._max_n_qubits:
+                prints(f"---WARNING---")
+                prints(f"A rather large n_qubits of {self.n_qubits} is detected.")
+                prints(f"This simulation may not be feasible without tapering qubits off.\n")
             self.state = QuantumState(self.n_qubits)
             if type(self.det) is int:
                 self.state.set_computational_basis(self.det)
@@ -1331,10 +1340,19 @@ class QuketData():
         self._n_qubits = self.n_qubits
 
         ### Tapering
-        if self.cf.do_taper_off or self.symmetry_pauli:
+        if self.cf.do_taper_off or self.symmetry:
             self.tapering.run(mapping=self.cf.mapping)
             if self.cf.do_taper_off and self.method != 'mbe':
                 ### Create excitation-pauli list, and transform relevant stuff by unitary
+                if self.n_qubits > cf._max_n_qubits:
+                    self.init_state = self.directly_generate_tapered_state(det)
+                    self.state = self.init_state.copy()
+                    for istate in range(self.multi.nstates):
+                        self.multi.init_states.append(self.directly_generate_tapered_state(self.multi.init_states_info[istate]))
+                        self.multi.states.append(self.multi.init_states[istate].copy())
+
+                    self.n_qubits = self.tapering.n_qubits_sym
+                    self.tapered["states"] = True
                 self.transform_all(reduce=True)
             elif self.get_allowed_pauli_list:
                 self.get_allowed_pauli_list()
@@ -1394,33 +1412,25 @@ class QuketData():
         self.projection.set_projection(trap=trap)
         self.projection.get_Rg_pauli_list(self.n_active_orbitals)
 
-    def fci2qubit(self, nroots=None, threshold=1e-8, verbose=False):
+    def fci2qubit(self, nroots=None, threshold=1e-5, shift=1, verbose=False):
         """Function
         Get FCI wave function in qubits.
         """
-        backtransformed = False
-        if hasattr(self, "fci_coeff"):
-            if self.n_qubits != self._n_qubits or any(self.tapered.values()):
-                ### Tapering-off already performed, which is currently not compatible with fci2qubit.
-                ### Backtransform 
-                self.taper_off(backtransform=True)
-                backtransformed = True
-        self.fci_states = fci2qubit(self, nroots=nroots, threshold=threshold, verbose=verbose)
-        
-        if backtransformed:
-            ### Retrieve things before backtransformation 
-            self.taper_off()
-        if self.fci_states is None:
-            return
-
+        self.fci_states = fci2qubit(self, nroots=nroots, threshold=threshold, verbose=verbose, shift=shift)
         prints("FCI in Qubits",end='')
         if self.n_qubits != self._n_qubits or any(self.tapered.values()):
             prints(" (tapered-off mapping)")
         else:
             prints("")
         for istate in range(len(self.fci_states)):
-            #tmp = self.get_E(self.fci_states[istate])
-            print_state(self.fci_states[istate]['state'], name=f"(FCI state : E = {self.fci_states[istate]['energy']})")
+            string = f"(FCI state : E = {self.fci_states[istate]['energy']:.10f}"
+            if self.operators.qubit_S2 is not None:
+                S2 = self.get_S2(self.fci_states[istate]['state'], parallel=True)
+                multiplicity = np.sqrt(1 + 4*S2)
+                string += f"  multiplicity = {multiplicity:.1f})"
+            else:
+                string += ")"
+            print_state(self.fci_states[istate]['state'], name=string)
 
 
     ### Defining other useful functions ###
@@ -1837,7 +1847,7 @@ class QuketData():
             return
         if self.pauli_list is None:
             prints('pauli_list not found. Perform get_pauli_list().')
-        from quket.tapering import transform_pauli_list
+        #from quket.tapering import transform_pauli_list
         if backtransform:
             if self.tapered["pauli_list"]:
                 self.get_pauli_list()
@@ -1849,7 +1859,7 @@ class QuketData():
             if self.tapered["pauli_list"]:
                 prints('Current pauli_list is already tapered-off. No transformation done')
             else:
-                self.pauli_list, self.allowed_pauli_list = transform_pauli_list(self.tapering, self.pauli_list, reduce=reduce)
+                self.pauli_list, self.allowed_pauli_list = self.tapering.transform_pauli_list(self.pauli_list, reduce=reduce)
                 self.tapered["pauli_list"] = True
                 prints('pauli_list transformed.')
 
@@ -1857,14 +1867,9 @@ class QuketData():
         """Function
         Transform QuantumState from/to tapered-off representaiton (symmetry-reduced mapping).
         """
-        from quket.tapering import transform_state
         if state is None:
             state = self.state
-        state = transform_state(state, self.tapering.clifford_operators, \
-                                     self.tapering.redundant_bits, \
-                                     self.tapering.X_eigvals, \
-                                     backtransform=backtransform, \
-                                     reduce=reduce)
+        state = self.tapering.transform_state(state, backtransform=backtransform, reduce=reduce)
 
         return state
 
@@ -1897,6 +1902,11 @@ class QuketData():
             prints('Current states are not tapered-off. No back-transformation done')
             return
         elif backtransform:
+            if self._n_qubits > cf._max_n_qubits:
+                prints(f'Warning: '
+                       f'    We shall not backtransform states for {self._nqubits} > {cf._max_n_qubits} qubits'
+                       f'    because a large amount of memory and time would be required.')
+                return
             self.tapered["states"] = False
             prints('States     backtransformed.')
 
@@ -1928,30 +1938,6 @@ class QuketData():
         elif reduce:
             self.n_qubits -= len(self.tapering.redundant_bits)
 
-    def transform_det(self, det=None, reduce=True, backtransform=False):
-        from quket.tapering import transform_state
-        # This will unlikely work...
-        state = QuantumState(self.n_qubits)
-        if det is None:
-            det = self.det
-        state.set_computational_basis(det)
-        if self.cf.mapping == "bravyi_kitaev":
-            state = transform_state_jw2bk(state)
-        state = transform_state(state, self.tapering.clifford_operators, \
-                                self.tapering.redundant_bits, \
-                                self.tapering.X_eigvals, \
-                                backtransform=backtransform, \
-                                reduce=reduce)
-
-        if reduce:
-            #Check this is stil a determinant
-            #Most likely it is entangled.
-            v = state.get_vector()
-            ind = np.argmax(abs(v))
-            if abs(v[ind]**2 - 1) > 1e-6:
-                prints('Warning! In transform_det, transformed_det does not seem to be a determinant.')
-        return state
-
 
     def transform_operators(self, backtransform=False, reduce=True):
         """Function
@@ -1963,7 +1949,6 @@ class QuketData():
 
         Author(s): TsangSiuChung, Takashi Tsuchimochi
         """
-        from quket.tapering import transform_operator 
         if self.tapering.redundant_bits is None:
             prints('First perform tapering.run(). No transformation done')
             return
@@ -2006,41 +1991,25 @@ class QuketData():
                 prints('Current operators are already tapered-off. No transformation done')
                 return
 
-            self.operators.qubit_Hamiltonian =  transform_operator(self.operators.qubit_Hamiltonian, \
-                                                                    self.tapering.clifford_operators, \
-                                                                    self.tapering.redundant_bits, \
-                                                                    self.tapering.X_eigvals, \
-                                                                    reduce=reduce)
+            self.operators.qubit_Hamiltonian = self.tapering.transform_operator(self.operators.qubit_Hamiltonian, \
+                                                                                reduce=reduce)
 
 
             if self.operators.qubit_S2 is not None:
-                self.operators.qubit_S2 =  transform_operator(self.operators.qubit_S2, \
-                                                                self.tapering.clifford_operators, \
-                                                                self.tapering.redundant_bits, \
-                                                                self.tapering.X_eigvals, \
-                                                                reduce=reduce)
+                self.operators.qubit_S2 = self.tapering.transform_operator(self.operators.qubit_S2, \
+                                                                                    reduce=reduce)
             if self.operators.qubit_Number is not None:
-                self.operators.qubit_Number =  transform_operator(self.operators.qubit_Number, \
-                                                                self.tapering.clifford_operators, \
-                                                                self.tapering.redundant_bits, \
-                                                                self.tapering.X_eigvals, \
-                                                                reduce=reduce)
+                self.operators.qubit_Number = self.tapering.transform_operator(self.operators.qubit_Number, \
+                                                                                    reduce=reduce)
             if self.operators.qubit_Sz is not None:
-                self.operators.qubit_Sz =  transform_operator(self.operators.qubit_Sz,\
-                                                                self.tapering.clifford_operators, \
-                                                                self.tapering.redundant_bits, \
-                                                                self.tapering.X_eigvals, \
-                                                                reduce=reduce)
+                self.operators.qubit_Sz = self.tapering.transform_operator(self.operators.qubit_Sz, \
+                                                                                    reduce=reduce)
             if self.operators.qubit_S4 is not None:
-                self.operators.qubit_S4 =  transform_operator(self.operators.qubit_S4,\
-                                                                self.tapering.clifford_operators, \
-                                                                self.tapering.redundant_bits, \
-                                                                self.tapering.X_eigvals, \
-                                                                reduce=reduce)
+                self.operators.qubit_S4 = self.tapering.transform_operator(self.operators.qubit_S4, \
+                                                                                    reduce=reduce)
  
             if hasattr(self.projection, 'Rg_pauli_list'):
-                from quket.tapering import transform_pauli_list
-                self.projection.Rg_pauli_list, dummy = transform_pauli_list(self.tapering, self.projection.Rg_pauli_list, reduce=reduce)
+                self.projection.Rg_pauli_list, dummy = self.tapering.transform_pauli_list(self.projection.Rg_pauli_list, reduce=reduce)
 
             self.tapered["operators"] = True
             prints('Operators  transformed.')
@@ -2089,21 +2058,6 @@ class QuketData():
         else:
             pass
 
-    #def transform_theta_list(self, backtransform=True):
-    #    """Function
-    #    Reorder theta_list from/to symmetry-reduced mapping/standard mapping.
-    #
-    #    Author(s): Takashi Tsuchimochi
-    #    """
-    #    if not hasattr(self, 'allowed_pauli_list'):
-    #        prints('First perform transform_pauli_list. No transformation done')
-    #        return
-    #    if not hasattr(self, 'theta_list'):
-    #        prints('No theta_list found. First perform VQE by run(). No transformation done')
-    #        return
-    #    prints('Under construction.')
-
-
     def transform_all(self, backtransform=False, reduce=True):
         """Function
         Wrapper for transformation of states, operators, and theta_list.
@@ -2120,6 +2074,34 @@ class QuketData():
             self.transform_pauli_list(backtransform=backtransform, reduce=reduce)
         if self.theta_list is not None:
             self.transform_theta_list(backtransform=backtransform, reduce=reduce)
+
+    def directly_generate_tapered_state(self, det):
+        """
+        Given string or list `det`, directly generate the determinant in the reduced mapping
+        """
+        new_vec = np.zeros(2**self.tapering.n_qubits_sym, complex)
+        if isinstance(det, (int, np.integer)):
+            dets = [det]
+            coefs = [1]
+        elif isinstance(det, str):
+            dets, coefs, _ = read_det(det)
+        elif isinstance(det, list):
+            dets = []
+            coefs = []
+            for state_ in det:
+                dets.append(state_[1])
+                coefs.append(state_[0])
+        else:
+            raise TypeError(f'{det} is neither str nor list.')
+        for det_, coef_ in zip(dets, coefs):
+            red_bit, parity = self.tapering.transform_bit(det_)
+            new_vec[red_bit] = coef_ * parity
+
+        new_state = QuantumState(self.tapering.n_qubits_sym)
+        new_state.load(new_vec)
+        norm = new_state.get_squared_norm()
+        new_state.normalize(norm)  
+        return new_state
 
     ####################
     # Orbital related  #
@@ -2221,6 +2203,8 @@ class QuketData():
         """
         from quket.vqe import VQE_driver
         from quket.qite import QITE_driver
+        from quket.post import lucc_solver
+        from quket.post import ct_solver
 
         # Sanitary check: use the new parameters for config
         self.cf.maxiter = self.maxiter
@@ -2405,7 +2389,12 @@ class QuketData():
         #################
         # Post-VQE part #
         #################
-        return
+        # Linearized UCC or Canonical Transformation
+        from quket.post import lucc, ct
+        if self.post_method in ["lucc", "cepa", "lucc2", "cisd", "ucisd", "pt2", "cepa0", "ucepa0"]:
+            return lucc.lucc_solver(self, self.cf.print_level)
+        if self.post_method in ["ct"]:
+            ct.ct_solver(self, self.cf.print_level)
 
     def grad(self):
         # Nuclear gradient
@@ -2680,3 +2669,5 @@ def set_state(det_info, n_qubits, mapping='jordan_wigner'):
         ### Broadcast
         state = mpi.bcast(state, root=0)
     return state
+
+

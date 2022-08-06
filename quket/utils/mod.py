@@ -108,7 +108,7 @@ def run_pyscf_mod(guess, n_active_orbitals, n_active_electrons, molecule,
                   run_ccsd=False, run_fci=False,
                   run_casscf=False, run_casci=True, verbose=False,
                   mo_basis="hf", nroots=1, system='chemical',
-                  frozen_indices=None, ncore=None):
+                  frozen_indices=None, ncore=0):
     """Function
     This function runs a pyscf calculation.
 

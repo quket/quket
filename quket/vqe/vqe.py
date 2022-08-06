@@ -29,11 +29,12 @@ from qulacs.observable import create_observable_from_openfermion_text
 
 from quket.mpilib import mpilib as mpi
 from quket import config as cf
-from quket.utils import cost_mpi, jac_mpi_num, jac_mpi_deriv, jac_mpi_deriv_SA
+from quket.utils import cost_mpi, jac_mpi_num, jac_mpi_ana, jac_mpi_deriv_SA
 from quket.linalg import T1mult
 from quket.linalg import SR1, LSR1
 from quket.fileio import LoadTheta, SaveTheta, error, prints, printmat, tstamp, print_state
-from quket.opelib import create_exp_state, set_exp_circuit
+from quket.opelib import set_exp_circuit
+from quket.ansatze import create_exp_state
 from quket.utils import get_ndims
 from quket.lib import QubitOperator, QuantumState
 
@@ -42,7 +43,7 @@ def cost_StateAverage(Quket, print_level, theta_list):
     State averaging.
     Author(s): Yuto Mori
     """
-    from quket.projection import S2proj
+    from quket.projection import S2Proj
     
     t1 = time.time()
 
@@ -142,7 +143,6 @@ def VQE_driver(Quket, kappa_guess, theta_guess, mix_level, opt_method,
 
     Author(s): Takashi Tsuchimochi
     """
-    from quket.ansatze import adapt_vqe_driver
     from quket.ansatze import cost_uccgd_forSAOO
     from quket.ansatze import cost_bcs
     from quket.ansatze import cost_uhf, mix_orbitals
@@ -153,6 +153,7 @@ def VQE_driver(Quket, kappa_guess, theta_guess, mix_level, opt_method,
         tstamp('Enter VQE_driver')
     if Quket.ansatz == "adapt":
         if Quket.adapt.mode in ('original', 'pauli', 'pauli_sz', 'pauli_yz', 'spin', 'pauli_spin', 'pauli_spin_xy', 'qeb', 'qeb_reduced', 'qeb1', 'qeb2', 'qeb3'):
+            from .adapt import adapt_vqe_driver
             adapt_vqe_driver(Quket, opt_method, opt_options, print_level, maxiter)
         else:
             raise ValueError(f'No option for adapt_mode = {Quket.adapt.mode}')
@@ -192,7 +193,12 @@ def VQE_driver(Quket, kappa_guess, theta_guess, mix_level, opt_method,
     optk = 0
     Gen = 0
     # cf.constraint_lambda = 100
+    ### Compute offset for kappa_list or theta_list files.
     istate = len(Quket.lower_states)  
+    offset = 0 
+    for kstate in range(istate): 
+        offset = len(Quket.lower_states[kstate]['theta_list'])
+
 
     ### set up the number of orbitals and such ###
     n_qubits = Quket.n_qubits
@@ -458,7 +464,7 @@ def VQE_driver(Quket, kappa_guess, theta_guess, mix_level, opt_method,
             mix = mix_orbitals(noa, nob, nva, nvb, mix_level, True, np.pi/4)
         kappa_list = mix[:ndim1]
     elif kappa_guess == "read":
-        kappa_list = LoadTheta(ndim1, cf.kappa_list_file, offset=istate)
+        kappa_list = LoadTheta(ndim1, cf.kappa_list_file, offset=offset)
         if mix_level > 0:
             temp = kappa_list[:ndim1].copy()
             mix = mix_orbitals(noa, nob, nva, nvb, mix_level, False, np.pi/4)
@@ -481,7 +487,7 @@ def VQE_driver(Quket, kappa_guess, theta_guess, mix_level, opt_method,
         if theta_guess == "zero":
             theta_list *= 0
         elif theta_guess == "read":
-            theta_list = LoadTheta(_ndim, cf.theta_list_file, offset=istate)
+            theta_list = LoadTheta(_ndim, cf.theta_list_file, offset=offset)
         elif theta_guess == "random":
             theta_list = (0.5-np.random.rand(_ndim))*0.001
         if Kappa_to_T1 and theta_guess != "read":
@@ -586,7 +592,7 @@ def VQE_driver(Quket, kappa_guess, theta_guess, mix_level, opt_method,
             ### Numerical/Analytical derivatives of wave function (vector-state)
             if Quket.multi.nstates==0:
                 # Currently analytical
-                jac_wrap_mpi = lambda theta_list: jac_mpi_deriv(create_state, Quket, theta_list, init_state=None, current_state=Quket.state)
+                jac_wrap_mpi = lambda theta_list: jac_mpi_ana(create_state, Quket, theta_list, init_state=None, current_state=Quket.state)
             else:
                 # Currently numerical
                 jac_wrap_mpi = lambda theta_list: jac_mpi_deriv_SA(create_state, Quket, theta_list)
@@ -628,10 +634,10 @@ def VQE_driver(Quket, kappa_guess, theta_guess, mix_level, opt_method,
     # Calculate final parameters.
     Evqe, S2 = cost_callback(final_param_list, print_control+1)
     if ansatz in ["uhf", "phf", "suhf", "sghf"]:
-        SaveTheta(ndim, final_param_list, cf.kappa_list_file, offset=istate)
+        SaveTheta(ndim, final_param_list, cf.kappa_list_file, offset=offset)
         Quket.kappa_list = final_param_list.copy()
     else:
-        SaveTheta(ndim, final_param_list, cf.theta_list_file, offset=istate)
+        SaveTheta(ndim, final_param_list, cf.theta_list_file, offset=offset)
         Quket.theta_list = final_param_list.copy()
 
 
@@ -677,7 +683,7 @@ def vqe(Quket):
         ### Numerical/Analytical derivatives of wave function (vector-state)
         if Quket.multi.nstates==0:
                 # Currently analytical
-            jac_wrap_mpi = lambda theta_list: jac_mpi_deriv(create_state, Quket, theta_list, init_state=None, current_state=Quket.state)
+            jac_wrap_mpi = lambda theta_list: jac_mpi_ana(create_state, Quket, theta_list, init_state=None, current_state=Quket.state)
         else:
             prints('Not yet supported.')
             return 

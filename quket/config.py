@@ -101,8 +101,8 @@ if 'main.py' in ext_args[0]:
         qkt = f"{input_dir}/{input_name}.qkt"
 
     ## OMP_NUM_THREADS ##############################################
-    nthreads = args.nthreads
-    os.environ["OMP_NUM_THREADS"] = nthreads
+    nthreads = int(args.nthreads)
+    os.environ["OMP_NUM_THREADS"] = str(nthreads)
     #################################################################
 
 else:
@@ -113,6 +113,11 @@ else:
     args.log = None
     input_name = ''
     input_dir = os.getcwd()
+    if "OMP_NUM_THREADS" in os.environ.keys():
+        nthreads = int(os.environ["OMP_NUM_THREADS"])
+    else:
+        nthreads = 1
+    nprocs_my_node = 1
 
 
 log_file = args.log
@@ -208,6 +213,8 @@ abelian_groups =['C1', 'C2', 'Ci', 'Cs', 'C2v', 'C2h', 'D2', 'D2h']
 _mapping = "jordan_wigner"
 _units = "angstrom"
 _bohr_to_angstrom = 0.529177249
+_max_n_qubits = 24
+_user_api = None
 timing = False
 fast_evaluation = True
 fswap = False
@@ -222,4 +229,3 @@ gradv = None
 # Time
 t_old = 0
 theta_threshold = 1e-9 # If theta is smaller than this value, do not construct the circuit
-
