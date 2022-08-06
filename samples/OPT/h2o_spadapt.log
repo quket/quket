@@ -9,14 +9,14 @@
 ///             Q   Q       U    U      K   K       E    E       T              ///
 ///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
 ///                                                                             ///
-///                      Quantum Computing Simulator Ver 0.9                    ///
+///                      Quantum Computing Simulator Ver 0.9.1                  ///
 ///                                                                             ///
 ///        Copyright 2019-2022                                                  ///
 ///        The Quket Developers                                                 ///
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-08-06 23:29:28.126741: 
+2022-08-07 01:06:27.758247: 
 8 processes x 4 = Total 32 cores
 API for qulacs: None
 Number of cpus in the main node (pinode01): 8
@@ -94,9 +94,9 @@ VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Number of operators in pool: 218
     1:   E[adapt] = -75.691694254762   <S**2> = -0.00000000000000   Grad = 5.11e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
     2:   E[adapt] = -75.696811707285   <S**2> =  0.00000000000000   Grad = 4.02e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 26
-    3:   E[adapt] = -75.707034574819   <S**2> = -0.00000000000000   Grad = 3.56e-01   Fidelity = 0.000000   CPU Time =  0.20   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 75
-    4:   E[adapt] = -75.710391129920   <S**2> =  0.00000000000000   Grad = 2.72e-01   Fidelity = 0.000000   CPU Time =  0.21   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 88
-    5:   E[adapt] = -75.713280689853   <S**2> =  0.00000000000000   Grad = 2.30e-01   Fidelity = 0.000000   CPU Time =  0.25   <N> =  6.00000000000001   <Sz> = -0.00000000000000   CNOT = 101
+    3:   E[adapt] = -75.707034574819   <S**2> = -0.00000000000000   Grad = 3.56e-01   Fidelity = 0.000000   CPU Time =  0.19   <N> =  5.99999999999999   <Sz> = -0.00000000000000   CNOT = 75
+    4:   E[adapt] = -75.710391129920   <S**2> = -0.00000000000000   Grad = 2.72e-01   Fidelity = 0.000000   CPU Time =  0.23   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 88
+    5:   E[adapt] = -75.713280689853   <S**2> =  0.00000000000000   Grad = 2.30e-01   Fidelity = 0.000000   CPU Time =  0.25   <N> =  6.00000000000000   <Sz> = -0.00000000000000   CNOT = 101
 adapt_max = ndim = 0.1
 
 -----------ADAPT-VQE finished----------
@@ -106,7 +106,7 @@ Final: E[adapt] = -75.713280689853   <S**2> = 0.000000000000000   Fidelity = 0.0
 | 0000111111 > : +0.9896 +0.0000i
 
 
- Done: CPU Time =            1.7597
+ Done: CPU Time =            1.7774
 adapt (vqe) 
      Basis             Coef
 | 0000111111 > : +0.9896 +0.0000i
@@ -158,21 +158,21 @@ ADAPT Convergence criterion = 1E-01
 Initial configuration: | 0000111111 >
 VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Number of operators in pool: 218
-    1:   E[adapt] = -75.687241030558   <S**2> = -0.00000000000000   Grad = 5.25e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
+    1:   E[adapt] = -75.687241030558   <S**2> = -0.00000000000000   Grad = 5.25e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 13
     2:   E[adapt] = -75.694048472943   <S**2> =  0.00000000000000   Grad = 4.25e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 26
-    3:   E[adapt] = -75.703474786808   <S**2> = -0.00000000000000   Grad = 3.74e-01   Fidelity = 0.000000   CPU Time =  0.18   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 75
-    4:   E[adapt] = -75.707234274506   <S**2> =  0.00000000000000   Grad = 3.02e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000000   <Sz> = -0.00000000000000   CNOT = 88
-    5:   E[adapt] = -75.709778050844   <S**2> = -0.00000000000000   Grad = 2.59e-01   Fidelity = 0.000000   CPU Time =  0.21   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 101
+    3:   E[adapt] = -75.703474786808   <S**2> = -0.00000000000000   Grad = 3.74e-01   Fidelity = 0.000000   CPU Time =  0.19   <N> =  6.00000000000000   <Sz> = -0.00000000000000   CNOT = 75
+    4:   E[adapt] = -75.707234274506   <S**2> =  0.00000000000000   Grad = 3.02e-01   Fidelity = 0.000000   CPU Time =  0.25   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 88
+    5:   E[adapt] = -75.709778050843   <S**2> = -0.00000000000000   Grad = 2.59e-01   Fidelity = 0.000000   CPU Time =  0.22   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 101
 adapt_max = ndim = 0.1
 
 -----------ADAPT-VQE finished----------
 number of parameter is  5
-Final: E[adapt] = -75.709778050844   <S**2> = -0.000000000000000   Fidelity = 0.000000
+Final: E[adapt] = -75.709778050843   <S**2> = -0.000000000000000   Fidelity = 0.000000
      Basis             Coef
 | 0000111111 > : +0.9890 +0.0000i
 
 
- Done: CPU Time =            1.7253
+ Done: CPU Time =            1.7481
  === Computing 1RDM === 
  === Computing 2RDM === 
 
@@ -212,10 +212,10 @@ ADAPT Convergence criterion = 1E-01
 Initial configuration: | 0000111111 >
 VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Number of operators in pool: 218
-    1:   E[adapt] = -75.693680027942   <S**2> = -0.00000000000000   Grad = 5.28e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 13
-    2:   E[adapt] = -75.708710951004   <S**2> =  0.00000000000000   Grad = 4.03e-01   Fidelity = 0.000000   CPU Time =  0.20   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 62
-    3:   E[adapt] = -75.713573153669   <S**2> =  0.00000000000000   Grad = 2.87e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 75
-    4:   E[adapt] = -75.717009931989   <S**2> =  0.00000000000000   Grad = 2.36e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 88
+    1:   E[adapt] = -75.693680027942   <S**2> =  0.00000000000000   Grad = 5.28e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
+    2:   E[adapt] = -75.708710951004   <S**2> = -0.00000000000000   Grad = 4.03e-01   Fidelity = 0.000000   CPU Time =  0.19   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 62
+    3:   E[adapt] = -75.713573153669   <S**2> = -0.00000000000000   Grad = 2.87e-01   Fidelity = 0.000000   CPU Time =  0.26   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 75
+    4:   E[adapt] = -75.717009931989   <S**2> =  0.00000000000000   Grad = 2.36e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  5.99999999999999   <Sz> = -0.00000000000000   CNOT = 88
     5:   E[adapt] = -75.720277277769   <S**2> = -0.00000000000000   Grad = 2.05e-01   Fidelity = 0.000000   CPU Time =  0.21   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 101
 adapt_max = ndim = 0.1
 
@@ -226,7 +226,7 @@ Final: E[adapt] = -75.720277277769   <S**2> = -0.000000000000000   Fidelity = 0.
 | 0000111111 > : +0.9869 -0.0000i
 
 
- Done: CPU Time =            1.8358
+ Done: CPU Time =            1.8634
  === Computing 1RDM === 
  === Computing 2RDM === 
 
@@ -266,21 +266,21 @@ ADAPT Convergence criterion = 1E-01
 Initial configuration: | 0000111111 >
 VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Number of operators in pool: 218
-    1:   E[adapt] = -75.693389749775   <S**2> = -0.00000000000000   Grad = 5.36e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
-    2:   E[adapt] = -75.709235732075   <S**2> = -0.00000000000000   Grad = 4.09e-01   Fidelity = 0.000000   CPU Time =  0.18   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 62
-    3:   E[adapt] = -75.714334671515   <S**2> =  0.00000000000000   Grad = 2.86e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 75
-    4:   E[adapt] = -75.717911911652   <S**2> =  0.00000000000000   Grad = 2.31e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000000   <Sz> = -0.00000000000000   CNOT = 88
-    5:   E[adapt] = -75.720923351563   <S**2> =  0.00000000000000   Grad = 1.97e-01   Fidelity = 0.000000   CPU Time =  0.21   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 101
+    1:   E[adapt] = -75.693389749775   <S**2> =  0.00000000000000   Grad = 5.36e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 13
+    2:   E[adapt] = -75.709235732075   <S**2> = -0.00000000000000   Grad = 4.09e-01   Fidelity = 0.000000   CPU Time =  0.18   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 62
+    3:   E[adapt] = -75.714334671515   <S**2> =  0.00000000000000   Grad = 2.86e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 75
+    4:   E[adapt] = -75.717911911652   <S**2> =  0.00000000000000   Grad = 2.31e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 88
+    5:   E[adapt] = -75.720923351563   <S**2> =  0.00000000000000   Grad = 1.97e-01   Fidelity = 0.000000   CPU Time =  0.21   <N> =  5.99999999999998   <Sz> = -0.00000000000000   CNOT = 101
 adapt_max = ndim = 0.1
 
 -----------ADAPT-VQE finished----------
 number of parameter is  5
 Final: E[adapt] = -75.720923351563   <S**2> = 0.000000000000000   Fidelity = 0.000000
      Basis             Coef
-| 0000111111 > : +0.9864 +0.0000i
+| 0000111111 > : +0.9864 -0.0000i
 
 
- Done: CPU Time =            1.8335
+ Done: CPU Time =            1.8238
  === Computing 1RDM === 
  === Computing 2RDM === 
 
@@ -320,21 +320,21 @@ ADAPT Convergence criterion = 1E-01
 Initial configuration: | 0000111111 >
 VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Number of operators in pool: 218
-    1:   E[adapt] = -75.693582975687   <S**2> =  0.00000000000000   Grad = 5.34e-01   Fidelity = 0.000000   CPU Time =  0.15   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 13
+    1:   E[adapt] = -75.693582975687   <S**2> = -0.00000000000000   Grad = 5.34e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 13
     2:   E[adapt] = -75.709279515252   <S**2> = -0.00000000000000   Grad = 4.08e-01   Fidelity = 0.000000   CPU Time =  0.18   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 62
-    3:   E[adapt] = -75.714322312432   <S**2> =  0.00000000000000   Grad = 2.86e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 75
-    4:   E[adapt] = -75.717874247463   <S**2> =  0.00000000000000   Grad = 2.32e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 88
-    5:   E[adapt] = -75.720948213282   <S**2> = -0.00000000000000   Grad = 1.98e-01   Fidelity = 0.000000   CPU Time =  0.22   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 101
+    3:   E[adapt] = -75.714322312432   <S**2> = -0.00000000000000   Grad = 2.86e-01   Fidelity = 0.000000   CPU Time =  0.25   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 75
+    4:   E[adapt] = -75.717874247463   <S**2> =  0.00000000000000   Grad = 2.32e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 88
+    5:   E[adapt] = -75.720948213282   <S**2> =  0.00000000000000   Grad = 1.98e-01   Fidelity = 0.000000   CPU Time =  0.23   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 101
 adapt_max = ndim = 0.1
 
 -----------ADAPT-VQE finished----------
 number of parameter is  5
-Final: E[adapt] = -75.720948213282   <S**2> = -0.000000000000000   Fidelity = 0.000000
+Final: E[adapt] = -75.720948213282   <S**2> = 0.000000000000000   Fidelity = 0.000000
      Basis             Coef
-| 0000111111 > : +0.9865 +0.0000i
+| 0000111111 > : +0.9865 -0.0000i
 
 
- Done: CPU Time =            1.8658
+ Done: CPU Time =            1.8768
  === Computing 1RDM === 
  === Computing 2RDM === 
 
@@ -358,7 +358,7 @@ Basis set = STO-6G
 
 Symmetry Cs : Cs(Abelian)
 E[FCI]    = -75.723510396265     (Spin = 1   Ms = 0)
-E[HF]     = -75.677464496345     (Spin = 1   Ms = 0)
+E[HF]     = -75.677464496348     (Spin = 1   Ms = 0)
 Projecting to spin space : s = 0.0    Ms = 0 
              Grid points : (alpha, beta, gamma) = (5, 2, 1)
 Tapering-Off Results:
@@ -374,21 +374,21 @@ ADAPT Convergence criterion = 1E-01
 Initial configuration: | 0000111111 >
 VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Number of operators in pool: 218
-    1:   E[adapt] = -75.693561547508   <S**2> = -0.00000000000000   Grad = 5.34e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
-    2:   E[adapt] = -75.709281601282   <S**2> = -0.00000000000000   Grad = 4.08e-01   Fidelity = 0.000000   CPU Time =  0.18   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 62
-    3:   E[adapt] = -75.714332564058   <S**2> = -0.00000000000000   Grad = 2.86e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 75
-    4:   E[adapt] = -75.717888713525   <S**2> =  0.00000000000000   Grad = 2.32e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 88
-    5:   E[adapt] = -75.720951652085   <S**2> = -0.00000000000000   Grad = 1.98e-01   Fidelity = 0.000000   CPU Time =  0.22   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 101
+    1:   E[adapt] = -75.693561547510   <S**2> =  0.00000000000000   Grad = 5.34e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
+    2:   E[adapt] = -75.709281601283   <S**2> = -0.00000000000000   Grad = 4.08e-01   Fidelity = 0.000000   CPU Time =  0.18   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 62
+    3:   E[adapt] = -75.714332564058   <S**2> = -0.00000000000000   Grad = 2.86e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 75
+    4:   E[adapt] = -75.717888713525   <S**2> =  0.00000000000000   Grad = 2.32e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 88
+    5:   E[adapt] = -75.720951652085   <S**2> = -0.00000000000000   Grad = 1.98e-01   Fidelity = 0.000000   CPU Time =  0.23   <N> =  6.00000000000002   <Sz> =  0.00000000000000   CNOT = 101
 adapt_max = ndim = 0.1
 
 -----------ADAPT-VQE finished----------
 number of parameter is  5
 Final: E[adapt] = -75.720951652085   <S**2> = -0.000000000000000   Fidelity = 0.000000
      Basis             Coef
-| 0000111111 > : +0.9865 -0.0000i
+| 0000111111 > : +0.9865 +0.0000i
 
 
- Done: CPU Time =            1.8701
+ Done: CPU Time =            1.8559
  === Computing 1RDM === 
  === Computing 2RDM === 
 
@@ -412,7 +412,7 @@ Basis set = STO-6G
 
 Symmetry Cs : Cs(Abelian)
 E[FCI]    = -75.723509389180     (Spin = 1   Ms = 0)
-E[HF]     = -75.677447723832     (Spin = 1   Ms = 0)
+E[HF]     = -75.677447723827     (Spin = 1   Ms = 0)
 Projecting to spin space : s = 0.0    Ms = 0 
              Grid points : (alpha, beta, gamma) = (5, 2, 1)
 Tapering-Off Results:
@@ -428,21 +428,21 @@ ADAPT Convergence criterion = 1E-01
 Initial configuration: | 0000111111 >
 VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Number of operators in pool: 218
-    1:   E[adapt] = -75.693552134613   <S**2> =  0.00000000000000   Grad = 5.34e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
-    2:   E[adapt] = -75.709280841875   <S**2> =  0.00000000000000   Grad = 4.08e-01   Fidelity = 0.000000   CPU Time =  0.18   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 62
-    3:   E[adapt] = -75.714334850128   <S**2> =  0.00000000000000   Grad = 2.86e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 75
-    4:   E[adapt] = -75.717892394650   <S**2> = -0.00000000000000   Grad = 2.32e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 88
-    5:   E[adapt] = -75.720952651540   <S**2> = -0.00000000000000   Grad = 1.98e-01   Fidelity = 0.000000   CPU Time =  0.21   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 101
+    1:   E[adapt] = -75.693552134609   <S**2> = -0.00000000000000   Grad = 5.34e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
+    2:   E[adapt] = -75.709280841873   <S**2> =  0.00000000000000   Grad = 4.08e-01   Fidelity = 0.000000   CPU Time =  0.20   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 62
+    3:   E[adapt] = -75.714334850128   <S**2> =  0.00000000000000   Grad = 2.86e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 75
+    4:   E[adapt] = -75.717892394650   <S**2> = -0.00000000000000   Grad = 2.32e-01   Fidelity = 0.000000   CPU Time =  0.24   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 88
+    5:   E[adapt] = -75.720952651540   <S**2> = -0.00000000000000   Grad = 1.98e-01   Fidelity = 0.000000   CPU Time =  0.21   <N> =  6.00000000000000   <Sz> = -0.00000000000000   CNOT = 101
 adapt_max = ndim = 0.1
 
 -----------ADAPT-VQE finished----------
 number of parameter is  5
 Final: E[adapt] = -75.720952651540   <S**2> = -0.000000000000000   Fidelity = 0.000000
      Basis             Coef
-| 0000111111 > : +0.9864 +0.0000i
+| 0000111111 > : +0.9864 -0.0000i
 
 
- Done: CPU Time =            1.8355
+ Done: CPU Time =            1.8712
  === Computing 1RDM === 
  === Computing 2RDM === 
 
@@ -462,4 +462,4 @@ Geometry Optimization Converged in 5 cycles
 *******************************************
 
 Saved in ./h2o_spadapt.qkt.
-Normal termination of quket at 2022-08-06 23:29:46.240852
+Normal termination of quket at 2022-08-07 01:06:46.029569

@@ -9,17 +9,17 @@
 ///             Q   Q       U    U      K   K       E    E       T              ///
 ///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
 ///                                                                             ///
-///                      Quantum Computing Simulator Ver 0.9                    ///
+///                      Quantum Computing Simulator Ver 0.9.1                  ///
 ///                                                                             ///
 ///        Copyright 2019-2022                                                  ///
 ///        The Quket Developers                                                 ///
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-08-06 23:20:53.305447: 
+2022-08-07 00:57:44.917847: 
 8 processes x 4 = Total 32 cores
 API for qulacs: None
-Number of cpus in the main node (pinode03): 8
+Number of cpus in the main node (pinode01): 8
 
 ##################### INPUT ########################
 basis        = sto-6G
@@ -57,7 +57,7 @@ Basis set = sto-6G
 *******************************************
 
 Symmetry C2v : C2v(Abelian)
-E[FCI]    = -75.463315580358     (Spin = 1   Ms = 0)
+E[FCI]    = -75.463315580348     (Spin = 1   Ms = 0)
 E[HF]     = -74.990092518846     (Spin = 1   Ms = 0)
 Tapering-Off Results:
 List of redundant qubits:  [0, 1, 2, 4]
@@ -145,19 +145,19 @@ Dimensions of theta_list (27) and pauli_list (10) are not consistent.
 Take over theta_list and force it to have 10 zero elements (guess will be gone!).
 Circuit order: Exp[T1] Exp[T2] |0>
 Initial: E[sauccsd] = -74.926806371698  <S**2> = +0.000000  rho = 10  
-      1: E[sauccsd] = -75.199036050315  <S**2> = +0.000085  Grad = 1.09e+00  CPU Time =    0.12457  (0.00 / step)
-      2: E[sauccsd] = -75.337959937357  <S**2> = +0.000037  Grad = 8.38e-01  CPU Time =    0.05636  (0.00 / step)
-      3: E[sauccsd] = -75.434453860145  <S**2> = +0.000007  Grad = 2.75e-01  CPU Time =    0.09572  (0.00 / step)
-      4: E[sauccsd] = -75.446233138552  <S**2> = +0.000041  Grad = 1.92e-01  CPU Time =    0.05556  (0.00 / step)
-      5: E[sauccsd] = -75.452401042491  <S**2> = +0.000061  Grad = 6.66e-02  CPU Time =    0.05535  (0.00 / step)
-      6: E[sauccsd] = -75.453636854616  <S**2> = +0.000070  Grad = 4.79e-02  CPU Time =    0.05545  (0.00 / step)
-      7: E[sauccsd] = -75.454887807912  <S**2> = +0.000086  Grad = 2.86e-02  CPU Time =    0.05526  (0.00 / step)
-      8: E[sauccsd] = -75.454975061222  <S**2> = +0.000082  Grad = 1.38e-02  CPU Time =    0.09518  (0.00 / step)
-      9: E[sauccsd] = -75.455008751732  <S**2> = +0.000078  Grad = 5.67e-03  CPU Time =    0.05528  (0.00 / step)
-     10: E[sauccsd] = -75.455011233158  <S**2> = +0.000080  Grad = 1.68e-03  CPU Time =    0.05507  (0.00 / step)
-     11: E[sauccsd] = -75.455011448999  <S**2> = +0.000080  Grad = 3.58e-04  CPU Time =    0.05531  (0.00 / step)
-     12: E[sauccsd] = -75.455011465574  <S**2> = +0.000080  Grad = 2.00e-04  CPU Time =    0.05937  (0.00 / step)
-  Final: E[sauccsd] = -75.455011465574  <S**2> = +0.000080  rho = 10 
+      1: E[sauccsd] = -75.199041156778  <S**2> = +0.000085  Grad = 1.09e+00  CPU Time =    0.11647  (0.00 / step)
+      2: E[sauccsd] = -75.337963264974  <S**2> = +0.000037  Grad = 8.38e-01  CPU Time =    0.06031  (0.00 / step)
+      3: E[sauccsd] = -75.434460951045  <S**2> = +0.000007  Grad = 2.75e-01  CPU Time =    0.10064  (0.00 / step)
+      4: E[sauccsd] = -75.446241930110  <S**2> = +0.000041  Grad = 1.92e-01  CPU Time =    0.06134  (0.00 / step)
+      5: E[sauccsd] = -75.452395722342  <S**2> = +0.000061  Grad = 6.70e-02  CPU Time =    0.06122  (0.00 / step)
+      6: E[sauccsd] = -75.453635457757  <S**2> = +0.000070  Grad = 4.79e-02  CPU Time =    0.05502  (0.00 / step)
+      7: E[sauccsd] = -75.454877045154  <S**2> = +0.000087  Grad = 2.95e-02  CPU Time =    0.05492  (0.00 / step)
+      8: E[sauccsd] = -75.454972757663  <S**2> = +0.000083  Grad = 1.44e-02  CPU Time =    0.09453  (0.00 / step)
+      9: E[sauccsd] = -75.455009028938  <S**2> = +0.000078  Grad = 5.31e-03  CPU Time =    0.05496  (0.00 / step)
+     10: E[sauccsd] = -75.455011091851  <S**2> = +0.000080  Grad = 1.69e-03  CPU Time =    0.05492  (0.00 / step)
+     11: E[sauccsd] = -75.455011462251  <S**2> = +0.000080  Grad = 3.39e-04  CPU Time =    0.05493  (0.00 / step)
+     12: E[sauccsd] = -75.455011466155  <S**2> = +0.000080  Grad = 3.14e-04  CPU Time =    0.09479  (0.00 / step)
+  Final: E[sauccsd] = -75.455011466155  <S**2> = +0.000080  rho = 10 
 
 (sauccsd state)
      Basis             Coef
@@ -171,7 +171,7 @@ Initial: E[sauccsd] = -74.926806371698  <S**2> = +0.000000  rho = 10
 | 1111000011 > : +0.4217 +0.0000i
 
 
-VQE Done: CPU Time =          0.8421
+VQE Done: CPU Time =          0.8898
 
 sauccsd (vqe) 
      Basis             Coef
@@ -188,11 +188,11 @@ sauccsd (vqe)
  === Computing 2RDM === 
 
 Dipole moment from 1RDM (in Debye):
-x = 0.00000  y = 0.01671  z = 0.00000
-| mu | = 0.01671
+x = -0.00000  y = 0.01665  z = 0.00000
+| mu | = 0.01665
 
 Dipole moment from relaxed 1RDM (in Debye):
-x = -0.00000     y = -0.00252    z = -0.00000
-| mu | = 0.00252
+x = 0.00000     y = -0.00224    z = -0.00000
+| mu | = 0.00224
 Saved in ./sauccsd_h2o.qkt.
-Normal termination of quket at 2022-08-06 23:20:56.443430
+Normal termination of quket at 2022-08-07 00:57:48.146411

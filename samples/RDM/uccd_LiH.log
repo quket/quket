@@ -9,14 +9,14 @@
 ///             Q   Q       U    U      K   K       E    E       T              ///
 ///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
 ///                                                                             ///
-///                      Quantum Computing Simulator Ver 0.9                    ///
+///                      Quantum Computing Simulator Ver 0.9.1                  ///
 ///                                                                             ///
 ///        Copyright 2019-2022                                                  ///
 ///        The Quket Developers                                                 ///
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-08-06 23:23:21.299934: 
+2022-08-07 01:00:11.849413: 
 8 processes x 4 = Total 32 cores
 API for qulacs: None
 Number of cpus in the main node (pinode01): 8
@@ -86,14 +86,14 @@ qubit    coeff    commutativity    tau
     6        1            1e-15    1.0 [Z6 Z7]
     8        1            1e-15    1.0 [Z8 Z9]
 
-Tapering-off algorithm finished in 0.2894477560184896 s
+Tapering-off algorithm finished in 0.2919660327024758 s
 
 Qubit: 0    Tau: 1.0 [Z0 Z2 Z4 Z7 Z9 Z10]
 Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9 Z11]
 Qubit: 6    Tau: 1.0 [Z6 Z7]
 Qubit: 8    Tau: 1.0 [Z8 Z9]
 
-2022-08-06 23:23:22.609087:  QuketData initialized
+2022-08-07 01:00:13.170396:  QuketData initialized
 NBasis = 6
 
 [Molecular Orbitals]
@@ -111,14 +111,14 @@ NBasis = 6
 
 MO coeff
 
-  eig  |  -2.34863551292198  |  -0.28573689346862  |   0.07826518697128  |   0.16393817934388  |   0.16393817934388  |   0.54923438724487  |
+  eig  |  -2.34863551292204  |  -0.28573689346843  |   0.07826518697125  |   0.16393817934391  |   0.16393817934391  |   0.54923438724508  |
        ------------------------------------------------------------------------------------------
-    0      0.99124500430117     -0.16744845114081     -0.20997266084602      0.00000000000000      0.00000000000000      0.09279179325792  
-    1      0.03267596030931      0.45475974184659      0.79962271564836      0.00000000000000      0.00000000000000     -0.70487641194115  
-    2     -0.00513726375476      0.28009335917869     -0.49523606105588     -0.00000000000000      0.58778118859293     -0.79374205760517  
-    3     -0.00238942500221      0.13027598101334     -0.23034235397948      0.76822127959738     -0.51792194896508     -0.36918235237450  
-    4      0.00286731000265     -0.15633117721601      0.27641082477538      0.64018439966448      0.62150633875810      0.44301882284940  
-    5      0.00447905379343      0.54875863724519     -0.13976590649793      0.00000000000000      0.00000000000000      1.18757118415665  
+    0      0.99124500430117     -0.16744845114064     -0.20997266084617      0.00000000000000      0.00000000000000      0.09279179325792  
+    1      0.03267596030932      0.45475974184596      0.79962271564865      0.00000000000000      0.00000000000000     -0.70487641194122  
+    2     -0.00513726375477      0.28009335917921     -0.49523606105576     -0.00000000000000      0.58778118859293     -0.79374205760506  
+    3     -0.00238942500222      0.13027598101359     -0.23034235397942      0.76822127959738     -0.51792194896508     -0.36918235237445  
+    4      0.00286731000266     -0.15633117721630      0.27641082477531      0.64018439966448      0.62150633875810      0.44301882284934  
+    5      0.00447905379344      0.54875863724519     -0.13976590649726      0.00000000000000      0.00000000000000      1.18757118415673  
 
 
 Overlap
@@ -150,14 +150,14 @@ qubit    coeff    commutativity    tau
     6        1            1e-15    1.0 [Z6 Z7]
     8        1            1e-15    1.0 [Z8 Z9]
 
-Tapering-off algorithm finished in 0.2919565378688276 s
+Tapering-off algorithm finished in 0.2918478609062731 s
 
 Qubit: 0    Tau: 1.0 [Z0 Z2 Z4 Z7 Z9 Z10]
 Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9 Z11]
 Qubit: 6    Tau: 1.0 [Z6 Z7]
 Qubit: 8    Tau: 1.0 [Z8 Z9]
 
-2022-08-06 23:23:23.159826:  Enter VQE_driver
+2022-08-07 01:00:13.722464:  Enter VQE_driver
 Entered VQE driver
 secondary: 0, vir: (4, 4), act: (2, 2), core: 0
 ndim1: 0, ndim2: 76
@@ -170,11 +170,11 @@ Dimensions of theta_list (76) and pauli_list (26) are not consistent.
 Take over theta_list and force it to have 26 zero elements (guess will be gone!).
 Circuit order: Exp[T1] Exp[T2] |0>
 Time for state preparation in cost 0.00006
-Time for expectation value in cost 0.00524
+Time for expectation value in cost 0.00322
 Initial: E[uccd] = -7.862038649178  <S**2> = +0.000000  rho = 1  
 Time for state preparation in cost 0.00004
 Time for expectation value in cost 0.00096
- cost =    -7.8620386491777960    ||g|| = 2.83e-01    g_max = 6.91e-02   grad time = 0.012
+ cost =    -7.8620386491778165    ||g|| = 2.83e-01    g_max = 6.91e-02   grad time = 0.012
 mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.001    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.002    U!|0>:  0.000    U!|H>: 0.000    sigma|0>:  0.002   Inner_product:  0.000
@@ -182,59 +182,59 @@ mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.003    U!|0>:  0.000    U!|
 mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.002    U!|0>:  0.000    U!|H>: 0.000    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.002    U!|0>:  0.000    U!|H>: 0.000    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.003    U!|0>:  0.000    U!|H>: 0.000    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.003    U!|0>:  0.001    U!|H>: 0.000    sigma|0>:  0.002   Inner_product:  0.000
-Time for state preparation in cost 0.00923
+mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.003    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
+Time for state preparation in cost 0.00930
+Time for expectation value in cost 0.00099
+ cost =    -7.1516858611935259    ||g|| = 2.25e+00    g_max = 1.56e+00   grad time = 0.024
+mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+Time for state preparation in cost 0.00931
+Time for expectation value in cost 0.00098
+ cost =    -7.8787237917232922    ||g|| = 1.88e-01    g_max = 1.28e-01   grad time = 0.023
+mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.001   Inner_product:  0.000
+mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+Time for state preparation in cost 0.00931
+Time for expectation value in cost 0.00094
+      1: E[uccd] = -7.878723791723  <S**2> = +0.000000  Grad = 1.88e-01  CPU Time =    0.19188  (0.01 / step)
+Time for state preparation in cost 0.00918
+Time for expectation value in cost 0.00107
+ cost =    -7.8760905004288517    ||g|| = 3.34e-01    g_max = 6.98e-02   grad time = 0.023
+mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+Time for state preparation in cost 0.00930
 Time for expectation value in cost 0.00096
- cost =    -7.1516858611941760    ||g|| = 2.25e+00    g_max = 1.56e+00   grad time = 0.023
+ cost =    -7.8813632012110615    ||g|| = 5.81e-02    g_max = 2.30e-02   grad time = 0.023
 mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.001   Inner_product:  0.000
 mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-Time for state preparation in cost 0.00922
-Time for expectation value in cost 0.00109
- cost =    -7.8787237917232806    ||g|| = 1.88e-01    g_max = 1.28e-01   grad time = 0.023
-mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-Time for state preparation in cost 0.00919
-Time for expectation value in cost 0.00097
-      1: E[uccd] = -7.878723791723  <S**2> = +0.000000  Grad = 1.88e-01  CPU Time =    0.16969  (0.00 / step)
-Time for state preparation in cost 0.00922
-Time for expectation value in cost 0.00096
- cost =    -7.8760905004288180    ||g|| = 3.34e-01    g_max = 6.98e-02   grad time = 0.023
-mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+Time for state preparation in cost 0.00925
+Time for expectation value in cost 0.00099
+      2: E[uccd] = -7.881363201211  <S**2> = +0.000000  Grad = 5.81e-02  CPU Time =    0.10900  (0.01 / step)
 Time for state preparation in cost 0.00922
 Time for expectation value in cost 0.00120
- cost =    -7.8813632012110464    ||g|| = 5.81e-02    g_max = 2.30e-02   grad time = 0.023
-mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-Time for state preparation in cost 0.00918
-Time for expectation value in cost 0.00097
-      2: E[uccd] = -7.881363201211  <S**2> = +0.000000  Grad = 5.81e-02  CPU Time =    0.09791  (0.01 / step)
-Time for state preparation in cost 0.00920
-Time for expectation value in cost 0.00097
  cost =    -7.8816614549986515    ||g|| = 3.23e-02    g_max = 1.62e-02   grad time = 0.023
 mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
@@ -244,40 +244,12 @@ mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|
 mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-Time for state preparation in cost 0.00920
-Time for expectation value in cost 0.00115
-      3: E[uccd] = -7.881661454999  <S**2> = +0.000000  Grad = 3.23e-02  CPU Time =    0.05967  (0.00 / step)
-Time for state preparation in cost 0.00925
-Time for expectation value in cost 0.00096
- cost =    -7.8818229050049142    ||g|| = 2.34e-02    g_max = 1.41e-02   grad time = 0.023
-mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-Time for state preparation in cost 0.00923
-Time for expectation value in cost 0.00108
-      4: E[uccd] = -7.881822905005  <S**2> = +0.000000  Grad = 2.34e-02  CPU Time =    0.06333  (0.01 / step)
-Time for state preparation in cost 0.00923
-Time for expectation value in cost 0.00097
- cost =    -7.8819303536945942    ||g|| = 1.99e-02    g_max = 1.64e-02   grad time = 0.023
-mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-Time for state preparation in cost 0.00921
-Time for expectation value in cost 0.00115
-      5: E[uccd] = -7.881930353695  <S**2> = +0.000000  Grad = 1.99e-02  CPU Time =    0.05858  (0.00 / step)
-Time for state preparation in cost 0.00922
+Time for state preparation in cost 0.00927
 Time for expectation value in cost 0.00095
- cost =    -7.8819574268655961    ||g|| = 6.88e-03    g_max = 3.36e-03   grad time = 0.023
+      3: E[uccd] = -7.881661454999  <S**2> = +0.000000  Grad = 3.23e-02  CPU Time =    0.05981  (0.00 / step)
+Time for state preparation in cost 0.00925
+Time for expectation value in cost 0.00094
+ cost =    -7.8818229050049373    ||g|| = 2.34e-02    g_max = 1.41e-02   grad time = 0.023
 mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
@@ -286,12 +258,68 @@ mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|
 mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-Time for state preparation in cost 0.00919
-Time for expectation value in cost 0.00097
-      6: E[uccd] = -7.881957426866  <S**2> = +0.000000  Grad = 6.88e-03  CPU Time =    0.05842  (0.01 / step)
+Time for state preparation in cost 0.00924
+Time for expectation value in cost 0.00096
+      4: E[uccd] = -7.881822905005  <S**2> = +0.000000  Grad = 2.34e-02  CPU Time =    0.05820  (0.00 / step)
+Time for state preparation in cost 0.00924
+Time for expectation value in cost 0.00093
+ cost =    -7.8819303536945808    ||g|| = 1.99e-02    g_max = 1.64e-02   grad time = 0.023
+mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+Time for state preparation in cost 0.00927
+Time for expectation value in cost 0.00094
+      5: E[uccd] = -7.881930353695  <S**2> = +0.000000  Grad = 1.99e-02  CPU Time =    0.05866  (0.00 / step)
+Time for state preparation in cost 0.00925
+Time for expectation value in cost 0.00093
+ cost =    -7.8819574268655845    ||g|| = 6.88e-03    g_max = 3.36e-03   grad time = 0.024
+mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.001   Inner_product:  0.000
+mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+Time for state preparation in cost 0.00925
+Time for expectation value in cost 0.00095
+      6: E[uccd] = -7.881957426866  <S**2> = +0.000000  Grad = 6.88e-03  CPU Time =    0.05952  (0.00 / step)
 Time for state preparation in cost 0.00922
-Time for expectation value in cost 0.00099
- cost =    -7.8819606193724256    ||g|| = 2.98e-03    g_max = 9.92e-04   grad time = 0.023
+Time for expectation value in cost 0.00093
+ cost =    -7.8819606193724328    ||g|| = 2.98e-03    g_max = 9.92e-04   grad time = 0.023
+mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.001   Inner_product:  0.000
+mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+Time for state preparation in cost 0.00925
+Time for expectation value in cost 0.00094
+      7: E[uccd] = -7.881960619372  <S**2> = +0.000000  Grad = 2.98e-03  CPU Time =    0.05881  (0.01 / step)
+Time for state preparation in cost 0.00918
+Time for expectation value in cost 0.00618
+ cost =    -7.8819616961035450    ||g|| = 2.20e-03    g_max = 7.10e-04   grad time = 0.023
+mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.001   Inner_product:  0.000
+mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+Time for state preparation in cost 0.00927
+Time for expectation value in cost 0.00108
+      8: E[uccd] = -7.881961696104  <S**2> = +0.000000  Grad = 2.20e-03  CPU Time =    0.06390  (0.00 / step)
+Time for state preparation in cost 0.00923
+Time for expectation value in cost 0.00093
+ cost =    -7.8819629514748621    ||g|| = 1.27e-03    g_max = 5.62e-04   grad time = 0.023
 mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
@@ -300,12 +328,37 @@ mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|
 mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+Time for state preparation in cost 0.00924
+Time for expectation value in cost 0.00119
+      9: E[uccd] = -7.881962951475  <S**2> = +0.000000  Grad = 1.27e-03  CPU Time =    0.06410  (0.01 / step)
+Time for state preparation in cost 0.00918
+Time for expectation value in cost 0.00095
+ cost =    -7.8819625160311038    ||g|| = 3.60e-03    g_max = 2.28e-03   grad time = 0.023
+mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.001   Inner_product:  0.000
+mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+Time for state preparation in cost 0.00923
+Time for expectation value in cost 0.00125
+ cost =    -7.8819630190162320    ||g|| = 9.73e-04    g_max = 1.97e-04   grad time = 0.023
+mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.001   Inner_product:  0.000
+mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
+mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+Time for state preparation in cost 0.00924
+Time for expectation value in cost 0.00103
+     10: E[uccd] = -7.881963019016  <S**2> = +0.000000  Grad = 9.73e-04  CPU Time =    0.10600  (0.01 / step)
 Time for state preparation in cost 0.00918
 Time for expectation value in cost 0.00096
-      7: E[uccd] = -7.881960619372  <S**2> = +0.000000  Grad = 2.98e-03  CPU Time =    0.06400  (0.01 / step)
-Time for state preparation in cost 0.00920
-Time for expectation value in cost 0.00097
- cost =    -7.8819616961035397    ||g|| = 2.20e-03    g_max = 7.10e-04   grad time = 0.023
+ cost =    -7.8819630850546814    ||g|| = 2.56e-04    g_max = 8.97e-05   grad time = 0.023
 mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
@@ -314,65 +367,12 @@ mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|
 mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-Time for state preparation in cost 0.00919
-Time for expectation value in cost 0.00094
-      8: E[uccd] = -7.881961696104  <S**2> = +0.000000  Grad = 2.20e-03  CPU Time =    0.05973  (0.00 / step)
-Time for state preparation in cost 0.00924
-Time for expectation value in cost 0.00094
- cost =    -7.8819629514748595    ||g|| = 1.27e-03    g_max = 5.62e-04   grad time = 0.023
-mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.001   Inner_product:  0.000
-mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-Time for state preparation in cost 0.00920
-Time for expectation value in cost 0.00102
-      9: E[uccd] = -7.881962951475  <S**2> = +0.000000  Grad = 1.27e-03  CPU Time =    0.06472  (0.01 / step)
 Time for state preparation in cost 0.00923
-Time for expectation value in cost 0.00100
- cost =    -7.8819625160311011    ||g|| = 3.60e-03    g_max = 2.28e-03   grad time = 0.023
-mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
+Time for expectation value in cost 0.00107
+     11: E[uccd] = -7.881963085055  <S**2> = +0.000000  Grad = 2.56e-04  CPU Time =    0.05900  (0.01 / step)
 Time for state preparation in cost 0.00921
-Time for expectation value in cost 0.00094
- cost =    -7.8819630190162524    ||g|| = 9.73e-04    g_max = 1.97e-04   grad time = 0.023
-mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.001   Inner_product:  0.000
-mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-Time for state preparation in cost 0.00922
-Time for expectation value in cost 0.00103
-     10: E[uccd] = -7.881963019016  <S**2> = +0.000000  Grad = 9.73e-04  CPU Time =    0.10455  (0.01 / step)
-Time for state preparation in cost 0.00924
 Time for expectation value in cost 0.00096
- cost =    -7.8819630850546911    ||g|| = 2.56e-04    g_max = 8.97e-05   grad time = 0.023
-mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.001   Inner_product:  0.000
-mpi.rank=3    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
-mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-Time for state preparation in cost 0.00922
-Time for expectation value in cost 0.00096
-     11: E[uccd] = -7.881963085055  <S**2> = +0.000000  Grad = 2.56e-04  CPU Time =    0.06500  (0.01 / step)
-Time for state preparation in cost 0.00919
-Time for expectation value in cost 0.00095
- cost =    -7.8819630920994639    ||g|| = 1.36e-04    g_max = 7.05e-05   grad time = 0.023
+ cost =    -7.8819630920994941    ||g|| = 1.36e-04    g_max = 7.05e-05   grad time = 0.023
 mpi.rank=0    Initial |H>:  0.006   Initial U!|H>: 0.000    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=1    Initial |H>:  0.006   Initial U!|H>: 0.004    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=2    Initial |H>:  0.006   Initial U!|H>: 0.008    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
@@ -381,11 +381,11 @@ mpi.rank=4    Initial |H>:  0.006   Initial U!|H>: 0.011    U!|0>:  0.002    U!|
 mpi.rank=5    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=6    Initial |H>:  0.006   Initial U!|H>: 0.012    U!|0>:  0.001    U!|H>: 0.001    sigma|0>:  0.002   Inner_product:  0.000
 mpi.rank=7    Initial |H>:  0.006   Initial U!|H>: 0.013    U!|0>:  0.002    U!|H>: 0.002    sigma|0>:  0.002   Inner_product:  0.000
-Time for state preparation in cost 0.00919
+Time for state preparation in cost 0.00924
 Time for expectation value in cost 0.00095
-     12: E[uccd] = -7.881963092099  <S**2> = +0.000000  Grad = 1.36e-04  CPU Time =    0.05889  (0.00 / step)
-Time for state preparation in cost 0.00925
-Time for expectation value in cost 0.00094
+     12: E[uccd] = -7.881963092099  <S**2> = +0.000000  Grad = 1.36e-04  CPU Time =    0.06009  (0.00 / step)
+Time for state preparation in cost 0.00930
+Time for expectation value in cost 0.00098
   Final: E[uccd] = -7.881963092099  <S**2> = +0.000000  rho = 1 
 
 (uccd state)
@@ -394,7 +394,7 @@ Time for expectation value in cost 0.00094
 | 110000000011 > : -0.1160 +0.0000i
 
 
-VQE Done: CPU Time =          0.9458
+VQE Done: CPU Time =          0.9707
 
 uccd (vqe) 
       Basis              Coef
@@ -410,10 +410,10 @@ Ja
 
     0      0.0000000     -0.0000009      0.0018574     -0.0000000     -0.0000000     -0.0022553  
     1      0.0000009      0.0000000      0.0110186      0.0000000      0.0000000      0.0026578  
-    2     -0.0018574     -0.0110186      0.0000000     -0.0000000     -0.0000000     -0.0000003  
-    3      0.0000000     -0.0000000      0.0000000      0.0000000     -0.0000000     -0.0000000  
+    2     -0.0018574     -0.0110186      0.0000000      0.0000000     -0.0000000     -0.0000003  
+    3      0.0000000     -0.0000000     -0.0000000      0.0000000     -0.0000000      0.0000000  
     4      0.0000000     -0.0000000      0.0000000      0.0000000      0.0000000     -0.0000000  
-    5      0.0022553     -0.0026578      0.0000003      0.0000000      0.0000000      0.0000000  
+    5      0.0022553     -0.0026578      0.0000003     -0.0000000      0.0000000      0.0000000  
 
 
 Jb
@@ -422,10 +422,10 @@ Jb
 
     0      0.0000000     -0.0000009      0.0018574     -0.0000000     -0.0000000     -0.0022553  
     1      0.0000009      0.0000000      0.0110188      0.0000000      0.0000000      0.0026579  
-    2     -0.0018574     -0.0110188      0.0000000     -0.0000000     -0.0000000     -0.0000004  
-    3      0.0000000     -0.0000000      0.0000000      0.0000000     -0.0000000     -0.0000000  
+    2     -0.0018574     -0.0110188      0.0000000      0.0000000     -0.0000000     -0.0000004  
+    3      0.0000000     -0.0000000     -0.0000000      0.0000000     -0.0000000      0.0000000  
     4      0.0000000     -0.0000000      0.0000000      0.0000000      0.0000000     -0.0000000  
-    5      0.0022553     -0.0026579      0.0000004      0.0000000      0.0000000      0.0000000  
+    5      0.0022553     -0.0026579      0.0000004     -0.0000000      0.0000000      0.0000000  
 
 
 Zij
@@ -439,11 +439,11 @@ Zab
 
                0              1              2              3              4              5              6              7              8              9          
 
-    0     -0.0000000     -0.0000000      0.0000000     -0.0000006     -0.0000000     -0.0000000     -0.0000000     -0.0000000      0.0000000     -0.0000009  
+    0      0.0000000     -0.0000000      0.0000000     -0.0000006      0.0000000     -0.0000000      0.0000000     -0.0000000      0.0000000     -0.0000009  
 
               10             11          
 
-    0     -0.0000000     -0.0000000  
+    0      0.0000000     -0.0000000  
 
 
 Zai
@@ -467,9 +467,9 @@ Zai
 
 
  Nuclear-replusion energy: 0.9956160907709449
-1RDM energy: -12.42620638137868
-2RDM energy: 3.5486271985082642
-Total energy: -7.881963092099472
+1RDM energy: -12.426206381378847
+2RDM energy: 3.5486271985084175
+Total energy: -7.881963092099485
 
 Dipole moment from 1RDM (in Debye):
 x = -3.87545  y = -1.80254  z = 2.16304
@@ -479,4 +479,4 @@ Dipole moment from relaxed 1RDM (in Debye):
 x = -3.78574     y = -1.76081    z = 2.11297
 | mu | = 4.67941
 Saved in ./uccd_LiH.qkt.
-Normal termination of quket at 2022-08-06 23:23:24.176418
+Normal termination of quket at 2022-08-07 01:00:14.800202

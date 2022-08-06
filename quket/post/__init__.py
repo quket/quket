@@ -10,9 +10,6 @@
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # limitations under the License.
-from .ct import(
-    ct_solver,
-    )
 from .cumulant import(
     cumulant_3RDM,
     cumulant_4RDM,
@@ -20,9 +17,6 @@ from .cumulant import(
 from .grad import(
     nuclear_grad,
     geomopt,
-    )
-from .lucc import(
-    lucc_solver,
     )
 from .prop import(
     prop,
