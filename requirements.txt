@@ -4,3 +4,5 @@ openfermionpyscf >= 0.4
 qulacs >= 0.1.9
 numpy 
 scipy
+threadpoolctl
+pyberny

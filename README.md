@@ -1,8 +1,8 @@
-# quket 0.9
+# quket 0.9.1
 ```
 
  Quket: Quantum Unified Kernel for Emulator Toolbox 
- Official Version 0.9
+ Official Version 0.9.1
  
      Copyright 2019-2022 Takashi Tsuchimochi, Yuto Mori, Yuma Shimomoto, Taisei Nishimaki, Yoohee Ryo,
                          Masaki Taii, Takahiro Yoshikura, TsangSiuChung, Kazuki Sasasako, Kengo Yoshimura. All rights Reserved.
@@ -33,8 +33,8 @@
  - Qulacs             >= 0.1.9   
  - numpy           
  - scipy 
+ - pyberny
  - (optional) mpi4py: MPI
- - (optional) pyberny: geometry optimization
 
 # How to install
 ```bash
