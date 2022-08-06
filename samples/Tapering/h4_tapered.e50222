@@ -1,8 +1,0 @@
-Loading compiler version 2021.1.2
-Loading tbb version 2021.1.1
-Loading debugger version 10.0.0
-Loading compiler-rt version 2021.1.2
-Loading dpl version 2021.1.2
-Loading oclfpga version 2021.1.2
-Loading mpi version 2021.1.1
-Overwritten attributes  contract_2e  of <class 'pyscf.fci.direct_spin1_symm.FCISolver'>

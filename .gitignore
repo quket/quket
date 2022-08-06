@@ -1,0 +1,11 @@
+__pycache__/
+contribute/
+.DS_Store/
+.ipynb_checkpoints/
+*.err
+*.chk
+*.qkt
+*.tmp
+*.theta
+*.out
+*.swp
