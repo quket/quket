@@ -9,17 +9,17 @@
 ///             Q   Q       U    U      K   K       E    E       T              ///
 ///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
 ///                                                                             ///
-///                      Quantum Computing Simulator Ver 0.9                    ///
+///                      Quantum Computing Simulator Ver 0.9.1                  ///
 ///                                                                             ///
 ///        Copyright 2019-2022                                                  ///
 ///        The Quket Developers                                                 ///
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-08-06 23:21:01.512562: 
+2022-08-07 00:57:53.159415: 
 8 processes x 4 = Total 32 cores
 API for qulacs: None
-Number of cpus in the main node (pinode03): 8
+Number of cpus in the main node (pinode01): 8
 
 ##################### INPUT ########################
 basis        = sto-3G
@@ -80,9 +80,9 @@ Dimensions of theta_list (3) and pauli_list (1) are not consistent.
 Take over theta_list and force it to have 1 zero elements (guess will be gone!).
 Circuit order: Exp[T1] Exp[T2] |0>
 Initial: E[uccsd] = -1.116759307396  <S**2> = +0.000000  rho = 1  
-      1: E[uccsd] = -1.136790172928  <S**2> = -0.000000  Grad = 5.66e-02  CPU Time =    0.01397  (0.00 / step)
-      2: E[uccsd] = -1.137283786439  <S**2> = +0.000000  Grad = 5.58e-04  CPU Time =    0.00324  (0.00 / step)
-      3: E[uccsd] = -1.137283834488  <S**2> = +0.000000  Grad = 1.12e-07  CPU Time =    0.00401  (0.00 / step)
+      1: E[uccsd] = -1.136790172928  <S**2> = -0.000000  Grad = 5.66e-02  CPU Time =    0.01966  (0.00 / step)
+      2: E[uccsd] = -1.137283786439  <S**2> = +0.000000  Grad = 5.58e-04  CPU Time =    0.00873  (0.00 / step)
+      3: E[uccsd] = -1.137283834488  <S**2> = +0.000000  Grad = 1.12e-07  CPU Time =    0.01055  (0.00 / step)
   Final: E[uccsd] = -1.137283834488  <S**2> = +0.000000  rho = 1 
 
 (uccsd state)
@@ -91,7 +91,7 @@ Initial: E[uccsd] = -1.116759307396  <S**2> = +0.000000  rho = 1
 | 1100 > : -0.1125 +0.0000i
 
 
-VQE Done: CPU Time =          0.0334
+VQE Done: CPU Time =          0.0535
 
 uccsd (vqe) 
   Basis          Coef
@@ -109,4 +109,4 @@ Dipole moment from relaxed 1RDM (in Debye):
 x = 0.00000     y = 0.00000    z = 0.00000
 | mu | = 0.00000
 Saved in ./uccsd_h2.qkt.
-Normal termination of quket at 2022-08-06 23:21:02.125745
+Normal termination of quket at 2022-08-07 00:57:53.823997

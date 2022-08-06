@@ -29,7 +29,6 @@ from quket.fileio import error, prints, printmat, print_geom, print_grad, tstamp
 from quket.fileio import read_input, set_config
 from quket.quket_data import QuketData
 from quket.utils import get_func_kwds
-from quket.post import lucc_solver, ct_solver
 
 
 prints(f"///////////////////////////////////////////////////////////////////////////////////", opentype="w")
@@ -190,12 +189,6 @@ for job_no, kwds in enumerate(kwds_list, 1):
     #################
     # Post-VQE part #
     #################
-    # Linearized UCC or Canonical Transformation
-    if Quket.post_method in ["lucc", "cepa", "lucc2", "cisd", "ucisd", "pt2", "cepa0", "ucepa0"]:
-        lucc_solver(Quket, Quket.cf.print_level)
-    if Quket.post_method in ["ct"]:
-        ct_solver(Quket, Quket.cf.print_level)
-
     # Nuclear gradient and/or Geometry optimization 
     if Quket.do_grad or Quket.geom_opt:
         from quket.post import grad 

@@ -9,17 +9,17 @@
 ///             Q   Q       U    U      K   K       E    E       T              ///
 ///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
 ///                                                                             ///
-///                      Quantum Computing Simulator Ver 0.9                    ///
+///                      Quantum Computing Simulator Ver 0.9.1                  ///
 ///                                                                             ///
 ///        Copyright 2019-2022                                                  ///
 ///        The Quket Developers                                                 ///
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-08-06 23:24:27.426849: 
+2022-08-07 01:01:19.104186: 
 8 processes x 4 = Total 32 cores
 API for qulacs: None
-Number of cpus in the main node (pinode04): 8
+Number of cpus in the main node (pinode01): 8
 
 ##################### INPUT ########################
 basis        = sto-3G
@@ -95,8 +95,8 @@ Initial configuration: |000000111111>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
-    1: E[3-UpCCGSD] = -107.588100485642  <S**2> = +0.000000000000001  Grad = 8.49e-04  CPU Time =  1.19  (0.03 / step)
-Final: E[3-UpCCGSD] = -107.588100485642  <S**2> = +0.000000000000002
+    1: E[3-UpCCGSD] = -107.588100515355  <S**2> = +0.000000000000002  Grad = 3.55e-04  CPU Time =  1.20  (0.03 / step)
+Final: E[3-UpCCGSD] = -107.588100515355  <S**2> = +0.000000000000002
 
 (3-UpCCGSD state)
       Basis              Coef
@@ -108,7 +108,7 @@ Final: E[3-UpCCGSD] = -107.588100485642  <S**2> = +0.000000000000002
 | 001111000011 > : +0.1094 +0.0000i
 
 
-VQE Done: CPU Time =          1.2302
+VQE Done: CPU Time =          1.2415
 
 3-upccgsd (vqe) 
       Basis              Coef
@@ -123,11 +123,11 @@ VQE Done: CPU Time =          1.2302
  === Computing 2RDM === 
 
 Dipole moment from 1RDM (in Debye):
-x = -0.00026  y = 0.00039  z = -0.00570
-| mu | = 0.00572
+x = -0.00025  y = 0.00039  z = -0.00424
+| mu | = 0.00427
 
 Dipole moment from relaxed 1RDM (in Debye):
-x = 0.00057     y = -0.00149    z = -0.00548
-| mu | = 0.00571
+x = 0.00061     y = -0.00152    z = -0.00555
+| mu | = 0.00579
 Saved in ./3-upccgsd_N2.qkt.
-Normal termination of quket at 2022-08-06 23:24:29.843764
+Normal termination of quket at 2022-08-07 01:01:21.564941

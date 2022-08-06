@@ -56,12 +56,12 @@ PHF_test_list = {
 }
 
 Tapering_test_list = {
-"Tapering/h4_tapered": ["List of Tapered-off Qubits:  [0, 1, 2, 4]",
+"Tapering/h4_tapered": ["List of redundant qubits:  [0, 1, 2, 4]",
                         "Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z6]",
                         "Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7]",
                         "Qubit: 2    Tau: 1.0 [Z2 Z3]",
                         "Qubit: 4    Tau: 1.0 [Z4 Z5]"],
-"Tapering/n2_tapered": ["List of Tapered-off Qubits:  [0, 1, 2, 4, 6]",
+"Tapering/n2_tapered": ["List of redundant qubits:  [0, 1, 2, 4, 6]",
                         "Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z7 Z9 Z10]",
                         "Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9 Z11]",
                         "Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]",
@@ -77,7 +77,7 @@ QITE_test_list = {
 
 MSQITE_test_list = {
 "MSQITE/msqite_h4": [-1.915106549508, -1.900779501949, -1.764318305093, -1.708685492323],
-"MSQITE/n2_tapered": [-107.51339479156, -107.294861989743, -107.236231484409],
+#"MSQITE/n2_tapered": [-107.51339479156, -107.294861989743, -107.236231484409],
 #Final:  E[0-MSQITE] = -107.513393311705  (<S**2> = +0.00000)  E[1-MSQITE] = -107.294861068392  (<S**2> = +0.00000)  E[2-MSQITE] = -107.236227890797  (<S**2> = +0.00000)  
 }
 
@@ -462,7 +462,7 @@ if TAPER:
         flag = True
         results = None
         try:
-            results = str(sh.grep("-e", "List of Tapered-off Qubits:", "-e","Qubit:", sample_log)).split("\n")
+            results = str(sh.grep("-e", "List of redundant qubits:", "-e","Qubit:", sample_log)).split("\n")
             for i in range(len(ref)):
                 if results[i] == ref[i]:
                     pass

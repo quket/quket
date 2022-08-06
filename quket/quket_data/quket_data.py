@@ -2203,8 +2203,6 @@ class QuketData():
         """
         from quket.vqe import VQE_driver
         from quket.qite import QITE_driver
-        from quket.post import lucc_solver
-        from quket.post import ct_solver
 
         # Sanitary check: use the new parameters for config
         self.cf.maxiter = self.maxiter
@@ -2384,17 +2382,6 @@ class QuketData():
                 self.theta_list = self.theta_list[:self.ndim]
         self.cf.opt_options['maxiter'] = self.maxiter
         vqe(self)
-
-    def post_run(self): 
-        #################
-        # Post-VQE part #
-        #################
-        # Linearized UCC or Canonical Transformation
-        from quket.post import lucc, ct
-        if self.post_method in ["lucc", "cepa", "lucc2", "cisd", "ucisd", "pt2", "cepa0", "ucepa0"]:
-            return lucc.lucc_solver(self, self.cf.print_level)
-        if self.post_method in ["ct"]:
-            ct.ct_solver(self, self.cf.print_level)
 
     def grad(self):
         # Nuclear gradient
