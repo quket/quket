@@ -16,8 +16,10 @@
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-07-27 19:52:35.679496: 
+2022-08-06 23:20:53.305447: 
 8 processes x 4 = Total 32 cores
+API for qulacs: None
+Number of cpus in the main node (pinode03): 8
 
 ##################### INPUT ########################
 basis        = sto-6G
@@ -55,8 +57,15 @@ Basis set = sto-6G
 *******************************************
 
 Symmetry C2v : C2v(Abelian)
-E[FCI]    = -75.463315580335     (Spin = 1   Ms = 0)
+E[FCI]    = -75.463315580358     (Spin = 1   Ms = 0)
 E[HF]     = -74.990092518846     (Spin = 1   Ms = 0)
+Tapering-Off Results:
+List of redundant qubits:  [0, 1, 2, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z7 Z9]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
+Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5 Z6 Z7]
+
 NBasis = 7
 
 [Molecular Orbitals]
@@ -71,6 +80,13 @@ NBasis = 7
  5 |   A1  |     0.0585 | Active (virtual)
  6 |   B1  |     0.0717 | Active (virtual)
 ---+-------+------------+------------------
+
+Tapering-Off Results:
+List of redundant qubits:  [0, 1, 2, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z7 Z9]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
+Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5 Z6 Z7]
 
 
    Skipping job since maxiter = 0.
@@ -90,6 +106,13 @@ Basis set = sto-6G
 Symmetry C2v : C2v(Abelian)
 E[FCI]    = -75.460357183497     (Spin = 1   Ms = 0)
 E[HF]     = -74.926806371698     (Spin = 1   Ms = 0)
+Tapering-Off Results:
+List of redundant qubits:  [0, 1, 2, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z7 Z9]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
+Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5 Z6 Z7]
+
 NBasis = 7
 
 [Molecular Orbitals]
@@ -105,27 +128,36 @@ NBasis = 7
  6 |   B1  |     0.0481 | Active (virtual)
 ---+-------+------------+------------------
 
+Tapering-Off Results:
+List of redundant qubits:  [0, 1, 2, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z7 Z9]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
+Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5 Z6 Z7]
+
 Entered VQE driver
 Performing VQE for sauccsd
-Number of VQE parameters: 27
+Number of VQE parameters: 10
 Initial configuration: |0000111111>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
+Dimensions of theta_list (27) and pauli_list (10) are not consistent.
+Take over theta_list and force it to have 10 zero elements (guess will be gone!).
 Circuit order: Exp[T1] Exp[T2] |0>
 Initial: E[sauccsd] = -74.926806371698  <S**2> = +0.000000  rho = 10  
-      1: E[sauccsd] = -75.199036103309  <S**2> = +0.000085  Grad = 1.09e+00  CPU Time =    0.19132  (0.01 / step)
-      2: E[sauccsd] = -75.337981976491  <S**2> = +0.000037  Grad = 8.38e-01  CPU Time =    0.08391  (0.01 / step)
-      3: E[sauccsd] = -75.434502916027  <S**2> = +0.000007  Grad = 2.75e-01  CPU Time =    0.15380  (0.01 / step)
-      4: E[sauccsd] = -75.446254319867  <S**2> = +0.000041  Grad = 1.91e-01  CPU Time =    0.08435  (0.01 / step)
-      5: E[sauccsd] = -75.452407245164  <S**2> = +0.000061  Grad = 6.66e-02  CPU Time =    0.08415  (0.01 / step)
-      6: E[sauccsd] = -75.453643098681  <S**2> = +0.000070  Grad = 4.77e-02  CPU Time =    0.08437  (0.01 / step)
-      7: E[sauccsd] = -75.454878354985  <S**2> = +0.000087  Grad = 2.95e-02  CPU Time =    0.08430  (0.01 / step)
-      8: E[sauccsd] = -75.454974631790  <S**2> = +0.000082  Grad = 1.40e-02  CPU Time =    0.15364  (0.01 / step)
-      9: E[sauccsd] = -75.455009046688  <S**2> = +0.000078  Grad = 5.09e-03  CPU Time =    0.08443  (0.01 / step)
-     10: E[sauccsd] = -75.455011243968  <S**2> = +0.000080  Grad = 1.23e-03  CPU Time =    0.08430  (0.01 / step)
-     11: E[sauccsd] = -75.455011457133  <S**2> = +0.000080  Grad = 4.05e-04  CPU Time =    0.08475  (0.01 / step)
-     12: E[sauccsd] = -75.455011462010  <S**2> = +0.000080  Grad = 4.51e-04  CPU Time =    0.15343  (0.01 / step)
-  Final: E[sauccsd] = -75.455011462010  <S**2> = +0.000080  rho = 10 
+      1: E[sauccsd] = -75.199036050315  <S**2> = +0.000085  Grad = 1.09e+00  CPU Time =    0.12457  (0.00 / step)
+      2: E[sauccsd] = -75.337959937357  <S**2> = +0.000037  Grad = 8.38e-01  CPU Time =    0.05636  (0.00 / step)
+      3: E[sauccsd] = -75.434453860145  <S**2> = +0.000007  Grad = 2.75e-01  CPU Time =    0.09572  (0.00 / step)
+      4: E[sauccsd] = -75.446233138552  <S**2> = +0.000041  Grad = 1.92e-01  CPU Time =    0.05556  (0.00 / step)
+      5: E[sauccsd] = -75.452401042491  <S**2> = +0.000061  Grad = 6.66e-02  CPU Time =    0.05535  (0.00 / step)
+      6: E[sauccsd] = -75.453636854616  <S**2> = +0.000070  Grad = 4.79e-02  CPU Time =    0.05545  (0.00 / step)
+      7: E[sauccsd] = -75.454887807912  <S**2> = +0.000086  Grad = 2.86e-02  CPU Time =    0.05526  (0.00 / step)
+      8: E[sauccsd] = -75.454975061222  <S**2> = +0.000082  Grad = 1.38e-02  CPU Time =    0.09518  (0.00 / step)
+      9: E[sauccsd] = -75.455008751732  <S**2> = +0.000078  Grad = 5.67e-03  CPU Time =    0.05528  (0.00 / step)
+     10: E[sauccsd] = -75.455011233158  <S**2> = +0.000080  Grad = 1.68e-03  CPU Time =    0.05507  (0.00 / step)
+     11: E[sauccsd] = -75.455011448999  <S**2> = +0.000080  Grad = 3.58e-04  CPU Time =    0.05531  (0.00 / step)
+     12: E[sauccsd] = -75.455011465574  <S**2> = +0.000080  Grad = 2.00e-04  CPU Time =    0.05937  (0.00 / step)
+  Final: E[sauccsd] = -75.455011465574  <S**2> = +0.000080  rho = 10 
 
 (sauccsd state)
      Basis             Coef
@@ -139,7 +171,7 @@ Initial: E[sauccsd] = -74.926806371698  <S**2> = +0.000000  rho = 10
 | 1111000011 > : +0.4217 +0.0000i
 
 
-VQE Done: CPU Time =          1.3507
+VQE Done: CPU Time =          0.8421
 
 sauccsd (vqe) 
      Basis             Coef
@@ -156,11 +188,11 @@ sauccsd (vqe)
  === Computing 2RDM === 
 
 Dipole moment from 1RDM (in Debye):
-x = 0.00000  y = 0.01668  z = 0.00000
-| mu | = 0.01668
+x = 0.00000  y = 0.01671  z = 0.00000
+| mu | = 0.01671
 
 Dipole moment from relaxed 1RDM (in Debye):
-x = -0.00000     y = -0.00231    z = -0.00000
-| mu | = 0.00231
+x = -0.00000     y = -0.00252    z = -0.00000
+| mu | = 0.00252
 Saved in ./sauccsd_h2o.qkt.
-Normal termination of quket at 2022-07-27 19:52:38.601868
+Normal termination of quket at 2022-08-06 23:20:56.443430

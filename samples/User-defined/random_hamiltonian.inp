@@ -41,8 +41,8 @@ det = random
 @@@
 ### User-defined initial qubit guess. 
 ### State is normalized.
-det = 0.5j*|001>+0.6*|010>-0.5*|110>
+det = 1* |011> - 1j*|101>
 
 @@@
 ### This also works. 
-det = 0.5j * 001 + 0.6 * 010 - 0.5 * 110
+det = |011> - (1j)|101>

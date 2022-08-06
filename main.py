@@ -10,6 +10,7 @@
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # limitations under the License.
+
 import os
 ### To avoid conflict
 os.environ["OMP_NUM_THREADS"] = "1"  ### Initial setting
@@ -28,6 +29,7 @@ from quket.fileio import error, prints, printmat, print_geom, print_grad, tstamp
 from quket.fileio import read_input, set_config
 from quket.quket_data import QuketData
 from quket.utils import get_func_kwds
+from quket.post import lucc_solver, ct_solver
 
 
 prints(f"///////////////////////////////////////////////////////////////////////////////////", opentype="w")
@@ -50,8 +52,17 @@ prints(f"///                                                                    
 prints(f"///////////////////////////////////////////////////////////////////////////////////")
 tstamp() 
 
+from quket._sys import get_user_api
+cf._user_api = get_user_api()
+cf.mem, cf.cpu = mpi.mem_proc_dict()
+cf.nprocs_my_node = cf.cpu[mpi.name]
 prints(f"{mpi.nprocs} processes x {cf.nthreads} = "
-       f"Total {mpi.nprocs*int(cf.nthreads)} cores")
+       f"Total {mpi.nprocs*int(cf.nthreads)} cores\n"
+       f"API for qulacs: {cf._user_api}\n"
+       f"Number of cpus in the main node ({mpi.name}): {cf.nprocs_my_node}")
+
+#prints('user_api', cf.user_api)
+#prints('Number of total CPU = ', cf.ntotal_cpu)
 ######################################
 ###    Start reading input file    ###
 ######################################
@@ -78,30 +89,27 @@ for job_no, kwds in enumerate(kwds_list, 1):
     #######################
     # Construct QuketData #
     #######################
-    if kwds["read"]:
-        Quket.load(cf.qkt)
-    else:
-        Quket.initialize(**kwds)
-        if cf.debug:
-            tstamp('QuketData initialized')
-        if Quket.method != 'mbe':
-            # Transform Jordan-Wigner Operators to Qulacs Format
-            Quket.openfermion_to_qulacs()
-            ### Tweaking orbitals...
-            if Quket.alter_pairs != []:
-                ## Switch orbitals
-                Quket.alter(Quket.alter_pairs)
-            if Quket.local != []:
-                ## Localize orbitals
-                Quket.boys(*Quket.local)
-            # 
-            Quket.get_pauli_list()
-        # Set projection parameters
-        Quket.set_projection()
+    Quket.initialize(**kwds)
+    if cf.debug:
+        tstamp('QuketData initialized')
+    if Quket.method != 'mbe':
+        # Transform Jordan-Wigner Operators to Qulacs Format
+        Quket.openfermion_to_qulacs()
+        ### Tweaking orbitals...
+        if Quket.alter_pairs != []:
+            ## Switch orbitals
+            Quket.alter(Quket.alter_pairs)
+        if Quket.local != []:
+            ## Localize orbitals
+            Quket.boys(*Quket.local)
+        # 
+        Quket.get_pauli_list()
+    # Set projection parameters
+    Quket.set_projection()
 
-        # Saving input 
-        Quket._init_dict = init_dict
-        Quket._kwds = kwds
+    # Saving input 
+    Quket._init_dict = init_dict
+    Quket._kwds = kwds
 
     if Quket.model == "chemical":
         prints(f"NBasis = {Quket.mo_coeff.shape[0]}")
@@ -115,10 +123,8 @@ for job_no, kwds in enumerate(kwds_list, 1):
         if cf.debug:
             printmat(Quket.overlap_integrals, name="Overlap", format=format)
 
-    if Quket.run_qubitfci:
-        Quket.fci2qubit()
 
-    if Quket.cf.do_taper_off or Quket.symmetry_pauli:
+    if Quket.cf.do_taper_off or Quket.symmetry:
         Quket.tapering.run(mapping=Quket.cf.mapping)
         if Quket.cf.do_taper_off and Quket.method != 'mbe':
             ### Create excitation-pauli list, and transform relevant stuff by unitary
@@ -126,11 +132,8 @@ for job_no, kwds in enumerate(kwds_list, 1):
         elif Quket.get_allowed_pauli_list:
             Quket.get_allowed_pauli_list()
 
-        if Quket.fci_states is not None:
-            prints("FCI in tapered-off qubits")
-            for fci_state in Quket.fci_states:
-                tmp = Quket.get_E(fci_state)
-                Quket.print_state(fci_state, name=f"(FCI state : E = {tmp})")
+    if Quket.run_qubitfci:
+        Quket.fci2qubit()
 
     if Quket.ansatz is None or Quket.maxiter == 0:
         prints(f"\n   Skipping job since maxiter = {Quket.maxiter}.\n")
@@ -187,6 +190,12 @@ for job_no, kwds in enumerate(kwds_list, 1):
     #################
     # Post-VQE part #
     #################
+    # Linearized UCC or Canonical Transformation
+    if Quket.post_method in ["lucc", "cepa", "lucc2", "cisd", "ucisd", "pt2", "cepa0", "ucepa0"]:
+        lucc_solver(Quket, Quket.cf.print_level)
+    if Quket.post_method in ["ct"]:
+        ct_solver(Quket, Quket.cf.print_level)
+
     # Nuclear gradient and/or Geometry optimization 
     if Quket.do_grad or Quket.geom_opt:
         from quket.post import grad 

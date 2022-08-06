@@ -16,8 +16,10 @@
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-07-27 19:56:58.077892: 
+2022-08-06 23:24:27.426849: 
 8 processes x 4 = Total 32 cores
+API for qulacs: None
+Number of cpus in the main node (pinode04): 8
 
 ##################### INPUT ########################
 basis        = sto-3G
@@ -48,6 +50,15 @@ Symmetry Dooh : D2h(Abelian)
 E[FCI]    = -107.591181749005     (Spin = 1   Ms = 0)
 E[HF]     = -107.357815445291     (Spin = 1   Ms = 0)
 TODO: Pauli_list is not supported for ansatz = 3-upccgsd.
+Tapering-Off Results:
+List of redundant qubits:  [0, 1, 2, 4, 6]
+Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z7 Z9 Z10]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9 Z11]
+Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5 Z8 Z9 Z10 Z11]
+Qubit: 6    Tau: 1.0 [Z6 Z7 Z8 Z9 Z10 Z11]
+
+pauli_list found.
 TODO: Pauli_list is not supported for ansatz = 3-upccgsd.
 NBasis = 10
 
@@ -67,6 +78,15 @@ NBasis = 10
  9 |  B1u  |     0.6132 | Active (virtual)
 ---+-------+------------+------------------
 
+Tapering-Off Results:
+List of redundant qubits:  [0, 1, 2, 4, 6]
+Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z7 Z9 Z10]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9 Z11]
+Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5 Z8 Z9 Z10 Z11]
+Qubit: 6    Tau: 1.0 [Z6 Z7 Z8 Z9 Z10 Z11]
+
+pauli_list found.
 Entered VQE driver
 Number of parameters: Singles 15    Doubles 15    Total 90
 Performing VQE for 3-upccgsd
@@ -75,8 +95,8 @@ Initial configuration: |000000111111>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
-    1: E[3-UpCCGSD] = -107.588100467658  <S**2> = -0.000000000000002  Grad = 4.30e-04  CPU Time =  1.23  (0.03 / step)
-Final: E[3-UpCCGSD] = -107.588100467658  <S**2> = -0.000000000000002
+    1: E[3-UpCCGSD] = -107.588100485642  <S**2> = +0.000000000000001  Grad = 8.49e-04  CPU Time =  1.19  (0.03 / step)
+Final: E[3-UpCCGSD] = -107.588100485642  <S**2> = +0.000000000000002
 
 (3-UpCCGSD state)
       Basis              Coef
@@ -88,7 +108,7 @@ Final: E[3-UpCCGSD] = -107.588100467658  <S**2> = -0.000000000000002
 | 001111000011 > : +0.1094 +0.0000i
 
 
-VQE Done: CPU Time =          1.2705
+VQE Done: CPU Time =          1.2302
 
 3-upccgsd (vqe) 
       Basis              Coef
@@ -103,11 +123,11 @@ VQE Done: CPU Time =          1.2705
  === Computing 2RDM === 
 
 Dipole moment from 1RDM (in Debye):
-x = -0.00024  y = 0.00039  z = -0.00411
-| mu | = 0.00413
+x = -0.00026  y = 0.00039  z = -0.00570
+| mu | = 0.00572
 
 Dipole moment from relaxed 1RDM (in Debye):
-x = 0.00058     y = -0.00157    z = -0.00558
-| mu | = 0.00582
+x = 0.00057     y = -0.00149    z = -0.00548
+| mu | = 0.00571
 Saved in ./3-upccgsd_N2.qkt.
-Normal termination of quket at 2022-07-27 19:57:00.446335
+Normal termination of quket at 2022-08-06 23:24:29.843764

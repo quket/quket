@@ -16,8 +16,10 @@
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-07-27 19:54:50.477870: 
+2022-08-06 23:22:38.874268: 
 8 processes x 4 = Total 32 cores
+API for qulacs: None
+Number of cpus in the main node (pinode01): 8
 
 ##################### INPUT ########################
 basis        = sto-6G
@@ -55,8 +57,16 @@ Basis set = sto-6G
 *******************************************
 
 Symmetry C2v : C2v(Abelian)
-E[FCI]    = -75.463315580348     (Spin = 1   Ms = 0)
+E[FCI]    = -75.463315580330     (Spin = 1   Ms = 0)
 E[HF]     = -74.990092518846     (Spin = 1   Ms = 0)
+Tapering-Off Results:
+List of redundant qubits:  [0, 1, 2, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z7 Z9]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
+Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5 Z6 Z7]
+
+pauli_list found.
 NBasis = 7
 
 [Molecular Orbitals]
@@ -72,6 +82,14 @@ NBasis = 7
  6 |   B1  |     0.0717 | Active (virtual)
 ---+-------+------------+------------------
 
+Tapering-Off Results:
+List of redundant qubits:  [0, 1, 2, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z7 Z9]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
+Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5 Z6 Z7]
+
+pauli_list found.
 
    Skipping job since maxiter = 0.
 
@@ -93,6 +111,14 @@ E[HF]     = -74.926806371698     (Spin = 1   Ms = 0)
 Projecting to spin space : s = 0.0    Ms = 0 
              Grid points : (alpha, beta, gamma) = (1, 2, 1)
 TODO: Pauli_list is not supported for ansatz = phf.
+Tapering-Off Results:
+List of redundant qubits:  [0, 1, 2, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z7 Z9]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
+Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5 Z6 Z7]
+
+pauli_list found.
 TODO: Pauli_list is not supported for ansatz = phf.
 Projecting to spin space : s = 0.0    Ms = 0 
              Grid points : (alpha, beta, gamma) = (1, 2, 1)
@@ -111,6 +137,14 @@ NBasis = 7
  6 |   B1  |     0.0481 | Active (virtual)
 ---+-------+------------+------------------
 
+Tapering-Off Results:
+List of redundant qubits:  [0, 1, 2, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z3 Z5 Z7 Z9]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
+Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5 Z6 Z7]
+
+pauli_list found.
 Entered VQE driver
 Number of parameters: Singles 12    Doubles 0    Total 12
 Performing VQE for phf
@@ -120,21 +154,21 @@ Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 
                0          
-    0     -0.0013444  
-    1      0.0012082  
-    2      0.0000061  
-    3     -0.7440278  
-    4     -2.3854366  
-    5     -0.0000095  
-    6      0.0000081  
-    7     -0.0000049  
-    8      0.0000023  
-    9      0.7312286  
-   10      2.4010995  
-   11     -0.0000010  
+    0     -0.0013435  
+    1      0.0012109  
+    2      0.0000048  
+    3     -0.7440292  
+    4     -2.3854373  
+    5     -0.0000090  
+    6      0.0000091  
+    7     -0.0000039  
+    8     -0.0000001  
+    9      0.7312269  
+   10      2.4010993  
+   11     -0.0000018  
 
-Initial E[phf] = -75.460201185168  <S**2> = -0.000000000000003  rho = 1
-     1: E[phf] = -75.460201185171  <S**2> = -0.000000000000002  Grad = 3.80e-05  CPU Time =  0.20  (0.01 / step)
+Initial E[phf] = -75.460201185171  <S**2> = -0.000000000000003  rho = 1
+     1: E[phf] = -75.460201185193  <S**2> = -0.000000000000004  Grad = 3.06e-05  CPU Time =  0.12  (0.01 / step)
 State before projection
      Basis             Coef
 | 0000111111 > : +0.2941 +0.0000i
@@ -154,7 +188,7 @@ State before projection
 | 1110010011 > : +0.2220 +0.0000i
 | 1111000011 > : +0.2094 +0.0000i
 
- Final: E[phf] = -75.460201185171  <S**2> = -0.000000000000002  rho = 1
+ Final: E[phf] = -75.460201185193  <S**2> = -0.000000000000004  rho = 1
      Basis             Coef
 | 0000111111 > : +0.2941 +0.0000i
 | 0001101111 > : -0.2774 +0.0000i
@@ -173,10 +207,10 @@ State before projection
 | 1110010011 > : +0.2220 +0.0000i
 | 1111000011 > : +0.2094 +0.0000i
 
-HUg [ -3.556223834099843 -47.120026212592336]
-Ug [0.04712058936753  0.624442025769667]
+HUg [ -3.55622040664977 -47.12002290143282]
+Ug [0.047120543952031 0.624441981884782]
 
-VQE Done: CPU Time =          0.2283
+VQE Done: CPU Time =          0.1410
 
 phf (vqe) 
      Basis             Coef
@@ -190,7 +224,7 @@ x = -0.00000  y = 0.39930  z = 0.00000
 | mu | = 0.39930
 
 Dipole moment from relaxed 1RDM (in Debye):
-x = 0.00000     y = 0.39930    z = -0.00000
+x = -0.00000     y = 0.39930    z = -0.00000
 | mu | = 0.39930
 Saved in ./phf_h2o.qkt.
-Normal termination of quket at 2022-07-27 19:54:51.901200
+Normal termination of quket at 2022-08-06 23:22:40.657827

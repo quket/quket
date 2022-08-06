@@ -13,8 +13,9 @@
 # limitations under the License.
 import openfermion
 import qulacs
+import numpy as np
 import copy
-COEFFICIENT_TYPES = (int, float, complex)
+COEFFICIENT_TYPES = (int, float, complex, np.integer)
 from .qulacs import QuantumState
 """
 OpenFermion's QubitOperator and FermionOperator are extended so that 

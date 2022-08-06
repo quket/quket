@@ -39,7 +39,7 @@ from quket.fileio import prints, print_state, printmat
 from quket.utils import fermi_to_str, isfloat
 from quket.linalg import lstsq
 from quket.opelib import evolve
-from quket.opelib import create_exp_state 
+from quket.ansatze import create_exp_state 
 from quket.lib import QuantumState, QubitOperator
 
 def QITE_driver(Quket):

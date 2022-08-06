@@ -16,8 +16,10 @@
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-07-27 20:01:09.703089: 
+2022-08-06 23:29:17.412372: 
 8 processes x 4 = Total 32 cores
+API for qulacs: None
+Number of cpus in the main node (pinode01): 8
 
 ##################### INPUT ########################
  basis        = STO-6G
@@ -49,6 +51,12 @@ Basis set = STO-6G
 Symmetry Cs : Cs(Abelian)
 E[FCI]    = -75.719215312767     (Spin = 1   Ms = 0)
 E[HF]     = -75.678679186538     (Spin = 1   Ms = 0)
+Tapering-Off Results:
+List of redundant qubits:  [0, 1, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z2 Z5 Z6 Z8]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5]
+
 NBasis = 7
 
 [Molecular Orbitals]
@@ -64,21 +72,29 @@ NBasis = 7
  6 |   A'  |     0.6834 | Active (virtual)
 ---+-------+------------+------------------
 
+Tapering-Off Results:
+List of redundant qubits:  [0, 1, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z2 Z5 Z6 Z8]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5]
+
 Entered VQE driver
 Performing VQE for uccsd
-Number of VQE parameters: 54
+Number of VQE parameters: 30
 Initial configuration: |0000111111>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
+Dimensions of theta_list (54) and pauli_list (30) are not consistent.
+Take over theta_list and force it to have 30 zero elements (guess will be gone!).
 Circuit order: Exp[T1] Exp[T2] |0>
 Initial: E[uccsd] = -75.678679186538  <S**2> = +0.000000  rho = 1  
-      1: E[uccsd] = -75.717454620923  <S**2> = +0.000000  Grad = 8.53e-02  CPU Time =    0.12207  (0.00 / step)
-      2: E[uccsd] = -75.718905154306  <S**2> = +0.000000  Grad = 2.57e-02  CPU Time =    0.02518  (0.00 / step)
-      3: E[uccsd] = -75.719101818547  <S**2> = +0.000000  Grad = 1.10e-02  CPU Time =    0.02533  (0.00 / step)
-      4: E[uccsd] = -75.719146755660  <S**2> = +0.000000  Grad = 3.03e-03  CPU Time =    0.02505  (0.00 / step)
-      5: E[uccsd] = -75.719148079037  <S**2> = +0.000000  Grad = 1.04e-03  CPU Time =    0.04428  (0.00 / step)
-      6: E[uccsd] = -75.719148262129  <S**2> = +0.000000  Grad = 1.26e-04  CPU Time =    0.02537  (0.00 / step)
-      7: E[uccsd] = -75.719148265928  <S**2> = +0.000000  Grad = 4.63e-05  CPU Time =    0.02548  (0.00 / step)
+      1: E[uccsd] = -75.717454620922  <S**2> = +0.000000  Grad = 8.53e-02  CPU Time =    0.07854  (0.00 / step)
+      2: E[uccsd] = -75.718905154306  <S**2> = +0.000000  Grad = 2.57e-02  CPU Time =    0.02761  (0.00 / step)
+      3: E[uccsd] = -75.719101818547  <S**2> = +0.000000  Grad = 1.10e-02  CPU Time =    0.02939  (0.00 / step)
+      4: E[uccsd] = -75.719146755659  <S**2> = +0.000000  Grad = 3.03e-03  CPU Time =    0.02920  (0.00 / step)
+      5: E[uccsd] = -75.719148079037  <S**2> = +0.000000  Grad = 1.04e-03  CPU Time =    0.04067  (0.00 / step)
+      6: E[uccsd] = -75.719148262129  <S**2> = +0.000000  Grad = 1.26e-04  CPU Time =    0.02150  (0.00 / step)
+      7: E[uccsd] = -75.719148265928  <S**2> = +0.000000  Grad = 4.63e-05  CPU Time =    0.02246  (0.00 / step)
   Final: E[uccsd] = -75.719148265928  <S**2> = +0.000000  rho = 1 
 
 (uccsd state)
@@ -86,7 +102,7 @@ Initial: E[uccsd] = -75.678679186538  <S**2> = +0.000000  rho = 1
 | 0000111111 > : +0.9869 +0.0000i
 
 
-VQE Done: CPU Time =          0.3054
+VQE Done: CPU Time =          0.2614
 
 uccsd (vqe) 
      Basis             Coef
@@ -124,14 +140,20 @@ Basis set = STO-6G
 Symmetry Cs : Cs(Abelian)
 E[FCI]    = -75.723469324309     (Spin = 1   Ms = 0)
 E[HF]     = -75.677379564949     (Spin = 1   Ms = 0)
-      1: E[uccsd] = -75.721561135804  <S**2> = +0.000000  Grad = 8.70e-02  CPU Time =    0.12030  (0.00 / step)
-      2: E[uccsd] = -75.723134671938  <S**2> = +0.000000  Grad = 2.58e-02  CPU Time =    0.02538  (0.00 / step)
-      3: E[uccsd] = -75.723337788664  <S**2> = +0.000000  Grad = 1.06e-02  CPU Time =    0.02492  (0.00 / step)
-      4: E[uccsd] = -75.723380641651  <S**2> = +0.000000  Grad = 2.36e-03  CPU Time =    0.02508  (0.00 / step)
-      5: E[uccsd] = -75.723381253796  <S**2> = +0.000000  Grad = 1.60e-03  CPU Time =    0.02489  (0.00 / step)
-      6: E[uccsd] = -75.723381694446  <S**2> = +0.000000  Grad = 7.48e-05  CPU Time =    0.02486  (0.00 / step)
-      7: E[uccsd] = -75.723381695506  <S**2> = +0.000000  Grad = 1.05e-05  CPU Time =    0.02492  (0.00 / step)
-  Final: E[uccsd] = -75.723381695506  <S**2> = +0.000000  rho = 1 
+Tapering-Off Results:
+List of redundant qubits:  [0, 1, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z2 Z5 Z6 Z8]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5]
+
+      1: E[uccsd] = -75.721561135804  <S**2> = +0.000000  Grad = 8.70e-02  CPU Time =    0.05227  (0.00 / step)
+      2: E[uccsd] = -75.723134671938  <S**2> = +0.000000  Grad = 2.58e-02  CPU Time =    0.03156  (0.00 / step)
+      3: E[uccsd] = -75.723337788664  <S**2> = +0.000000  Grad = 1.06e-02  CPU Time =    0.02573  (0.00 / step)
+      4: E[uccsd] = -75.723380641651  <S**2> = +0.000000  Grad = 2.36e-03  CPU Time =    0.02468  (0.00 / step)
+      5: E[uccsd] = -75.723381253795  <S**2> = +0.000000  Grad = 1.60e-03  CPU Time =    0.02468  (0.00 / step)
+      6: E[uccsd] = -75.723381694446  <S**2> = +0.000000  Grad = 7.48e-05  CPU Time =    0.03328  (0.00 / step)
+      7: E[uccsd] = -75.723381695505  <S**2> = +0.000000  Grad = 1.05e-05  CPU Time =    0.02462  (0.00 / step)
+  Final: E[uccsd] = -75.723381695505  <S**2> = +0.000000  rho = 1 
 
 (uccsd state)
      Basis             Coef
@@ -162,13 +184,19 @@ Basis set = STO-6G
 Symmetry Cs : Cs(Abelian)
 E[FCI]    = -75.723521870477     (Spin = 1   Ms = 0)
 E[HF]     = -75.677195963205     (Spin = 1   Ms = 0)
-      1: E[uccsd] = -75.721590356621  <S**2> = +0.000000  Grad = 8.73e-02  CPU Time =    0.05244  (0.00 / step)
-      2: E[uccsd] = -75.723181359586  <S**2> = +0.000000  Grad = 2.60e-02  CPU Time =    0.02606  (0.00 / step)
-      3: E[uccsd] = -75.723388842122  <S**2> = +0.000000  Grad = 1.07e-02  CPU Time =    0.02534  (0.00 / step)
-      4: E[uccsd] = -75.723432819707  <S**2> = +0.000000  Grad = 2.39e-03  CPU Time =    0.02521  (0.00 / step)
-      5: E[uccsd] = -75.723433436099  <S**2> = +0.000000  Grad = 1.63e-03  CPU Time =    0.02514  (0.00 / step)
-      6: E[uccsd] = -75.723433896832  <S**2> = +0.000000  Grad = 7.34e-05  CPU Time =    0.02530  (0.00 / step)
-      7: E[uccsd] = -75.723433897864  <S**2> = +0.000000  Grad = 9.41e-06  CPU Time =    0.02550  (0.00 / step)
+Tapering-Off Results:
+List of redundant qubits:  [0, 1, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z2 Z5 Z6 Z8]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5]
+
+      1: E[uccsd] = -75.721590356620  <S**2> = +0.000000  Grad = 8.73e-02  CPU Time =    0.05124  (0.00 / step)
+      2: E[uccsd] = -75.723181359586  <S**2> = +0.000000  Grad = 2.60e-02  CPU Time =    0.02452  (0.00 / step)
+      3: E[uccsd] = -75.723388842122  <S**2> = +0.000000  Grad = 1.07e-02  CPU Time =    0.02442  (0.00 / step)
+      4: E[uccsd] = -75.723432819707  <S**2> = +0.000000  Grad = 2.39e-03  CPU Time =    0.02429  (0.00 / step)
+      5: E[uccsd] = -75.723433436099  <S**2> = +0.000000  Grad = 1.63e-03  CPU Time =    0.02438  (0.00 / step)
+      6: E[uccsd] = -75.723433896832  <S**2> = +0.000000  Grad = 7.34e-05  CPU Time =    0.02422  (0.00 / step)
+      7: E[uccsd] = -75.723433897864  <S**2> = +0.000000  Grad = 9.41e-06  CPU Time =    0.02432  (0.00 / step)
   Final: E[uccsd] = -75.723433897864  <S**2> = +0.000000  rho = 1 
 
 (uccsd state)
@@ -200,13 +228,19 @@ Basis set = STO-6G
 Symmetry Cs : Cs(Abelian)
 E[FCI]    = -75.723524350381     (Spin = 1   Ms = 0)
 E[HF]     = -75.677155601017     (Spin = 1   Ms = 0)
-      1: E[uccsd] = -75.721597103409  <S**2> = +0.000000  Grad = 8.73e-02  CPU Time =    0.06808  (0.00 / step)
-      2: E[uccsd] = -75.723185689015  <S**2> = +0.000000  Grad = 2.59e-02  CPU Time =    0.02689  (0.00 / step)
-      3: E[uccsd] = -75.723391523399  <S**2> = +0.000000  Grad = 1.06e-02  CPU Time =    0.02682  (0.00 / step)
-      4: E[uccsd] = -75.723434993715  <S**2> = +0.000000  Grad = 2.38e-03  CPU Time =    0.02540  (0.00 / step)
-      5: E[uccsd] = -75.723435613384  <S**2> = +0.000000  Grad = 1.61e-03  CPU Time =    0.02528  (0.00 / step)
-      6: E[uccsd] = -75.723436062945  <S**2> = +0.000000  Grad = 7.35e-05  CPU Time =    0.02540  (0.00 / step)
-      7: E[uccsd] = -75.723436063971  <S**2> = +0.000000  Grad = 9.35e-06  CPU Time =    0.02542  (0.00 / step)
+Tapering-Off Results:
+List of redundant qubits:  [0, 1, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z2 Z5 Z6 Z8]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5]
+
+      1: E[uccsd] = -75.721597103409  <S**2> = +0.000000  Grad = 8.73e-02  CPU Time =    0.05073  (0.00 / step)
+      2: E[uccsd] = -75.723185689015  <S**2> = +0.000000  Grad = 2.59e-02  CPU Time =    0.03044  (0.00 / step)
+      3: E[uccsd] = -75.723391523399  <S**2> = +0.000000  Grad = 1.06e-02  CPU Time =    0.04306  (0.00 / step)
+      4: E[uccsd] = -75.723434993714  <S**2> = +0.000000  Grad = 2.38e-03  CPU Time =    0.03047  (0.00 / step)
+      5: E[uccsd] = -75.723435613384  <S**2> = +0.000000  Grad = 1.61e-03  CPU Time =    0.02434  (0.00 / step)
+      6: E[uccsd] = -75.723436062945  <S**2> = +0.000000  Grad = 7.35e-05  CPU Time =    0.02429  (0.00 / step)
+      7: E[uccsd] = -75.723436063971  <S**2> = +0.000000  Grad = 9.35e-06  CPU Time =    0.02456  (0.00 / step)
   Final: E[uccsd] = -75.723436063971  <S**2> = +0.000000  rho = 1 
 
 (uccsd state)
@@ -237,14 +271,20 @@ Basis set = STO-6G
 
 Symmetry Cs : Cs(Abelian)
 E[FCI]    = -75.723524614416     (Spin = 1   Ms = 0)
-E[HF]     = -75.677187484112     (Spin = 1   Ms = 0)
-      1: E[uccsd] = -75.721597214405  <S**2> = +0.000000  Grad = 8.73e-02  CPU Time =    0.06991  (0.00 / step)
-      2: E[uccsd] = -75.723185569967  <S**2> = +0.000000  Grad = 2.59e-02  CPU Time =    0.02558  (0.00 / step)
-      3: E[uccsd] = -75.723391798915  <S**2> = +0.000000  Grad = 1.06e-02  CPU Time =    0.02531  (0.00 / step)
-      4: E[uccsd] = -75.723435405368  <S**2> = +0.000000  Grad = 2.38e-03  CPU Time =    0.02540  (0.00 / step)
-      5: E[uccsd] = -75.723436023769  <S**2> = +0.000000  Grad = 1.61e-03  CPU Time =    0.02527  (0.00 / step)
-      6: E[uccsd] = -75.723436475642  <S**2> = +0.000000  Grad = 7.34e-05  CPU Time =    0.02541  (0.00 / step)
-      7: E[uccsd] = -75.723436476669  <S**2> = +0.000000  Grad = 9.36e-06  CPU Time =    0.02526  (0.00 / step)
+E[HF]     = -75.677187484111     (Spin = 1   Ms = 0)
+Tapering-Off Results:
+List of redundant qubits:  [0, 1, 4]
+Qubit: 0    Tau: 1.0 [Z0 Z2 Z5 Z6 Z8]
+Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
+Qubit: 4    Tau: 1.0 [Z4 Z5]
+
+      1: E[uccsd] = -75.721597214404  <S**2> = +0.000000  Grad = 8.73e-02  CPU Time =    0.05145  (0.00 / step)
+      2: E[uccsd] = -75.723185569967  <S**2> = +0.000000  Grad = 2.59e-02  CPU Time =    0.02492  (0.00 / step)
+      3: E[uccsd] = -75.723391798915  <S**2> = +0.000000  Grad = 1.06e-02  CPU Time =    0.02451  (0.00 / step)
+      4: E[uccsd] = -75.723435405368  <S**2> = +0.000000  Grad = 2.38e-03  CPU Time =    0.02453  (0.00 / step)
+      5: E[uccsd] = -75.723436023769  <S**2> = +0.000000  Grad = 1.61e-03  CPU Time =    0.02430  (0.00 / step)
+      6: E[uccsd] = -75.723436475642  <S**2> = +0.000000  Grad = 7.34e-05  CPU Time =    0.02441  (0.00 / step)
+      7: E[uccsd] = -75.723436476669  <S**2> = +0.000000  Grad = 9.36e-06  CPU Time =    0.02448  (0.00 / step)
   Final: E[uccsd] = -75.723436476669  <S**2> = +0.000000  rho = 1 
 
 (uccsd state)
@@ -271,4 +311,4 @@ Geometry Optimization Converged in 3 cycles
 *******************************************
 
 Saved in ./h2o_ucc.qkt.
-Normal termination of quket at 2022-07-27 20:01:14.732527
+Normal termination of quket at 2022-08-06 23:29:23.603310

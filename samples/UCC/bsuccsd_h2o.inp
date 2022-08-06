@@ -21,10 +21,12 @@ H   -1.976723791    1.359252514 0
 kappa_guess  = read
 ansatz       = uhf
 
+Symmetry     = False
+
 @@@
 theta_guess  = zero
 kappa_to_T1  = 1
 kappa_guess  = read
 ansatz       = uccsd
 rho          = 1
-
+Symmetry     = False
