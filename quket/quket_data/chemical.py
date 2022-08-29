@@ -354,7 +354,7 @@ class Chemical(MolecularData):
 
     def get_operators(self, guess="minao",
                       run_fci=True, run_ccsd=True,
-                      run_mp2=True, run_casscf=False,
+                      run_mp2=False, run_casscf=False,
                       bcast_Hamiltonian=True):
         """Function
         Run PySCF and get operators.
