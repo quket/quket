@@ -638,7 +638,7 @@ def FermionOperator_from_list(creation_list, annihilation_list):
     return fermi_op
 
 
-def Taylor_U(operator, wfn, theta, threshold=1e-16, parallel=True):
+def Taylor_U(operator, wfn, theta, threshold=1e-16, parallel=False, shift=False):
     """Function
     Form 
             wfn' = exp[-i theta operator] wfn
@@ -647,12 +647,18 @@ def Taylor_U(operator, wfn, theta, threshold=1e-16, parallel=True):
     Args:
         operator: QubitOperator 
         wfn: QuantumState
+        theta: parameter (float)
+        parallel: whether parallized or not
+        shift: whether Taylor expantion is performed around the expectation value
     """
     chi = wfn.copy()
     chi_dash = wfn.copy()
+    expHpsi = wfn.copy()
     d = 10.0
     j = 1
-    phase = -1j
+    s = 0
+    from quket.fileio import print_state
+    from qulacs.state import inner_product
     while d > 1e-16:
         chi.multiply_coef(0)
         #### MPI ###
@@ -663,17 +669,20 @@ def Taylor_U(operator, wfn, theta, threshold=1e-16, parallel=True):
         #    pauli = observable.get_term(i)
         #    chi_i = multiply_Hpauli(chi_i, n, pauli, db, j)
         #    my_chi.add_state(chi_i)
-        chi_dash = evolve(operator, chi_dash) 
-        # Add (shift * db/j) |chi_dash>
-        chi_dash.multiply_coef(phase*theta/j)
-        chi.add_state(chi_dash)
+        chi_dash = evolve(operator - s, chi_dash, parallel=parallel) 
+        if shift:
+            if j == 1:
+                s = inner_product(chi_dash, wfn)
+                chi_dash = chi_dash - s * wfn 
 
+        chi += (-1j * theta)/j * chi_dash 
         chi_dash = chi.copy()
+        expHpsi += chi
         # chi  = H.psi  ->  1/2 H.(H.psi) -> 1/3 H.(1/2 H.(H.psi)) ...
         d = np.sqrt(chi.get_squared_norm())
         j += 1
-        if mpi.rank == mpi.nprocs-1:
-            prints(j, operator,root=mpi.rank)
-
-    return chi
+        #if mpi.rank == mpi.nprocs-1:
+        #    prints(j, operator,root=mpi.rank)
+    expHpsi *= np.exp(-1j * s * theta)
+    return expHpsi
 

@@ -32,6 +32,7 @@ from quket.utils import(
 from quket.opelib import(
     evolve,
     devolve,
+    Taylor_U,
     OpenFermionOperator2QulacsObservable,
     OpenFermionOperator2QulacsGeneralOperator,
     )

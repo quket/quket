@@ -32,35 +32,8 @@ try:
 
 except ImportError as error:
     print('mpi4py is not imported. no MPI.')
-    class MPI():
-        SUM = 'SUM'
-        MAX = 'MAX'
-        COMM_WORLD = None
-        def Get_processor_name(self):
-            return 'dummy'
-        def Finalize(self):
-            pass
-    class Comm():
-        def Bcast(self, buf, root):
-            return None
-        def bcast(self, buf, root):
-            pass
-        def Allreduce(self, sendbuf, recvbuf, op):
-            raise Exception("This function is not meant for no MPI version!")
-        def allreduce(self, sendbuf, op):
-            return sendbuf
-        def Gather(self, sendobj, recvobj, root):
-            raise Exception("This function is not meant for no MPI version!")
-        def gather(self, sendobj, root):
-            return sendobj
-        def send(self, obj, dest, tag): 
-            pass
-        def recv(self, buf, source, tag): 
-            return None
-        def Barrier(self):
-            pass
-    comm = Comm()
-    MPI = MPI()
+    import quket.mpilib.mpilib_serial as MPI
+    comm = MPI.COMM_WORLD
     rank = 0
     nprocs = 1
     name = 'dummy'

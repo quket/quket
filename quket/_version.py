@@ -10,4 +10,4 @@
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # limitations under the License.
-__version__ = "0.9.1"
+__version__ = "0.9.2"

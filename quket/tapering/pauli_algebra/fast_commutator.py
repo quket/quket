@@ -53,7 +53,7 @@ from copy import deepcopy
 from itertools import combinations, product, chain
 from collections import defaultdict
 
-from openfermion.ops import QubitOperator
+from quket.lib import QubitOperator
 
 
 q2lookup_xyz = {'XY':'Z',

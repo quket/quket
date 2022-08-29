@@ -17,6 +17,8 @@ Qulacs' QuantumState is extended for further usability
 """
 import numpy as np
 import qulacs
+import openfermion
+from qulacs.state import inner_product
 import copy
 INTEGER_TYPES = (int, np.integer)
 COEFFICIENT_TYPES = (int, float, complex, np.integer)
@@ -29,21 +31,22 @@ class QuantumState(qulacs.QuantumState):
             if isinstance(det, INTEGER_TYPES):
                 self.set_computational_basis(det)
             elif isinstance(det, str):
-                from quket.fileio.read import read_det
-                dets, coefs, _ = read_det(det)
-                if isinstance(dets, INTEGER_TYPES):
-                    if det < 0:
-                        prints(f"Invalid determinant description '{det}'")
-                    self.set_computational_basis(det)
-                elif type(dets) is list:
-                    self.multiply_coef(0)
-                    for state_, coef_ in zip(dets, coefs):
-                        x = QuantumState(n_qubits, state_)
-                        x.multiply_coef(coef_)
-                        self.add_state(x)
-
-                elif det == "random":
+                if det == "random":
                     self.set_Haar_random_state()
+                else:
+                    from quket.fileio.read import read_det
+                    dets, coefs, _ = read_det(det)
+                    if isinstance(dets, INTEGER_TYPES):
+                        if det < 0:
+                            prints(f"Invalid determinant description '{det}'")
+                        self.set_computational_basis(det)
+                    elif type(dets) is list:
+                        self.multiply_coef(0)
+                        for state_, coef_ in zip(dets, coefs):
+                            x = QuantumState(n_qubits, state_)
+                            x.multiply_coef(coef_)
+                            self.add_state(x)
+
             elif isinstance(det, list):
                 # Sparse vector list
                 import numpy as np
@@ -114,10 +117,16 @@ class QuantumState(qulacs.QuantumState):
             raise TypeError('Only qulacs.QuantumState or quket.QuantumState is allowed for `-`.')
 
     def __mul__(self, a):
+        from .openfermion import QubitOperator
         if isinstance(a, COEFFICIENT_TYPES):
             state_ = self.copy()
             state_.multiply_coef(a)
             return state_
+        elif isinstance(a, (openfermion.QubitOperator, QubitOperator)):
+            from quket.opelib.excitation import evolve
+            return evolve(a, self)
+        elif isinstance(a, (qulacs.QuantumState, QuantumState)):
+            return inner_product(a, self)
         else:
             raise TypeError('Only scalar values are allowed for `*`.')
             
@@ -127,8 +136,10 @@ class QuantumState(qulacs.QuantumState):
             state_ = self.copy()
             state_.multiply_coef(a)
             return state_
+        elif isinstance(a, (qulacs.QuantumState, QuantumState)):
+            return inner_product(a, self)
         else:
-            raise TypeError('Only scalar values are allowed for `*`.')
+            raise TypeError(f'Only scalar values are allowed for `*`. {type(a)}')
 
     def __imul__(self, a):
         if isinstance(a, COEFFICIENT_TYPES):
@@ -151,3 +162,19 @@ class QuantumState(qulacs.QuantumState):
             return self
         else:
             raise TypeError('Only scalar values are allowed for `/`.')
+
+    def __pos__(self):
+        return self
+
+    def __neg__(self):
+        return self * -1
+
+    def __matmul__(self, a):
+        from .openfermion import QubitOperator, hermitian_conjugated
+        if isinstance(a, (qulacs.QuantumState, QuantumState)):
+            return inner_product(self, a)
+        elif isinstance(a, (openfermion.QubitOperator, QubitOperator)):
+            from quket.opelib.excitation import evolve
+            return evolve(hermitian_conjugated(a), self)
+        else:
+            raise TypeError('Either QubitOperator or QuantumState is allowed for `@`.')

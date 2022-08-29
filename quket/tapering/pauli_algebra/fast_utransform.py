@@ -95,7 +95,7 @@ from operator import itemgetter
 from itertools import product, chain, combinations, repeat
 from collections import defaultdict
 
-from openfermion.ops import QubitOperator
+from quket.lib import QubitOperator
 
 
 qlookup = {  'XXX': ('X', 1),

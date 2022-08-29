@@ -1,8 +1,8 @@
-# quket 0.9.1
+# quket 0.9.2
 ```
 
  Quket: Quantum Unified Kernel for Emulator Toolbox 
- Official Version 0.9.1
+ Official Version 0.9.2
  
      Copyright 2019-2022 Takashi Tsuchimochi, Yuto Mori, Yuma Shimomoto, Taisei Nishimaki, Yoohee Ryo,
                          Masaki Taii, Takahiro Yoshikura, TsangSiuChung, Kazuki Sasasako, Kengo Yoshimura. All rights Reserved.
@@ -35,6 +35,7 @@
  - scipy 
  - pyberny
  - (optional) mpi4py: MPI
+ - (optional) threadpoolctl: Faster ansatz operation for hybrid parallel calculation 
 
 # How to install
 ```bash

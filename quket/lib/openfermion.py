@@ -52,6 +52,14 @@ class QubitOperator(openfermion.QubitOperator):
             raise TypeError('Object of invalid type cannot multiply with ' +
                             type(self) + '.')
 
+    def __matmul__(self, multiplier):
+        from .qulacs import QuantumState
+        if isinstance(multiplier, (qulacs.QuantumState, QuantumState)):
+            from quket.opelib.excitation import evolve
+            return evolve(self, multiplier)
+        else:
+            raise TypeError('Only QuantumState is allowed for `@`.')
+
 class FermionOperator(openfermion.FermionOperator):
     def __init__(self, term=None, coefficient=1.):
         super().__init__(term, coefficient)
