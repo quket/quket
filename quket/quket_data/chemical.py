@@ -482,6 +482,7 @@ class Chemical(MolecularData):
         Dipole = mpi.bcast(Dipole, root=0)
         hf_energy = mpi.bcast(hf_energy, root=0)
         fci_energy = mpi.bcast(fci_energy, root=0)
+        mp2_energy = mpi.bcast(mp2_energy, root=0)
         ccsd_energy = mpi.bcast(ccsd_energy, root=0)
         nuclear_repulsion = mpi.bcast(nuclear_repulsion, root=0)
         rint = mpi.bcast(rint, root=0)
