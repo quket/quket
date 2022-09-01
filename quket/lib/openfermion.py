@@ -28,7 +28,8 @@ they can be directly multiplied to (extended) QuantumState class
 class QubitOperator(openfermion.QubitOperator):
     def __init__(self, term=None, coefficient=1.):
         super().__init__(term, coefficient)
-    def __mul__(self, multiplier):
+
+    def __matmul__(self, multiplier):
         """Return self * multiplier for a scalar, or a SymbolicOperator.
 
         Args:
@@ -46,24 +47,14 @@ class QubitOperator(openfermion.QubitOperator):
             return product
         elif isinstance(multiplier, (qulacs.QuantumState, QuantumState)):
             from quket.opelib.excitation import evolve
-            state = evolve(self, multiplier)
-            return state
-        else:
-            raise TypeError('Object of invalid type cannot multiply with ' +
-                            type(self) + '.')
-
-    def __matmul__(self, multiplier):
-        from .qulacs import QuantumState
-        if isinstance(multiplier, (qulacs.QuantumState, QuantumState)):
-            from quket.opelib.excitation import evolve
             return evolve(self, multiplier)
         else:
-            raise TypeError('Only QuantumState is allowed for `@`.')
+            raise TypeError('Either QubitOperator or QuantumState is allowed for `@`.')
 
 class FermionOperator(openfermion.FermionOperator):
     def __init__(self, term=None, coefficient=1.):
         super().__init__(term, coefficient)
-    def __mul__(self, multiplier):
+    def __matmul__(self, multiplier):
         """Return self * multiplier for a scalar, or a SymbolicOperator.
 
         Args:

@@ -1,4 +1,4 @@
-# Copyright 2022 The Quket Developers
+# Copyright 2022me'he Quket Developers
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -122,11 +122,6 @@ class QuantumState(qulacs.QuantumState):
             state_ = self.copy()
             state_.multiply_coef(a)
             return state_
-        elif isinstance(a, (openfermion.QubitOperator, QubitOperator)):
-            from quket.opelib.excitation import evolve
-            return evolve(a, self)
-        elif isinstance(a, (qulacs.QuantumState, QuantumState)):
-            return inner_product(a, self)
         else:
             raise TypeError('Only scalar values are allowed for `*`.')
             
@@ -136,8 +131,6 @@ class QuantumState(qulacs.QuantumState):
             state_ = self.copy()
             state_.multiply_coef(a)
             return state_
-        elif isinstance(a, (qulacs.QuantumState, QuantumState)):
-            return inner_product(a, self)
         else:
             raise TypeError(f'Only scalar values are allowed for `*`. {type(a)}')
 
