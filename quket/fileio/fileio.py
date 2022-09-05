@@ -33,7 +33,7 @@ from quket import config as cf
 from quket.mpilib import mpilib as mpi
 
 
-def prints(*args, filepath=None, opentype="a", end=None, root=None):
+def prints(*args, filepath=None, opentype="a", end=None, root=None, flush=True):
     """Function:
     Print wrapper.
 
@@ -52,14 +52,14 @@ def prints(*args, filepath=None, opentype="a", end=None, root=None):
     """
     if mpi.rank == root or mpi.main_rank:
         if filepath == '' or (filepath is None and cf.log is None):
-            print(*args, end=end)
+            print(*args, end=end, flush=flush)
             return
         if filepath is None:
             filepath_ = cf.log
         else:
             filepath_ = filepath
         with open(filepath_, opentype) as f:
-            print(*args, file=f, end=end)
+            print(*args, file=f, end=end, flush=flush)
 
 def tstamp(*args, filepath=None, end=None, root=0):
     """

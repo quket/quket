@@ -332,6 +332,125 @@ def fast_commutator_general(A:QubitOperator, B:QubitOperator, mode=QubitOperator
         new = {k:v for k,v in new.items() if val}
         return new
 
+def fast_commutator_parallel(A:QubitOperator, B:QubitOperator, mode=QubitOperator) -> QubitOperator:
+    """ Version: General commutator([multiple terms], [multiple terms])
+    This version do not make use of set theory and relatively slow to
+    self-commute situation however still 100X speed as OpenFermion.
+    Find whether A and B is commute i.e. AB == BA or not
+    (In special case)
+    Since we need only one counter example to disprove commutativity.
+    First assume that it is True.
+    When non commute pattern found, break or return False.
+    (In general case)
+    Since uniqueness is degenerated in the general case, we can not reject
+    any commutativity until we reach the end of all calculation.
+    Thats why the result is only returned at the end of the function.
+
+    MPI parallel version
+    """
+    import quket.mpilib.mpilib as mpi
+    from quket.fileio import prints
+    from itertools import islice
+
+    if not isinstance(A, QubitOperator) \
+    and not isinstance(B, QubitOperator):
+        return None
+
+    lenA = len(A.terms)
+    lenB = len(B.terms)
+    if lenA > lenB:
+        B_ = A
+        A_ = B
+    else:
+        A_ = A
+        B_ = B
+
+    qlookup_xyz = q2lookup_xyz
+    qlookup_cof = q2lookup_cof
+
+    B_tmp = getrid_QOconstant(B_.terms)
+    ipos, my_ndim = mpi.myrange(len(B_tmp))
+    it = iter(B_tmp)
+    _ = {k:B_tmp[k] for k in islice(it, ipos)}
+    B_ = {k:B_tmp[k] for k in islice(it, my_ndim)}
+
+    A_hashs = {hash((k,v)):[k,v] for k,v in getrid_QOconstant(A_.terms).items()}
+    B_hashs = {hash((k,v)):[dict(k),v] for k,v in B_.items()}
+    # Since B.values() is looped for many times, better to batch process
+
+
+    AB_common_terms = set(A_hashs.keys()).intersection(B_hashs.keys())
+
+    new = defaultdict(complex)
+
+    for a_hash,(akey,acof) in A_hashs.items():
+        akey, aidx = dict(akey), set(map(itemgetter(0), akey))
+        if a_hash in AB_common_terms and acof not in {-1,-2}:  # Need to check for b_hash in AB_common_terms
+
+            for b_hash, (bkey,bcof) in B_hashs.items():
+
+                if b_hash in AB_common_terms and bcof not in {-1,-2}:
+                    continue
+                intersect = aidx.intersection(bkey.keys())
+                if intersect:
+                    new_key = akey.copy(); new_key.update(bkey)
+                    ab, ba = 1, 1
+
+                    for i in intersect:
+                        if akey[i]!=bkey[i]:
+                            ab *= qlookup_cof[f"{akey[i]}{bkey[i]}"]
+                            ba *= qlookup_cof[f"{bkey[i]}{akey[i]}"]
+                            new_key[i] = qlookup_xyz[f"{bkey[i]}{akey[i]}"]
+                        else:
+                            new_key[i] = None
+
+                    new_cof = ab - ba
+                    if new_cof:
+                        new_key = tuple(sorted(
+                                        ((bit,xyz) for bit,xyz in new_key.items() if xyz), key=itemgetter(0)
+                                        ))
+                        new[new_key] = new.get(new_key, 0) + acof*bcof*new_cof
+
+        else:  # No need to check for b_hash in AB_common_terms, save some times
+            for bkey,bcof in B_hashs.values():  # b_hash is not used anywhere below, so .values() is fine
+                intersect = aidx.intersection(bkey.keys())
+                if intersect:
+                    new_key = akey.copy(); new_key.update(bkey)
+                    ab, ba = 1, 1
+                    for i in intersect:
+                        if akey[i]!=bkey[i]:
+                            ab *= qlookup_cof[f"{akey[i]}{bkey[i]}"]
+                            ba *= qlookup_cof[f"{bkey[i]}{akey[i]}"]
+                            new_key[i] = qlookup_xyz[f"{bkey[i]}{akey[i]}"]
+                        else:
+                            new_key[i] = None
+                    new_cof = ab - ba
+                    if new_cof:
+                        new_key = tuple(sorted(
+                                        ((bit,xyz) for bit,xyz in new_key.items() if xyz), key=itemgetter(0)
+                                        ))
+                        new[new_key] += acof*bcof*new_cof
+     
+    if mode == QubitOperator:
+        QO = QubitOperator
+        new_QO = QO()
+        for k,v in new.items():
+            if v: new_QO += QO(k,v)
+        if lenA > lenB:
+            new_QO *= -1
+        new_QO.compress()
+        new_QO = mpi.allreduce(new_QO)
+        return new_QO
+
+    elif mode == dict:
+        if lenA > lenB:
+            new = {k:-v for k,v in new.items() if val}
+        else:
+            new = {k:v for k,v in new.items() if val}
+        new = mpi.allreduce(new)
+        return new
+
+
 
 def fast_commutator_special_parity(A:QubitOperator, B:QubitOperator):
     """ Version: Special commutator([multiple terms], [single terms])

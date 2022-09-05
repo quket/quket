@@ -517,6 +517,7 @@ class Chemical(MolecularData):
         # Put values in self
         self.hf_energy = hf_energy
         self.fci_energy = fci_energy
+        self.mp2_energy = mp2_energy
         self.ccsd_energy = ccsd_energy
         self.mo_coeff = mo_coeff
         self.canonical_orbitals = canonical_orbitals

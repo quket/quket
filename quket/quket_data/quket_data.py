@@ -720,6 +720,7 @@ class QuketData():
     basis: str = None
     det: int = None
     run_fci: bool = True
+    run_mp2: bool = False
     run_ccsd: bool = False
     run_casscf: bool = False
     run_qubitfci: bool = False
@@ -971,6 +972,7 @@ class QuketData():
             Hamiltonian, S2, Number, Dipole \
                     = obj.get_operators(guess=pyscf_guess,
                                         run_fci=self.run_fci,
+                                        run_mp2=self.run_mp2,
                                         run_ccsd=self.run_ccsd,
                                         run_casscf=self.run_casscf)
             if self.constraint_lambda > 0:
@@ -1444,9 +1446,9 @@ class QuketData():
             if state is None:
                 state = self.state
             if self.projection.SpinProj:
-                Pstate = S2Proj(self, self.state_unproj, normalize=False)
-                norm = inner_product(self.state_unproj, Pstate).real
-                return abs(inner_product(self.fci_states[istate]['state'], Pstate))**2/norm
+                from quket.projection import S2Proj
+                Pstate = S2Proj(self, self.state_unproj, normalize=True)
+                return abs(inner_product(self.fci_states[istate]['state'], Pstate))**2
             else:
                 return abs(inner_product(self.fci_states[istate]['state'], state))**2
 

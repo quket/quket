@@ -67,6 +67,14 @@ def allreduce(sendbuf, op=MPI.SUM):
             recvbuf = np.zeros_like(sendbuf)
             comm.Allreduce(sendbuf, recvbuf, op)
             return recvbuf
+        elif isinstance(sendbuf, dict):
+            if op==MPI.SUM:
+                def add_dict(dict1, dict2, datatype):
+                    for k in dict2.keys():
+                        dict1[k] += dict2[k]
+                    return dict1
+                dictSum = MPI.Op.Create(add_dict, commute=True)
+                return comm.allreduce(sendbuf, op=dictSum)                
         else:
             return comm.allreduce(sendbuf, op)
 def gather(sendobj, root=0): 
