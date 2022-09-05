@@ -1,8 +1,8 @@
-# quket 0.9.2
+# quket 0.9.3
 ```
 
  Quket: Quantum Unified Kernel for Emulator Toolbox 
- Official Version 0.9.2
+ Official Version 0.9.3
  
      Copyright 2019-2022 Takashi Tsuchimochi, Yuto Mori, Yuma Shimomoto, Taisei Nishimaki, Yoohee Ryo,
                          Masaki Taii, Takahiro Yoshikura, TsangSiuChung, Kazuki Sasasako, Kengo Yoshimura. All rights Reserved.
@@ -59,7 +59,7 @@ A = quket.QubitOperator('[X0 Z1] + [Z0 X1]')
 # Set a two-qubit state:  psi = |00>
 psi = quket.QuantumState(2)
 # Apply A to psi to obtain a new state
-Apsi = A*psi
+Apsi = A@psi
 # Print state
 quket.print_state(Apsi)
 ```
