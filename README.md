@@ -33,9 +33,10 @@
  - Qulacs             >= 0.1.9   
  - numpy           
  - scipy 
+ - psutil
  - pyberny
  - (optional) mpi4py: MPI
- - (optional) threadpoolctl: Faster ansatz operation for hybrid parallel calculation 
+ - (optional) threadpoolctl >= 3: Faster ansatz operation for hybrid parallel calculation 
 
 # How to install
 ```bash
