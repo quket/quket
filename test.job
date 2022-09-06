@@ -1,0 +1,16 @@
+#!/bin/bash
+#PBS -o test.out
+#PBS -e test.err
+#PBS -N test
+#PBS -q large
+#PBS -l select=8:ncpus=32:mpiprocs=4
+
+source /etc/profile.d/modules.sh
+module load compiler
+module load mpi
+export OMP_NUM_THREADS=8
+
+cd ${PBS_O_WORKDIR}
+
+mpiexec -genv I_MPI_PIN=0 -genv UCX_TLS=rc_mlx5,ud_verbs:aux,self,shm /opt/intel/oneapi/intelpython/python3.7/bin/python3.7 -m mpi4py main.py test -nt 8
+
