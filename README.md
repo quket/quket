@@ -36,7 +36,7 @@
  - psutil
  - pyberny
  - (optional) mpi4py: MPI
- - (optional) threadpoolctl >= 3: Faster ansatz operation for hybrid parallel calculation 
+ - (optional) threadpoolctl >= 3: Faster ansatz operation for hybrid parallel calculation. (For this to work, unbind processes and cores, e.g., I_MPI_PIN=0)
 
 # How to install
 ```bash
