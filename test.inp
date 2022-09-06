@@ -9,8 +9,8 @@ ansatz        = sauccsd
 debug=True
 run_fci = False
 
-n_electrons = 14
-n_orbitals = 14
+n_electrons = 10
+n_orbitals = 10
 taper_off = True
 
 create_w_1process=False
