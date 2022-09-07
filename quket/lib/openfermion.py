@@ -103,12 +103,15 @@ def get_fermion_operator(operator):
     return fermion_operator
 
 def commutator(operator_a, operator_b, parallel=False):
-    if parallel:
-        from .fast_commutator import fast_commutator_parallel 
-        operator_c = fast_commutator_parallel(operator_a, operator_b)
-    else:
-        from .fast_commutator import fast_commutator_general
-        operator_c = fast_commutator_general(operator_a, operator_b)
+    if isinstance(operator_a, (openfermion.QubitOperator, QubitOperator)):
+        if parallel:
+            from .fast_commutator import fast_commutator_parallel
+            operator_c = fast_commutator_parallel(operator_a, operator_b)
+        else:
+            from .fast_commutator import fast_commutator_general
+            operator_c = fast_commutator_general(operator_a, operator_b)
+    elif isinstance(operator_a, (openfermion.FermionOperator, FermionOperator)):
+        operator_c = openfermion.commutator(operator_a, operator_b)
     operator_c.__class__ = operator_a.__class__
     return operator_c
 
