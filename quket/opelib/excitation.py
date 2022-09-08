@@ -483,6 +483,51 @@ def get_excite_dict_sf(Quket):
             excite_dict["doubles"][from_] = x_
     return excite_dict
 
+def update_pauli1(pauli, state):
+    OP = {'X':1, 'Y':2, 'Z':3}
+    from qulacs.gate import PauliRotation
+    n_qubits = state.get_qubit_count()
+    target_list = []
+    pauli_index = []
+    for op in pauli:
+        target_list.append(op[0])
+        pauli_index.append(OP[op[1]])
+    circuit = PauliRotation(target_list, pauli_index, np.pi)
+    circuit.update_quantum_state(state)
+    state.multiply_coef(-1j)
+    return state
+
+def update_pauli2(pauli, state):
+    n_qubits = state.get_qubit_count()
+    circuit = Pauli2Circuit(pauli, n_qubits=n_qubits)
+    circuit.update_quantum_state(state)
+    return state
+
+def update_pauli_test(n_qubits):
+    """Check wichi of update_pauli1 adn update_pauli2 is faster for this system.
+    
+    Args:
+        n_qubits (int):
+            Number of qubits
+
+    Returns:
+        None
+    """
+    state = QuantumState(n_qubits)
+    pauli = []
+    for i in range(n_qubits):
+        pauli.append([i, 'Z'])
+    import time
+    t0 = time.time() 
+    _ = update_pauli1(pauli, state)
+    t1 = time.time() 
+    _ = update_pauli2(pauli, state)
+    t2 = time.time()
+    if t2-t1 > t1-t0:
+        cf._evolve = 1
+    else:
+        cf._evolve = 2
+    prints(f'Using update_pauli{cf._evolve} for evolve: {max(t1-t0, t2-t1) / min(t1-t0, t2-t1):.2f} times faster')
 
 def evolve(operator, wfn, mapping=None, parallel=False):
     """
@@ -503,6 +548,8 @@ def evolve(operator, wfn, mapping=None, parallel=False):
     Return(s):
         result: operator * wfn as `QuantumState`
     """
+    from qulacs.gate import PauliRotation
+
     n_qubits = wfn.get_qubit_count()
     if type(operator) == list:
         for operator_ in operator:
@@ -522,54 +569,32 @@ def evolve(operator, wfn, mapping=None, parallel=False):
         raise ValueError('operator in evolve() has to be FermionOperator or QubitOperator')
     result = QuantumState(n_qubits)
     result.multiply_coef(0)
-    circuit_list = []
     import time
     iterm = 0
+    T0 = time.time()
     for pauli, coef in qubit_op.terms.items():
         if not parallel or iterm % mpi.nprocs == mpi.rank:
             wfn_ = wfn.copy()
-
-            #if len(pauli) < 5:
-                #t0 = time.time()
-                #circuit = set_exp_circuit(n_qubits, [QubitOperator(pauli)], [np.pi/2])
-                #circuit.update_quantum_state(wfn_)
-                #wfn_.multiply_coef(-1j * coef)
-                #t1 = time.time()
-                #t_exp = t1-t0
-
-                #t0 = time.time()
-                #index_list = []
-                #id_list = []
-                #for k in range(len(pauli)):
-                #    index_list.append(pauli[k][0])
-                #    id_list.append(pauli[k][1])
-
-                #circuit = make_gate(n_qubits, index_list, id_list)
-                #circuit.update_quantum_state(wfn_)
-                #wfn_.multiply_coef(coef)
-                #t1 = time.time()
-                #t_makegate = t1-t0
-
-
-                #t0 = time.time()
-                #circuit = Pauli2Circuit(n_qubits, pauli)
-                #circuit.update_quantum_state(wfn_)
-                #wfn_.multiply_coef(coef)
-                #t1 = time.time()
-                #t_pauli2 = t1-t0
-            #prints(f'T:  {t_exp:0.5f}, {t_makegate:0.5f}, {t_pauli2:0.5f}   {len(pauli)}')
-            circuit = Pauli2Circuit(n_qubits, pauli)
-            circuit.update_quantum_state(wfn_)
-            wfn_.multiply_coef(coef)
-
-            result.add_state(wfn_)
+            # Use the faster update  
+            if cf._evolve == 1:
+                update_pauli1(pauli, wfn_)
+            elif cf._evolve == 2:
+                update_pauli2(pauli, wfn_)
+            wfn_ *= coef
+            result += wfn_
         iterm += 1
+    T1 = time.time()
+    #prints(f'my rank = {mpi.rank}   time {T1-T0}    {cf._evolve}', root=mpi.rank)
+    T1 = time.time()
     if parallel:
+        mpi.barrier()
         # Allreduce to final quantum state
         my_vec = result.get_vector()
         vec = np.zeros_like(my_vec)
         vec = mpi.allreduce(my_vec, mpi.MPI.SUM)
         result.load(vec)
+    T2 = time.time()
+    #prints(f'Allreduce time {T2-T1}')
     return result
 
 
@@ -673,7 +698,8 @@ def Taylor_U(operator, wfn, theta, threshold=1e-16, parallel=False, shift=False)
         if shift:
             if j == 1:
                 s = inner_product(chi_dash, wfn)
-                chi_dash = chi_dash - s * wfn 
+                wfn *= s
+                chi_dash = chi_dash - wfn 
 
         chi += (-1j * theta)/j * chi_dash 
         chi_dash = chi.copy()

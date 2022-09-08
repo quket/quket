@@ -510,7 +510,7 @@ class Z2tapering():
         k = 0
         for Pauli, coef in U.terms.items():
             if k % mpi.nprocs == mpi.rank:
-                circuit = Pauli2Circuit(n_qubits_total, Pauli)
+                circuit = Pauli2Circuit(Pauli, n_qubits=n_qubits_total)
                 state_ = state_tmp.copy()
                 state_.multiply_coef(coef)        
                 circuit.update_quantum_state(state_)
