@@ -1194,6 +1194,9 @@ class QuketData():
                     self.transform_all(reduce=True)
                 elif self.get_allowed_pauli_list:
                     self.get_allowed_pauli_list()
+            # Test which circuit is faster for evolve
+            from quket.opelib.excitation import update_pauli_test
+            update_pauli_test(self.n_qubits)
             return
                 
         #######################################
@@ -1358,6 +1361,9 @@ class QuketData():
                 self.transform_all(reduce=True)
             elif self.get_allowed_pauli_list:
                 self.get_allowed_pauli_list()
+        # Test which circuit is faster for evolve
+        from quket.opelib.excitation import update_pauli_test
+        update_pauli_test(self.n_qubits)
 
     def openfermion_to_qulacs(self):
         self.qulacs = Qulacs(qubit_Hamiltonian=self.operators.qubit_Hamiltonian,

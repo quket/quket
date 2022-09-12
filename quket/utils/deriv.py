@@ -568,7 +568,7 @@ def jac_mpi_ana(create_state, Quket, theta, stepsize=1e-8, current_state=None, i
         prints(f' cost = {E0:22.16f}    ||g|| = {cf.grad:4.2e}    g_max = {cf.grad_max:4.2e}   grad time = {t_final-t_initial:0.3f}')
         for irank in range(mpi.nprocs):
             if irank == mpi.rank:
-                prints(f'{mpi.rank=}    Initial |H>:  {t_hstate:0.3f}   Initial U!|H>: {t_init:0.3f}    U!|0>:  {t_cu:0.3f}    U!|H>: {t_cuH:0.3f}    sigma|0>:  {t_sigma:0.3f}   Inner_product:  {t_inner:0.3f}',root=mpi.rank)
+                prints(f'mpi.rank={mpi.rank}    Initial |H>:  {t_hstate:0.3f}   Initial U!|H>: {t_init:0.3f}    U!|0>:  {t_cu:0.3f}    U!|H>: {t_cuH:0.3f}    sigma|0>:  {t_sigma:0.3f}   Inner_product:  {t_inner:0.3f}',root=mpi.rank)
             mpi.barrier()
 
     return grad_r

@@ -1563,14 +1563,14 @@ def make_gate(n, index, pauli_id):
             circuit.add_Z_gate(gate_number)
     return circuit
 
-def Pauli2Circuit(n, Pauli, circuit=None):
+def Pauli2Circuit(Pauli, circuit=None, n_qubits=None):
     """Function
     Given a list of Pauli operators in the format of OpenFermion,
     for example, ((0, 'X'), (1, 'X'), (2, 'X'), (3, 'X'), (6, 'X'), (8, 'X')),
     create a gate circuit using qulacs.
     """
     if circuit is None:
-        circuit = QuantumCircuit(n)
+        circuit = QuantumCircuit(n_qubits)
     for ibit, xyz in Pauli:
         if xyz == 'X':
             circuit.add_X_gate(ibit)
@@ -1579,6 +1579,34 @@ def Pauli2Circuit(n, Pauli, circuit=None):
         elif xyz == 'Z':
             circuit.add_Z_gate(ibit)
     return circuit
+
+def pauli_rotation_gate(pauli, theta, rho=1, circuit=None, n_qubits=None):
+    if circuit is None:
+        circuit = QuantumCitcuit(n_qubits)
+    for op, coef in pauli.terms.items():
+        target_list = []
+        pauli_index = []
+        for op_ in op:
+            m = op_[0]
+            if op_[1] == 'X':
+                target_list.append(m)
+                pauli_index.append(1)
+            elif op_[1] == 'Y':
+                target_list.append(m)
+                pauli_index.append(2)
+            elif op_[1] == 'Z':
+                target_list.append(m)
+                pauli_index.append(3)        
+        # PauliRotation does exp[i theta/2 P]
+        if coef.real:
+            gate = PauliRotation(target_list, pauli_index, 2*coef.real*theta/rho)
+        elif coef.imag:
+            gate = PauliRotation(target_list, pauli_index, 2*coef.imag*theta/rho)
+        else:
+            continue
+        circuit.add_gate(gate)
+        cf.ncnot += 2*(len(op) - 1)
+
 
 def set_exp_circuit(n_qubits, pauli_list, theta_list, rho=1):
     """Function
@@ -1594,31 +1622,6 @@ def set_exp_circuit(n_qubits, pauli_list, theta_list, rho=1):
     Returns:
         circuit (QuantumCircuit):
     """
-    def pauli_rotation_gate(pauli, theta, rho, circuit):
-        for op, coef in pauli.terms.items():
-            target_list = []
-            pauli_index = []
-            for op_ in op:
-                m = op_[0]
-                if op_[1] == 'X':
-                    target_list.append(m)
-                    pauli_index.append(1)
-                elif op_[1] == 'Y':
-                    target_list.append(m)
-                    pauli_index.append(2)
-                elif op_[1] == 'Z':
-                    target_list.append(m)
-                    pauli_index.append(3)        
-            # PauliRotation does exp[i theta/2 P]
-            if coef.real:
-                gate = PauliRotation(target_list, pauli_index, 2*coef.real*theta/rho)
-            elif coef.imag:
-                gate = PauliRotation(target_list, pauli_index, 2*coef.imag*theta/rho)
-            else:
-                continue
-            circuit.add_gate(gate)
-            cf.ncnot += 2*(len(op) - 1)
-
     circuit = QuantumCircuit(n_qubits)
     for pauli, theta in zip(pauli_list, theta_list):
         if abs(theta) > cf.theta_threshold:
