@@ -707,7 +707,7 @@ def davidson(qubit_Hamiltonian, nroots=1, initial_states=None, det_list=None, th
                 fci_vec[i] += states[j].get_vector() * V[j, i]
                 Hfci_vec[i] += Hstates[j].get_vector() * V[j, i] 
             residual = Hfci_vec[i] - E[i] * fci_vec[i]
-             
+            residual = mpi.bcast(residual) 
             norms[i] = np.linalg.norm(residual)
             if norms[i] < threshold:
                 converge[i] = True
