@@ -490,6 +490,9 @@ def set_dynamic_class(self, kwds, obj):
     # Inherit parent class                #
     #   MAGIC: DYNAMIC CLASS INHERITANCE. #
     #######################################
+    if obj is None:
+        return 
+
     for k, v in obj.__dict__.items():
         if k not in self.__dict__:
             self.__dict__[k] = v
