@@ -1992,7 +1992,10 @@ def include_pgss(E, pgss, mapping='jordan_wigner'):
 def sequential_run(tapering, n_qubits, det, mapping='jordan_wigner', verbose=False):
     H = tapering.H_old
     tapering.run(mapping=mapping, verbose=verbose)
-    n_red = len(tapering.redundant_bits)
+    if tapering.redundant_bits is None:
+        return tapering
+    else:
+        n_red = len(tapering.redundant_bits)
     clifford_operators = []
     redundant_bits = []
     X_eigvals = []
