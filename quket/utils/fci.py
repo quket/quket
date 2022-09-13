@@ -611,7 +611,8 @@ def fci2qubit(Quket, nroots=None, threshold=1e-5, shift=1, verbose=False, maxite
 
     if verbose or cf.debug:
         tstamp('Entered fci2qubit')
-        prints(f'Target spin s = {Quket.spin}')
+        if Quket.model in ('chemical', 'hubbard'):
+            prints(f'Target spin s = {Quket.spin}')
 
     return davidson(qubit_Hamiltonian, 
                     nroots=nroots, 
@@ -653,7 +654,6 @@ def davidson(qubit_Hamiltonian, nroots=1, initial_states=None, det_list=None, th
     if det_list is None:
         ### det_list includes all bit strings
         det_list = [x for x in range(2**n_qubits)]
-
     Hdiag_list = get_Hdiag_list(qubit_Hamiltonian, det_list)
     if cf.debug or verbose:
         prints('Diagonal matrix elements prepared.')
@@ -677,7 +677,7 @@ def davidson(qubit_Hamiltonian, nroots=1, initial_states=None, det_list=None, th
     if verbose or cf.debug:
         prints('Cycle  State       Energy      Norm')
 
-    Hsub = np.zeros(0)
+    Hsub = np.zeros(0, complex)
     norms = np.zeros(nroots)
     converge = [False for x in range(nroots)]
     Hstates = []
@@ -693,7 +693,7 @@ def davidson(qubit_Hamiltonian, nroots=1, initial_states=None, det_list=None, th
         for i in range(ioff, ioff+ntargets):
             Hstates.append(evolve(qubit_Hamiltonian, states[i], parallel=True))
             for j in range(i+1):
-                Hij = inner_product(states[j], Hstates[i]).real
+                Hij = inner_product(states[j], Hstates[i])
                 Hsub = np.append(Hsub, Hij)
                 
         Hsub_symm = symm(Hsub)
@@ -718,7 +718,7 @@ def davidson(qubit_Hamiltonian, nroots=1, initial_states=None, det_list=None, th
                     if abs(Hdiag_list[k] - E[i]) > 1e-14:
                         new_state[det] = - residual[det] / (Hdiag_list[k] - E[i])
                     else:
-                        new_state[det] = - residual[det] / 1e5
+                        new_state[det] = - residual[det] / 1e14
                         
                 # Gram-Schmidt orthogonalization
                 state = QuantumState(n_qubits)
@@ -728,7 +728,7 @@ def davidson(qubit_Hamiltonian, nroots=1, initial_states=None, det_list=None, th
                 if np.sqrt(norm2) < 1e-6:
                     reset = True
                 for old_state in states:
-                    state -= old_state * inner_product(state, old_state)
+                    state -= old_state * inner_product(old_state, state)
                     norm2 = state.get_squared_norm()
                     state.normalize(norm2)
                     if np.sqrt(norm2) < 1e-6:
@@ -737,7 +737,6 @@ def davidson(qubit_Hamiltonian, nroots=1, initial_states=None, det_list=None, th
                         break
                 else:
                     states.append(state)
-
         if verbose or cf.debug:
             prints(f'[{icyc:2d}]      0:  {E[0]:+.10f}   {norms[0]:.2e}  ', end='')
             if converge[0]:
@@ -809,8 +808,11 @@ def davidson(qubit_Hamiltonian, nroots=1, initial_states=None, det_list=None, th
         fci_state.load(fci_vec[k])
         fci_dict = {'energy':E[k], 'state':fci_state, 'theta_list':[], 'det':0} 
         fci_states.append(fci_dict)
+    if all (converge):
+        prints('Davidson convergence achieved.')
+    else:
+        prints('Davidson convergence FAILED.')
     if verbose or cf.debug:
-        prints('Davidson done.')
         tstamp('Leaving fci2qubit')
     return fci_states
 

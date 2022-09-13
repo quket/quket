@@ -1361,6 +1361,7 @@ class QuketData():
                 self.transform_all(reduce=True)
             elif self.get_allowed_pauli_list:
                 self.get_allowed_pauli_list()
+
         # Test which circuit is faster for evolve
         from quket.opelib.excitation import update_pauli_test
         update_pauli_test(self.n_qubits)
@@ -1420,11 +1421,11 @@ class QuketData():
         self.projection.set_projection(trap=trap)
         self.projection.get_Rg_pauli_list(self.n_active_orbitals)
 
-    def fci2qubit(self, nroots=None, threshold=1e-5, shift=1, verbose=False):
+    def fci2qubit(self, nroots=None, threshold=1e-5, shift=1, verbose=False, maxiter=100):
         """Function
         Get FCI wave function in qubits.
         """
-        self.fci_states = fci2qubit(self, nroots=nroots, threshold=threshold, verbose=verbose, shift=shift)
+        self.fci_states = fci2qubit(self, nroots=nroots, threshold=threshold, verbose=verbose, shift=shift, maxiter=maxiter)
         prints("FCI in Qubits",end='')
         if self.n_qubits != self._n_qubits or any(self.tapered.values()):
             prints(" (tapered-off mapping)")

@@ -39,7 +39,10 @@ def vectorize_symm(A):
     if A.shape[1] != N:
         raise ValueError(f'Matrix is not square in vectorize_symm ({A.shape[0], A.shape[1]})')
     NTT = N*(N+1)//2
-    B = np.zeros((NTT))
+    if 'complex' in A.dtype:
+        B = np.zeros((NTT), complex)
+    else:
+        B = np.zeros((NTT))
 
     ij = 0
     for i in range(0, N):
@@ -53,12 +56,12 @@ def symm(B):
     Given a vector B with the dimension n*(n+1)//2,
     form a symmetric matrix,
 
-                                       |  0   1   3   6  10  ... |
-                                       |  1   2   4   7  11  ... |
-    B = [1,2,3,4,5,...]   -->     A =  |  3   4   5   8  12  ... |
-                                       |  6   7   8   9  13  ... |
-                                       | 10  11  12  13  14  ... |
-                                       | ..  ..  ..  ..  ..  ... |
+                                         |  0   1   3   6  10  ... |
+                                         |  1   2   4   7  11  ... |
+    B = [0,1,2,3,4,5,...]   -->     A =  |  3   4   5   8  12  ... |
+                                         |  6   7   8   9  13  ... |
+                                         | 10  11  12  13  14  ... |
+                                         | ..  ..  ..  ..  ..  ... |
                               
     Args:
         B (1darray): Lower-triangular of A
@@ -72,13 +75,24 @@ def symm(B):
     if not n.is_integer():
         raise ValueError(f'Vector is not [N*(N+1)] in symm (lenB = {lenB})')
     n = int(n)
-    A = np.zeros((n,n))
+    dtype = 'float'
+    for element in B:
+        if 'complex' in str(type(element)):
+            dtype = 'complex'
+    if dtype == 'complex':
+        A = np.zeros((n,n), complex)
+    else:
+        A = np.zeros((n,n))
 
     ij = 0
     for i in range(n):
         for j in range(i+1):
             A[i,j] = A[j,i] = B[ij]
             ij += 1
+    if dtype == 'complex':
+        for i in range(n):
+            for j in range(i+1):
+                A[i,j] = np.conjugate(A[i,j])
     return A
 
 def vectorize_skew(A):

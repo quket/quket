@@ -289,9 +289,10 @@ class Z2tapering():
                 #prints(self.redundant_bits)
                 #prints(self.commutative_sigmas)
                 #prints(taus_Z)
+                self.XZ = 'Z'
                 if taus_X != [] and taus_X is not None:
                     prints('WARNING: X redudant tau exists. Only Z redundancy is considered.')
-            elif taus_X != [] and taus_X is not None and XZ == 'X':
+            elif taus_X != [] and taus_X is not None:
                 if self.redundant_bits is not None:
                     self.redundant_bits.extend(redundant_bits_X)
                     self.commutative_sigmas.extend(commutative_sigmas_X)
@@ -303,12 +304,16 @@ class Z2tapering():
                 redundant_bits = redundant_bits_X
                 commutative_sigmas = commutative_sigmas_X
                 commutative_taus = taus_X
+                self.XZ = 'X'
             elif taus_Z == taus_X == [] or taus_Z == taus_X == None:
                 redundant_bits = None
                 self.redundant_bits = None
                 self.commutative_sigmas = None 
                 self.commutative_taus = None
                 #return
+            else:
+                prints("taus_Z",taus_Z)
+                prints("taus_X",taus_X)
                  
 
 
@@ -375,7 +380,7 @@ class Z2tapering():
 
     def check_symmetry(self, bit):
         ### Checking if the provided bit has the correct symmetry
-        index_list = QubitOperatorInfoExtracter(self.tau_list, 0, tuple)
+        index_list = QubitOperatorInfoExtracter(self.commutative_taus, 0, tuple)
         for k, index in enumerate(index_list):
             exponential = sum(is_1bit(bit, x) for x in index)
             if (-1)**exponential != self.X_eigvals[k]:
@@ -608,7 +613,11 @@ class Z2tapering():
             new_operator  =  (clifford_operator * new_operator * clifford_operator)
             new_operator.compress()
         # Clean up some 10e-7 terms especially in the case of NH3
-        new_operator = purify_hamiltonian(new_operator, self.redundant_bits)
+        if self.XZ == 'X':
+            keep = 'Z'
+        elif self.XZ == 'Z':
+            keep = 'X'
+        new_operator = purify_hamiltonian(new_operator, self.redundant_bits, keep=keep)
         # Replace redundent qubits by those coefficients 
         # and reconstruct operator to remove redundent qubits
         if reduce:
@@ -824,6 +833,8 @@ def get_commutative_sigma(commutative_taus, XZ='Z'):
     commutative_sigmas = []
     taus = []
     total_num_checked = 0
+    to_remove = {}
+    commutative_taus_ = deepcopy(commutative_taus)
     for i, (tau1, Zs) in enumerate(zip(commutative_taus, z_positions)):
         ncols = len(Zs) # number of entries in ith row
         # Scan through all z_positions in a tau for the commutative Sigma
@@ -845,7 +856,10 @@ def get_commutative_sigma(commutative_taus, XZ='Z'):
             # Keep track of how many rows Sigma commutes with
             count = 0
             # Count for total number of rows for second time
-            for tau2 in commutative_taus:              
+            my_remove = []
+            for j in range(i): 
+                count = i-1 
+                tau2 = commutative_taus[j]
                 # Skip if comoparing to the same tau
                 # Otherwise do the commutativity check
                 if tau1 == tau2:
@@ -856,8 +870,10 @@ def get_commutative_sigma(commutative_taus, XZ='Z'):
                     count +=1
                 else:
                     prints(f"sigma of {tau1} not commutative with tau {tau2}")
+                    my_remove.append(j)
                     # Can break tau1 since there is at least a chance not commute
                     break 
+            to_remove[i] = my_remove.copy()
             if count == nrows-1:
                 redundant_bits.append(Z)
                 commutative_sigmas.append(sigma)
@@ -866,7 +882,6 @@ def get_commutative_sigma(commutative_taus, XZ='Z'):
             # We can break the second layer of loop to save some resources
             # Else it will search for another available sigma within same tau
             break
-
 #    if total_num_checked != nrows*(nrows-1):
 #        prints(f'''Error occured in get_commutative_sigma().
 #Should be in total {nrows*(nrows-1)} times checking sequences initiated
@@ -901,7 +916,8 @@ def get_clifford_operator(commutative_taus, commutative_sigmas):
         index = QubitOperatorInfoExtracter(sigma, 0, tuple)
         pauli_index = QubitOperatorInfoExtracter(sigma, 1, tuple)
         if pauli_index[0][0] == 'Z':
-            clifford_operators.append((1/2) * (sigma + tau) * (QubitOperator((index[0][0],'X')) + QubitOperator((index[0][0],'Z'))))
+            #clifford_operators.append((1/2) * (sigma + tau) * (QubitOperator((index[0][0],'X')) + QubitOperator((index[0][0],'Z'))))
+            clifford_operators.append((1/np.sqrt(2)) * (sigma + tau))
         elif pauli_index[0][0] == 'X':
             clifford_operators.append((1/np.sqrt(2)) * (sigma + tau))
     return clifford_operators
