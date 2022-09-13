@@ -1755,7 +1755,10 @@ class QuketData():
             self.ansatz = 'user-defined'
         elif self.cf.user_defined_pauli_list is not None:
             prints("user-defined pauli_list found.")
-            self.get_pauli_list(self.cf.user_defined_pauli_list)
+            if isinstance(self.cf.user_defined_pauli_list[0], (openfermion.QubitOperator, QubitOperator)):
+                self.pauli_list = self.cf.user_defined_pauli_list
+            elif isinstance(self.cf.user_defined_pauli_list[0], str):
+                self.get_pauli_list(self.cf.user_defined_pauli_list)
         elif self.ansatz is None:
             return
         elif self.ansatz in ("anti-hamiltonian", "ahva"):
@@ -1806,6 +1809,8 @@ class QuketData():
         else:
             self._ndim = None
 
+        # Preserve Original pauli_list
+        self._pauli_list = deepcopy(self.pauli_list)
         self.tapered['pauli_list'] = False
 
         #if self.tapered['theta_list']:
@@ -1834,7 +1839,7 @@ class QuketData():
             return
 
         from quket.pauli import get_allowed_pauli_list
-        self.pauli_list, self.allowed_pauli_list = get_allowed_pauli_list(self.tapering, self.pauli_list)
+        self.pauli_list, self.allowed_pauli_list = get_allowed_pauli_list(self.tapering, self._pauli_list)
         if self.ncnot_list is not None:
             if len(self.allowed_pauli_list) != len(self.ncnot_list):
                 prints('len(self.allowed_pauli_list) != len(self.ncnot_list). Check.')
@@ -1868,7 +1873,7 @@ class QuketData():
             if self.tapered["pauli_list"]:
                 prints('Current pauli_list is already tapered-off. No transformation done')
             else:
-                self.pauli_list, self.allowed_pauli_list = self.tapering.transform_pauli_list(self.pauli_list, reduce=reduce)
+                self.pauli_list, self.allowed_pauli_list = self.tapering.transform_pauli_list(self._pauli_list, reduce=reduce)
                 self.tapered["pauli_list"] = True
                 prints('pauli_list transformed.')
 
