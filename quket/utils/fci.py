@@ -675,7 +675,7 @@ def davidson(qubit_Hamiltonian, nroots=1, initial_states=None, det_list=None, th
         states = initial_states
 
     if verbose or cf.debug:
-        prints('Cycle  State       Energy      Norm')
+        prints('Cycle  State       Energy      Grad')
 
     Hsub = np.zeros(0, complex)
     norms = np.zeros(nroots)
