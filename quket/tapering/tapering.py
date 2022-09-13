@@ -227,7 +227,7 @@ class Z2tapering():
         prints(f"\n^^^^^^^^^^^^^^^^^^^^^^^\n   TAPERING.PY  DEBUG\n#######################\n")
         
         
-    def run(self, mode='np', mapping='jordan_wigner', XZ='Z'):
+    def run(self, mode='np', mapping='jordan_wigner', XZ='Z', verbose=True):
         """Function
         Transform Hamiltonian based on the tapering-off techniques
         (arXiv:1701.08213; arXiv:1910.14644).
@@ -273,12 +273,10 @@ class Z2tapering():
             elif any(tau_iscommute):
                 self.commutative_taus = list(compress(self.tau_list, tau_iscommute))
             self.stage = 4
-
-
         if self.commutative_taus is not None:
             # Get the list of commutative sigmas (Pauli X string)　e.g. IXIIIIIII
-            redundant_bits_Z, commutative_sigmas_Z, taus_Z = get_commutative_sigma(self.commutative_taus, 'Z')
-            redundant_bits_X, commutative_sigmas_X, taus_X = get_commutative_sigma(self.commutative_taus, 'X')
+            redundant_bits_Z, commutative_sigmas_Z, taus_Z = get_commutative_sigma(self.commutative_taus, 'Z', verbose=verbose)
+            redundant_bits_X, commutative_sigmas_X, taus_X = get_commutative_sigma(self.commutative_taus, 'X', verbose=verbose)
             if (taus_Z != [] and taus_Z is not None) and XZ == 'Z':
                 self.redundant_bits = redundant_bits_Z
                 self.commutative_sigmas = commutative_sigmas_Z
@@ -290,7 +288,7 @@ class Z2tapering():
                 #prints(self.commutative_sigmas)
                 #prints(taus_Z)
                 self.XZ = 'Z'
-                if taus_X != [] and taus_X is not None:
+                if taus_X != [] and taus_X is not None and verbose:
                     prints('WARNING: X redudant tau exists. Only Z redundancy is considered.')
             elif taus_X != [] and taus_X is not None:
                 if self.redundant_bits is not None:
@@ -311,9 +309,6 @@ class Z2tapering():
                 self.commutative_sigmas = None 
                 self.commutative_taus = None
                 #return
-            else:
-                prints("taus_Z",taus_Z)
-                prints("taus_X",taus_X)
                  
 
 
@@ -374,7 +369,8 @@ class Z2tapering():
             self.n_qubits_sym = self.n_qubits 
         t1 = time.time()
         self.timelog = t1-t0
-        prints(self)
+        if verbose:
+            prints(self)
         return None
 
 
@@ -798,7 +794,7 @@ def get_commutative_tau(H, g_list, n_qubits, cutoff=6):
     return tau_list, tau_info
 
 
-def get_commutative_sigma(commutative_taus, XZ='Z'):
+def get_commutative_sigma(commutative_taus, XZ='Z', verbose=True):
     '''Function
     Returns a list of commutative Pauli X (Z) strings for construction of Clifford
     Operators and the index of them. 
@@ -857,8 +853,8 @@ def get_commutative_sigma(commutative_taus, XZ='Z'):
             count = 0
             # Count for total number of rows for second time
             my_remove = []
-            for j in range(i): 
-                count = i-1 
+            count = i 
+            for j in range(i+1,nrows): 
                 tau2 = commutative_taus[j]
                 # Skip if comoparing to the same tau
                 # Otherwise do the commutativity check
@@ -869,7 +865,8 @@ def get_commutative_sigma(commutative_taus, XZ='Z'):
                 if len(comm.terms) == 0:
                     count +=1
                 else:
-                    prints(f"sigma of {tau1} not commutative with tau {tau2}")
+                    if verbose:
+                        prints(f"sigma of {tau1} not commutative with tau {tau2}")
                     my_remove.append(j)
                     # Can break tau1 since there is at least a chance not commute
                     break 
@@ -1988,3 +1985,54 @@ def include_pgss(E, pgss, mapping='jordan_wigner'):
 
     return Epgs
 
+
+
+
+
+def sequential_run(tapering, n_qubits, det, mapping='jordan_wigner', verbose=False):
+    H = tapering.H_old
+    tapering.run(mapping=mapping, verbose=verbose)
+    n_red = len(tapering.redundant_bits)
+    clifford_operators = []
+    redundant_bits = []
+    X_eigvals = []
+    tau_info = []
+    commutative_taus = []
+
+    while True:
+        if n_red > 0:
+            for i in range(n_red):
+                redundant_bit = tapering.redundant_bits[i]
+                clifford_operator = tapering.clifford_operators[i]
+                X_eigval = tapering.X_eigvals[i]
+                tau_info_ = tapering.tau_info[i]
+                commutative_tau = tapering.commutative_taus[i]
+
+                if redundant_bit in redundant_bits:
+                    continue
+                else:
+                    clifford_operators.append(clifford_operator)
+                    redundant_bits.append(redundant_bit)
+                    X_eigvals.append(X_eigval)
+                    tau_info.append(tau_info_)
+                    commutative_taus.append(commutative_tau)
+                    H = clifford_operator * H * clifford_operator
+                    H = tapering_off_operator(H, [redundant_bit], [X_eigval], eliminate=False)
+                    tapering = Z2tapering(H,
+                                          n_qubits,
+                                          det,
+                                          None,
+                                          True)
+                    tapering.run(mapping=mapping, verbose=False)
+                    break
+            else:
+                break
+        else:
+            break
+    tapering.tau_info = tau_info 
+    tapering.commutative_taus = commutative_taus 
+    tapering.clifford_operators = clifford_operators 
+    tapering.redundant_bits = redundant_bits 
+    tapering.X_eigvals = X_eigvals 
+
+    return tapering

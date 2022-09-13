@@ -1142,12 +1142,6 @@ class QuketData():
                 #      f"init_state = {self.init_state.get_qubit_count()},  n_qubits = {self.n_qubits}")
                 #return
             self._n_qubits = self.n_qubits
-            # Create subclass Quket.tapering
-            self.tapering = Z2tapering(self.operators.qubit_Hamiltonian,
-                                       self.n_qubits,
-                                       det,
-                                       self.operators.pgs,
-                                       not self.projection.SpinProj)
             self.lower_states = []
             self.nexcited = 0
             self.DA = self.DB = self.RelDA = self.RelDB = self.Daaaa = self.Dbbbb = self.Dbaab = None
@@ -1188,8 +1182,64 @@ class QuketData():
             self._kwds = kwds
 
             ### Tapering
+            # Create subclass Quket.tapering
+            self.tapering = Z2tapering(self.operators.qubit_Hamiltonian,
+                                       self.n_qubits,
+                                       det,
+                                       self.operators.pgs,
+                                       not self.projection.SpinProj)
+            clifford_operators = []
+            redundant_bits = []
+            X_eigvals = []
+            tau_info = []
+            commutative_taus = []
+
             if self.cf.do_taper_off or self.symmetry:
-                self.tapering.run(mapping=self.cf.mapping)
+                # Sequential...
+                from quket.tapering.tapering import sequential_run
+                self.tapering = sequential_run(self.tapering, self.n_qubits, det, mapping=self.cf.mapping)
+                #H = self.operators.qubit_Hamiltonian
+                #self.tapering.run(mapping=self.cf.mapping, verbose=False)
+                #from quket.tapering.tapering import tapering_off_operator
+                #n_red = len(self.tapering.redundant_bits)
+                #while True:
+                #    if n_red > 0:
+                #        for i in range(n_red):
+                #            redundant_bit = self.tapering.redundant_bits[i]
+                #            clifford_operator = self.tapering.clifford_operators[i]
+                #            X_eigval = self.tapering.X_eigvals[i]
+                #            tau_info_ = self.tapering.tau_info[i]
+                #            commutative_tau = self.tapering.commutative_taus[i]
+
+                #            if redundant_bit in redundant_bits:
+                #                continue
+                #            else:
+                #                clifford_operators.append(clifford_operator)
+                #                redundant_bits.append(redundant_bit)
+                #                X_eigvals.append(X_eigval)
+                #                tau_info.append(tau_info_)
+                #                commutative_taus.append(commutative_tau)
+                #                H = clifford_operator * H * clifford_operator
+                #                H = tapering_off_operator(H, [redundant_bit], [X_eigval], eliminate=False)
+                #                self.tapering = Z2tapering(H,
+                #                                           self.n_qubits,
+                #                                           det,
+                #                                           self.operators.pgs,
+                #                                           not self.projection.SpinProj)
+                #                self.tapering.run(mapping=self.cf.mapping, verbose=False)
+                #                break
+                #        else:
+                #            break
+                #    else:
+                #        break
+                #self.tapering.tau_info = tau_info 
+                #self.tapering.commutative_taus = commutative_taus 
+                #self.tapering.clifford_operators = clifford_operators 
+                #self.tapering.redundant_bits = redundant_bits 
+                #self.tapering.X_eigvals = X_eigvals 
+
+                prints(self.tapering)
+
                 if self.cf.do_taper_off and self.method != 'mbe':
                     self.transform_all(reduce=True)
                 elif self.get_allowed_pauli_list:
