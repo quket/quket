@@ -492,7 +492,6 @@ def set_dynamic_class(self, kwds, obj):
     #######################################
     if obj is None:
         return 
-
     for k, v in obj.__dict__.items():
         if k not in self.__dict__:
             self.__dict__[k] = v
@@ -1190,7 +1189,8 @@ class QuketData():
                                        self.n_qubits,
                                        det,
                                        self.operators.pgs,
-                                       not self.projection.SpinProj)
+                                       not self.projection.SpinProj,
+                                       seq=True)
             clifford_operators = []
             redundant_bits = []
             X_eigvals = []
@@ -1201,6 +1201,46 @@ class QuketData():
                 # Sequential...
                 from quket.tapering.tapering import sequential_run
                 self.tapering = sequential_run(self.tapering, self.n_qubits, det, mapping=self.cf.mapping)
+                #H = self.operators.qubit_Hamiltonian
+                #self.tapering.run(mapping=self.cf.mapping, verbose=False)
+                #from quket.tapering.tapering import tapering_off_operator
+                #n_red = len(self.tapering.redundant_bits)
+                #while True:
+                #    if n_red > 0:
+                #        for i in range(n_red):
+                #            redundant_bit = self.tapering.redundant_bits[i]
+                #            clifford_operator = self.tapering.clifford_operators[i]
+                #            X_eigval = self.tapering.X_eigvals[i]
+                #            tau_info_ = self.tapering.tau_info[i]
+                #            commutative_tau = self.tapering.commutative_taus[i]
+
+                #            if redundant_bit in redundant_bits:
+                #                continue
+                #            else:
+                #                clifford_operators.append(clifford_operator)
+                #                redundant_bits.append(redundant_bit)
+                #                X_eigvals.append(X_eigval)
+                #                tau_info.append(tau_info_)
+                #                commutative_taus.append(commutative_tau)
+                #                H = clifford_operator * H * clifford_operator
+                #                H = tapering_off_operator(H, [redundant_bit], [X_eigval], eliminate=False)
+                #                self.tapering = Z2tapering(H,
+                #                                           self.n_qubits,
+                #                                           det,
+                #                                           self.operators.pgs,
+                #                                           not self.projection.SpinProj)
+                #                self.tapering.run(mapping=self.cf.mapping, verbose=False)
+                #                break
+                #        else:
+                #            break
+                #    else:
+                #        break
+                #self.tapering.tau_info = tau_info 
+                #self.tapering.commutative_taus = commutative_taus 
+                #self.tapering.clifford_operators = clifford_operators 
+                #self.tapering.redundant_bits = redundant_bits 
+                #self.tapering.X_eigvals = X_eigvals 
+
                 prints(self.tapering)
 
                 if self.cf.do_taper_off and self.method != 'mbe':
@@ -1896,9 +1936,9 @@ class QuketData():
         """
         if state is None:
             state = self.state
-        state = self.tapering.transform_state(state, backtransform=backtransform, reduce=reduce)
+        state, success = self.tapering.transform_state(state, backtransform=backtransform, reduce=reduce)
 
-        return state
+        return state, success
 
     def transform_states(self, backtransform=False, reduce=True):
         """Function
@@ -1943,22 +1983,34 @@ class QuketData():
             prints('States     transformed.')
 
         if self.state is not None:
-            self.state = self.transform_state(self.state, backtransform=backtransform, reduce=reduce)
+            self.state, success = self.transform_state(self.state, backtransform=backtransform, reduce=reduce)
+            if not success:
+                prints('WARNING: QuketData.state breaks symmetry.')
         if self.init_state is not None:
-            self.init_state = self.transform_state(self.init_state, backtransform=backtransform, reduce=reduce)
+            self.init_state, success = self.transform_state(self.init_state, backtransform=backtransform, reduce=reduce)
+            if not success:
+                prints('WARNING: QuketData.init_state breaks symmetry.')
         if self.fci_states is not None:
             for k in range(len(self.fci_states)):
-                self.fci_states[k]['state'] = self.transform_state(self.fci_states[k]['state'], backtransform=backtransform, reduce=reduce)
+                self.fci_states[k]['state'], success = self.transform_state(self.fci_states[k]['state'], backtransform=backtransform, reduce=reduce)
+                if not success:
+                    prints(f'WARNING: QuketData.fci_states[{k}] breaks symmetry.')
         if len(self.lower_states) != 0:
             for k in range(len(self.lower_states)):
-                self.lower_states[k]['state'] = self.transform_state(self.lower_states[k]['state'], backtransform=backtransform, reduce=reduce)
+                self.lower_states[k]['state'], success = self.transform_state(self.lower_states[k]['state'], backtransform=backtransform, reduce=reduce)
+                if not success:
+                    prints(f'WARNING: QuketData.lower_states[{k}] breaks symmetry.')
         if len(self.multi.states) != 0:
             for k in range(len(self.multi.states)):
-                self.multi.states[k] = self.transform_state(self.multi.states[k], backtransform=backtransform, reduce=reduce)
+                self.multi.states[k], success = self.transform_state(self.multi.states[k], backtransform=backtransform, reduce=reduce)
+                if not success:
+                    prints(f'WARNING: QuketData.multi.states[{k}] breaks symmetry.')
 
         if len(self.multi.init_states) != 0:
             for k in range(len(self.multi.init_states)):
-                self.multi.init_states[k] = self.transform_state(self.multi.init_states[k], backtransform=backtransform, reduce=reduce)
+                self.multi.init_states[k], success = self.transform_state(self.multi.init_states[k], backtransform=backtransform, reduce=reduce)
+                if not success:
+                    prints(f'WARNING: QuketData.multi.init_states[{k}] breaks symmetry.')
 
         if backtransform:
             self.n_qubits = self._n_qubits
