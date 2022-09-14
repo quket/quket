@@ -174,6 +174,8 @@ class Z2tapering():
 
         
     def print_result(self, debug=False):
+        if self.seq:
+            prints("Sequential ",end='')
         prints(f"Tapering-Off Results:")
         if debug:
             prints(f"qubit    coeff    commutativity    tau")
