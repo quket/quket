@@ -52,7 +52,7 @@ class Z2tapering():
     Author(s): Takashi Tsuchimochi, TsangSiuChung
     '''
     
-    def __init__(self, H_old, n_qubits=None, det=None, PGS=None, Sz_symmetry=True):
+    def __init__(self, H_old, n_qubits=None, det=None, PGS=None, Sz_symmetry=True, seq=False):
         '''
         Args:
             Hamiltonian (QubitOperator): Hamiltonian.
@@ -84,6 +84,7 @@ class Z2tapering():
         self.X_eigvals = None
 
         self.H_old = H_old
+        self.seq = seq
         if n_qubits is None:
             self.n_qubits = Hamiltonian2n_qubits(self.H_old)
         else:
@@ -321,10 +322,11 @@ class Z2tapering():
             # Get all Clifford Operators Ui
             clifford_operators = get_clifford_operator(commutative_taus, 
                                                        commutative_sigmas)
-            if self.clifford_operators is not None and XZ == 'X':
-                self.clifford_operators.extend(clifford_operators)
-            else:
-                self.clifford_operators = clifford_operators
+            #if self.clifford_operators is not None and XZ == 'X':
+            #    self.clifford_operators.extend(clifford_operators)
+            #else:
+            #    self.clifford_operators = clifford_operators
+            self.clifford_operators = clifford_operators
             self.stage = 6
         else:
             clifford_operators = None
@@ -375,6 +377,8 @@ class Z2tapering():
 
 
     def check_symmetry(self, bit):
+        if self.seq:
+            raise Exception("check_symmetry is not available for seq = True")    
         ### Checking if the provided bit has the correct symmetry
         index_list = QubitOperatorInfoExtracter(self.commutative_taus, 0, tuple)
         for k, index in enumerate(index_list):
@@ -454,8 +458,9 @@ class Z2tapering():
             transformed_state (QuantumState): QuantumState instance transformed (normalized).
         
         """
-        if reduce and not backtransform:
-            return self.transform_sparse_state(state_old)
+        success = True
+        if reduce and not backtransform and not self.seq:
+            return self.transform_sparse_state(state_old), success
 
         nredbits = len(self.clifford_operators)
         n_qubits_old = state_old.get_qubit_count()
@@ -505,8 +510,14 @@ class Z2tapering():
     
         ### MPI ###
         U = 1
-        for U_ in self.clifford_operators: 
-            U *= U_
+        if backtransform:
+            # |state_org> = U0 @ U1 @ ... |state_tapered>
+            for U_ in self.clifford_operators: 
+                U *= U_
+        else:
+            # |state_tapered> = ... @ U1 @ U0 |state_org>
+            for U_ in self.clifford_operators[::-1]: 
+                U *= U_
         state_new.multiply_coef(0)
         k = 0
         for Pauli, coef in U.terms.items():
@@ -522,10 +533,10 @@ class Z2tapering():
         del(new_vector)
         del(state_tmp)
         state_new.load(vector)
-    
-        if not backtransform:
-            from quket.opelib import OpenFermionOperator2QulacsObservable
+   
+        if not backtransform :
             ### Check if this state respects symmetry.
+            from quket.opelib import OpenFermionOperator2QulacsObservable
             symmetry_check = []
             X_expectation_value_list = []
             for redbit, eigval in zip(self.redundant_bits, self.X_eigvals):
@@ -537,20 +548,27 @@ class Z2tapering():
                 else:
                     symmetry_check.append(True)
             if not all(symmetry_check):
-                print_state(state_old,'Symmetry check failed for the state')
-                for i, (redbit, eigval) in enumerate(zip(self.redundant_bits, self.X_eigvals)):
-                    prints(f'<X{redbit}> = {X_expectation_value_list[i]:+.5f} should be {eigval:+d}  --> ', end='')
-                    if symmetry_check[i]:
-                        prints('OK')
-                    else:
-                        prints('NG')
-                raise Exception()
-                
+                if cf.debug:
+                    print_state(state_old,'Symmetry check failed for the state')
+                    for i, (redbit, eigval) in enumerate(zip(self.redundant_bits, self.X_eigvals)):
+                        prints(f'<X{redbit}> = {X_expectation_value_list[i]:+.5f} should be {eigval:+d}  --> ', end='')
+                        if symmetry_check[i]:
+                            prints('OK')
+                        else:
+                            prints('NG')
+                if not self.seq:
+                    raise Exception('For chemical Hamiltonian, this should not happen.')
+                else:
+                    if reduce:
+                        success = False
+
         if not reduce:
-            return state_new
+            return state_new, success
         ######################
         #  Taper off qubits  #
         ######################    
+        redundant_bits = self.redundant_bits.copy()
+        redundant_bits.sort()
         if not backtransform and (self.redundant_bits is not None and self.X_eigvals is not None):
             state_vec = state_new.get_vector()
             red_vec = np.zeros(2**n_qubits_new, dtype=complex)
@@ -581,7 +599,7 @@ class Z2tapering():
                  
                 ibit_ = ibit
                 #prints('Reducing ',bin(ibit)[2:])
-                for redbit in self.redundant_bits[::-1]:
+                for redbit in redundant_bits[::-1]:
                     jbit_quo = ibit_ // 2**(redbit)
                     redbit_val = jbit_quo % 2    # Reduced bit contained in ibit jk 
                     jbit_quo = jbit_quo // 2     # Left side |jn jn-1 ... jk+1>
@@ -601,7 +619,7 @@ class Z2tapering():
         ### Transformation done. Just in case, normalize...
         norm=state_new.get_squared_norm()
         state_new.normalize(norm)  
-        return state_new
+        return state_new, success
     
     def transform_operator(self, operator, reduce=True):
         new_operator = operator
@@ -1992,10 +2010,7 @@ def include_pgss(E, pgss, mapping='jordan_wigner'):
 def sequential_run(tapering, n_qubits, det, mapping='jordan_wigner', verbose=False):
     H = tapering.H_old
     tapering.run(mapping=mapping, verbose=verbose)
-    if tapering.redundant_bits is None:
-        return tapering
-    else:
-        n_red = len(tapering.redundant_bits)
+    n_red = len(tapering.redundant_bits)
     clifford_operators = []
     redundant_bits = []
     X_eigvals = []
@@ -2025,13 +2040,16 @@ def sequential_run(tapering, n_qubits, det, mapping='jordan_wigner', verbose=Fal
                                           n_qubits,
                                           det,
                                           None,
-                                          True)
+                                          True,
+                                          seq=True)
                     tapering.run(mapping=mapping, verbose=False)
                     break
             else:
                 break
         else:
             break
+        n_red = len(tapering.redundant_bits)
+    tapering.n_qubits_sym = tapering.n_qubits  - len(redundant_bits)
     tapering.tau_info = tau_info 
     tapering.commutative_taus = commutative_taus 
     tapering.clifford_operators = clifford_operators 
