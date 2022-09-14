@@ -673,7 +673,7 @@ def read_input():
                         error(f"Invalid determinant description '{value}'")
                 except:
                     error(f"Invalid determinant description '{value}'")
-            if not state:
+            if not state and state != 0:
                 error(f"The format of det = {value} is not correct.\n Use the following format:\n   det = coef * bit + coef * bit + ...")
             #else:
             #    error(f"Invalid determinant description '{value}'")
@@ -1044,7 +1044,7 @@ def read_input_command_line(kwds_):
                         error(f"Invalid determinant description '{value}'")
                 except:
                     error(f"Invalid determinant description '{value}'")
-            if not state:
+            if not state and state != 0:
                 error(f"The format of det = {value} is not correct.\n Use the following format:\n   det = coef * bit + coef * bit + ...")
         #######################
         # Symmetry-Projection #

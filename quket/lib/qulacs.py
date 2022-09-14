@@ -171,3 +171,16 @@ class QuantumState(qulacs.QuantumState):
             return evolve(hermitian_conjugated(a), self)
         else:
             raise TypeError('Either QubitOperator or QuantumState is allowed for `@`.')
+
+    def __abs__(self):
+        return np.sqrt(self.get_squared_norm())
+
+    def __eq__ (self, a):
+        if isinstance(a, (qulacs.QuantumState, QuantumState)):
+            if abs(self - a) < 1e-14:
+                return True
+        return False
+
+    def __ne__(self, a):
+        return not self == a
+

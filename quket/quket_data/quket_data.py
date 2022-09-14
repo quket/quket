@@ -2330,7 +2330,7 @@ class QuketData():
                 QITE_driver(self)
 
 
-    def vqd(self, det=None, converge=None, delete=False):
+    def vqd(self, det=None, converge=None, delete=False, ansatz=None):
         """
         Prepare VQD calculation.
         
@@ -2349,6 +2349,7 @@ class QuketData():
             self.energy = self.lower_states[-1]['energy']
             self.state = self.lower_states[-1]['state'].copy()
             self.theta_list = self.lower_states[-1]['theta_list'].copy()
+            self.ansatz = self.lower_states[-1]['ansatz']
             try:
                 self.det = self.lower_states[-1]['det'].copy()
             except:
@@ -2387,7 +2388,7 @@ class QuketData():
             self.converge = False
 
             ### Set previous VQE information
-            lower_state = {'energy': self.energy, 'state': self.state, 'theta_list': self.theta_list, 'det': self.det}
+            lower_state = {'energy': self.energy, 'state': self.state, 'theta_list': self.theta_list, 'det': self.det, 'ansatz': self.ansatz}
             self.lower_states.append(lower_state)
 
             prints(f"Performing VQD for excited state {len(self.lower_states)}")
@@ -2424,6 +2425,9 @@ class QuketData():
                 prints(f"Invalid determinant description '{det}'")
             self.current_det = self.det
             self.init_state = set_state(self.det, self._n_qubits, mapping=self.cf.mapping)
+            if ansatz is not None:
+                prints(f"ansatz is now {ansatz} (previously {self.ansatz}).")
+                self.ansatz = ansatz
             if self.tapered['states']:
                 self.init_state = self.transform_state(self.init_state, backtransform=False)
                 prints('Tapered-off initial state...')
