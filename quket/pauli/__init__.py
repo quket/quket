@@ -28,4 +28,5 @@ from .pauli import(
     get_pauli_list_adapt,
     remove_z_from_pauli,
     get_allowed_pauli_list,
+    remove_forbidden_pauli_list
     )

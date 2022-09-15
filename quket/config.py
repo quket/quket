@@ -215,6 +215,7 @@ _units = "angstrom"
 _bohr_to_angstrom = 0.529177249
 _max_n_qubits = 24
 _user_api = None
+_evolve = 1
 timing = False
 fast_evaluation = True
 fswap = False

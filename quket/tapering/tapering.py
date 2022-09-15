@@ -75,13 +75,14 @@ class Z2tapering():
         self.E_kernel = None
         self.g_list = None
         self.tau_list = None
-        self.commutative_taus = None
+        self.commutative_taus = []
         self.redundant_bits = None
-        self.commutative_sigmas = None
-        self.clifford_operators = None
+        self.commutative_sigmas = []
+        self.clifford_operators = []
         self.H_new = None
-        self.validity = None
-        self.X_eigvals = None
+        self.validity = []
+        self.X_eigvals = []
+        self.H_renew = None
 
         self.H_old = H_old
         self.seq = seq
@@ -132,10 +133,6 @@ class Z2tapering():
                                 prints(
                                     f"  ({len(self.H_new.terms)-len(self.H_old.terms)})\n")
                             prints(f"Replaced redundent qubits by their eigenvalues.")
-                            prints(
-                                f"Terms in Hamiltonian: {len(self.H_new.terms)} --> {len(self.H_renew.terms)}", end='')
-                            prints(
-                                f"  ({len(self.H_renew.terms)-len(self.H_new.terms)})\n")
 
                 else:
                     prints(f"Tapering off failure.\n")
@@ -151,7 +148,7 @@ class Z2tapering():
             # Print Tapering-off result
             self.print_result(debug=cf.debug)
 
-            if self.redundant_bits is not None:
+            if self.redundant_bits != []:
                 for bit,tau in zip(self.redundant_bits, self.commutative_taus):
                     prints(f"Qubit: {bit}    Tau: {tau}")
 
@@ -161,9 +158,8 @@ class Z2tapering():
     def is_available(self):
         a = self.stage == 9
         b = len(self.validity) == 0
-        c = self.H_renew is not None
         d = self.initialized == 1
-        return a&b&c&d
+        return a&b&d
         
         
     def print_pgs(self):
@@ -177,17 +173,20 @@ class Z2tapering():
         if self.seq:
             prints("Sequential ",end='')
         prints(f"Tapering-Off Results:")
-        if debug:
-            prints(f"qubit    coeff    commutativity    tau")
-            for q, w, e, r in zip(self.redundant_bits,
-                                  self.X_eigvals,
-                                  filter(lambda x: x[0], self.tau_info),
-                                  self.commutative_taus):
-                prints(f"{q:>5} {w:>8}            {e[1]}    {r}")
-            prints(f"\nTapering-off algorithm finished in {self.timelog} s\n")
-
+        if self.redundant_bits == []:
+            prints("No symmetry found.")
         else:
-            prints("List of redundant qubits: ",self.redundant_bits)
+            if debug:
+                prints(f"qubit    coeff    commutativity    tau")
+                for q, w, e, r in zip(self.redundant_bits,
+                                      self.X_eigvals,
+                                      filter(lambda x: x[0], self.tau_info),
+                                      self.commutative_taus):
+                    prints(f"{q:>5} {w:>8}            {e[1]}    {r}")
+                prints(f"\nTapering-off algorithm finished in {self.timelog} s\n")
+
+            else:
+                prints("List of redundant qubits: ",self.redundant_bits)
 
             
     def print_error(self):
@@ -276,7 +275,7 @@ class Z2tapering():
             elif any(tau_iscommute):
                 self.commutative_taus = list(compress(self.tau_list, tau_iscommute))
             self.stage = 4
-        if self.commutative_taus is not None:
+        if self.commutative_taus != []:
             # Get the list of commutative sigmas (Pauli X string)　e.g. IXIIIIIII
             redundant_bits_Z, commutative_sigmas_Z, taus_Z = get_commutative_sigma(self.commutative_taus, 'Z', verbose=verbose)
             redundant_bits_X, commutative_sigmas_X, taus_X = get_commutative_sigma(self.commutative_taus, 'X', verbose=verbose)
@@ -308,19 +307,25 @@ class Z2tapering():
                 self.XZ = 'X'
             elif taus_Z == taus_X == [] or taus_Z == taus_X == None:
                 redundant_bits = None
-                self.redundant_bits = None
-                self.commutative_sigmas = None 
-                self.commutative_taus = None
+                self.redundant_bits = []
+                self.commutative_sigmas = [] 
+                self.commutative_taus = []
                 #return
-                 
+        else:
+            # No symmetry
+            redundant_bits = []
+            commutative_sigmas = []
+            clifford_operators = []
+            self.redundant_bits = []
+            self.commutative_sigmas = []
+            self.clifford_operators = []
 
 
             # Combine tau and sigma to obtan Clifford Operators
             # iff those component found are valid for tapering.
             # Split the commutative_sigma_result into components
             self.stage = 5
-
-        if redundant_bits is not None and commutative_sigmas is not None:
+        if redundant_bits != [] and commutative_sigmas != []:
             # Get all Clifford Operators Ui
             clifford_operators = get_clifford_operator(commutative_taus, 
                                                        commutative_sigmas)
@@ -331,11 +336,11 @@ class Z2tapering():
             self.clifford_operators = clifford_operators
             self.stage = 6
         else:
-            clifford_operators = None
+            clifford_operators = []
             
 
         #if self.clifford_operators is not None:
-        if clifford_operators is not None:
+        if clifford_operators != []:
             # Finally, transform the Hamiltonian by U = U0 * U1 * ... * Uk
             H_new = self.H_old
             for clifford_operator in clifford_operators:
@@ -363,11 +368,11 @@ class Z2tapering():
                                                             det)
             # Replace redundent qubits by those coefficients 
             # and reconstruct Hamiltoian to remove redundent qubits
-            self.H_renew = tapering_off_operator(self.H_new, self.redundant_bits, 
-                                                            self.X_eigvals, 1)
+            #self.H_renew = tapering_off_operator(self.H_new, self.redundant_bits, 
+            #                                                self.X_eigvals, 1)
             self.stage = 9
 
-        if self.redundant_bits is not None:
+        if self.redundant_bits != []:
             self.n_qubits_sym = self.n_qubits - len(self.redundant_bits)
         else:
             self.n_qubits_sym = self.n_qubits 
@@ -466,7 +471,7 @@ class Z2tapering():
 
         nredbits = len(self.clifford_operators)
         n_qubits_old = state_old.get_qubit_count()
-        reduction = self.redundant_bits is not None
+        reduction = self.redundant_bits != []
         if reduce:
             if backtransform:
                 n_qubits_total = n_qubits_old + nredbits
@@ -683,7 +688,7 @@ class Z2tapering():
                 allowed_pauli_list.append(allowed)
         new_pauli_list = mpi.allgather(new_pauli_list)
         allowed_pauli_list = mpi.allgather(allowed_pauli_list)
-        return new_pauli_list, allowed_pauli_list
+        return new_pauli_list
     
     
     def transform_pauli(self, pauli, reduce):
@@ -990,8 +995,8 @@ def judge_reduced_hamiltonian(H, redundant_bits, keep='X'):
 
     Author(s): Takashi Tsuchimochi, TsangSiuChung
     """
-    if redundant_bits is None:
-        return True
+    if redundant_bits != []:
+        return []
     # Prepare for fast set relation check
     redbits = frozenset(redundant_bits)
     forbidden = {'X', 'Y', 'Z'}
@@ -2018,7 +2023,6 @@ def sequential_run(tapering, n_qubits, det, mapping='jordan_wigner', verbose=Fal
     X_eigvals = []
     tau_info = []
     commutative_taus = []
-
     while True:
         if n_red > 0:
             for i in range(n_red):

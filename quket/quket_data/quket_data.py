@@ -153,6 +153,7 @@ class Config():
     user_defined_pauli_list: List = None
     disassemble_pauli: bool = False
     operator_basis: str = "fermi"
+    symmetry_pauli: bool = True
 
     # Quket options
     mapping: str = 'jordan_wigner'
@@ -1179,6 +1180,22 @@ class QuketData():
                 ### Broadcast
                 self.theta_list = mpi.bcast(self.theta_list, root=0)
 
+            if len(self.multi.init_states_info) != 0:
+                ### Set initial quantum states for multi
+                self.multi.states = []
+                self.multi.init_states = []
+                for istate in range(len(self.multi.init_states_info)):
+                    if type(self.multi.init_states_info[istate]) is list:
+                        state = set_multi_det_state(self.multi.init_states_info[istate], self.n_qubits)
+                    else:
+                        state = QuantumState(self.n_qubits)
+                        state.set_computational_basis(self.multi.init_states_info[istate])
+                    if self.cf.mapping == "bravyi_kitaev":
+                        state = transform_state_jw2bk(state)
+                        
+                    self.multi.states.append(state.copy())
+                    self.multi.init_states.append(state.copy())
+
             init_dict = get_func_kwds(QuketData.__init__, kwds)
             self._init_dict = init_dict
             self._kwds = kwds
@@ -1196,57 +1213,20 @@ class QuketData():
             X_eigvals = []
             tau_info = []
             commutative_taus = []
-
-            if self.cf.do_taper_off or self.symmetry:
+            if self.cf.do_taper_off or self.symmetry or self.cf.symmetry_pauli:
                 # Sequential...
                 from quket.tapering.tapering import sequential_run
                 self.tapering = sequential_run(self.tapering, self.n_qubits, det, mapping=self.cf.mapping)
-                #H = self.operators.qubit_Hamiltonian
-                #self.tapering.run(mapping=self.cf.mapping, verbose=False)
-                #from quket.tapering.tapering import tapering_off_operator
-                #n_red = len(self.tapering.redundant_bits)
-                #while True:
-                #    if n_red > 0:
-                #        for i in range(n_red):
-                #            redundant_bit = self.tapering.redundant_bits[i]
-                #            clifford_operator = self.tapering.clifford_operators[i]
-                #            X_eigval = self.tapering.X_eigvals[i]
-                #            tau_info_ = self.tapering.tau_info[i]
-                #            commutative_tau = self.tapering.commutative_taus[i]
-
-                #            if redundant_bit in redundant_bits:
-                #                continue
-                #            else:
-                #                clifford_operators.append(clifford_operator)
-                #                redundant_bits.append(redundant_bit)
-                #                X_eigvals.append(X_eigval)
-                #                tau_info.append(tau_info_)
-                #                commutative_taus.append(commutative_tau)
-                #                H = clifford_operator * H * clifford_operator
-                #                H = tapering_off_operator(H, [redundant_bit], [X_eigval], eliminate=False)
-                #                self.tapering = Z2tapering(H,
-                #                                           self.n_qubits,
-                #                                           det,
-                #                                           self.operators.pgs,
-                #                                           not self.projection.SpinProj)
-                #                self.tapering.run(mapping=self.cf.mapping, verbose=False)
-                #                break
-                #        else:
-                #            break
-                #    else:
-                #        break
-                #self.tapering.tau_info = tau_info 
-                #self.tapering.commutative_taus = commutative_taus 
-                #self.tapering.clifford_operators = clifford_operators 
-                #self.tapering.redundant_bits = redundant_bits 
-                #self.tapering.X_eigvals = X_eigvals 
-
                 prints(self.tapering)
 
+                self.get_allowed_pauli_list()
                 if self.cf.do_taper_off and self.method != 'mbe':
                     self.transform_all(reduce=True)
-                elif self.get_allowed_pauli_list:
-                    self.get_allowed_pauli_list()
+                else:
+                    self.update_pauli_list()
+            else:
+                if self.pauli_list is not None:
+                    self.allowed_pauli_list = [True for x in range(len(self.pauli_list))]
             # Test which circuit is faster for evolve
             from quket.opelib.excitation import update_pauli_test
             update_pauli_test(self.n_qubits)
@@ -1356,6 +1336,8 @@ class QuketData():
                 self.current_det = self.det.copy()
             if len(self.multi.init_states_info) != 0:
                 ### Set initial quantum states for multi
+                self.multi.states = []
+                self.multi.init_states = []
                 for istate in range(len(self.multi.init_states_info)):
                     if type(self.multi.init_states_info[istate]) is list:
                         state = set_multi_det_state(self.multi.init_states_info[istate], self.n_qubits)
@@ -1383,28 +1365,23 @@ class QuketData():
 
         if self.ansatz is not None or self.cf.user_defined_pauli_list is not None:
             self.get_pauli_list()
-        if self.pauli_list is not None:
-            self.theta_list = np.zeros(len(self.pauli_list))
-            if self.cf.theta_guess == "read":
-                from quket.fileio import LoadTheta
-                self.theta_list = LoadTheta(self._ndim, cf.theta_list_file, offset=0)
-            elif self.cf.theta_guess == "random":
-                self.theta_list = (0.5-np.random.rand(self._ndim))*0.001
-            ### Broadcast
-            self.theta_list = mpi.bcast(self.theta_list, root=0)
+
         init_dict = get_func_kwds(QuketData.__init__, kwds)
         self._init_dict = init_dict
         self._kwds = kwds
         self._n_qubits = self.n_qubits
 
         ### Tapering
-        if self.cf.do_taper_off or self.symmetry:
+        if self.cf.do_taper_off or self.symmetry or self.cf.symmetry_pauli:
             self.tapering.run(mapping=self.cf.mapping)
+            self.get_allowed_pauli_list()
             if self.cf.do_taper_off and self.method != 'mbe':
                 ### Create excitation-pauli list, and transform relevant stuff by unitary
                 if self.n_qubits > cf._max_n_qubits:
                     self.init_state = self.directly_generate_tapered_state(det)
                     self.state = self.init_state.copy()
+                    self.multi.states = []
+                    self.multi.init_states = []
                     for istate in range(self.multi.nstates):
                         self.multi.init_states.append(self.directly_generate_tapered_state(self.multi.init_states_info[istate]))
                         self.multi.states.append(self.multi.init_states[istate].copy())
@@ -1412,8 +1389,26 @@ class QuketData():
                     self.n_qubits = self.tapering.n_qubits_sym
                     self.tapered["states"] = True
                 self.transform_all(reduce=True)
-            elif self.get_allowed_pauli_list:
-                self.get_allowed_pauli_list()
+            else:
+                self.update_pauli_list()
+        else:
+            if self.pauli_list is not None:
+                self.allowed_pauli_list = [True for x in range(len(self.pauli_list))]
+
+        if self.pauli_list is not None:
+            self.theta_list = np.zeros(len(self.pauli_list))
+            from quket.utils.utils import isint
+            if self.cf.theta_guess == "read" or isint(self.cf.theta_guess):
+                if self.cf.theta_guess == "read":
+                    offset = 0
+                else:
+                    offset = int(self.cf.theta_guess)
+                from quket.fileio import LoadTheta
+                self.theta_list = LoadTheta(self._ndim, cf.theta_list_file, offset=offset)
+            elif self.cf.theta_guess == "random":
+                self.theta_list = (0.5-np.random.rand(self._ndim))*0.001
+            ### Broadcast
+            self.theta_list = mpi.bcast(self.theta_list, root=0)
 
         # Test which circuit is faster for evolve
         from quket.opelib.excitation import update_pauli_test
@@ -1474,11 +1469,11 @@ class QuketData():
         self.projection.set_projection(trap=trap)
         self.projection.get_Rg_pauli_list(self.n_active_orbitals)
 
-    def fci2qubit(self, nroots=None, threshold=1e-5, shift=1, verbose=False, maxiter=100):
+    def fci2qubit(self, nroots=None, init_states=None, threshold=1e-5, shift=1, verbose=False, maxiter=100):
         """Function
         Get FCI wave function in qubits.
         """
-        self.fci_states = fci2qubit(self, nroots=nroots, threshold=threshold, verbose=verbose, shift=shift, maxiter=maxiter)
+        self.fci_states = fci2qubit(self, nroots=nroots, init_states=init_states, threshold=threshold, verbose=verbose, shift=shift, maxiter=maxiter)
         prints("FCI in Qubits",end='')
         if self.n_qubits != self._n_qubits or any(self.tapered.values()):
             prints(" (tapered-off mapping)")
@@ -1542,7 +1537,7 @@ class QuketData():
     def get_1RDM(self, state=None, relax=True):
         from quket.post import get_1RDM, get_relax_delta_full
         ### For the current implementation, tapered qubits need to be retrieved.
-        if state is not None and self.tapering.redundant_bits is not None:
+        if state is not None and self.tapering.redundant_bits != []:
             # Check if state has the correct number of qubits
             state_n_qubits = sate.get_qubit_count()
             if state_n_qubits() != self._n_qubits and \
@@ -1572,7 +1567,7 @@ class QuketData():
     def get_2RDM(self, state=None):
         from quket.post import get_2RDM
         ### For the current implementation, tapered qubits need to be retrieved.
-        if state is not None and self.tapering.redundant_bits is not None:
+        if state is not None and self.tapering.redundant_bits != []:
             # Check if state has the correct number of qubits
             state_n_qubits = sate.get_qubit_count()
             if state_n_qubits() != self._n_qubits and \
@@ -1877,22 +1872,34 @@ class QuketData():
     ########################
     # Tapering-off related #
     ########################
-    def get_allowed_pauli_list(self):
+    def update_pauli_list(self):
         """Function
         Update pauli_list to include only symmetry-allowed ones
         """
+        from quket.pauli import remove_forbidden_pauli_list
+        if self.pauli_list is not None and self.pauli_list != []:
+            self.pauli_list = remove_forbidden_pauli_list(self.pauli_list, self.allowed_pauli_list)
+
+
+    def get_allowed_pauli_list(self):
+        """Function
+        Get allowed_pauli_list 
+        """
         if self.tapering.redundant_bits is None:
-            prints('First perform tapering.run(). No transformation done')
+            prints('First perform tapering.run().')
+            return
+        if self.tapering.redundant_bits == []:
+            self.allowed_pauli_list = [True for _ in range(len(self.pauli_list))]
             return
         if self.tapered['pauli_list']:
             prints('pauli_list already transformed and tapered-off.')
             return
         if self.pauli_list is None or self.pauli_list == []:
-            prints('pauli_list found.')
+            #prints('pauli_list not found.')
             return
 
         from quket.pauli import get_allowed_pauli_list
-        self.pauli_list, self.allowed_pauli_list = get_allowed_pauli_list(self.tapering, self._pauli_list)
+        self.allowed_pauli_list = get_allowed_pauli_list(self.tapering, self._pauli_list)
         if self.ncnot_list is not None:
             if len(self.allowed_pauli_list) != len(self.ncnot_list):
                 prints('len(self.allowed_pauli_list) != len(self.ncnot_list). Check.')
@@ -1903,13 +1910,25 @@ class QuketData():
                     ncnot_list.append(y)
             self.ncnot_list = ncnot_list
 
+        if self.theta_list is not None:
+            self.get_allowed_theta_list()
+
+    def get_allowed_theta_list(self):
+        if len(self.allowed_pauli_list) == len(self.theta_list):
+            theta_list = []
+            for x,y in zip(self.allowed_pauli_list, self.theta_list):
+                if x:
+                    theta_list.append(y)
+            self.theta_list = theta_list
+
+
     def transform_pauli_list(self, backtransform=False, reduce=True):
         """Function
         Transform pauli list by unitary to symmetry-reduced mapping.
 
         Author(s): Kazuki Sasasako, Takashi Tsuchimochi
         """
-        if self.tapering.redundant_bits is None:
+        if self.tapering.redundant_bits == []:
             prints('First perform tapering.run(). No transformation done')
             return
         if self.pauli_list is None:
@@ -1926,7 +1945,7 @@ class QuketData():
             if self.tapered["pauli_list"]:
                 prints('Current pauli_list is already tapered-off. No transformation done')
             else:
-                self.pauli_list, self.allowed_pauli_list = self.tapering.transform_pauli_list(self._pauli_list, reduce=reduce)
+                self.pauli_list = self.tapering.transform_pauli_list(self.pauli_list, reduce=reduce)
                 self.tapered["pauli_list"] = True
                 prints('pauli_list transformed.')
 
@@ -1959,7 +1978,7 @@ class QuketData():
 
         Author(s): Takashi Tsuchimochi
         """
-        if self.tapering.redundant_bits is None:
+        if self.tapering.redundant_bits == []:
             prints('First perform tapering.run(). No transformation done')
             return
         if not backtransform and self.tapered["states"]:
@@ -2028,7 +2047,7 @@ class QuketData():
 
         Author(s): TsangSiuChung, Takashi Tsuchimochi
         """
-        if self.tapering.redundant_bits is None:
+        if self.tapering.redundant_bits == []:
             prints('First perform tapering.run(). No transformation done')
             return
         if backtransform:
@@ -2088,7 +2107,7 @@ class QuketData():
                                                                                     reduce=reduce)
  
             if hasattr(self.projection, 'Rg_pauli_list'):
-                self.projection.Rg_pauli_list, dummy = self.tapering.transform_pauli_list(self.projection.Rg_pauli_list, reduce=reduce)
+                self.projection.Rg_pauli_list = self.tapering.transform_pauli_list(self.projection.Rg_pauli_list, reduce=reduce)
 
             self.tapered["operators"] = True
             prints('Operators  transformed.')
@@ -2113,6 +2132,10 @@ class QuketData():
             self.tapered["theta_list"] = not backtransform
             return
         if hasattr(self, 'theta_list') and hasattr(self, 'allowed_pauli_list'):
+            if len(self.theta_list) != len(self._pauli_list) and len(self.theta_list) == len(self.pauli_list):
+                self.tapered["theta_list"] = True
+                prints('theta_list transformed.')
+                return
             _ndim = len(self.allowed_pauli_list)
             if backtransform:
                 new_theta_list = np.zeros(_ndim, dtype=float)
@@ -2144,7 +2167,7 @@ class QuketData():
         if self.tapering.initialized == 0 :
             prints('First perform tapering.run(). No transformation done')
             return
-        if self.tapering.redundant_bits is None:
+        if self.tapering.redundant_bits == []:
             prints('No qubits to be tapered-off. No transformation done')
             return
         self.transform_states(backtransform=backtransform, reduce=reduce)
@@ -2437,6 +2460,7 @@ class QuketData():
                 prints('Tapered-off pauli list...')
             else:
                 self.get_pauli_list()
+            self.theta_list = np.zeros(len(self.pauli_list), float)
             self.state = self.init_state.copy()
             prints('VQD ready. Perform run().')
 
@@ -2702,6 +2726,38 @@ class QuketData():
         Quket.tapering.__dict__ = tapering_dict
         return Quket
 
+    def savetheta(self, offset=0):
+        """Save theta_list on disk (without symmetry). 
+        """
+        if len(self.theta_list) != len(self.allowed_pauli_list):
+            theta_list = []
+            i = 0
+            for x in self.allowed_pauli_list:
+                if x:
+                    theta_list.append(self.theta_list[i])
+                    i+=1
+                else:
+                    theta_list.append(0)
+            theta_list = np.array(theta_list)
+        else:
+            theta_list = self.theta_list
+        if len(theta_list) == len(self.allowed_pauli_list):
+            from quket.fileio.fileio import SaveTheta
+            SaveTheta(len(theta_list), theta_list, cf.theta_list_file, offset=offset)
+        else:
+            prints('savetheta failed.')
+
+    def loadtheta(self, filepath=None, offset=0):
+        """Save theta_list on disk (without symmetry). 
+        """
+        from quket.fileio.fileio import LoadTheta
+        if filepath is None:
+            filepath = cf.theta_list_file
+        theta_list = LoadTheta(self._ndim, filepath, offset=offset)
+        self.theta_list = theta_list
+        if len(theta_list) != len(self.pauli_list):
+            self.get_allowed_theta_list()
+
     def set(self, **kwds):
         """
         Set or change parameters.
@@ -2739,5 +2795,4 @@ def set_state(det_info, n_qubits, mapping='jordan_wigner'):
         ### Broadcast
         state = mpi.bcast(state, root=0)
     return state
-
 

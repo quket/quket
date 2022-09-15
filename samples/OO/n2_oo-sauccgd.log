@@ -9,17 +9,17 @@
 ///             Q   Q       U    U      K   K       E    E       T              ///
 ///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
 ///                                                                             ///
-///                      Quantum Computing Simulator Ver 0.9.1                  ///
+///                      Quantum Computing Simulator Ver 0.9.4                  ///
 ///                                                                             ///
 ///        Copyright 2019-2022                                                  ///
 ///        The Quket Developers                                                 ///
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-08-07 01:09:49.342203: 
-8 processes x 4 = Total 32 cores
-API for qulacs: None
-Number of cpus in the main node (pinode01): 8
+2022-09-16 00:08:31.242065: 
+16 processes x 2 = Total 32 cores
+API for qulacs: openmp
+Number of cpus in the main node (pinode01): 16
 
 ##################### INPUT ########################
 basis       = cc-pvtz
@@ -60,7 +60,9 @@ Qubit: 6    Tau: 1.0 [Z6 Z7 Z8 Z9 Z10 Z11]
 States     transformed.
 Operators  transformed.
 pauli_list transformed.
-theta_list transformed.
+Existing theta_list is inconsistent :
+   size of pauli_list 315 != size of theta_list 33.
+Ovewrite theta_list by zero.
 NBasis = 60
 
 [Molecular Orbitals]
@@ -140,7 +142,6 @@ Qubit: 6    Tau: 1.0 [Z6 Z7 Z8 Z9 Z10 Z11]
 Current states are already tapered-off. No transformation done
 Current operators are already tapered-off. No transformation done
 pauli_list transformed.
-Current theta_list is already tapered-off. No transformation done
 Entered VQE driver
 Performing VQE for sauccgd
 Number of VQE parameters: 33
@@ -149,18 +150,18 @@ Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
 Initial: E[sauccgd] = -108.983509207266  <S**2> = +0.000000  rho = 1  
-      1: E[sauccgd] = -109.018336647534  <S**2> = +0.000018  Grad = 4.62e-01  CPU Time =    0.08240  (0.00 / step)
-      2: E[sauccgd] = -109.028194928757  <S**2> = +0.000004  Grad = 2.44e-01  CPU Time =    0.03411  (0.00 / step)
-      3: E[sauccgd] = -109.036604404973  <S**2> = +0.000001  Grad = 1.58e-01  CPU Time =    0.03379  (0.00 / step)
-      4: E[sauccgd] = -109.040485038793  <S**2> = +0.000001  Grad = 1.06e-01  CPU Time =    0.03379  (0.00 / step)
-      5: E[sauccgd] = -109.040933956971  <S**2> = +0.000001  Grad = 8.78e-02  CPU Time =    0.05981  (0.00 / step)
-      6: E[sauccgd] = -109.041336603559  <S**2> = +0.000002  Grad = 3.41e-02  CPU Time =    0.03397  (0.00 / step)
-      7: E[sauccgd] = -109.041452330898  <S**2> = +0.000002  Grad = 1.86e-02  CPU Time =    0.03394  (0.00 / step)
-      8: E[sauccgd] = -109.041496176722  <S**2> = +0.000002  Grad = 4.88e-03  CPU Time =    0.03369  (0.00 / step)
-      9: E[sauccgd] = -109.041498863301  <S**2> = +0.000002  Grad = 1.63e-03  CPU Time =    0.03346  (0.00 / step)
-     10: E[sauccgd] = -109.041499504959  <S**2> = +0.000002  Grad = 9.76e-04  CPU Time =    0.03333  (0.00 / step)
-     11: E[sauccgd] = -109.041499622503  <S**2> = +0.000002  Grad = 2.13e-04  CPU Time =    0.03327  (0.00 / step)
-     12: E[sauccgd] = -109.041499625109  <S**2> = +0.000002  Grad = 1.53e-04  CPU Time =    0.05912  (0.00 / step)
+      1: E[sauccgd] = -109.018336647534  <S**2> = +0.000018  Grad = 4.62e-01  CPU Time =    0.09733  (0.00 / step)
+      2: E[sauccgd] = -109.028194928758  <S**2> = +0.000004  Grad = 2.44e-01  CPU Time =    0.04099  (0.00 / step)
+      3: E[sauccgd] = -109.036604404973  <S**2> = +0.000001  Grad = 1.58e-01  CPU Time =    0.04184  (0.00 / step)
+      4: E[sauccgd] = -109.040485038793  <S**2> = +0.000001  Grad = 1.06e-01  CPU Time =    0.04154  (0.00 / step)
+      5: E[sauccgd] = -109.040933956971  <S**2> = +0.000001  Grad = 8.78e-02  CPU Time =    0.07287  (0.00 / step)
+      6: E[sauccgd] = -109.041336603559  <S**2> = +0.000002  Grad = 3.41e-02  CPU Time =    0.04131  (0.00 / step)
+      7: E[sauccgd] = -109.041452330899  <S**2> = +0.000002  Grad = 1.86e-02  CPU Time =    0.04112  (0.00 / step)
+      8: E[sauccgd] = -109.041496176722  <S**2> = +0.000002  Grad = 4.88e-03  CPU Time =    0.04114  (0.00 / step)
+      9: E[sauccgd] = -109.041498863301  <S**2> = +0.000002  Grad = 1.63e-03  CPU Time =    0.04104  (0.00 / step)
+     10: E[sauccgd] = -109.041499504958  <S**2> = +0.000002  Grad = 9.76e-04  CPU Time =    0.04115  (0.00 / step)
+     11: E[sauccgd] = -109.041499622503  <S**2> = +0.000002  Grad = 2.13e-04  CPU Time =    0.04164  (0.00 / step)
+     12: E[sauccgd] = -109.041499625109  <S**2> = +0.000002  Grad = 1.53e-04  CPU Time =    0.07237  (0.00 / step)
   Final: E[sauccgd] = -109.041499625109  <S**2> = +0.000002  rho = 1 
 
 (sauccgd state)
@@ -170,7 +171,7 @@ Initial: E[sauccgd] = -108.983509207266  <S**2> = +0.000000  rho = 1
 | 0011010 > : -0.1113 +0.0000i
 
 
-VQE Done: CPU Time =          0.5165
+VQE Done: CPU Time =          0.6289
 
 States     backtransformed.
 Operators  backtransformed.
@@ -185,12 +186,12 @@ theta_list backtransformed.
  === Computing 1RDM === 
  === Computing 2RDM === 
 Running Davidson to get update by AH
-Target lowest eigenvalue of augmented Hessian:  -0.05809791033396346  (C0 = 0.8675745463681125)
+Target lowest eigenvalue of augmented Hessian:  -0.05809791033397199  (C0 = 0.8675745463681108)
 Golden Section done in 2
 
 
 
-||g|| = 0.136625651264224 ---> Updated with scaling factor 1.2135254915624212
+||g|| = 0.1366256512642489 ---> Updated with scaling factor 1.2135254915624212
 
 
 Next energy estimation:  -109.07571197976347
@@ -206,23 +207,23 @@ Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
 Initial: E[sauccgd] = -109.075711979763  <S**2> = +0.000002  rho = 1  
-      1: E[sauccgd] = -109.076834496729  <S**2> = +0.000004  Grad = 8.83e-02  CPU Time =    0.11157  (0.00 / step)
-      2: E[sauccgd] = -109.077197304961  <S**2> = +0.000004  Grad = 5.86e-02  CPU Time =    0.04063  (0.00 / step)
-      3: E[sauccgd] = -109.077635183631  <S**2> = +0.000003  Grad = 3.28e-02  CPU Time =    0.03947  (0.00 / step)
-      4: E[sauccgd] = -109.077693875876  <S**2> = +0.000003  Grad = 3.45e-02  CPU Time =    0.03940  (0.00 / step)
-      5: E[sauccgd] = -109.077727983640  <S**2> = +0.000003  Grad = 1.25e-02  CPU Time =    0.03922  (0.00 / step)
-      6: E[sauccgd] = -109.077738371557  <S**2> = +0.000003  Grad = 4.24e-03  CPU Time =    0.03345  (0.00 / step)
-      7: E[sauccgd] = -109.077740126561  <S**2> = +0.000003  Grad = 2.91e-03  CPU Time =    0.03325  (0.00 / step)
-      8: E[sauccgd] = -109.077741152313  <S**2> = +0.000003  Grad = 1.11e-03  CPU Time =    0.03319  (0.00 / step)
-      9: E[sauccgd] = -109.077741309832  <S**2> = +0.000003  Grad = 6.73e-04  CPU Time =    0.03323  (0.00 / step)
-     10: E[sauccgd] = -109.077741484477  <S**2> = +0.000003  Grad = 8.97e-04  CPU Time =    0.03300  (0.00 / step)
-     11: E[sauccgd] = -109.077741832417  <S**2> = +0.000003  Grad = 1.48e-03  CPU Time =    0.03325  (0.00 / step)
-     12: E[sauccgd] = -109.077742285567  <S**2> = +0.000003  Grad = 3.25e-03  CPU Time =    0.03314  (0.00 / step)
-     13: E[sauccgd] = -109.077743048893  <S**2> = +0.000003  Grad = 2.19e-03  CPU Time =    0.03375  (0.00 / step)
-     14: E[sauccgd] = -109.077744103816  <S**2> = +0.000003  Grad = 1.83e-03  CPU Time =    0.03344  (0.00 / step)
-     15: E[sauccgd] = -109.077744885926  <S**2> = +0.000003  Grad = 1.49e-03  CPU Time =    0.03338  (0.00 / step)
-     16: E[sauccgd] = -109.077744983766  <S**2> = +0.000003  Grad = 1.65e-03  CPU Time =    0.05922  (0.00 / step)
-  Final: E[sauccgd] = -109.077744983766  <S**2> = +0.000003  rho = 1 
+      1: E[sauccgd] = -109.076834496728  <S**2> = +0.000004  Grad = 8.83e-02  CPU Time =    0.13201  (0.00 / step)
+      2: E[sauccgd] = -109.077197304960  <S**2> = +0.000004  Grad = 5.86e-02  CPU Time =    0.04155  (0.00 / step)
+      3: E[sauccgd] = -109.077635183631  <S**2> = +0.000003  Grad = 3.28e-02  CPU Time =    0.04115  (0.00 / step)
+      4: E[sauccgd] = -109.077693875877  <S**2> = +0.000003  Grad = 3.45e-02  CPU Time =    0.04112  (0.00 / step)
+      5: E[sauccgd] = -109.077727983640  <S**2> = +0.000003  Grad = 1.25e-02  CPU Time =    0.04098  (0.00 / step)
+      6: E[sauccgd] = -109.077738371556  <S**2> = +0.000003  Grad = 4.24e-03  CPU Time =    0.04080  (0.00 / step)
+      7: E[sauccgd] = -109.077740126561  <S**2> = +0.000003  Grad = 2.91e-03  CPU Time =    0.04092  (0.00 / step)
+      8: E[sauccgd] = -109.077741152313  <S**2> = +0.000003  Grad = 1.11e-03  CPU Time =    0.04108  (0.00 / step)
+      9: E[sauccgd] = -109.077741309833  <S**2> = +0.000003  Grad = 6.73e-04  CPU Time =    0.04108  (0.00 / step)
+     10: E[sauccgd] = -109.077741484477  <S**2> = +0.000003  Grad = 8.97e-04  CPU Time =    0.04079  (0.00 / step)
+     11: E[sauccgd] = -109.077741832418  <S**2> = +0.000003  Grad = 1.48e-03  CPU Time =    0.04118  (0.00 / step)
+     12: E[sauccgd] = -109.077742285566  <S**2> = +0.000003  Grad = 3.25e-03  CPU Time =    0.04112  (0.00 / step)
+     13: E[sauccgd] = -109.077743048894  <S**2> = +0.000003  Grad = 2.19e-03  CPU Time =    0.04093  (0.00 / step)
+     14: E[sauccgd] = -109.077744103816  <S**2> = +0.000003  Grad = 1.83e-03  CPU Time =    0.04098  (0.00 / step)
+     15: E[sauccgd] = -109.077744885925  <S**2> = +0.000003  Grad = 1.49e-03  CPU Time =    0.04098  (0.00 / step)
+     16: E[sauccgd] = -109.077744983768  <S**2> = +0.000003  Grad = 1.65e-03  CPU Time =    0.07231  (0.00 / step)
+  Final: E[sauccgd] = -109.077744983768  <S**2> = +0.000003  rho = 1 
 
 (sauccgd state)
     Basis            Coef
@@ -231,7 +232,7 @@ Initial: E[sauccgd] = -109.075711979763  <S**2> = +0.000002  rho = 1
 | 0011010 > : -0.1307 +0.0000i
 
 
-VQE Done: CPU Time =          0.6744
+VQE Done: CPU Time =          0.7956
 
 
 States     backtransformed.
@@ -247,15 +248,15 @@ theta_list backtransformed.
  === Computing 1RDM === 
  === Computing 2RDM === 
 Running Davidson to get update by AH
-Target lowest eigenvalue of augmented Hessian:  -0.008421141409404065  (C0 = 0.6978227142885313)
+Target lowest eigenvalue of augmented Hessian:  -0.008421141409716375  (C0 = 0.6978227143263588)
 Golden Section done in 1
 
 
 
-deltaE = -0.0362453586568563    ||g|| = 0.035106937499913005 ---> Updated with scaling factor 1.0364745084375788
+deltaE = -0.03624535865925793    ||g|| = 0.03510693750337836 ---> Updated with scaling factor 1.0364745084375788
 
 
-Next energy estimation:  -109.08414083124687
+Next energy estimation:  -109.08414083124701
 States     transformed.
 Operators  transformed.
 pauli_list transformed.
@@ -267,25 +268,25 @@ Initial configuration: |0111111>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
-Initial: E[sauccgd] = -109.084140831246  <S**2> = +0.000003  rho = 1  
-      1: E[sauccgd] = -109.086024076740  <S**2> = +0.000003  Grad = 1.39e-01  CPU Time =    0.11127  (0.00 / step)
-      2: E[sauccgd] = -109.086787150099  <S**2> = +0.000003  Grad = 6.88e-02  CPU Time =    0.03990  (0.00 / step)
-      3: E[sauccgd] = -109.087016500111  <S**2> = +0.000003  Grad = 1.90e-02  CPU Time =    0.03972  (0.00 / step)
-      4: E[sauccgd] = -109.087046095101  <S**2> = +0.000003  Grad = 1.23e-02  CPU Time =    0.03935  (0.00 / step)
-      5: E[sauccgd] = -109.087061935855  <S**2> = +0.000002  Grad = 8.86e-03  CPU Time =    0.03339  (0.00 / step)
-      6: E[sauccgd] = -109.087065160670  <S**2> = +0.000003  Grad = 5.77e-03  CPU Time =    0.05904  (0.00 / step)
-      7: E[sauccgd] = -109.087066747662  <S**2> = +0.000003  Grad = 3.52e-03  CPU Time =    0.03325  (0.00 / step)
-      8: E[sauccgd] = -109.087068212665  <S**2> = +0.000003  Grad = 2.47e-03  CPU Time =    0.03350  (0.00 / step)
-      9: E[sauccgd] = -109.087069036983  <S**2> = +0.000003  Grad = 1.62e-03  CPU Time =    0.03335  (0.00 / step)
-     10: E[sauccgd] = -109.087069810225  <S**2> = +0.000002  Grad = 1.66e-03  CPU Time =    0.03341  (0.00 / step)
-     11: E[sauccgd] = -109.087071214549  <S**2> = +0.000002  Grad = 2.67e-03  CPU Time =    0.03329  (0.00 / step)
-     12: E[sauccgd] = -109.087073923316  <S**2> = +0.000002  Grad = 5.10e-03  CPU Time =    0.03343  (0.00 / step)
-     13: E[sauccgd] = -109.087075281373  <S**2> = +0.000002  Grad = 1.08e-02  CPU Time =    0.03324  (0.00 / step)
-     14: E[sauccgd] = -109.087078854406  <S**2> = +0.000003  Grad = 4.34e-03  CPU Time =    0.03320  (0.00 / step)
-     15: E[sauccgd] = -109.087080037386  <S**2> = +0.000003  Grad = 2.75e-03  CPU Time =    0.03348  (0.00 / step)
-     16: E[sauccgd] = -109.087080564137  <S**2> = +0.000003  Grad = 1.00e-03  CPU Time =    0.03356  (0.00 / step)
-     17: E[sauccgd] = -109.087080667556  <S**2> = +0.000003  Grad = 7.35e-04  CPU Time =    0.03338  (0.00 / step)
-  Final: E[sauccgd] = -109.087080667556  <S**2> = +0.000003  rho = 1 
+Initial: E[sauccgd] = -109.084140831248  <S**2> = +0.000003  rho = 1  
+      1: E[sauccgd] = -109.086024076740  <S**2> = +0.000003  Grad = 1.39e-01  CPU Time =    0.13140  (0.00 / step)
+      2: E[sauccgd] = -109.086787150098  <S**2> = +0.000003  Grad = 6.88e-02  CPU Time =    0.04175  (0.00 / step)
+      3: E[sauccgd] = -109.087016500109  <S**2> = +0.000003  Grad = 1.90e-02  CPU Time =    0.04102  (0.00 / step)
+      4: E[sauccgd] = -109.087046095098  <S**2> = +0.000003  Grad = 1.23e-02  CPU Time =    0.04103  (0.00 / step)
+      5: E[sauccgd] = -109.087061935855  <S**2> = +0.000002  Grad = 8.86e-03  CPU Time =    0.04284  (0.00 / step)
+      6: E[sauccgd] = -109.087065160668  <S**2> = +0.000003  Grad = 5.77e-03  CPU Time =    0.07213  (0.00 / step)
+      7: E[sauccgd] = -109.087066747661  <S**2> = +0.000003  Grad = 3.52e-03  CPU Time =    0.04074  (0.00 / step)
+      8: E[sauccgd] = -109.087068212663  <S**2> = +0.000003  Grad = 2.47e-03  CPU Time =    0.04111  (0.00 / step)
+      9: E[sauccgd] = -109.087069036978  <S**2> = +0.000003  Grad = 1.62e-03  CPU Time =    0.04083  (0.00 / step)
+     10: E[sauccgd] = -109.087069810224  <S**2> = +0.000002  Grad = 1.66e-03  CPU Time =    0.04086  (0.00 / step)
+     11: E[sauccgd] = -109.087071214549  <S**2> = +0.000002  Grad = 2.67e-03  CPU Time =    0.04111  (0.00 / step)
+     12: E[sauccgd] = -109.087073923316  <S**2> = +0.000002  Grad = 5.10e-03  CPU Time =    0.04109  (0.00 / step)
+     13: E[sauccgd] = -109.087075281375  <S**2> = +0.000002  Grad = 1.08e-02  CPU Time =    0.04104  (0.00 / step)
+     14: E[sauccgd] = -109.087078854408  <S**2> = +0.000003  Grad = 4.34e-03  CPU Time =    0.04100  (0.00 / step)
+     15: E[sauccgd] = -109.087080037385  <S**2> = +0.000003  Grad = 2.75e-03  CPU Time =    0.04104  (0.00 / step)
+     16: E[sauccgd] = -109.087080564136  <S**2> = +0.000003  Grad = 1.00e-03  CPU Time =    0.04106  (0.00 / step)
+     17: E[sauccgd] = -109.087080667560  <S**2> = +0.000003  Grad = 7.35e-04  CPU Time =    0.04120  (0.00 / step)
+  Final: E[sauccgd] = -109.087080667560  <S**2> = +0.000003  rho = 1 
 
 (sauccgd state)
     Basis            Coef
@@ -294,7 +295,7 @@ Initial: E[sauccgd] = -109.084140831246  <S**2> = +0.000003  rho = 1
 | 0011010 > : -0.1355 +0.0000i
 
 
-VQE Done: CPU Time =          0.7022
+VQE Done: CPU Time =          0.8369
 
 
 States     backtransformed.
@@ -310,15 +311,15 @@ theta_list backtransformed.
  === Computing 1RDM === 
  === Computing 2RDM === 
 Running Davidson to get update by AH
-Target lowest eigenvalue of augmented Hessian:  -0.012091116848667195  (C0 = 0.6462371850200253)
+Target lowest eigenvalue of augmented Hessian:  -0.012091116852815303  (C0 = 0.6462371847831497)
 Golden Section done in 1
 
 
 
-deltaE = -0.009335683790624216    ||g|| = 0.02820436080544471 ---> Updated with scaling factor 1.0364745084375788
+deltaE = -0.009335683791746874    ||g|| = 0.028204360796431918 ---> Updated with scaling factor 1.0364745084375788
 
 
-Next energy estimation:  -109.0976934210891
+Next energy estimation:  -109.09769342109405
 States     transformed.
 Operators  transformed.
 pauli_list transformed.
@@ -330,29 +331,29 @@ Initial configuration: |0111111>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
-Initial: E[sauccgd] = -109.097693421086  <S**2> = +0.000003  rho = 1  
-      1: E[sauccgd] = -109.105984250977  <S**2> = +0.000002  Grad = 2.90e-01  CPU Time =    0.11046  (0.00 / step)
-      2: E[sauccgd] = -109.107378924718  <S**2> = +0.000002  Grad = 1.52e-01  CPU Time =    0.03317  (0.00 / step)
-      3: E[sauccgd] = -109.108452701218  <S**2> = +0.000001  Grad = 8.59e-02  CPU Time =    0.03303  (0.00 / step)
-      4: E[sauccgd] = -109.108799717051  <S**2> = +0.000001  Grad = 3.92e-02  CPU Time =    0.03307  (0.00 / step)
-      5: E[sauccgd] = -109.108878029610  <S**2> = +0.000002  Grad = 1.18e-02  CPU Time =    0.03321  (0.00 / step)
-      6: E[sauccgd] = -109.108889237748  <S**2> = +0.000002  Grad = 6.51e-03  CPU Time =    0.03333  (0.00 / step)
-      7: E[sauccgd] = -109.108894143492  <S**2> = +0.000002  Grad = 5.69e-03  CPU Time =    0.03855  (0.00 / step)
-      8: E[sauccgd] = -109.108895569860  <S**2> = +0.000002  Grad = 1.45e-02  CPU Time =    0.03938  (0.00 / step)
-      9: E[sauccgd] = -109.108899779568  <S**2> = +0.000002  Grad = 3.72e-03  CPU Time =    0.03934  (0.00 / step)
-     10: E[sauccgd] = -109.108900600832  <S**2> = +0.000002  Grad = 3.03e-03  CPU Time =    0.03885  (0.00 / step)
-     11: E[sauccgd] = -109.108902012975  <S**2> = +0.000002  Grad = 3.43e-03  CPU Time =    0.03894  (0.00 / step)
-     12: E[sauccgd] = -109.108905259727  <S**2> = +0.000002  Grad = 5.20e-03  CPU Time =    0.03310  (0.00 / step)
-     13: E[sauccgd] = -109.108913260713  <S**2> = +0.000002  Grad = 8.11e-03  CPU Time =    0.03318  (0.00 / step)
-     14: E[sauccgd] = -109.108916613902  <S**2> = +0.000002  Grad = 2.61e-02  CPU Time =    0.03299  (0.00 / step)
-     15: E[sauccgd] = -109.108930177508  <S**2> = +0.000002  Grad = 1.00e-02  CPU Time =    0.03317  (0.00 / step)
-     16: E[sauccgd] = -109.108937212766  <S**2> = +0.000002  Grad = 5.90e-03  CPU Time =    0.03332  (0.00 / step)
-     17: E[sauccgd] = -109.108940564557  <S**2> = +0.000002  Grad = 3.47e-03  CPU Time =    0.03296  (0.00 / step)
-     18: E[sauccgd] = -109.108940956510  <S**2> = +0.000002  Grad = 1.79e-03  CPU Time =    0.05900  (0.00 / step)
-     19: E[sauccgd] = -109.108941195461  <S**2> = +0.000002  Grad = 1.08e-03  CPU Time =    0.03317  (0.00 / step)
-     20: E[sauccgd] = -109.108941316786  <S**2> = +0.000002  Grad = 8.31e-04  CPU Time =    0.03329  (0.00 / step)
-     21: E[sauccgd] = -109.108941346869  <S**2> = +0.000002  Grad = 7.95e-04  CPU Time =    0.05894  (0.00 / step)
-  Final: E[sauccgd] = -109.108941346869  <S**2> = +0.000002  rho = 1 
+Initial: E[sauccgd] = -109.097693421094  <S**2> = +0.000003  rho = 1  
+      1: E[sauccgd] = -109.105984250982  <S**2> = +0.000002  Grad = 2.90e-01  CPU Time =    0.13179  (0.00 / step)
+      2: E[sauccgd] = -109.107378924726  <S**2> = +0.000002  Grad = 1.52e-01  CPU Time =    0.04161  (0.00 / step)
+      3: E[sauccgd] = -109.108452701226  <S**2> = +0.000001  Grad = 8.59e-02  CPU Time =    0.04112  (0.00 / step)
+      4: E[sauccgd] = -109.108799717062  <S**2> = +0.000001  Grad = 3.92e-02  CPU Time =    0.04118  (0.00 / step)
+      5: E[sauccgd] = -109.108878029620  <S**2> = +0.000002  Grad = 1.18e-02  CPU Time =    0.04106  (0.00 / step)
+      6: E[sauccgd] = -109.108889237758  <S**2> = +0.000002  Grad = 6.51e-03  CPU Time =    0.04080  (0.00 / step)
+      7: E[sauccgd] = -109.108894143502  <S**2> = +0.000002  Grad = 5.69e-03  CPU Time =    0.04119  (0.00 / step)
+      8: E[sauccgd] = -109.108895569869  <S**2> = +0.000002  Grad = 1.45e-02  CPU Time =    0.04125  (0.00 / step)
+      9: E[sauccgd] = -109.108899779576  <S**2> = +0.000002  Grad = 3.72e-03  CPU Time =    0.04115  (0.00 / step)
+     10: E[sauccgd] = -109.108900600842  <S**2> = +0.000002  Grad = 3.03e-03  CPU Time =    0.04115  (0.00 / step)
+     11: E[sauccgd] = -109.108902012983  <S**2> = +0.000002  Grad = 3.43e-03  CPU Time =    0.04109  (0.00 / step)
+     12: E[sauccgd] = -109.108905259737  <S**2> = +0.000002  Grad = 5.20e-03  CPU Time =    0.04152  (0.00 / step)
+     13: E[sauccgd] = -109.108913260724  <S**2> = +0.000002  Grad = 8.11e-03  CPU Time =    0.04119  (0.00 / step)
+     14: E[sauccgd] = -109.108916613912  <S**2> = +0.000002  Grad = 2.61e-02  CPU Time =    0.04122  (0.00 / step)
+     15: E[sauccgd] = -109.108930177519  <S**2> = +0.000002  Grad = 1.00e-02  CPU Time =    0.04093  (0.00 / step)
+     16: E[sauccgd] = -109.108937212778  <S**2> = +0.000002  Grad = 5.90e-03  CPU Time =    0.04116  (0.00 / step)
+     17: E[sauccgd] = -109.108940564567  <S**2> = +0.000002  Grad = 3.47e-03  CPU Time =    0.04086  (0.00 / step)
+     18: E[sauccgd] = -109.108940956520  <S**2> = +0.000002  Grad = 1.79e-03  CPU Time =    0.07204  (0.00 / step)
+     19: E[sauccgd] = -109.108941195470  <S**2> = +0.000002  Grad = 1.08e-03  CPU Time =    0.04103  (0.00 / step)
+     20: E[sauccgd] = -109.108941316797  <S**2> = +0.000002  Grad = 8.31e-04  CPU Time =    0.04124  (0.00 / step)
+     21: E[sauccgd] = -109.108941346882  <S**2> = +0.000002  Grad = 7.95e-04  CPU Time =    0.07211  (0.00 / step)
+  Final: E[sauccgd] = -109.108941346882  <S**2> = +0.000002  rho = 1 
 
 (sauccgd state)
     Basis            Coef
@@ -361,7 +362,7 @@ Initial: E[sauccgd] = -109.097693421086  <S**2> = +0.000003  rho = 1
 | 0011010 > : -0.1284 +0.0000i
 
 
-VQE Done: CPU Time =          0.8665
+VQE Done: CPU Time =          1.0329
 
 
 States     backtransformed.
@@ -377,15 +378,15 @@ theta_list backtransformed.
  === Computing 1RDM === 
  === Computing 2RDM === 
 Running Davidson to get update by AH
-Target lowest eigenvalue of augmented Hessian:  -0.014924277721165077  (C0 = 0.8943710469413407)
+Target lowest eigenvalue of augmented Hessian:  -0.014924277693868528  (C0 = 0.8943710471007359)
 Golden Section done in 1
 
 
 
-deltaE = -0.021860679312837306    ||g|| = 0.05041762718446032 ---> Updated with scaling factor 1.0364745084375788
+deltaE = -0.021860679322116994    ||g|| = 0.050417627115167785 ---> Updated with scaling factor 1.0364745084375788
 
 
-Next energy estimation:  -109.11690875160582
+Next energy estimation:  -109.11690875159788
 States     transformed.
 Operators  transformed.
 pauli_list transformed.
@@ -397,18 +398,18 @@ Initial configuration: |0111111>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
-Initial: E[sauccgd] = -109.116908751605  <S**2> = +0.000002  rho = 1  
-      1: E[sauccgd] = -109.118234506889  <S**2> = +0.000002  Grad = 1.55e-01  CPU Time =    0.11136  (0.00 / step)
-      2: E[sauccgd] = -109.118601322376  <S**2> = +0.000002  Grad = 5.57e-02  CPU Time =    0.03970  (0.00 / step)
-      3: E[sauccgd] = -109.118711358529  <S**2> = +0.000002  Grad = 4.02e-02  CPU Time =    0.03958  (0.00 / step)
-      4: E[sauccgd] = -109.118829521946  <S**2> = +0.000002  Grad = 2.02e-02  CPU Time =    0.03373  (0.00 / step)
-      5: E[sauccgd] = -109.118851584228  <S**2> = +0.000002  Grad = 8.45e-03  CPU Time =    0.03368  (0.00 / step)
-      6: E[sauccgd] = -109.118858601534  <S**2> = +0.000002  Grad = 5.40e-03  CPU Time =    0.03311  (0.00 / step)
-      7: E[sauccgd] = -109.118860611437  <S**2> = +0.000002  Grad = 3.32e-03  CPU Time =    0.03358  (0.00 / step)
-      8: E[sauccgd] = -109.118861618250  <S**2> = +0.000002  Grad = 2.36e-03  CPU Time =    0.03363  (0.00 / step)
-      9: E[sauccgd] = -109.118861799622  <S**2> = +0.000002  Grad = 1.47e-03  CPU Time =    0.05956  (0.00 / step)
-     10: E[sauccgd] = -109.118861896508  <S**2> = +0.000002  Grad = 9.82e-04  CPU Time =    0.03349  (0.00 / step)
-  Final: E[sauccgd] = -109.118861896508  <S**2> = +0.000002  rho = 1 
+Initial: E[sauccgd] = -109.116908751599  <S**2> = +0.000002  rho = 1  
+      1: E[sauccgd] = -109.118234506921  <S**2> = +0.000002  Grad = 1.55e-01  CPU Time =    0.13175  (0.00 / step)
+      2: E[sauccgd] = -109.118601322378  <S**2> = +0.000002  Grad = 5.57e-02  CPU Time =    0.04139  (0.00 / step)
+      3: E[sauccgd] = -109.118711358531  <S**2> = +0.000002  Grad = 4.02e-02  CPU Time =    0.04129  (0.00 / step)
+      4: E[sauccgd] = -109.118829521943  <S**2> = +0.000002  Grad = 2.02e-02  CPU Time =    0.04141  (0.00 / step)
+      5: E[sauccgd] = -109.118851584227  <S**2> = +0.000002  Grad = 8.45e-03  CPU Time =    0.04128  (0.00 / step)
+      6: E[sauccgd] = -109.118858601532  <S**2> = +0.000002  Grad = 5.40e-03  CPU Time =    0.04126  (0.00 / step)
+      7: E[sauccgd] = -109.118860611436  <S**2> = +0.000002  Grad = 3.32e-03  CPU Time =    0.04148  (0.00 / step)
+      8: E[sauccgd] = -109.118861618251  <S**2> = +0.000002  Grad = 2.36e-03  CPU Time =    0.04123  (0.00 / step)
+      9: E[sauccgd] = -109.118861799622  <S**2> = +0.000002  Grad = 1.47e-03  CPU Time =    0.07234  (0.00 / step)
+     10: E[sauccgd] = -109.118861896509  <S**2> = +0.000002  Grad = 9.82e-04  CPU Time =    0.04153  (0.00 / step)
+  Final: E[sauccgd] = -109.118861896509  <S**2> = +0.000002  rho = 1 
 
 (sauccgd state)
     Basis            Coef
@@ -417,7 +418,7 @@ Initial: E[sauccgd] = -109.116908751605  <S**2> = +0.000002  rho = 1
 | 0011010 > : -0.1227 +0.0000i
 
 
-VQE Done: CPU Time =          0.4652
+VQE Done: CPU Time =          0.5513
 
 
 States     backtransformed.
@@ -433,15 +434,15 @@ theta_list backtransformed.
  === Computing 1RDM === 
  === Computing 2RDM === 
 Running Davidson to get update by AH
-Target lowest eigenvalue of augmented Hessian:  -0.0005887979722997821  (C0 = 0.9966411761539045)
+Target lowest eigenvalue of augmented Hessian:  -0.0005887979789872202  (C0 = 0.9966411761197385)
 Golden Section done in 0
 
 
 
-deltaE = -0.009920549638877674    ||g|| = 0.01900243878513608 ---> Updated with scaling factor 0.75
+deltaE = -0.009920549627409514    ||g|| = 0.0190024389581201 ---> Updated with scaling factor 0.75
 
 
-Next energy estimation:  -109.11914045215242
+Next energy estimation:  -109.11914045215525
 States     transformed.
 Operators  transformed.
 pauli_list transformed.
@@ -453,22 +454,22 @@ Initial configuration: |0111111>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
-Initial: E[sauccgd] = -109.119140452151  <S**2> = +0.000002  rho = 1  
-      1: E[sauccgd] = -109.119152649700  <S**2> = +0.000002  Grad = 1.50e-02  CPU Time =    0.11288  (0.00 / step)
-      2: E[sauccgd] = -109.119156087956  <S**2> = +0.000002  Grad = 1.93e-03  CPU Time =    0.03991  (0.00 / step)
-      3: E[sauccgd] = -109.119156198651  <S**2> = +0.000002  Grad = 1.70e-03  CPU Time =    0.03953  (0.00 / step)
-      4: E[sauccgd] = -109.119156697229  <S**2> = +0.000002  Grad = 1.10e-03  CPU Time =    0.03939  (0.00 / step)
-      5: E[sauccgd] = -109.119156863913  <S**2> = +0.000002  Grad = 1.27e-03  CPU Time =    0.03350  (0.00 / step)
-      6: E[sauccgd] = -109.119157083157  <S**2> = +0.000002  Grad = 1.43e-03  CPU Time =    0.03370  (0.00 / step)
-      7: E[sauccgd] = -109.119157246484  <S**2> = +0.000002  Grad = 2.04e-03  CPU Time =    0.03364  (0.00 / step)
-      8: E[sauccgd] = -109.119157437489  <S**2> = +0.000002  Grad = 1.58e-03  CPU Time =    0.03341  (0.00 / step)
-      9: E[sauccgd] = -109.119158069654  <S**2> = +0.000002  Grad = 2.06e-03  CPU Time =    0.03352  (0.00 / step)
-     10: E[sauccgd] = -109.119158664762  <S**2> = +0.000002  Grad = 2.53e-03  CPU Time =    0.03357  (0.00 / step)
-     11: E[sauccgd] = -109.119159746807  <S**2> = +0.000002  Grad = 2.65e-03  CPU Time =    0.03356  (0.00 / step)
-     12: E[sauccgd] = -109.119159873502  <S**2> = +0.000002  Grad = 2.07e-03  CPU Time =    0.05930  (0.00 / step)
-     13: E[sauccgd] = -109.119160051172  <S**2> = +0.000002  Grad = 7.94e-04  CPU Time =    0.03341  (0.00 / step)
-     14: E[sauccgd] = -109.119160055801  <S**2> = +0.000002  Grad = 9.82e-04  CPU Time =    0.03361  (0.00 / step)
-  Final: E[sauccgd] = -109.119160055801  <S**2> = +0.000002  rho = 1 
+Initial: E[sauccgd] = -109.119140452155  <S**2> = +0.000002  rho = 1  
+      1: E[sauccgd] = -109.119152649701  <S**2> = +0.000002  Grad = 1.50e-02  CPU Time =    0.13180  (0.00 / step)
+      2: E[sauccgd] = -109.119156087959  <S**2> = +0.000002  Grad = 1.93e-03  CPU Time =    0.04137  (0.00 / step)
+      3: E[sauccgd] = -109.119156198652  <S**2> = +0.000002  Grad = 1.70e-03  CPU Time =    0.04123  (0.00 / step)
+      4: E[sauccgd] = -109.119156697230  <S**2> = +0.000002  Grad = 1.10e-03  CPU Time =    0.04106  (0.00 / step)
+      5: E[sauccgd] = -109.119156863916  <S**2> = +0.000002  Grad = 1.27e-03  CPU Time =    0.04113  (0.00 / step)
+      6: E[sauccgd] = -109.119157083154  <S**2> = +0.000002  Grad = 1.43e-03  CPU Time =    0.04129  (0.00 / step)
+      7: E[sauccgd] = -109.119157246487  <S**2> = +0.000002  Grad = 2.04e-03  CPU Time =    0.04120  (0.00 / step)
+      8: E[sauccgd] = -109.119157437490  <S**2> = +0.000002  Grad = 1.58e-03  CPU Time =    0.04116  (0.00 / step)
+      9: E[sauccgd] = -109.119158069660  <S**2> = +0.000002  Grad = 2.06e-03  CPU Time =    0.04099  (0.00 / step)
+     10: E[sauccgd] = -109.119158664771  <S**2> = +0.000002  Grad = 2.53e-03  CPU Time =    0.04103  (0.00 / step)
+     11: E[sauccgd] = -109.119159746814  <S**2> = +0.000002  Grad = 2.65e-03  CPU Time =    0.04113  (0.00 / step)
+     12: E[sauccgd] = -109.119159873507  <S**2> = +0.000002  Grad = 2.07e-03  CPU Time =    0.07246  (0.00 / step)
+     13: E[sauccgd] = -109.119160051173  <S**2> = +0.000002  Grad = 7.94e-04  CPU Time =    0.04082  (0.00 / step)
+     14: E[sauccgd] = -109.119160055804  <S**2> = +0.000002  Grad = 9.82e-04  CPU Time =    0.04103  (0.00 / step)
+  Final: E[sauccgd] = -109.119160055804  <S**2> = +0.000002  rho = 1 
 
 (sauccgd state)
     Basis            Coef
@@ -477,7 +478,7 @@ Initial: E[sauccgd] = -109.119140452151  <S**2> = +0.000002  rho = 1
 | 0011010 > : -0.1222 +0.0000i
 
 
-VQE Done: CPU Time =          0.6062
+VQE Done: CPU Time =          0.7144
 
 
 States     backtransformed.
@@ -493,15 +494,15 @@ theta_list backtransformed.
  === Computing 1RDM === 
  === Computing 2RDM === 
 Running Davidson to get update by AH
-Target lowest eigenvalue of augmented Hessian:  -6.990107785681124e-05  (C0 = 0.9995620721498648)
+Target lowest eigenvalue of augmented Hessian:  -6.990103381846298e-05  (C0 = 0.9995620724153376)
 Golden Section done in 0
 
 
 
-deltaE = -0.00029815929254084494    ||g|| = 0.005816181320528134 ---> Updated with scaling factor 0.75
+deltaE = -0.0002981592948714251    ||g|| = 0.005816180444919195 ---> Updated with scaling factor 0.75
 
 
-Next energy estimation:  -109.11919291960649
+Next energy estimation:  -109.11919291958796
 States     transformed.
 Operators  transformed.
 pauli_list transformed.
@@ -513,11 +514,11 @@ Initial configuration: |0111111>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
-Initial: E[sauccgd] = -109.119192919606  <S**2> = +0.000002  rho = 1  
-      1: E[sauccgd] = -109.119194080350  <S**2> = +0.000002  Grad = 5.33e-03  CPU Time =    0.11066  (0.00 / step)
-      2: E[sauccgd] = -109.119194518308  <S**2> = +0.000002  Grad = 7.61e-04  CPU Time =    0.03388  (0.00 / step)
-      3: E[sauccgd] = -109.119194535624  <S**2> = +0.000002  Grad = 6.61e-04  CPU Time =    0.03374  (0.00 / step)
-  Final: E[sauccgd] = -109.119194535624  <S**2> = +0.000002  rho = 1 
+Initial: E[sauccgd] = -109.119192919589  <S**2> = +0.000002  rho = 1  
+      1: E[sauccgd] = -109.119194080342  <S**2> = +0.000002  Grad = 5.33e-03  CPU Time =    0.13216  (0.00 / step)
+      2: E[sauccgd] = -109.119194518300  <S**2> = +0.000002  Grad = 7.61e-04  CPU Time =    0.04154  (0.00 / step)
+      3: E[sauccgd] = -109.119194535620  <S**2> = +0.000002  Grad = 6.61e-04  CPU Time =    0.04152  (0.00 / step)
+  Final: E[sauccgd] = -109.119194535620  <S**2> = +0.000002  rho = 1 
 
 (sauccgd state)
     Basis            Coef
@@ -526,7 +527,7 @@ Initial: E[sauccgd] = -109.119192919606  <S**2> = +0.000002  rho = 1
 | 0011010 > : -0.1222 +0.0000i
 
 
-VQE Done: CPU Time =          0.1915
+VQE Done: CPU Time =          0.2317
 
 
 States     backtransformed.
@@ -542,15 +543,15 @@ theta_list backtransformed.
  === Computing 1RDM === 
  === Computing 2RDM === 
 Running Davidson to get update by AH
-Target lowest eigenvalue of augmented Hessian:  -7.28728883848622e-06  (C0 = 0.9999524407141251)
+Target lowest eigenvalue of augmented Hessian:  -7.2872989211999145e-06  (C0 = 0.9999524406496181)
 Golden Section done in 0
 
 
 
-deltaE = -3.4479823625588324e-05    ||g|| = 0.0017563769022100617 ---> Updated with scaling factor 0.75
+deltaE = -3.4479815610666265e-05    ||g|| = 0.0017563779446822406 ---> Updated with scaling factor 0.75
 
 
-Next energy estimation:  -109.11919795465533
+Next energy estimation:  -109.11919795465563
 States     transformed.
 Operators  transformed.
 pauli_list transformed.
@@ -562,9 +563,9 @@ Initial configuration: |0111111>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
-Initial: E[sauccgd] = -109.119197954656  <S**2> = +0.000002  rho = 1  
-      1: E[sauccgd] = -109.119198147183  <S**2> = +0.000002  Grad = 2.04e-03  CPU Time =    0.11276  (0.00 / step)
-      2: E[sauccgd] = -109.119198212464  <S**2> = +0.000002  Grad = 7.80e-04  CPU Time =    0.03969  (0.00 / step)
+Initial: E[sauccgd] = -109.119197954655  <S**2> = +0.000002  rho = 1  
+      1: E[sauccgd] = -109.119198147184  <S**2> = +0.000002  Grad = 2.04e-03  CPU Time =    0.13188  (0.00 / step)
+      2: E[sauccgd] = -109.119198212464  <S**2> = +0.000002  Grad = 7.80e-04  CPU Time =    0.04164  (0.00 / step)
   Final: E[sauccgd] = -109.119198212464  <S**2> = +0.000002  rho = 1 
 
 (sauccgd state)
@@ -574,7 +575,7 @@ Initial: E[sauccgd] = -109.119197954656  <S**2> = +0.000002  rho = 1
 | 0011010 > : -0.1222 +0.0000i
 
 
-VQE Done: CPU Time =          0.1708
+VQE Done: CPU Time =          0.1906
 
 
 States     backtransformed.
@@ -590,15 +591,15 @@ theta_list backtransformed.
  === Computing 1RDM === 
  === Computing 2RDM === 
 Running Davidson to get update by AH
-Target lowest eigenvalue of augmented Hessian:  -8.171963732509033e-07  (C0 = 0.9999945702439352)
+Target lowest eigenvalue of augmented Hessian:  -8.171973099826338e-07  (C0 = 0.9999945702384088)
 Golden Section done in 0
 
 
 
-deltaE = -3.676839625654793e-06    ||g|| = 0.0005615761195866402 ---> Updated with scaling factor 0.75
+deltaE = -3.6768447984059094e-06    ||g|| = 0.000561576391977198 ---> Updated with scaling factor 0.75
 
 
-Next energy estimation:  -109.11919859563541
+Next energy estimation:  -109.1191985956361
 States     transformed.
 Operators  transformed.
 pauli_list transformed.
@@ -610,8 +611,8 @@ Initial configuration: |0111111>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
-Initial: E[sauccgd] = -109.119198595635  <S**2> = +0.000002  rho = 1  
-      1: E[sauccgd] = -109.119198639734  <S**2> = +0.000002  Grad = 1.01e-03  CPU Time =    0.11552  (0.00 / step)
+Initial: E[sauccgd] = -109.119198595636  <S**2> = +0.000002  rho = 1  
+      1: E[sauccgd] = -109.119198639734  <S**2> = +0.000002  Grad = 1.01e-03  CPU Time =    0.13237  (0.00 / step)
   Final: E[sauccgd] = -109.119198639734  <S**2> = +0.000002  rho = 1 
 
 (sauccgd state)
@@ -621,7 +622,7 @@ Initial: E[sauccgd] = -109.119198595635  <S**2> = +0.000002  rho = 1
 | 0011010 > : -0.1221 +0.0000i
 
 
-VQE Done: CPU Time =          0.1290
+VQE Done: CPU Time =          0.1490
 
 
 States     backtransformed.
@@ -637,15 +638,15 @@ theta_list backtransformed.
  === Computing 1RDM === 
  === Computing 2RDM === 
 Running Davidson to get update by AH
-Target lowest eigenvalue of augmented Hessian:  -1.1062041876552212e-07  (C0 = 0.9999992607809767)
+Target lowest eigenvalue of augmented Hessian:  -1.1062051878061039e-07  (C0 = 0.9999992607804498)
 Golden Section done in 0
 
 
 
-deltaE = -4.2726999538444943e-07    ||g|| = 0.00019793506192144526 ---> Updated with scaling factor 0.75
+deltaE = -4.272692279982948e-07    ||g|| = 0.00019793513571318474 ---> Updated with scaling factor 0.75
 
 
-Next energy estimation:  -109.11919869159162
+Next energy estimation:  -109.11919869159233
 States     transformed.
 Operators  transformed.
 pauli_list transformed.
@@ -658,8 +659,8 @@ Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
 Initial: E[sauccgd] = -109.119198691592  <S**2> = +0.000002  rho = 1  
-      1: E[sauccgd] = -109.119198740331  <S**2> = +0.000002  Grad = 1.18e-03  CPU Time =    0.11114  (0.00 / step)
-  Final: E[sauccgd] = -109.119198740331  <S**2> = +0.000002  rho = 1 
+      1: E[sauccgd] = -109.119198740332  <S**2> = +0.000002  Grad = 1.18e-03  CPU Time =    0.13242  (0.00 / step)
+  Final: E[sauccgd] = -109.119198740332  <S**2> = +0.000002  rho = 1 
 
 (sauccgd state)
     Basis            Coef
@@ -668,7 +669,7 @@ Initial: E[sauccgd] = -109.119198691592  <S**2> = +0.000002  rho = 1
 | 0011010 > : -0.1221 +0.0000i
 
 
-VQE Done: CPU Time =          0.1240
+VQE Done: CPU Time =          0.1493
 
 
 States     backtransformed.
@@ -684,14 +685,14 @@ theta_list backtransformed.
  === Computing 1RDM === 
  === Computing 2RDM === 
 Running Davidson to get update by AH
-Target lowest eigenvalue of augmented Hessian:  -4.496210856836595e-09  (C0 = 0.9999999896760985)
+Target lowest eigenvalue of augmented Hessian:  -4.496210425198632e-09  (C0 = 0.9999999896760561)
 Golden Section done in 0
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
      Convergence of orbital optimizer with 9 cycles
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-  Final: E[oo-sauccgd] = -109.11919874033133 
+  Final: E[oo-sauccgd] = -109.11919874033163 
 Current states are not tapered-off. No back-transformation done
 Current operators are not tapered-off. No back-transformation done
 Current pauli_list is not tapered-off. No back-transformation done
@@ -705,11 +706,11 @@ sauccgd (vqe)
  === Computing 1RDM === 
 
 Dipole moment from 1RDM (in Debye):
-x = -0.00000  y = 0.00000  z = 0.00000
+x = -0.00000  y = -0.00000  z = -0.00000
 | mu | = 0.00000
 
 Dipole moment from relaxed 1RDM (in Debye):
-x = -0.00000     y = -0.00000    z = 0.00000
+x = 0.00000     y = 0.00000    z = 0.00000
 | mu | = 0.00000
 Saved in ./n2_oo-sauccgd.qkt.
-Normal termination of quket at 2022-08-07 01:11:12.140614
+Normal termination of quket at 2022-09-16 00:09:53.335106

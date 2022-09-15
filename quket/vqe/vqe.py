@@ -29,7 +29,7 @@ from qulacs.observable import create_observable_from_openfermion_text
 
 from quket.mpilib import mpilib as mpi
 from quket import config as cf
-from quket.utils import cost_mpi, jac_mpi_num, jac_mpi_ana, jac_mpi_deriv_SA
+from quket.utils import cost_mpi, jac_mpi_num, jac_mpi_ana, jac_mpi_deriv_SA, isint
 from quket.linalg import T1mult
 from quket.linalg import SR1, LSR1
 from quket.fileio import LoadTheta, SaveTheta, error, prints, printmat, tstamp, print_state
@@ -480,47 +480,30 @@ def VQE_driver(Quket, kappa_guess, theta_guess, mix_level, opt_method,
         if Quket.theta_list is not None:
             ## Read Quket.theta_list as guess
             theta_list = Quket.theta_list[:len(Quket.pauli_list)]
+    elif theta_guess == "read" or isint(theta_guess):
+        if Quket.cf.theta_guess == "read":
+            offset = 0
         else:
-            theta_list = np.zeros(ndim, float)
+            offset = int(Quket.cf.theta_guess)
+        theta_list = LoadTheta(Quket._ndim, cf.theta_list_file, offset=offset)
+    elif Quket.cf.theta_guess == "random":
+        theta_list = (0.5-np.random.rand(Quket._ndim))*0.001
+    elif Quket.theta_list is not None:
+        theta_list = Quket.theta_list
     else:
-        theta_list = np.zeros(_ndim)
-        if theta_guess == "zero":
-            theta_list *= 0
-        elif theta_guess == "read":
-            theta_list = LoadTheta(_ndim, cf.theta_list_file, offset=offset)
-        elif theta_guess == "random":
-            theta_list = (0.5-np.random.rand(_ndim))*0.001
-        if Kappa_to_T1 and theta_guess != "read":
-            ### Use Kappa for T1  ###
-            if Quket.DS:
-                theta_list[:ndim1] = kappa_list[:ndim1]
-            else:
-                theta_list[ndim2:] = kappa_list[:ndim1]
-            kappa_list *= 0
-            prints("Initial T1 amplitudes will be read from kappa.")
+        theta_list = np.zeros(ndim, float)
 
-        if optk:
-            theta_list_fix = theta_list[ndim1:]
-            theta_list = theta_list[:ndim1]
-            if Gen:
-                # Generalized Singles.
-                temp = theta_list.copy()
-                theta_list = np.zeros(_ndim)
-                indices = [i*(i-1)//2 + j
-                            for i in range(norbs)
-                                for j in range(i)
-                                    if i >= noa and j < noa]
-                indices.extend([i*(i-1)//2 + j + ndim1
-                                    for i in range(norbs)
-                                        for j in range(i)
-                                            if i >= nob and j < nob])
-                theta_list[indices] = temp[:len(indices)]
+    if Kappa_to_T1 and theta_guess != "read":
+        ### Use Kappa for T1  ###
+        if Quket.DS:
+            theta_list[:ndim1] = kappa_list[:ndim1]
         else:
-            theta_list_fix = 0
+            theta_list[ndim2:] = kappa_list[:ndim1]
+        kappa_list *= 0
+        prints("Initial T1 amplitudes will be read from kappa.")
 
-        ### Broadcast lists
-        kappa_list = mpi.bcast(kappa_list, root=0)
-        theta_list = mpi.bcast(theta_list, root=0)
+    kappa_list = mpi.bcast(kappa_list, root=0)
+    theta_list = mpi.bcast(theta_list, root=0)
     #######
     # Based on pauli_list
     #######
@@ -637,8 +620,8 @@ def VQE_driver(Quket, kappa_guess, theta_guess, mix_level, opt_method,
         SaveTheta(ndim, final_param_list, cf.kappa_list_file, offset=offset)
         Quket.kappa_list = final_param_list.copy()
     else:
-        SaveTheta(ndim, final_param_list, cf.theta_list_file, offset=offset)
         Quket.theta_list = final_param_list.copy()
+        Quket.savetheta(offset=offset)
 
 
 

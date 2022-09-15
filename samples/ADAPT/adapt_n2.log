@@ -9,17 +9,17 @@
 ///             Q   Q       U    U      K   K       E    E       T              ///
 ///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
 ///                                                                             ///
-///                      Quantum Computing Simulator Ver 0.9.1                  ///
+///                      Quantum Computing Simulator Ver 0.9.4                  ///
 ///                                                                             ///
 ///        Copyright 2019-2022                                                  ///
 ///        The Quket Developers                                                 ///
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-08-07 00:58:39.936164: 
-8 processes x 4 = Total 32 cores
-API for qulacs: None
-Number of cpus in the main node (pinode01): 8
+2022-09-16 00:03:38.151507: 
+16 processes x 2 = Total 32 cores
+API for qulacs: openmp
+Number of cpus in the main node (pinode01): 16
 
 ##################### INPUT ########################
 basis        = sto-3G
@@ -59,7 +59,6 @@ Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9 Z10 Z11]
 Qubit: 4    Tau: 1.0 [Z4 Z5 Z10 Z11]
 Qubit: 6    Tau: 1.0 [Z6 Z7 Z8 Z9 Z10 Z11]
 
-pauli_list found.
 NBasis = 10
 
 [Molecular Orbitals]
@@ -86,40 +85,40 @@ Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9 Z10 Z11]
 Qubit: 4    Tau: 1.0 [Z4 Z5 Z10 Z11]
 Qubit: 6    Tau: 1.0 [Z6 Z7 Z8 Z9 Z10 Z11]
 
-pauli_list found.
+Symmetry-forbidden pauli operators are removed.
 Performing ADAPT-VQE [original]
 ADAPT Convergence criterion = 5E-02
 Initial configuration: | 000000111111 >
 VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Number of operators in pool: 57
-    1:   E[adapt] = -107.447042561269   <S**2> =  0.00000000000000   Grad = 1.51e+00   Fidelity = 0.000000   CPU Time =  0.04   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
-    2:   E[adapt] = -107.474535044054   <S**2> =  0.00000000000000   Grad = 1.23e+00   Fidelity = 0.000000   CPU Time =  0.05   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 26
-    3:   E[adapt] = -107.494254224302   <S**2> =  0.03453996047504   Grad = 8.81e-01   Fidelity = 0.000000   CPU Time =  0.07   <N> =  6.00000000000002   <Sz> =  0.00000000000000   CNOT = 60
-    4:   E[adapt] = -107.496534605146   <S**2> =  0.03454121871732   Grad = 7.28e-01   Fidelity = 0.000000   CPU Time =  0.07   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 73
-    5:   E[adapt] = -107.501419937677   <S**2> =  0.03827487451412   Grad = 6.26e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  5.99999999999998   <Sz> =  0.00000000000000   CNOT = 115
-    6:   E[adapt] = -107.505780811952   <S**2> =  0.04109146072042   Grad = 5.28e-01   Fidelity = 0.000000   CPU Time =  0.17   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 157
-    7:   E[adapt] = -107.508294173432   <S**2> =  0.03577062187702   Grad = 4.37e-01   Fidelity = 0.000000   CPU Time =  0.17   <N> =  5.99999999999998   <Sz> =  0.00000000000000   CNOT = 199
-    8:   E[adapt] = -107.513117097632   <S**2> =  0.00726141610436   Grad = 3.86e-01   Fidelity = 0.000000   CPU Time =  0.21   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 233
-    9:   E[adapt] = -107.515378365646   <S**2> =  0.00334722558348   Grad = 3.42e-01   Fidelity = 0.000000   CPU Time =  0.19   <N> =  5.99999999999998   <Sz> =  0.00000000000000   CNOT = 275
-   10:   E[adapt] = -107.516685468594   <S**2> =  0.00330391829091   Grad = 2.88e-01   Fidelity = 0.000000   CPU Time =  0.17   <N> =  5.99999999999999   <Sz> = -0.00000000000000   CNOT = 288
-   11:   E[adapt] = -107.517928094995   <S**2> =  0.00327452443121   Grad = 2.51e-01   Fidelity = 0.000000   CPU Time =  0.19   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 301
-   12:   E[adapt] = -107.518218290540   <S**2> =  0.00326469239734   Grad = 2.12e-01   Fidelity = 0.000000   CPU Time =  0.17   <N> =  5.99999999999997   <Sz> =  0.00000000000000   CNOT = 314
-   13:   E[adapt] = -107.518503892721   <S**2> =  0.00325686107636   Grad = 1.76e-01   Fidelity = 0.000000   CPU Time =  0.17   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 327
-   14:   E[adapt] = -107.519604307310   <S**2> =  0.00016715426539   Grad = 1.31e-01   Fidelity = 0.000000   CPU Time =  0.32   <N> =  6.00000000000004   <Sz> =  0.00000000000000   CNOT = 361
-   15:   E[adapt] = -107.519862441213   <S**2> =  0.00016700092573   Grad = 1.01e-01   Fidelity = 0.000000   CPU Time =  0.23   <N> =  5.99999999999998   <Sz> =  0.00000000000000   CNOT = 374
-   16:   E[adapt] = -107.520149874617   <S**2> =  0.00016686962236   Grad = 8.18e-02   Fidelity = 0.000000   CPU Time =  0.23   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 387
+    1:   E[adapt] = -107.447042561269   <S**2> = -0.00000000000000   Grad = 1.51e+00   Fidelity = 0.000000   CPU Time =  0.03   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
+    2:   E[adapt] = -107.474535044054   <S**2> =  0.00000000000000   Grad = 1.23e+00   Fidelity = 0.000000   CPU Time =  0.04   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 26
+    3:   E[adapt] = -107.494254224302   <S**2> =  0.03453996047504   Grad = 8.81e-01   Fidelity = 0.000000   CPU Time =  0.06   <N> =  6.00000000000002   <Sz> =  0.00000000000000   CNOT = 60
+    4:   E[adapt] = -107.496534605146   <S**2> =  0.03454121871732   Grad = 7.28e-01   Fidelity = 0.000000   CPU Time =  0.05   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 73
+    5:   E[adapt] = -107.501419937677   <S**2> =  0.03827487451412   Grad = 6.26e-01   Fidelity = 0.000000   CPU Time =  0.12   <N> =  5.99999999999998   <Sz> =  0.00000000000000   CNOT = 115
+    6:   E[adapt] = -107.505780811952   <S**2> =  0.04109146072042   Grad = 5.28e-01   Fidelity = 0.000000   CPU Time =  0.13   <N> =  6.00000000000000   <Sz> =  0.00000000000000   CNOT = 157
+    7:   E[adapt] = -107.508294173432   <S**2> =  0.03577062187702   Grad = 4.37e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  5.99999999999997   <Sz> =  0.00000000000000   CNOT = 199
+    8:   E[adapt] = -107.513117097632   <S**2> =  0.00726141610435   Grad = 3.86e-01   Fidelity = 0.000000   CPU Time =  0.17   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 233
+    9:   E[adapt] = -107.515378365647   <S**2> =  0.00334722558348   Grad = 3.42e-01   Fidelity = 0.000000   CPU Time =  0.16   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 275
+   10:   E[adapt] = -107.516685468593   <S**2> =  0.00330391829091   Grad = 2.88e-01   Fidelity = 0.000000   CPU Time =  0.13   <N> =  5.99999999999998   <Sz> =  0.00000000000000   CNOT = 288
+   11:   E[adapt] = -107.517928094996   <S**2> =  0.00327452443121   Grad = 2.51e-01   Fidelity = 0.000000   CPU Time =  0.14   <N> =  6.00000000000001   <Sz> =  0.00000000000000   CNOT = 301
+   12:   E[adapt] = -107.518218290540   <S**2> =  0.00326469239734   Grad = 2.12e-01   Fidelity = 0.000000   CPU Time =  0.12   <N> =  5.99999999999998   <Sz> =  0.00000000000000   CNOT = 314
+   13:   E[adapt] = -107.518503892721   <S**2> =  0.00325686107636   Grad = 1.76e-01   Fidelity = 0.000000   CPU Time =  0.12   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 327
+   14:   E[adapt] = -107.519604307310   <S**2> =  0.00016715426539   Grad = 1.31e-01   Fidelity = 0.000000   CPU Time =  0.23   <N> =  6.00000000000002   <Sz> =  0.00000000000000   CNOT = 361
+   15:   E[adapt] = -107.519862441213   <S**2> =  0.00016700092573   Grad = 1.01e-01   Fidelity = 0.000000   CPU Time =  0.17   <N> =  5.99999999999998   <Sz> =  0.00000000000000   CNOT = 374
+   16:   E[adapt] = -107.520149874617   <S**2> =  0.00016686962236   Grad = 8.18e-02   Fidelity = 0.000000   CPU Time =  0.17   <N> =  5.99999999999999   <Sz> =  0.00000000000000   CNOT = 387
 gradient norm = 4.219505e-02 < 5.000000e-02
 
 -----------ADAPT-VQE finished----------
 number of parameter is  16
-Final: E[adapt] = -107.520149874617   <S**2> = 0.000166869622359   Fidelity = 0.000000
+Final: E[adapt] = -107.520149874617   <S**2> = 0.000166869622358   Fidelity = 0.000000
       Basis              Coef
 | 000000111111 > : +0.9727 +0.0000i
 | 000011110011 > : -0.1155 +0.0000i
 | 001100111100 > : -0.1155 +0.0000i
 
 
- Done: CPU Time =            4.5251
+ Done: CPU Time =            4.4638
 adapt (vqe) 
       Basis              Coef
 | 000000111111 > : +0.9727 +0.0000i
@@ -134,7 +133,7 @@ x = 0.00000  y = 0.00000  z = -0.00000
 | mu | = 0.00000
 
 Dipole moment from relaxed 1RDM (in Debye):
-x = 0.00000     y = 0.00000    z = 0.00000
+x = 0.00000     y = 0.00000    z = -0.00000
 | mu | = 0.00000
 Saved in ./adapt_n2.qkt.
-Normal termination of quket at 2022-08-07 00:58:45.692912
+Normal termination of quket at 2022-09-16 00:03:43.730568

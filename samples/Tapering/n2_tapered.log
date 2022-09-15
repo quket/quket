@@ -9,17 +9,17 @@
 ///             Q   Q       U    U      K   K       E    E       T              ///
 ///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
 ///                                                                             ///
-///                      Quantum Computing Simulator Ver 0.9.1                  ///
+///                      Quantum Computing Simulator Ver 0.9.4                  ///
 ///                                                                             ///
 ///        Copyright 2019-2022                                                  ///
 ///        The Quket Developers                                                 ///
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-08-07 01:03:33.510991: 
-8 processes x 4 = Total 32 cores
-API for qulacs: None
-Number of cpus in the main node (pinode02): 8
+2022-09-16 00:05:16.691795: 
+16 processes x 2 = Total 32 cores
+API for qulacs: openmp
+Number of cpus in the main node (pinode01): 16
 
 ##################### INPUT ########################
 basis        = sto-3G
@@ -89,4 +89,4 @@ Current operators are already tapered-off. No transformation done
    Skipping job since maxiter = 0.
 
 Saved in ./n2_tapered.qkt.
-Normal termination of quket at 2022-08-07 01:03:34.896530
+Normal termination of quket at 2022-09-16 00:05:18.062437

@@ -1104,14 +1104,16 @@ def get_pauli_list_adapt(Quket):
             # I assume that using a tapering-off algorithm can reduce CNOT gate counts, because some of the so this is just temporary.
 
             ### First reduce the pauli set by symmetry (those that do not hold the symmetry will be removed)
-            pauli_list, allowed_pauli_list =  get_allowed_pauli_list(Quket.tapering, pauli_list)
+            allowed_pauli_list =  get_allowed_pauli_list(Quket.tapering, pauli_list)
+            pauli_list = remove_forbidden_pauli_list(pauli_list, allowed_pauli_list)
             ### Then make a list for Ncnot for each pauli
             ncnot_list = NCNOT_list_adapt(pauli_list, Quket.adapt.mode)
-        pauli_list, allowed_pauli_list = Quket.tapering.transform_pauli_list(pauli_list, reduce=True)
+        pauli_list = Quket.tapering.transform_pauli_list(pauli_list, reduce=True)
         Quket.tapered["pauli_list"] = True
 
-    elif Quket.symmetry:
-        pauli_list, allowed_pauli_list =  get_allowed_pauli_list(Quket.tapering, pauli_list)
+    elif Quket.cf.symmetry_pauli:
+        allowed_pauli_list =  get_allowed_pauli_list(Quket.tapering, pauli_list)
+        pauli_list = remove_forbidden_pauli_list(pauli_list, allowed_pauli_list)
 
     ### Remove the same operators
     if Quket.adapt.mode != 'original':
@@ -1163,10 +1165,8 @@ def remove_z_from_pauli(pauli_list):
 
 def get_allowed_pauli_list(Tapering, pauli_list):
     """Function
-    Rerturn symmetry-allowed pauli_list
+    Rerturn bool list that labels symmetry-allowed/forbidden for pauli_list
     """
-    # List of transformed pauli operators
-    new_pauli_list = []
     # List of surviving/discarded operators because of symmetry
     allowed_pauli_list = []
     i = 0
@@ -1175,27 +1175,35 @@ def get_allowed_pauli_list(Tapering, pauli_list):
         if type(pauli) is list:
             for pauli_ in pauli:
                 new_pauli_, allowed = Tapering.transform_pauli(pauli_, reduce=False)
-                #prints(i, allowed)
                 if not allowed:
                     allowed_pauli_list.append(False)
                     break
-                #prints(i, 'passed', allowed)
             else:
-                new_pauli_list.append(pauli)
                 allowed_pauli_list.append(True)
                 continue
 
         else:
             new_pauli, allowed = Tapering.transform_pauli(pauli, reduce=False)
             if allowed:
-                new_pauli_list.append(pauli)
                 allowed_pauli_list.append(True)
             else:
                 allowed_pauli_list.append(False)
-#    for i, pauli in enumerate(new_pauli_list):
-#        prints(i,  '    ',  pauli)
-#    prints(allowed_pauli_list)
-    return new_pauli_list, allowed_pauli_list
+    return allowed_pauli_list
+
+def remove_forbidden_pauli_list(pauli_list, allowed_pauli_list):
+    """Function
+    Rerturn symmetry-allowed pauli_list
+    """
+    # List of transformed pauli operators
+    new_pauli_list = []
+    # List of surviving/discarded operators because of symmetry
+    i = 0
+    for pauli, allowed in zip(pauli_list, allowed_pauli_list):
+        if allowed:
+            new_pauli_list.append(pauli)
+    if len(new_pauli_list) != len(pauli_list):
+        prints('Symmetry-forbidden pauli operators are removed.')
+    return new_pauli_list
 
 def NCNOT_list_adapt(pauli_list, mode):
     """

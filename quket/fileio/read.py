@@ -105,6 +105,7 @@ bools = {
         "run_ccsd": "run_ccsd",
         "run_casscf": "run_casscf",
         "symmetry": "symmetry",
+        "symmetry_pauli": "symmetry_pauli",
         "qubit_excitation": "qubit_excitation", "qe": "qubit_excitation",
         "disassemble_pauli":"disassemble_pauli",
         "run_qubitfci": "run_qubitfci",

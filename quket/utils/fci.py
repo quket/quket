@@ -581,13 +581,14 @@ def get_Hdiag_list(qubit_Hamiltonian, det_list):
         diag_list.append(diag)
     return diag_list 
 
-def fci2qubit(Quket, nroots=None, threshold=1e-5, shift=1, verbose=False, maxiter=100):
+def fci2qubit(Quket, nroots=None, init_states=None, threshold=1e-5, shift=1, verbose=False, maxiter=100):
     """Function
     Obtain the exact eigen states of the system given in Quket, by Davidson-diagonalizing qubit_Hamiltonian.
     
     Args:
         Quket (QuketData): QuketData instance, which includes qubit_Hamiltonian
         nroots (int): Number of FCI states to be computed. If None, use Quket.nroots. 
+        init_states (list): Initial states.
         threshold (float): Threshold for convergence (norm of residual)
         shift (float): shift for spin using a penalty function, + shift * (S^2 - s(s+1))
         verbose (bool): Detailed print if True
@@ -598,8 +599,6 @@ def fci2qubit(Quket, nroots=None, threshold=1e-5, shift=1, verbose=False, maxite
     Author(s): Takashi Tsuchimochi
     """
     from copy import deepcopy
-    if nroots is None:
-        nroots = Quket.nroots
 
     qubit_Hamiltonian = deepcopy(Quket.operators.qubit_Hamiltonian)
     if Quket.model in ('chemical', 'hubbard'):
@@ -609,14 +608,56 @@ def fci2qubit(Quket, nroots=None, threshold=1e-5, shift=1, verbose=False, maxite
     else:
         det_list = None
 
+    if init_states is None:
+        if Quket.multi.init_states == []:
+            init_states = [Quket.init_state]
+        else:
+            init_states = Quket.multi.init_states
+    elif isinstance(init_states[0], QuantumState):
+        pass
+    elif isinstance(init_states[0], str):
+        from quket.fileio.read import read_multi
+        # Read configurations 
+        states = []
+        for j in range(len(init_states)):
+            next_info = init_states[j]
+            if isinstance(next_info, str):
+                state, weight = read_multi(next_info)
+            elif isinstance(next_info, tuple) or isinstance(next_info, list):
+                if len(next_info) == 2:
+                    next_info = str(next_info[0])  + ' ' +  str(next_info[1]) 
+                    state, weight = read_multi(next_info)
+                else:
+                    prints(f"incorrect specification for multi: {next_info}")
+            else:
+                prints(f"incorrect specification for multi: {next_info}")
+            if state is not None:
+                states.append(state)
+        from quket.utils import set_multi_det_state
+        init_states_ = []
+        for istate in range(len(states)):
+            if type(states[istate]) is list:
+                state = set_multi_det_state(states[istate], Quket._n_qubits)
+            else:
+                state = QuantumState(Quket._n_qubits, states[istate])
+            if Quket.cf.mapping == "bravyi_kitaev":
+                state = transform_state_jw2bk(state)
+            if Quket.tapered['operators']:
+                state, success = Quket.tapering.transform_state(state)
+            init_states_.append(state)
+        init_states = init_states_
+    
     if verbose or cf.debug:
         tstamp('Entered fci2qubit')
         if Quket.model in ('chemical', 'hubbard'):
             prints(f'Target spin s = {Quket.spin}')
 
+    if nroots is None:
+        nroots = len(init_states)
+
     return davidson(qubit_Hamiltonian, 
                     nroots=nroots, 
-                    initial_states=None, 
+                    init_states=init_states, 
                     det_list=det_list, 
                     threshold=threshold,
                     n_qubits=Quket.n_qubits,
@@ -625,14 +666,14 @@ def fci2qubit(Quket, nroots=None, threshold=1e-5, shift=1, verbose=False, maxite
 
 
 
-def davidson(qubit_Hamiltonian, nroots=1, initial_states=None, det_list=None, threshold=1e-5, n_qubits=None, maxiter=100, verbose=False):
+def davidson(qubit_Hamiltonian, nroots=1, init_states=None, det_list=None, threshold=1e-5, n_qubits=None, maxiter=100, verbose=False):
     """
     Perform Davidson diagonalization of qubit_Hamiltonian.
 
     Args:
         qubit_Hamiltonian (QubitOperator): Hamiltonian as a linear combination of Pauli operators
         nroots (int): Number of FCI states to be computed. If None, use Quket.nroots. 
-        initial_states (list, optional): Initial guess states as a list of orhonormal QuantumStates 
+        init_states (list, optional): Initial guess states as a list of orhonormal QuantumStates 
         det_list (list, optional): A list that has determinants (bit strings) as integers that are considered in the update of Davidson procedure. That is, these integers correspond to a certain symmetry (number, Sz). Note this is crucial to speed up the calculation, but missing integers that are required to span the symmetry space will cause a failure of calculation. 
         threshold (float): Threshold for convergence (norm of residual)
         n_qubits (int, optional): Number of qubits
@@ -658,7 +699,7 @@ def davidson(qubit_Hamiltonian, nroots=1, initial_states=None, det_list=None, th
     if cf.debug or verbose:
         prints('Diagonal matrix elements prepared.')
 
-    if initial_states is None:
+    if init_states is None:
         ### Find the nroots lowest diagonals
         ### Get lowest nroots states according to the diagonals
         from heapq import nsmallest
@@ -672,7 +713,7 @@ def davidson(qubit_Hamiltonian, nroots=1, initial_states=None, det_list=None, th
         for k in range(nroots):
             states.append(QuantumState(n_qubits, initial_dets[k]))
     else:
-        states = initial_states
+        states = init_states
 
     if verbose or cf.debug:
         prints('Cycle  State       Energy      Norm')
@@ -686,10 +727,11 @@ def davidson(qubit_Hamiltonian, nroots=1, initial_states=None, det_list=None, th
     Hfci_vec = np.zeros((nroots, 2**n_qubits), complex)
     new_state = np.zeros(2**n_qubits, complex)
     ioff = 0
-    ntargets = nroots
+    nroots_ = len(states)
     while icyc < maxiter:
         ### Subspace Hamiltonian
         ntargets = len(states) - len(Hstates) 
+        len_states = len(states)
         for i in range(ioff, ioff+ntargets):
             Hstates.append(evolve(qubit_Hamiltonian, states[i], parallel=True))
             for j in range(i+1):
@@ -700,7 +742,7 @@ def davidson(qubit_Hamiltonian, nroots=1, initial_states=None, det_list=None, th
         E, V = np.linalg.eigh(Hsub_symm)
 
         reset = False 
-        for i in range(nroots):
+        for i in range(min(nroots, len_states)):
             fci_vec[i] *= 0
             Hfci_vec[i] *= 0
             for j in range(V.shape[0]):
@@ -743,7 +785,7 @@ def davidson(qubit_Hamiltonian, nroots=1, initial_states=None, det_list=None, th
                 prints('converged')
             else:
                 prints('')
-            for k in range(1, nroots):
+            for k in range(1, min(nroots, len_states)):
                 prints(f'          {k}:  {E[k]:+.10f}   {norms[k]:.2e}  ', end='')
                 if converge[k]:
                     prints('converged')

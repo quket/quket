@@ -9,17 +9,17 @@
 ///             Q   Q       U    U      K   K       E    E       T              ///
 ///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
 ///                                                                             ///
-///                      Quantum Computing Simulator Ver 0.9.1                  ///
+///                      Quantum Computing Simulator Ver 0.9.4                  ///
 ///                                                                             ///
 ///        Copyright 2019-2022                                                  ///
 ///        The Quket Developers                                                 ///
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-08-07 01:07:19.480769: 
-8 processes x 4 = Total 32 cores
-API for qulacs: None
-Number of cpus in the main node (pinode01): 8
+2022-09-16 00:09:58.743668: 
+16 processes x 2 = Total 32 cores
+API for qulacs: openmp
+Number of cpus in the main node (pinode01): 16
 
 ##################### INPUT ########################
 ### This sample performs VQE with a user-defined Hamiltonian and user-defined ansatz.
@@ -99,66 +99,24 @@ Initial state:
 | 000 > : +1.0000 +0.0000i
 
 user-defined pauli_list found.
-Tapering-Off Results:
-List of redundant qubits:  None
+Sequential Tapering-Off Results:
+No symmetry found.
 
-First perform tapering.run(). No transformation done
 user-defined pauli_list found.
-Tapering-Off Results:
-List of redundant qubits:  None
+Sequential Tapering-Off Results:
+No symmetry found.
 
-First perform tapering.run(). No transformation done
+Davidson convergence achieved.
 FCI in Qubits
-(FCI state : E = -1.7391885700)
+(FCI state : E = -1.3334245569)
   Basis          Coef
-| 000 > : +0.0000 -0.1028i
-| 001 > : -0.0000 +0.2378i
-| 010 > : +0.4339 -0.0000i
-| 011 > : +0.5205 +0.0000i
-| 100 > : -0.4127 -0.0000i
-| 101 > : -0.4224 +0.0000i
-| 110 > : +0.0000 +0.2292i
-| 111 > : +0.0000 +0.3059i
-
-(FCI state : E = -1.3488026372)
-  Basis          Coef
-| 000 > : +0.1466 -0.0000i
-| 001 > : -0.4868 -0.0000i
-| 010 > : -0.0000 +0.5981i
-| 100 > : -0.0000 -0.3254i
-| 101 > : +0.0000 -0.1601i
-| 110 > : +0.4350 +0.0000i
-| 111 > : -0.2720 -0.0000i
-
-(FCI state : E = -1.2452357064)
-  Basis          Coef
-| 001 > : +0.5511 -0.0000i
-| 010 > : -0.0000 +0.4485i
-| 011 > : +0.0000 -0.1546i
-| 100 > : +0.0000 +0.3687i
-| 101 > : +0.0000 -0.3967i
-| 110 > : -0.1085 +0.0000i
-| 111 > : -0.4016 +0.0000i
-
-(FCI state : E = -1.1323080350)
-  Basis          Coef
-| 000 > : +0.0000 -0.2621i
-| 001 > : +0.0000 +0.3848i
-| 010 > : +0.3209 +0.0000i
-| 011 > : -0.2369 -0.0000i
-| 101 > : -0.1921 -0.0000i
-| 110 > : -0.0000 -0.7079i
-| 111 > : -0.0000 -0.3138i
-
-(FCI state : E = -0.9845414608)
-  Basis          Coef
-| 000 > : -0.0000 +0.2411i
-| 001 > : -0.0000 -0.2405i
-| 010 > : +0.5628 -0.0000i
-| 011 > : -0.2042 +0.0000i
-| 100 > : +0.5812 +0.0000i
-| 101 > : -0.2087 +0.0000i
-| 111 > : +0.0000 +0.3599i
+| 000 > : -0.1499 +0.0000i
+| 001 > : +0.4677 -0.0000i
+| 010 > : +0.0000 -0.6091i
+| 100 > : +0.0000 +0.3166i
+| 101 > : -0.0000 +0.1694i
+| 110 > : -0.4254 -0.0000i
+| 111 > : +0.2789 +0.0000i
 
 Entered VQE driver
 Performing VQE for user-defined
@@ -167,49 +125,49 @@ Initial configuration: |000>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
-Initial: E[user-defined] = +0.400135124568  <S**2> = +0.000000  Fidelity = 0.010580  rho = 1  
-      1: E[user-defined] = -0.054975773012  <S**2> = +0.000000  Fidelity = 0.168737  Grad = 8.57e-01  CPU Time =    1.12843  (0.00 / step)
-      2: E[user-defined] = -0.295017240363  <S**2> = +0.000000  Fidelity = 0.127500  Grad = 6.19e-01  CPU Time =    0.01530  (0.00 / step)
-      3: E[user-defined] = -0.403803174037  <S**2> = +0.000000  Fidelity = 0.132156  Grad = 3.16e-01  CPU Time =    0.01639  (0.00 / step)
-      4: E[user-defined] = -0.406344422805  <S**2> = +0.000000  Fidelity = 0.092339  Grad = 4.34e-01  CPU Time =    0.01543  (0.00 / step)
-      5: E[user-defined] = -0.529081341093  <S**2> = +0.000000  Fidelity = 0.118309  Grad = 6.73e-01  CPU Time =    0.01672  (0.00 / step)
-      6: E[user-defined] = -0.588232342701  <S**2> = +0.000000  Fidelity = 0.117973  Grad = 9.51e-01  CPU Time =    0.01584  (0.00 / step)
-      7: E[user-defined] = -0.662709549885  <S**2> = +0.000000  Fidelity = 0.137200  Grad = 1.05e+00  CPU Time =    0.01429  (0.00 / step)
-      8: E[user-defined] = -0.763656896293  <S**2> = +0.000000  Fidelity = 0.193244  Grad = 8.51e-01  CPU Time =    0.01438  (0.00 / step)
-      9: E[user-defined] = -0.885514875967  <S**2> = +0.000000  Fidelity = 0.171156  Grad = 2.94e-01  CPU Time =    0.01521  (0.00 / step)
-     10: E[user-defined] = -0.918366072158  <S**2> = +0.000000  Fidelity = 0.157220  Grad = 1.63e-01  CPU Time =    0.01444  (0.00 / step)
-     11: E[user-defined] = -0.944816908561  <S**2> = +0.000000  Fidelity = 0.156303  Grad = 1.35e-01  CPU Time =    0.00927  (0.00 / step)
-     12: E[user-defined] = -0.994290691065  <S**2> = +0.000000  Fidelity = 0.146918  Grad = 1.35e-01  CPU Time =    0.00452  (0.00 / step)
-     13: E[user-defined] = -0.996621490007  <S**2> = +0.000000  Fidelity = 0.144075  Grad = 1.19e-01  CPU Time =    0.00300  (0.00 / step)
-     14: E[user-defined] = -0.997917362281  <S**2> = +0.000000  Fidelity = 0.125983  Grad = 7.38e-02  CPU Time =    0.00223  (0.00 / step)
-     15: E[user-defined] = -0.998588763480  <S**2> = +0.000000  Fidelity = 0.132339  Grad = 1.81e-02  CPU Time =    0.00213  (0.00 / step)
-     16: E[user-defined] = -0.998649356931  <S**2> = +0.000000  Fidelity = 0.133198  Grad = 8.64e-03  CPU Time =    0.00211  (0.00 / step)
-     17: E[user-defined] = -0.998807402183  <S**2> = +0.000000  Fidelity = 0.133871  Grad = 3.99e-02  CPU Time =    0.00271  (0.00 / step)
-     18: E[user-defined] = -1.000509472899  <S**2> = +0.000000  Fidelity = 0.153723  Grad = 3.34e-01  CPU Time =    0.00340  (0.00 / step)
-     19: E[user-defined] = -1.000733632199  <S**2> = +0.000000  Fidelity = 0.158606  Grad = 3.78e-01  CPU Time =    0.00275  (0.00 / step)
-     20: E[user-defined] = -1.003745334907  <S**2> = +0.000000  Fidelity = 0.178191  Grad = 5.29e-01  CPU Time =    0.00222  (0.00 / step)
-     21: E[user-defined] = -1.007648580535  <S**2> = +0.000000  Fidelity = 0.197572  Grad = 6.46e-01  CPU Time =    0.00278  (0.00 / step)
-     22: E[user-defined] = -1.021444116210  <S**2> = +0.000000  Fidelity = 0.210862  Grad = 7.07e-01  CPU Time =    0.00216  (0.00 / step)
-     23: E[user-defined] = -1.057521339033  <S**2> = +0.000000  Fidelity = 0.200063  Grad = 6.68e-01  CPU Time =    0.00217  (0.00 / step)
-     24: E[user-defined] = -1.136049155214  <S**2> = +0.000000  Fidelity = 0.186286  Grad = 2.84e-01  CPU Time =    0.00218  (0.00 / step)
-     25: E[user-defined] = -1.153716827616  <S**2> = +0.000000  Fidelity = 0.164793  Grad = 7.70e-02  CPU Time =    0.00225  (0.00 / step)
-     26: E[user-defined] = -1.154417485097  <S**2> = +0.000000  Fidelity = 0.180208  Grad = 2.86e-02  CPU Time =    0.00238  (0.00 / step)
-     27: E[user-defined] = -1.154509224271  <S**2> = +0.000000  Fidelity = 0.176848  Grad = 8.16e-03  CPU Time =    0.00278  (0.00 / step)
-     28: E[user-defined] = -1.154523774287  <S**2> = +0.000000  Fidelity = 0.176461  Grad = 6.82e-03  CPU Time =    0.00288  (0.00 / step)
-     29: E[user-defined] = -1.154572130475  <S**2> = +0.000000  Fidelity = 0.175757  Grad = 1.24e-02  CPU Time =    0.00278  (0.00 / step)
-     30: E[user-defined] = -1.154684308369  <S**2> = +0.000000  Fidelity = 0.174784  Grad = 2.59e-02  CPU Time =    0.00287  (0.00 / step)
-     31: E[user-defined] = -1.155019232263  <S**2> = +0.000000  Fidelity = 0.172959  Grad = 5.36e-02  CPU Time =    0.00262  (0.00 / step)
-     32: E[user-defined] = -1.155928474845  <S**2> = +0.000000  Fidelity = 0.170644  Grad = 1.08e-01  CPU Time =    0.00217  (0.00 / step)
-     33: E[user-defined] = -1.157134739842  <S**2> = +0.000000  Fidelity = 0.173610  Grad = 1.65e-01  CPU Time =    0.00219  (0.00 / step)
-     34: E[user-defined] = -1.158718731701  <S**2> = +0.000000  Fidelity = 0.176910  Grad = 1.35e-01  CPU Time =    0.00272  (0.00 / step)
-     35: E[user-defined] = -1.161163889991  <S**2> = +0.000000  Fidelity = 0.190994  Grad = 2.17e-02  CPU Time =    0.00280  (0.00 / step)
-     36: E[user-defined] = -1.161207334527  <S**2> = +0.000000  Fidelity = 0.193119  Grad = 7.45e-03  CPU Time =    0.00253  (0.00 / step)
-     37: E[user-defined] = -1.161257815062  <S**2> = +0.000000  Fidelity = 0.191686  Grad = 6.19e-03  CPU Time =    0.00282  (0.00 / step)
-     38: E[user-defined] = -1.161261722469  <S**2> = +0.000000  Fidelity = 0.192665  Grad = 5.80e-03  CPU Time =    0.00217  (0.00 / step)
-     39: E[user-defined] = -1.161267334932  <S**2> = +0.000000  Fidelity = 0.191946  Grad = 5.76e-04  CPU Time =    0.00262  (0.00 / step)
-     40: E[user-defined] = -1.161267384708  <S**2> = +0.000000  Fidelity = 0.192023  Grad = 7.56e-05  CPU Time =    0.00270  (0.00 / step)
-     41: E[user-defined] = -1.161267385945  <S**2> = +0.000000  Fidelity = 0.192015  Grad = 1.12e-05  CPU Time =    0.00283  (0.00 / step)
-  Final: E[user-defined] = -1.161267385945  <S**2> = +0.000000  Fidelity = 0.192015  rho = 1 
+Initial: E[user-defined] = +0.399669218514  <S**2> = +0.000000  Fidelity = 0.022614  rho = 1  
+      1: E[user-defined] = -0.056539480469  <S**2> = +0.000000  Fidelity = 0.050234  Grad = 8.56e-01  CPU Time =    0.01198  (0.00 / step)
+      2: E[user-defined] = -0.296243155487  <S**2> = +0.000000  Fidelity = 0.088984  Grad = 6.16e-01  CPU Time =    0.00562  (0.00 / step)
+      3: E[user-defined] = -0.404933234119  <S**2> = +0.000000  Fidelity = 0.109150  Grad = 3.07e-01  CPU Time =    0.00865  (0.00 / step)
+      4: E[user-defined] = -0.408180596609  <S**2> = +0.000000  Fidelity = 0.142047  Grad = 4.30e-01  CPU Time =    0.00586  (0.00 / step)
+      5: E[user-defined] = -0.547009039517  <S**2> = +0.000000  Fidelity = 0.354906  Grad = 7.50e-01  CPU Time =    0.01107  (0.00 / step)
+      6: E[user-defined] = -0.588582412777  <S**2> = +0.000000  Fidelity = 0.434174  Grad = 9.23e-01  CPU Time =    0.00851  (0.00 / step)
+      7: E[user-defined] = -0.666631363038  <S**2> = +0.000000  Fidelity = 0.540693  Grad = 1.01e+00  CPU Time =    0.00856  (0.00 / step)
+      8: E[user-defined] = -0.725686236062  <S**2> = +0.000000  Fidelity = 0.586261  Grad = 9.75e-01  CPU Time =    0.00588  (0.00 / step)
+      9: E[user-defined] = -0.861653115416  <S**2> = +0.000000  Fidelity = 0.623240  Grad = 4.28e-01  CPU Time =    0.00668  (0.00 / step)
+     10: E[user-defined] = -0.904277356429  <S**2> = +0.000000  Fidelity = 0.615387  Grad = 2.12e-01  CPU Time =    0.00578  (0.00 / step)
+     11: E[user-defined] = -0.928982573266  <S**2> = +0.000000  Fidelity = 0.593154  Grad = 1.39e-01  CPU Time =    0.00591  (0.00 / step)
+     12: E[user-defined] = -0.983582525227  <S**2> = +0.000000  Fidelity = 0.467077  Grad = 1.62e-01  CPU Time =    0.01106  (0.00 / step)
+     13: E[user-defined] = -0.994309867200  <S**2> = +0.000000  Fidelity = 0.386468  Grad = 1.60e-01  CPU Time =    0.00858  (0.00 / step)
+     14: E[user-defined] = -0.997514893210  <S**2> = +0.000000  Fidelity = 0.415472  Grad = 8.30e-02  CPU Time =    0.00617  (0.00 / step)
+     15: E[user-defined] = -0.998400631491  <S**2> = +0.000000  Fidelity = 0.410050  Grad = 3.69e-02  CPU Time =    0.00600  (0.00 / step)
+     16: E[user-defined] = -0.998601898724  <S**2> = +0.000000  Fidelity = 0.408847  Grad = 3.56e-03  CPU Time =    0.00613  (0.00 / step)
+     17: E[user-defined] = -0.998604647197  <S**2> = +0.000000  Fidelity = 0.409366  Grad = 7.63e-04  CPU Time =    0.00641  (0.00 / step)
+     18: E[user-defined] = -0.998605799560  <S**2> = +0.000000  Fidelity = 0.409714  Grad = 2.85e-03  CPU Time =    0.00854  (0.00 / step)
+     19: E[user-defined] = -1.010190120681  <S**2> = +0.000000  Fidelity = 0.571942  Grad = 5.53e-01  CPU Time =    0.01825  (0.00 / step)
+     20: E[user-defined] = -1.028165211031  <S**2> = +0.000000  Fidelity = 0.570874  Grad = 5.42e-01  CPU Time =    0.00612  (0.00 / step)
+     21: E[user-defined] = -1.043207770254  <S**2> = +0.000000  Fidelity = 0.616842  Grad = 6.41e-01  CPU Time =    0.01097  (0.00 / step)
+     22: E[user-defined] = -1.074621617952  <S**2> = +0.000000  Fidelity = 0.664553  Grad = 7.13e-01  CPU Time =    0.00829  (0.00 / step)
+     23: E[user-defined] = -1.122628343264  <S**2> = +0.000000  Fidelity = 0.667515  Grad = 5.28e-01  CPU Time =    0.00584  (0.00 / step)
+     24: E[user-defined] = -1.146013913433  <S**2> = +0.000000  Fidelity = 0.662491  Grad = 2.62e-01  CPU Time =    0.00581  (0.00 / step)
+     25: E[user-defined] = -1.155058198338  <S**2> = +0.000000  Fidelity = 0.697653  Grad = 8.96e-02  CPU Time =    0.00591  (0.00 / step)
+     26: E[user-defined] = -1.156278226374  <S**2> = +0.000000  Fidelity = 0.688932  Grad = 4.20e-02  CPU Time =    0.00584  (0.00 / step)
+     27: E[user-defined] = -1.156513871828  <S**2> = +0.000000  Fidelity = 0.686985  Grad = 1.13e-02  CPU Time =    0.00584  (0.00 / step)
+     28: E[user-defined] = -1.156564216788  <S**2> = +0.000000  Fidelity = 0.687985  Grad = 8.28e-03  CPU Time =    0.00578  (0.00 / step)
+     29: E[user-defined] = -1.156615628202  <S**2> = +0.000000  Fidelity = 0.688338  Grad = 9.82e-03  CPU Time =    0.00580  (0.00 / step)
+     30: E[user-defined] = -1.156869870566  <S**2> = +0.000000  Fidelity = 0.690239  Grad = 2.20e-02  CPU Time =    0.00592  (0.00 / step)
+     31: E[user-defined] = -1.157426964097  <S**2> = +0.000000  Fidelity = 0.694778  Grad = 4.12e-02  CPU Time =    0.00581  (0.00 / step)
+     32: E[user-defined] = -1.158702969981  <S**2> = +0.000000  Fidelity = 0.707853  Grad = 7.41e-02  CPU Time =    0.00579  (0.00 / step)
+     33: E[user-defined] = -1.159559593945  <S**2> = +0.000000  Fidelity = 0.716681  Grad = 7.24e-02  CPU Time =    0.00575  (0.00 / step)
+     34: E[user-defined] = -1.159711271284  <S**2> = +0.000000  Fidelity = 0.717431  Grad = 7.69e-02  CPU Time =    0.00823  (0.00 / step)
+     35: E[user-defined] = -1.161070658452  <S**2> = +0.000000  Fidelity = 0.717065  Grad = 2.77e-02  CPU Time =    0.00580  (0.00 / step)
+     36: E[user-defined] = -1.161250789543  <S**2> = +0.000000  Fidelity = 0.717024  Grad = 7.48e-03  CPU Time =    0.00572  (0.00 / step)
+     37: E[user-defined] = -1.161264716169  <S**2> = +0.000000  Fidelity = 0.715915  Grad = 3.86e-03  CPU Time =    0.00578  (0.00 / step)
+     38: E[user-defined] = -1.161266630093  <S**2> = +0.000000  Fidelity = 0.715993  Grad = 2.07e-03  CPU Time =    0.00593  (0.00 / step)
+     39: E[user-defined] = -1.161267376845  <S**2> = +0.000000  Fidelity = 0.716082  Grad = 1.64e-04  CPU Time =    0.00574  (0.00 / step)
+     40: E[user-defined] = -1.161267385809  <S**2> = +0.000000  Fidelity = 0.716058  Grad = 2.39e-05  CPU Time =    0.00580  (0.00 / step)
+     41: E[user-defined] = -1.161267385970  <S**2> = +0.000000  Fidelity = 0.716061  Grad = 9.13e-06  CPU Time =    0.00582  (0.00 / step)
+  Final: E[user-defined] = -1.161267385970  <S**2> = +0.000000  Fidelity = 0.716061  rho = 1 
 
 (user-defined state)
   Basis          Coef
@@ -219,10 +177,10 @@ Initial: E[user-defined] = +0.400135124568  <S**2> = +0.000000  Fidelity = 0.010
 | 011 > : +0.1478 -0.1478i
 | 100 > : +0.4104 -0.4104i
 | 110 > : +0.1445 +0.1445i
-| 111 > : -0.1801 -0.1800i
+| 111 > : -0.1801 -0.1801i
 
 
-VQE Done: CPU Time =          1.3665
+VQE Done: CPU Time =          0.3074
 
 Saved in ./random_hamiltonian.qkt.
 +-------------+
@@ -252,63 +210,24 @@ Initial state:
 | 000 > : +1.0000 +0.0000i
 
 user-defined pauli_list found.
-Tapering-Off Results:
-List of redundant qubits:  None
+Sequential Tapering-Off Results:
+No symmetry found.
 
-First perform tapering.run(). No transformation done
 user-defined pauli_list found.
-Tapering-Off Results:
-List of redundant qubits:  None
+Sequential Tapering-Off Results:
+No symmetry found.
 
-First perform tapering.run(). No transformation done
+Davidson convergence achieved.
 FCI in Qubits
-(FCI state : E = -1.3557129073)
+(FCI state : E = -1.3334245569)
   Basis          Coef
-| 000 > : +0.0000 +0.2221i
-| 001 > : -0.0000 +0.2753i
-| 010 > : +0.6690 +0.0000i
-| 100 > : +0.3516 -0.0000i
-| 101 > : -0.1728 -0.0000i
-| 110 > : +0.0000 -0.4190i
-| 111 > : -0.0000 -0.3095i
-
-(FCI state : E = -1.3488026372)
-  Basis          Coef
-| 000 > : -0.1466 +0.0000i
-| 001 > : +0.4868 +0.0000i
-| 010 > : +0.0000 -0.5981i
-| 100 > : +0.0000 +0.3254i
-| 101 > : -0.0000 +0.1601i
-| 110 > : -0.4350 -0.0000i
-| 111 > : +0.2720 -0.0000i
-
-(FCI state : E = -1.2452357064)
-  Basis          Coef
-| 001 > : -0.5511 -0.0000i
-| 010 > : -0.0000 -0.4485i
-| 011 > : -0.0000 +0.1546i
-| 100 > : +0.0000 -0.3687i
-| 101 > : +0.0000 +0.3967i
-| 110 > : +0.1085 +0.0000i
-| 111 > : +0.4016 +0.0000i
-
-(FCI state : E = -1.1325345964)
-  Basis          Coef
-| 000 > : +0.0000 -0.3615i
-| 001 > : -0.0000 -0.1315i
-| 010 > : +0.4025 -0.0000i
-| 011 > : +0.3045 -0.0000i
-| 100 > : -0.7176 -0.0000i
-| 101 > : -0.1122 +0.0000i
-| 110 > : -0.0000 -0.2372i
-
-(FCI state : E = -0.7154669889)
-  Basis          Coef
-| 000 > : +0.0000 +0.4291i
-| 011 > : +0.4224 -0.0000i
-| 100 > : -0.1403 -0.0000i
-| 101 > : +0.5255 -0.0000i
-| 111 > : -0.0000 -0.5423i
+| 000 > : -0.1499 +0.0000i
+| 001 > : +0.4677 +0.0000i
+| 010 > : -0.0000 -0.6091i
+| 100 > : -0.0000 +0.3166i
+| 101 > : +0.0000 +0.1694i
+| 110 > : -0.4254 -0.0000i
+| 111 > : +0.2789 -0.0000i
 
 Entered VQE driver
 Performing VQE for user-defined
@@ -317,59 +236,65 @@ Initial configuration: |000>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
-Initial: E[user-defined] = +0.399689214324  <S**2> = +0.000000  Fidelity = 0.048912  rho = 1  
-      1: E[user-defined] = -0.099101304396  <S**2> = +0.000000  Fidelity = 0.002424  Grad = 1.17e+00  CPU Time =    0.02038  (0.00 / step)
-      2: E[user-defined] = -0.208581514865  <S**2> = +0.000000  Fidelity = 0.023587  Grad = 1.08e+00  CPU Time =    0.00659  (0.00 / step)
-      3: E[user-defined] = -0.375280506269  <S**2> = +0.000000  Fidelity = 0.097503  Grad = 5.87e-01  CPU Time =    0.00412  (0.00 / step)
-      4: E[user-defined] = -0.418216255404  <S**2> = +0.000000  Fidelity = 0.202920  Grad = 4.69e-01  CPU Time =    0.00335  (0.00 / step)
-      5: E[user-defined] = -0.593990265098  <S**2> = +0.000000  Fidelity = 0.147994  Grad = 1.23e+00  CPU Time =    0.00368  (0.00 / step)
-      6: E[user-defined] = -0.616430019782  <S**2> = +0.000000  Fidelity = 0.140558  Grad = 1.41e+00  CPU Time =    0.00364  (0.00 / step)
-      7: E[user-defined] = -0.736037338487  <S**2> = +0.000000  Fidelity = 0.056551  Grad = 1.58e+00  CPU Time =    0.00268  (0.00 / step)
-      8: E[user-defined] = -0.895505846848  <S**2> = +0.000000  Fidelity = 0.124930  Grad = 5.44e-01  CPU Time =    0.00613  (0.00 / step)
-      9: E[user-defined] = -0.930360598963  <S**2> = +0.000000  Fidelity = 0.100834  Grad = 2.55e-01  CPU Time =    0.00276  (0.00 / step)
-     10: E[user-defined] = -0.989261932769  <S**2> = +0.000000  Fidelity = 0.005452  Grad = 3.70e-01  CPU Time =    0.00362  (0.00 / step)
-     11: E[user-defined] = -0.998055736398  <S**2> = +0.000000  Fidelity = 0.009665  Grad = 8.93e-02  CPU Time =    0.00241  (0.00 / step)
-     12: E[user-defined] = -0.998335642828  <S**2> = +0.000000  Fidelity = 0.007246  Grad = 5.59e-02  CPU Time =    0.00252  (0.00 / step)
-     13: E[user-defined] = -0.998697657913  <S**2> = +0.000000  Fidelity = 0.008919  Grad = 3.52e-02  CPU Time =    0.00411  (0.00 / step)
-     14: E[user-defined] = -0.998852619911  <S**2> = +0.000000  Fidelity = 0.009286  Grad = 2.34e-02  CPU Time =    0.00304  (0.00 / step)
-     15: E[user-defined] = -1.007665814657  <S**2> = +0.000000  Fidelity = 0.017139  Grad = 5.11e-01  CPU Time =    0.00623  (0.00 / step)
-     16: E[user-defined] = -1.008077016924  <S**2> = +0.000000  Fidelity = 0.018242  Grad = 5.72e-01  CPU Time =    0.00456  (0.00 / step)
-     17: E[user-defined] = -1.034775392871  <S**2> = +0.000000  Fidelity = 0.017139  Grad = 8.32e-01  CPU Time =    0.00348  (0.00 / step)
-     18: E[user-defined] = -1.046086292260  <S**2> = +0.000000  Fidelity = 0.015609  Grad = 8.93e-01  CPU Time =    0.00338  (0.00 / step)
-     19: E[user-defined] = -1.086779817556  <S**2> = +0.000000  Fidelity = 0.007648  Grad = 8.55e-01  CPU Time =    0.00332  (0.00 / step)
-     20: E[user-defined] = -1.127697161199  <S**2> = +0.000000  Fidelity = 0.000960  Grad = 4.52e-01  CPU Time =    0.00243  (0.00 / step)
-     21: E[user-defined] = -1.152543315697  <S**2> = +0.000000  Fidelity = 0.000018  Grad = 9.26e-02  CPU Time =    0.00249  (0.00 / step)
-     22: E[user-defined] = -1.153696860661  <S**2> = +0.000000  Fidelity = 0.000017  Grad = 3.05e-02  CPU Time =    0.00311  (0.00 / step)
-     23: E[user-defined] = -1.153842066755  <S**2> = +0.000000  Fidelity = 0.000027  Grad = 2.43e-02  CPU Time =    0.00304  (0.00 / step)
-     24: E[user-defined] = -1.153944360887  <S**2> = +0.000000  Fidelity = 0.000070  Grad = 2.67e-02  CPU Time =    0.00269  (0.00 / step)
-     25: E[user-defined] = -1.154307469093  <S**2> = +0.000000  Fidelity = 0.000586  Grad = 6.75e-02  CPU Time =    0.00291  (0.00 / step)
-     26: E[user-defined] = -1.154785364705  <S**2> = +0.000000  Fidelity = 0.004210  Grad = 1.65e-01  CPU Time =    0.00346  (0.00 / step)
-     27: E[user-defined] = -1.155626869506  <S**2> = +0.000000  Fidelity = 0.004731  Grad = 1.40e-01  CPU Time =    0.00340  (0.00 / step)
-     28: E[user-defined] = -1.159573425144  <S**2> = +0.000000  Fidelity = 0.016926  Grad = 1.35e-01  CPU Time =    0.00392  (0.00 / step)
-     29: E[user-defined] = -1.163223105491  <S**2> = +0.000000  Fidelity = 0.028108  Grad = 1.65e-01  CPU Time =    0.00338  (0.00 / step)
-     30: E[user-defined] = -1.165245899585  <S**2> = +0.000000  Fidelity = 0.028658  Grad = 3.06e-02  CPU Time =    0.00354  (0.00 / step)
-     31: E[user-defined] = -1.165547849701  <S**2> = +0.000000  Fidelity = 0.038117  Grad = 4.94e-02  CPU Time =    0.00253  (0.00 / step)
-     32: E[user-defined] = -1.165825714941  <S**2> = +0.000000  Fidelity = 0.036630  Grad = 2.06e-02  CPU Time =    0.00308  (0.00 / step)
-     33: E[user-defined] = -1.165895896946  <S**2> = +0.000000  Fidelity = 0.036512  Grad = 1.07e-02  CPU Time =    0.00302  (0.00 / step)
-     34: E[user-defined] = -1.165932428011  <S**2> = +0.000000  Fidelity = 0.037049  Grad = 7.42e-03  CPU Time =    0.00342  (0.00 / step)
-     35: E[user-defined] = -1.165949504308  <S**2> = +0.000000  Fidelity = 0.037632  Grad = 4.69e-03  CPU Time =    0.00329  (0.00 / step)
-     36: E[user-defined] = -1.165951031040  <S**2> = +0.000000  Fidelity = 0.037513  Grad = 1.38e-03  CPU Time =    0.00439  (0.00 / step)
-     37: E[user-defined] = -1.165951338047  <S**2> = +0.000000  Fidelity = 0.037515  Grad = 2.59e-04  CPU Time =    0.00305  (0.00 / step)
-     38: E[user-defined] = -1.165951345766  <S**2> = +0.000000  Fidelity = 0.037490  Grad = 1.03e-04  CPU Time =    0.00271  (0.00 / step)
-     39: E[user-defined] = -1.165951346733  <S**2> = +0.000000  Fidelity = 0.037495  Grad = 1.06e-05  CPU Time =    0.00255  (0.00 / step)
-  Final: E[user-defined] = -1.165951346733  <S**2> = +0.000000  Fidelity = 0.037495  rho = 1 
+Initial: E[user-defined] = +0.400522168376  <S**2> = +0.000000  Fidelity = 0.022477  rho = 1  
+      1: E[user-defined] = -0.096124329868  <S**2> = +0.000000  Fidelity = 0.050408  Grad = 1.17e+00  CPU Time =    0.01584  (0.00 / step)
+      2: E[user-defined] = -0.206541595506  <S**2> = +0.000000  Fidelity = 0.067668  Grad = 1.09e+00  CPU Time =    0.00953  (0.00 / step)
+      3: E[user-defined] = -0.376365329618  <S**2> = +0.000000  Fidelity = 0.088365  Grad = 5.82e-01  CPU Time =    0.00730  (0.00 / step)
+      4: E[user-defined] = -0.418505262668  <S**2> = +0.000000  Fidelity = 0.136816  Grad = 4.67e-01  CPU Time =    0.00705  (0.00 / step)
+      5: E[user-defined] = -0.600838887732  <S**2> = +0.000000  Fidelity = 0.435969  Grad = 1.21e+00  CPU Time =    0.00929  (0.00 / step)
+      6: E[user-defined] = -0.627960184743  <S**2> = +0.000000  Fidelity = 0.504558  Grad = 1.50e+00  CPU Time =    0.00943  (0.00 / step)
+      7: E[user-defined] = -0.786815957354  <S**2> = +0.000000  Fidelity = 0.604732  Grad = 1.29e+00  CPU Time =    0.00671  (0.00 / step)
+      8: E[user-defined] = -0.924611171314  <S**2> = +0.000000  Fidelity = 0.594898  Grad = 2.71e-01  CPU Time =    0.00652  (0.00 / step)
+      9: E[user-defined] = -0.937440412350  <S**2> = +0.000000  Fidelity = 0.576073  Grad = 2.08e-01  CPU Time =    0.00662  (0.00 / step)
+     10: E[user-defined] = -0.993582566571  <S**2> = +0.000000  Fidelity = 0.410252  Grad = 2.62e-01  CPU Time =    0.00660  (0.00 / step)
+     11: E[user-defined] = -0.997042623357  <S**2> = +0.000000  Fidelity = 0.425582  Grad = 1.03e-01  CPU Time =    0.00669  (0.00 / step)
+     12: E[user-defined] = -0.998475547220  <S**2> = +0.000000  Fidelity = 0.410259  Grad = 4.22e-02  CPU Time =    0.00945  (0.00 / step)
+     13: E[user-defined] = -0.998585361334  <S**2> = +0.000000  Fidelity = 0.409562  Grad = 1.65e-02  CPU Time =    0.00663  (0.00 / step)
+     14: E[user-defined] = -0.998606305876  <S**2> = +0.000000  Fidelity = 0.409435  Grad = 2.42e-03  CPU Time =    0.00655  (0.00 / step)
+     15: E[user-defined] = -0.998607249743  <S**2> = +0.000000  Fidelity = 0.409419  Grad = 2.54e-03  CPU Time =    0.00672  (0.00 / step)
+     16: E[user-defined] = -1.001684269434  <S**2> = +0.000000  Fidelity = 0.391289  Grad = 7.61e-01  CPU Time =    0.02033  (0.00 / step)
+     17: E[user-defined] = -1.001701166264  <S**2> = +0.000000  Fidelity = 0.389692  Grad = 7.94e-01  CPU Time =    0.00984  (0.00 / step)
+     18: E[user-defined] = -1.015323010350  <S**2> = +0.000000  Fidelity = 0.357426  Grad = 1.09e+00  CPU Time =    0.01557  (0.00 / step)
+     19: E[user-defined] = -1.024188972222  <S**2> = +0.000000  Fidelity = 0.353969  Grad = 1.07e+00  CPU Time =    0.01012  (0.00 / step)
+     20: E[user-defined] = -1.072182396801  <S**2> = +0.000000  Fidelity = 0.427942  Grad = 8.81e-01  CPU Time =    0.00728  (0.00 / step)
+     21: E[user-defined] = -1.122213907562  <S**2> = +0.000000  Fidelity = 0.500787  Grad = 4.52e-01  CPU Time =    0.00728  (0.00 / step)
+     22: E[user-defined] = -1.134380899676  <S**2> = +0.000000  Fidelity = 0.506274  Grad = 4.29e-01  CPU Time =    0.00735  (0.00 / step)
+     23: E[user-defined] = -1.144055784976  <S**2> = +0.000000  Fidelity = 0.482625  Grad = 4.06e-01  CPU Time =    0.00768  (0.00 / step)
+     24: E[user-defined] = -1.152685534652  <S**2> = +0.000000  Fidelity = 0.486494  Grad = 5.05e-02  CPU Time =    0.00715  (0.00 / step)
+     25: E[user-defined] = -1.153069939958  <S**2> = +0.000000  Fidelity = 0.487421  Grad = 3.61e-02  CPU Time =    0.00660  (0.00 / step)
+     26: E[user-defined] = -1.153562992537  <S**2> = +0.000000  Fidelity = 0.480258  Grad = 2.44e-02  CPU Time =    0.00661  (0.00 / step)
+     27: E[user-defined] = -1.153654808602  <S**2> = +0.000000  Fidelity = 0.471356  Grad = 3.14e-02  CPU Time =    0.00671  (0.00 / step)
+     28: E[user-defined] = -1.153761081788  <S**2> = +0.000000  Fidelity = 0.468452  Grad = 2.07e-02  CPU Time =    0.00673  (0.00 / step)
+     29: E[user-defined] = -1.153977634150  <S**2> = +0.000000  Fidelity = 0.455715  Grad = 3.01e-02  CPU Time =    0.00657  (0.00 / step)
+     30: E[user-defined] = -1.154947335997  <S**2> = +0.000000  Fidelity = 0.385013  Grad = 1.11e-01  CPU Time =    0.00942  (0.00 / step)
+     31: E[user-defined] = -1.155375399746  <S**2> = +0.000000  Fidelity = 0.342872  Grad = 1.55e-01  CPU Time =    0.00945  (0.00 / step)
+     32: E[user-defined] = -1.156601053392  <S**2> = +0.000000  Fidelity = 0.293776  Grad = 1.81e-01  CPU Time =    0.00660  (0.00 / step)
+     33: E[user-defined] = -1.159678222274  <S**2> = +0.000000  Fidelity = 0.191688  Grad = 1.95e-01  CPU Time =    0.00666  (0.00 / step)
+     34: E[user-defined] = -1.160891568869  <S**2> = +0.000000  Fidelity = 0.181088  Grad = 2.18e-01  CPU Time =    0.00654  (0.00 / step)
+     35: E[user-defined] = -1.165080243745  <S**2> = +0.000000  Fidelity = 0.158764  Grad = 4.13e-02  CPU Time =    0.00650  (0.00 / step)
+     36: E[user-defined] = -1.165634256768  <S**2> = +0.000000  Fidelity = 0.126024  Grad = 4.75e-02  CPU Time =    0.00668  (0.00 / step)
+     37: E[user-defined] = -1.165863512133  <S**2> = +0.000000  Fidelity = 0.122820  Grad = 2.66e-02  CPU Time =    0.00649  (0.00 / step)
+     38: E[user-defined] = -1.165934008248  <S**2> = +0.000000  Fidelity = 0.114733  Grad = 1.66e-02  CPU Time =    0.00654  (0.00 / step)
+     39: E[user-defined] = -1.165949006078  <S**2> = +0.000000  Fidelity = 0.114148  Grad = 3.95e-03  CPU Time =    0.00653  (0.00 / step)
+     40: E[user-defined] = -1.165950538530  <S**2> = +0.000000  Fidelity = 0.114504  Grad = 1.91e-03  CPU Time =    0.00672  (0.00 / step)
+     41: E[user-defined] = -1.165951254268  <S**2> = +0.000000  Fidelity = 0.114041  Grad = 6.39e-04  CPU Time =    0.00654  (0.00 / step)
+     42: E[user-defined] = -1.165951327727  <S**2> = +0.000000  Fidelity = 0.113827  Grad = 2.47e-04  CPU Time =    0.00639  (0.00 / step)
+     43: E[user-defined] = -1.165951337820  <S**2> = +0.000000  Fidelity = 0.113760  Grad = 9.33e-05  CPU Time =    0.00649  (0.00 / step)
+     44: E[user-defined] = -1.165951339240  <S**2> = +0.000000  Fidelity = 0.113758  Grad = 3.11e-05  CPU Time =    0.00641  (0.00 / step)
+     45: E[user-defined] = -1.165951339491  <S**2> = +0.000000  Fidelity = 0.113760  Grad = 1.25e-05  CPU Time =    0.00619  (0.00 / step)
+  Final: E[user-defined] = -1.165951339491  <S**2> = +0.000000  Fidelity = 0.113760  rho = 1 
 
 (user-defined state)
   Basis          Coef
-| 000 > : +0.1555 -0.1556i
-| 001 > : -0.4780 +0.4783i
-| 010 > : -0.1788 -0.1788i
-| 100 > : -0.4087 -0.4084i
-| 101 > : +0.1821 +0.1820i
-| 111 > : +0.0957 -0.0957i
+| 000 > : +0.1556 +0.1555i
+| 001 > : -0.4784 -0.4779i
+| 010 > : +0.1788 -0.1788i
+| 100 > : +0.4083 -0.4088i
+| 101 > : -0.1820 +0.1822i
+| 111 > : +0.0957 +0.0957i
 
 
-VQE Done: CPU Time =          0.1579
+VQE Done: CPU Time =          0.3654
 
 Saved in ./random_hamiltonian.qkt.
 +-------------+
@@ -399,62 +324,24 @@ Initial state:
 | 000 > : +1.0000 +0.0000i
 
 user-defined pauli_list found.
-Tapering-Off Results:
-List of redundant qubits:  None
+Sequential Tapering-Off Results:
+No symmetry found.
 
-First perform tapering.run(). No transformation done
 user-defined pauli_list found.
-Tapering-Off Results:
-List of redundant qubits:  None
+Sequential Tapering-Off Results:
+No symmetry found.
 
-First perform tapering.run(). No transformation done
+Davidson convergence achieved.
 FCI in Qubits
-(FCI state : E = -2.0084137002)
+(FCI state : E = -1.3334245569)
   Basis          Coef
-| 000 > : +0.0000 -0.1434i
-| 001 > : +0.0000 +0.5470i
-| 010 > : +0.4653 -0.0000i
-| 011 > : +0.2625 -0.0000i
-| 100 > : -0.3411 -0.0000i
-| 101 > : -0.2398 +0.0000i
-| 110 > : -0.0000 -0.4427i
-| 111 > : +0.0000 +0.1607i
-
-(FCI state : E = -1.5645761482)
-  Basis          Coef
-| 000 > : -0.1874 -0.0000i
-| 001 > : +0.5124 -0.0000i
-| 011 > : -0.0000 -0.3310i
-| 100 > : +0.0000 +0.6714i
-| 110 > : -0.3177 -0.0000i
-| 111 > : -0.1601 +0.0000i
-
-(FCI state : E = -1.3780039096)
-  Basis          Coef
-| 000 > : -0.0000 -0.1190i
-| 001 > : -0.0000 +0.1954i
-| 010 > : -0.3144 -0.0000i
-| 011 > : -0.5522 +0.0000i
-| 101 > : +0.3983 +0.0000i
-| 110 > : +0.0000 -0.4885i
-| 111 > : +0.0000 +0.3381i
-
-(FCI state : E = -1.3059707955)
-  Basis          Coef
-| 010 > : -0.0000 -0.7291i
-| 011 > : +0.0000 +0.1618i
-| 101 > : -0.0000 +0.3383i
-| 110 > : -0.2465 +0.0000i
-| 111 > : +0.5024 -0.0000i
-
-(FCI state : E = -1.0827972653)
-  Basis          Coef
-| 000 > : -0.0000 +0.2147i
-| 001 > : -0.0000 -0.2106i
-| 010 > : +0.4796 -0.0000i
-| 100 > : +0.5729 -0.0000i
-| 101 > : -0.1498 +0.0000i
-| 111 > : +0.0000 +0.5679i
+| 000 > : -0.1499 +0.0000i
+| 001 > : +0.4677 +0.0000i
+| 010 > : -0.0000 -0.6091i
+| 100 > : -0.0000 +0.3166i
+| 101 > : +0.0000 +0.1694i
+| 110 > : -0.4254 -0.0000i
+| 111 > : +0.2789 -0.0000i
 
 Entered VQE driver
 Performing VQE for user-defined
@@ -463,79 +350,77 @@ Initial configuration: |000>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
-Initial: E[user-defined] = +0.400049779661  <S**2> = +0.000000  Fidelity = 0.020392  rho = 1  
-      1: E[user-defined] = -0.094954175001  <S**2> = +0.000000  Fidelity = 0.070885  Grad = 1.43e+00  CPU Time =    0.94584  (0.00 / step)
-      2: E[user-defined] = -0.205638076138  <S**2> = +0.000000  Fidelity = 0.094054  Grad = 1.33e+00  CPU Time =    0.01126  (0.00 / step)
-      3: E[user-defined] = -0.382282405087  <S**2> = +0.000000  Fidelity = 0.114895  Grad = 6.81e-01  CPU Time =    0.01067  (0.00 / step)
-      4: E[user-defined] = -0.420495530143  <S**2> = +0.000000  Fidelity = 0.145300  Grad = 5.62e-01  CPU Time =    0.01064  (0.00 / step)
-      5: E[user-defined] = -0.637260967718  <S**2> = +0.000000  Fidelity = 0.392158  Grad = 1.34e+00  CPU Time =    0.01187  (0.00 / step)
-      6: E[user-defined] = -0.656798763379  <S**2> = +0.000000  Fidelity = 0.428438  Grad = 1.56e+00  CPU Time =    0.01455  (0.00 / step)
-      7: E[user-defined] = -0.706255179753  <S**2> = +0.000000  Fidelity = 0.478828  Grad = 1.66e+00  CPU Time =    0.00439  (0.00 / step)
-      8: E[user-defined] = -0.807562519591  <S**2> = +0.000000  Fidelity = 0.543235  Grad = 1.51e+00  CPU Time =    0.00441  (0.00 / step)
-      9: E[user-defined] = -0.915887084414  <S**2> = +0.000000  Fidelity = 0.549377  Grad = 7.14e-01  CPU Time =    0.00367  (0.00 / step)
-     10: E[user-defined] = -0.964091448396  <S**2> = +0.000000  Fidelity = 0.512545  Grad = 3.51e-01  CPU Time =    0.00323  (0.00 / step)
-     11: E[user-defined] = -0.979771712820  <S**2> = +0.000000  Fidelity = 0.466016  Grad = 6.32e-01  CPU Time =    0.00321  (0.00 / step)
-     12: E[user-defined] = -0.989310694567  <S**2> = +0.000000  Fidelity = 0.473027  Grad = 3.80e-01  CPU Time =    0.00312  (0.00 / step)
-     13: E[user-defined] = -0.998354550009  <S**2> = +0.000000  Fidelity = 0.451513  Grad = 7.12e-02  CPU Time =    0.00324  (0.00 / step)
-     14: E[user-defined] = -0.998461694329  <S**2> = +0.000000  Fidelity = 0.453324  Grad = 4.91e-02  CPU Time =    0.00317  (0.00 / step)
-     15: E[user-defined] = -0.998621010289  <S**2> = +0.000000  Fidelity = 0.451780  Grad = 7.66e-03  CPU Time =    0.00315  (0.00 / step)
-     16: E[user-defined] = -1.121037700120  <S**2> = +0.000000  Fidelity = 0.642477  Grad = 1.10e+00  CPU Time =    0.01146  (0.00 / step)
-     17: E[user-defined] = -1.121049067233  <S**2> = +0.000000  Fidelity = 0.643374  Grad = 1.10e+00  CPU Time =    0.00590  (0.00 / step)
-     18: E[user-defined] = -1.138881076283  <S**2> = +0.000000  Fidelity = 0.649011  Grad = 9.61e-01  CPU Time =    0.00431  (0.00 / step)
-     19: E[user-defined] = -1.189653256712  <S**2> = +0.000000  Fidelity = 0.665861  Grad = 3.85e-01  CPU Time =    0.00313  (0.00 / step)
-     20: E[user-defined] = -1.198001025055  <S**2> = +0.000000  Fidelity = 0.665310  Grad = 2.39e-01  CPU Time =    0.00310  (0.00 / step)
-     21: E[user-defined] = -1.210023539581  <S**2> = +0.000000  Fidelity = 0.684103  Grad = 2.30e-01  CPU Time =    0.00280  (0.00 / step)
-     22: E[user-defined] = -1.232996098075  <S**2> = +0.000000  Fidelity = 0.735776  Grad = 4.22e-01  CPU Time =    0.00275  (0.00 / step)
-     23: E[user-defined] = -1.259808390443  <S**2> = +0.000000  Fidelity = 0.804695  Grad = 4.65e-01  CPU Time =    0.00275  (0.00 / step)
-     24: E[user-defined] = -1.284071540677  <S**2> = +0.000000  Fidelity = 0.851285  Grad = 3.65e-01  CPU Time =    0.00394  (0.00 / step)
-     25: E[user-defined] = -1.303337702758  <S**2> = +0.000000  Fidelity = 0.845041  Grad = 3.78e-01  CPU Time =    0.00275  (0.00 / step)
-     26: E[user-defined] = -1.313983013189  <S**2> = +0.000000  Fidelity = 0.842864  Grad = 2.32e-01  CPU Time =    0.00278  (0.00 / step)
-     27: E[user-defined] = -1.321614021811  <S**2> = +0.000000  Fidelity = 0.846112  Grad = 1.70e-01  CPU Time =    0.00274  (0.00 / step)
-     28: E[user-defined] = -1.326987438109  <S**2> = +0.000000  Fidelity = 0.844217  Grad = 1.18e-01  CPU Time =    0.00277  (0.00 / step)
-     29: E[user-defined] = -1.329629937618  <S**2> = +0.000000  Fidelity = 0.846901  Grad = 8.35e-02  CPU Time =    0.00311  (0.00 / step)
-     30: E[user-defined] = -1.331450920822  <S**2> = +0.000000  Fidelity = 0.855245  Grad = 6.34e-02  CPU Time =    0.00338  (0.00 / step)
-     31: E[user-defined] = -1.332148528014  <S**2> = +0.000000  Fidelity = 0.863237  Grad = 8.03e-02  CPU Time =    0.00296  (0.00 / step)
-     32: E[user-defined] = -1.332598466120  <S**2> = +0.000000  Fidelity = 0.860060  Grad = 3.00e-02  CPU Time =    0.00291  (0.00 / step)
-     33: E[user-defined] = -1.332676588826  <S**2> = +0.000000  Fidelity = 0.861176  Grad = 1.32e-02  CPU Time =    0.00286  (0.00 / step)
-     34: E[user-defined] = -1.332712351145  <S**2> = +0.000000  Fidelity = 0.860978  Grad = 9.62e-03  CPU Time =    0.00294  (0.00 / step)
-     35: E[user-defined] = -1.332740026048  <S**2> = +0.000000  Fidelity = 0.861093  Grad = 9.94e-03  CPU Time =    0.00345  (0.00 / step)
-     36: E[user-defined] = -1.332812529373  <S**2> = +0.000000  Fidelity = 0.860334  Grad = 1.66e-02  CPU Time =    0.00339  (0.00 / step)
-     37: E[user-defined] = -1.332822188018  <S**2> = +0.000000  Fidelity = 0.861406  Grad = 4.26e-02  CPU Time =    0.00317  (0.00 / step)
-     38: E[user-defined] = -1.332908715964  <S**2> = +0.000000  Fidelity = 0.861401  Grad = 1.26e-02  CPU Time =    0.00293  (0.00 / step)
-     39: E[user-defined] = -1.332933694180  <S**2> = +0.000000  Fidelity = 0.861763  Grad = 7.23e-03  CPU Time =    0.00286  (0.00 / step)
-     40: E[user-defined] = -1.332948838555  <S**2> = +0.000000  Fidelity = 0.862342  Grad = 6.38e-03  CPU Time =    0.00281  (0.00 / step)
-     41: E[user-defined] = -1.332952478028  <S**2> = +0.000000  Fidelity = 0.862665  Grad = 4.26e-03  CPU Time =    0.00281  (0.00 / step)
-     42: E[user-defined] = -1.332954875657  <S**2> = +0.000000  Fidelity = 0.862938  Grad = 1.59e-03  CPU Time =    0.00287  (0.00 / step)
-     43: E[user-defined] = -1.332955207490  <S**2> = +0.000000  Fidelity = 0.862997  Grad = 1.12e-03  CPU Time =    0.00282  (0.00 / step)
-     44: E[user-defined] = -1.332955393283  <S**2> = +0.000000  Fidelity = 0.862985  Grad = 9.50e-04  CPU Time =    0.00281  (0.00 / step)
-     45: E[user-defined] = -1.332955771709  <S**2> = +0.000000  Fidelity = 0.862960  Grad = 1.08e-03  CPU Time =    0.00281  (0.00 / step)
-     46: E[user-defined] = -1.332955920065  <S**2> = +0.000000  Fidelity = 0.862909  Grad = 1.61e-03  CPU Time =    0.00284  (0.00 / step)
-     47: E[user-defined] = -1.332956114823  <S**2> = +0.000000  Fidelity = 0.862890  Grad = 1.05e-03  CPU Time =    0.00281  (0.00 / step)
-     48: E[user-defined] = -1.332956709879  <S**2> = +0.000000  Fidelity = 0.862812  Grad = 1.32e-03  CPU Time =    0.00284  (0.00 / step)
-     49: E[user-defined] = -1.332957272311  <S**2> = +0.000000  Fidelity = 0.862743  Grad = 2.11e-03  CPU Time =    0.00288  (0.00 / step)
-     50: E[user-defined] = -1.332958483536  <S**2> = +0.000000  Fidelity = 0.862648  Grad = 2.85e-03  CPU Time =    0.00333  (0.00 / step)
-     51: E[user-defined] = -1.332959283720  <S**2> = +0.000000  Fidelity = 0.862944  Grad = 7.48e-03  CPU Time =    0.00340  (0.00 / step)
-     52: E[user-defined] = -1.332961544195  <S**2> = +0.000000  Fidelity = 0.862791  Grad = 3.11e-03  CPU Time =    0.00312  (0.00 / step)
-     53: E[user-defined] = -1.332962486038  <S**2> = +0.000000  Fidelity = 0.862858  Grad = 1.65e-03  CPU Time =    0.00332  (0.00 / step)
-     54: E[user-defined] = -1.332962975348  <S**2> = +0.000000  Fidelity = 0.862968  Grad = 9.09e-04  CPU Time =    0.00337  (0.00 / step)
-     55: E[user-defined] = -1.332963113273  <S**2> = +0.000000  Fidelity = 0.862981  Grad = 3.03e-04  CPU Time =    0.00344  (0.00 / step)
-     56: E[user-defined] = -1.332963118062  <S**2> = +0.000000  Fidelity = 0.862935  Grad = 4.38e-04  CPU Time =    0.00329  (0.00 / step)
-     57: E[user-defined] = -1.332963126837  <S**2> = +0.000000  Fidelity = 0.862950  Grad = 9.34e-05  CPU Time =    0.00292  (0.00 / step)
-     58: E[user-defined] = -1.332963127576  <S**2> = +0.000000  Fidelity = 0.862946  Grad = 6.78e-05  CPU Time =    0.00284  (0.00 / step)
-  Final: E[user-defined] = -1.332963127576  <S**2> = +0.000000  Fidelity = 0.862946  rho = 1 
+Initial: E[user-defined] = +0.399836593046  <S**2> = +0.000000  Fidelity = 0.022376  rho = 1  
+      1: E[user-defined] = -0.096396872109  <S**2> = +0.000000  Fidelity = 0.050285  Grad = 1.43e+00  CPU Time =    0.01634  (0.00 / step)
+      2: E[user-defined] = -0.206659564810  <S**2> = +0.000000  Fidelity = 0.067656  Grad = 1.33e+00  CPU Time =    0.00951  (0.00 / step)
+      3: E[user-defined] = -0.382799238187  <S**2> = +0.000000  Fidelity = 0.090295  Grad = 6.77e-01  CPU Time =    0.00670  (0.00 / step)
+      4: E[user-defined] = -0.421531182502  <S**2> = +0.000000  Fidelity = 0.139096  Grad = 5.61e-01  CPU Time =    0.00659  (0.00 / step)
+      5: E[user-defined] = -0.677862401975  <S**2> = +0.000000  Fidelity = 0.519279  Grad = 1.57e+00  CPU Time =    0.01607  (0.00 / step)
+      6: E[user-defined] = -0.695432318526  <S**2> = +0.000000  Fidelity = 0.560980  Grad = 1.75e+00  CPU Time =    0.01321  (0.00 / step)
+      7: E[user-defined] = -0.823426594791  <S**2> = +0.000000  Fidelity = 0.612493  Grad = 1.17e+00  CPU Time =    0.00702  (0.00 / step)
+      8: E[user-defined] = -0.915337445482  <S**2> = +0.000000  Fidelity = 0.605317  Grad = 3.69e-01  CPU Time =    0.00713  (0.00 / step)
+      9: E[user-defined] = -0.931440278563  <S**2> = +0.000000  Fidelity = 0.586010  Grad = 2.79e-01  CPU Time =    0.00710  (0.00 / step)
+     10: E[user-defined] = -0.994044628575  <S**2> = +0.000000  Fidelity = 0.439046  Grad = 2.07e-01  CPU Time =    0.00694  (0.00 / step)
+     11: E[user-defined] = -0.997484078334  <S**2> = +0.000000  Fidelity = 0.419880  Grad = 1.29e-01  CPU Time =    0.01002  (0.00 / step)
+     12: E[user-defined] = -0.998486529134  <S**2> = +0.000000  Fidelity = 0.405721  Grad = 3.25e-02  CPU Time =    0.00695  (0.00 / step)
+     13: E[user-defined] = -0.998602876932  <S**2> = +0.000000  Fidelity = 0.409082  Grad = 1.26e-02  CPU Time =    0.00708  (0.00 / step)
+     14: E[user-defined] = -0.998617068061  <S**2> = +0.000000  Fidelity = 0.409556  Grad = 6.41e-03  CPU Time =    0.00694  (0.00 / step)
+     15: E[user-defined] = -0.998635793975  <S**2> = +0.000000  Fidelity = 0.409985  Grad = 1.67e-02  CPU Time =    0.00699  (0.00 / step)
+     16: E[user-defined] = -0.998890678842  <S**2> = +0.000000  Fidelity = 0.416972  Grad = 1.79e-01  CPU Time =    0.00700  (0.00 / step)
+     17: E[user-defined] = -0.998978338804  <S**2> = +0.000000  Fidelity = 0.423226  Grad = 2.82e-01  CPU Time =    0.01309  (0.00 / step)
+     18: E[user-defined] = -0.999835199626  <S**2> = +0.000000  Fidelity = 0.440611  Grad = 5.08e-01  CPU Time =    0.00995  (0.00 / step)
+     19: E[user-defined] = -1.000499324144  <S**2> = +0.000000  Fidelity = 0.454626  Grad = 6.43e-01  CPU Time =    0.01021  (0.00 / step)
+     20: E[user-defined] = -1.002802764258  <S**2> = +0.000000  Fidelity = 0.510201  Grad = 1.03e+00  CPU Time =    0.00700  (0.00 / step)
+     21: E[user-defined] = -1.031789014430  <S**2> = +0.000000  Fidelity = 0.571996  Grad = 1.14e+00  CPU Time =    0.01007  (0.00 / step)
+     22: E[user-defined] = -1.069393365068  <S**2> = +0.000000  Fidelity = 0.714616  Grad = 1.39e+00  CPU Time =    0.01006  (0.00 / step)
+     23: E[user-defined] = -1.127773176932  <S**2> = +0.000000  Fidelity = 0.832024  Grad = 1.23e+00  CPU Time =    0.01018  (0.00 / step)
+     24: E[user-defined] = -1.200040830178  <S**2> = +0.000000  Fidelity = 0.865893  Grad = 3.89e-01  CPU Time =    0.00703  (0.00 / step)
+     25: E[user-defined] = -1.217416430380  <S**2> = +0.000000  Fidelity = 0.881955  Grad = 2.80e-01  CPU Time =    0.00711  (0.00 / step)
+     26: E[user-defined] = -1.234976435378  <S**2> = +0.000000  Fidelity = 0.885369  Grad = 3.10e-01  CPU Time =    0.00717  (0.00 / step)
+     27: E[user-defined] = -1.256577012485  <S**2> = +0.000000  Fidelity = 0.914606  Grad = 3.76e-01  CPU Time =    0.00713  (0.00 / step)
+     28: E[user-defined] = -1.281353177834  <S**2> = +0.000000  Fidelity = 0.946025  Grad = 4.27e-01  CPU Time =    0.01006  (0.00 / step)
+     29: E[user-defined] = -1.296714134688  <S**2> = +0.000000  Fidelity = 0.965222  Grad = 3.81e-01  CPU Time =    0.01012  (0.00 / step)
+     30: E[user-defined] = -1.310760520092  <S**2> = +0.000000  Fidelity = 0.981299  Grad = 2.94e-01  CPU Time =    0.00722  (0.00 / step)
+     31: E[user-defined] = -1.319624139980  <S**2> = +0.000000  Fidelity = 0.988989  Grad = 2.20e-01  CPU Time =    0.00713  (0.00 / step)
+     32: E[user-defined] = -1.325100903995  <S**2> = +0.000000  Fidelity = 0.990043  Grad = 1.68e-01  CPU Time =    0.00706  (0.00 / step)
+     33: E[user-defined] = -1.329401332997  <S**2> = +0.000000  Fidelity = 0.987496  Grad = 7.08e-02  CPU Time =    0.00667  (0.00 / step)
+     34: E[user-defined] = -1.330417215989  <S**2> = +0.000000  Fidelity = 0.987823  Grad = 4.84e-02  CPU Time =    0.00679  (0.00 / step)
+     35: E[user-defined] = -1.331563305025  <S**2> = +0.000000  Fidelity = 0.990580  Grad = 5.24e-02  CPU Time =    0.00660  (0.00 / step)
+     36: E[user-defined] = -1.332066087435  <S**2> = +0.000000  Fidelity = 0.994454  Grad = 8.70e-02  CPU Time =    0.00658  (0.00 / step)
+     37: E[user-defined] = -1.332715639510  <S**2> = +0.000000  Fidelity = 0.994598  Grad = 2.50e-02  CPU Time =    0.00660  (0.00 / step)
+     38: E[user-defined] = -1.332802762009  <S**2> = +0.000000  Fidelity = 0.994789  Grad = 1.32e-02  CPU Time =    0.00654  (0.00 / step)
+     39: E[user-defined] = -1.332842094577  <S**2> = +0.000000  Fidelity = 0.994735  Grad = 5.82e-03  CPU Time =    0.00670  (0.00 / step)
+     40: E[user-defined] = -1.332856153568  <S**2> = +0.000000  Fidelity = 0.994668  Grad = 5.95e-03  CPU Time =    0.00651  (0.00 / step)
+     41: E[user-defined] = -1.332871930089  <S**2> = +0.000000  Fidelity = 0.994424  Grad = 1.21e-02  CPU Time =    0.00703  (0.00 / step)
+     42: E[user-defined] = -1.332887693648  <S**2> = +0.000000  Fidelity = 0.994401  Grad = 7.55e-03  CPU Time =    0.00715  (0.00 / step)
+     43: E[user-defined] = -1.332914965056  <S**2> = +0.000000  Fidelity = 0.994424  Grad = 6.29e-03  CPU Time =    0.00714  (0.00 / step)
+     44: E[user-defined] = -1.332938238103  <S**2> = +0.000000  Fidelity = 0.994655  Grad = 1.59e-02  CPU Time =    0.00661  (0.00 / step)
+     45: E[user-defined] = -1.332954484380  <S**2> = +0.000000  Fidelity = 0.994732  Grad = 1.00e-02  CPU Time =    0.00660  (0.00 / step)
+     46: E[user-defined] = -1.332959954195  <S**2> = +0.000000  Fidelity = 0.994730  Grad = 2.56e-03  CPU Time =    0.00655  (0.00 / step)
+     47: E[user-defined] = -1.332961120984  <S**2> = +0.000000  Fidelity = 0.994748  Grad = 1.65e-03  CPU Time =    0.00674  (0.00 / step)
+     48: E[user-defined] = -1.332961823023  <S**2> = +0.000000  Fidelity = 0.994777  Grad = 7.50e-04  CPU Time =    0.00665  (0.00 / step)
+     49: E[user-defined] = -1.332961905385  <S**2> = +0.000000  Fidelity = 0.994779  Grad = 4.17e-04  CPU Time =    0.00664  (0.00 / step)
+     50: E[user-defined] = -1.332961934315  <S**2> = +0.000000  Fidelity = 0.994780  Grad = 2.30e-04  CPU Time =    0.00667  (0.00 / step)
+     51: E[user-defined] = -1.332961950092  <S**2> = +0.000000  Fidelity = 0.994777  Grad = 2.55e-04  CPU Time =    0.00663  (0.00 / step)
+     52: E[user-defined] = -1.332961979373  <S**2> = +0.000000  Fidelity = 0.994769  Grad = 3.08e-04  CPU Time =    0.00680  (0.00 / step)
+     53: E[user-defined] = -1.332961993004  <S**2> = +0.000000  Fidelity = 0.994771  Grad = 2.10e-04  CPU Time =    0.00713  (0.00 / step)
+     54: E[user-defined] = -1.332962001745  <S**2> = +0.000000  Fidelity = 0.994772  Grad = 1.05e-04  CPU Time =    0.00706  (0.00 / step)
+     55: E[user-defined] = -1.332962005813  <S**2> = +0.000000  Fidelity = 0.994774  Grad = 1.34e-04  CPU Time =    0.01703  (0.00 / step)
+     56: E[user-defined] = -1.332962006838  <S**2> = +0.000000  Fidelity = 0.994778  Grad = 1.58e-04  CPU Time =    0.00684  (0.00 / step)
+  Final: E[user-defined] = -1.332962006838  <S**2> = +0.000000  Fidelity = 0.994778  rho = 1 
 
 (user-defined state)
   Basis          Coef
-| 000 > : +0.1074 +0.1074i
-| 001 > : -0.3006 -0.3006i
-| 010 > : -0.4506 +0.4507i
-| 100 > : +0.2072 -0.2072i
-| 101 > : +0.1409 -0.1409i
-| 110 > : +0.2916 +0.2916i
-| 111 > : -0.2172 -0.2172i
+| 000 > : +0.1113 +0.1033i
+| 001 > : -0.3100 -0.2910i
+| 010 > : -0.4352 +0.4656i
+| 100 > : +0.1999 -0.2142i
+| 101 > : +0.1355 -0.1460i
+| 110 > : +0.3009 +0.2821i
+| 111 > : -0.2244 -0.2097i
 
 
-VQE Done: CPU Time =          1.1852
+VQE Done: CPU Time =          0.4632
 
 Saved in ./random_hamiltonian.qkt.
 +-------------+
@@ -551,176 +436,104 @@ Hamiltonian:
 0.6 [Y2]
 Initial state:
   Basis          Coef
-| 000 > : +0.1447 -0.2335i
-| 001 > : +0.1217 -0.3649i
-| 010 > : -0.2547 +0.2708i
-| 011 > : -0.0921 +0.2140i
-| 100 > : -0.2777 +0.1242i
-| 101 > : +0.2050 -0.2165i
-| 110 > : +0.5674 -0.1007i
-| 111 > : -0.1889 -0.1868i
+| 000 > : +0.2293 +0.0729i
+| 001 > : +0.1095 +0.3675i
+| 011 > : +0.3400 -0.3877i
+| 100 > : -0.0828 -0.1542i
+| 101 > : -0.0889 -0.2928i
+| 110 > : +0.1926 -0.0235i
+| 111 > : +0.5815 +0.1588i
 
 user-defined pauli_list found.
-Tapering-Off Results:
-List of redundant qubits:  None
+Sequential Tapering-Off Results:
+No symmetry found.
 
-First perform tapering.run(). No transformation done
 user-defined pauli_list found.
-Tapering-Off Results:
-List of redundant qubits:  None
+Sequential Tapering-Off Results:
+No symmetry found.
 
-First perform tapering.run(). No transformation done
+Davidson convergence achieved.
 FCI in Qubits
-(FCI state : E = -1.9221855361)
+(FCI state : E = -1.3334245569)
   Basis          Coef
-| 001 > : +0.0000 -0.2919i
-| 010 > : -0.6467 -0.0000i
-| 011 > : -0.2831 -0.0000i
-| 101 > : +0.5125 +0.0000i
-| 111 > : +0.0000 +0.3711i
-
-(FCI state : E = -1.3713384152)
-  Basis          Coef
-| 001 > : -0.0000 +0.5153i
-| 010 > : -0.2163 +0.0000i
-| 100 > : +0.3384 -0.0000i
-| 101 > : +0.2407 -0.0000i
-| 110 > : +0.0000 -0.6745i
-| 111 > : -0.0000 -0.2274i
-
-(FCI state : E = -1.3488026372)
-  Basis          Coef
-| 000 > : -0.1466 +0.0000i
-| 001 > : +0.4868 +0.0000i
-| 010 > : -0.0000 -0.5981i
-| 100 > : +0.0000 +0.3254i
-| 101 > : +0.0000 +0.1601i
-| 110 > : -0.4350 -0.0000i
-| 111 > : +0.2720 -0.0000i
-
-(FCI state : E = -1.2452357064)
-  Basis          Coef
-| 001 > : +0.5511 -0.0000i
-| 010 > : +0.0000 +0.4485i
-| 011 > : +0.0000 -0.1546i
-| 100 > : -0.0000 +0.3687i
-| 101 > : -0.0000 -0.3967i
-| 110 > : -0.1085 +0.0000i
-| 111 > : -0.4016 -0.0000i
-
-(FCI state : E = -1.0379553542)
-  Basis          Coef
-| 000 > : -0.0000 +0.4923i
-| 001 > : -0.0000 -0.4105i
-| 011 > : +0.1357 +0.0000i
-| 100 > : +0.1166 -0.0000i
-| 101 > : +0.3117 +0.0000i
-| 111 > : +0.0000 -0.6498i
+| 000 > : +0.0055 +0.1498i
+| 001 > : -0.0172 -0.4674i
+| 010 > : -0.6087 +0.0225i
+| 100 > : +0.3164 -0.0117i
+| 101 > : +0.1693 -0.0062i
+| 110 > : +0.0157 +0.4251i
+| 111 > : -0.0103 -0.2788i
 
 Entered VQE driver
 Performing VQE for user-defined
 Number of VQE parameters: 18
-Initial configuration:  +0.1447-0.2335j * |000> +0.1217-0.3649j * |001> -0.2547+0.2708j * |010> -0.0921+0.2140j * |011> -0.2777+0.1242j * |100> +0.2050-0.2165j * |101> +0.5674-0.1007j * |110> -0.1889-0.1868j * |111>
+Initial configuration:  +0.2293+0.0729j * |000> +0.1095+0.3675j * |001> -0.0617-0.0103j * |010> +0.3400-0.3877j * |011> -0.0828-0.1542j * |100> -0.0889-0.2928j * |101> +0.1926-0.0235j * |110> +0.5815+0.1588j * |111>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
-Initial: E[user-defined] = -0.210481407400  <S**2> = +0.000000  Fidelity = 0.201266  rho = 1  
-      1: E[user-defined] = -0.631087912609  <S**2> = +0.000000  Fidelity = 0.335271  Grad = 1.70e+00  CPU Time =    1.10407  (0.00 / step)
-      2: E[user-defined] = -0.843007980397  <S**2> = +0.000000  Fidelity = 0.506698  Grad = 2.59e+00  CPU Time =    0.01555  (0.00 / step)
-      3: E[user-defined] = -1.092870441852  <S**2> = +0.000000  Fidelity = 0.461529  Grad = 1.19e+00  CPU Time =    0.01178  (0.00 / step)
-      4: E[user-defined] = -1.200023392141  <S**2> = +0.000000  Fidelity = 0.331422  Grad = 8.48e-01  CPU Time =    0.00379  (0.00 / step)
-      5: E[user-defined] = -1.230510339394  <S**2> = +0.000000  Fidelity = 0.325082  Grad = 3.44e-01  CPU Time =    0.00338  (0.00 / step)
-      6: E[user-defined] = -1.241020906320  <S**2> = +0.000000  Fidelity = 0.300130  Grad = 2.40e-01  CPU Time =    0.00313  (0.00 / step)
-      7: E[user-defined] = -1.244755537621  <S**2> = +0.000000  Fidelity = 0.286957  Grad = 1.80e-01  CPU Time =    0.00299  (0.00 / step)
-      8: E[user-defined] = -1.248918604017  <S**2> = +0.000000  Fidelity = 0.275046  Grad = 1.16e-01  CPU Time =    0.00293  (0.00 / step)
-      9: E[user-defined] = -1.252500111514  <S**2> = +0.000000  Fidelity = 0.247912  Grad = 1.54e-01  CPU Time =    0.00289  (0.00 / step)
-     10: E[user-defined] = -1.258789664035  <S**2> = +0.000000  Fidelity = 0.204301  Grad = 3.65e-01  CPU Time =    0.00288  (0.00 / step)
-     11: E[user-defined] = -1.262962525473  <S**2> = +0.000000  Fidelity = 0.169648  Grad = 4.65e-01  CPU Time =    0.00290  (0.00 / step)
-     12: E[user-defined] = -1.272064368652  <S**2> = +0.000000  Fidelity = 0.173493  Grad = 2.49e-01  CPU Time =    0.00282  (0.00 / step)
-     13: E[user-defined] = -1.277302256057  <S**2> = +0.000000  Fidelity = 0.178938  Grad = 9.77e-02  CPU Time =    0.00328  (0.00 / step)
-     14: E[user-defined] = -1.278481803568  <S**2> = +0.000000  Fidelity = 0.181274  Grad = 9.87e-02  CPU Time =    0.00324  (0.00 / step)
-     15: E[user-defined] = -1.281508141677  <S**2> = +0.000000  Fidelity = 0.181810  Grad = 8.69e-02  CPU Time =    0.00323  (0.00 / step)
-     16: E[user-defined] = -1.285818141679  <S**2> = +0.000000  Fidelity = 0.202647  Grad = 1.84e-01  CPU Time =    0.00329  (0.00 / step)
-     17: E[user-defined] = -1.288805151583  <S**2> = +0.000000  Fidelity = 0.208689  Grad = 1.03e-01  CPU Time =    0.00281  (0.00 / step)
-     18: E[user-defined] = -1.290623316977  <S**2> = +0.000000  Fidelity = 0.213805  Grad = 1.05e-01  CPU Time =    0.00282  (0.00 / step)
-     19: E[user-defined] = -1.291864439129  <S**2> = +0.000000  Fidelity = 0.225229  Grad = 9.98e-02  CPU Time =    0.00281  (0.00 / step)
-     20: E[user-defined] = -1.293958034489  <S**2> = +0.000000  Fidelity = 0.227514  Grad = 8.97e-02  CPU Time =    0.00282  (0.00 / step)
-     21: E[user-defined] = -1.295118102354  <S**2> = +0.000000  Fidelity = 0.245246  Grad = 1.58e-01  CPU Time =    0.00287  (0.00 / step)
-     22: E[user-defined] = -1.296006043716  <S**2> = +0.000000  Fidelity = 0.236300  Grad = 6.06e-02  CPU Time =    0.00289  (0.00 / step)
-     23: E[user-defined] = -1.296557650162  <S**2> = +0.000000  Fidelity = 0.225820  Grad = 2.91e-02  CPU Time =    0.00284  (0.00 / step)
-     24: E[user-defined] = -1.296775159101  <S**2> = +0.000000  Fidelity = 0.225134  Grad = 5.00e-02  CPU Time =    0.00290  (0.00 / step)
-     25: E[user-defined] = -1.296924740726  <S**2> = +0.000000  Fidelity = 0.224812  Grad = 3.06e-02  CPU Time =    0.00356  (0.00 / step)
-     26: E[user-defined] = -1.297010702299  <S**2> = +0.000000  Fidelity = 0.226166  Grad = 2.08e-02  CPU Time =    0.00344  (0.00 / step)
-     27: E[user-defined] = -1.297191839847  <S**2> = +0.000000  Fidelity = 0.227643  Grad = 2.14e-02  CPU Time =    0.00320  (0.00 / step)
-     28: E[user-defined] = -1.297554401450  <S**2> = +0.000000  Fidelity = 0.228129  Grad = 3.49e-02  CPU Time =    0.00294  (0.00 / step)
-     29: E[user-defined] = -1.297774051447  <S**2> = +0.000000  Fidelity = 0.221701  Grad = 9.74e-02  CPU Time =    0.00331  (0.00 / step)
-     30: E[user-defined] = -1.298282713499  <S**2> = +0.000000  Fidelity = 0.219988  Grad = 3.61e-02  CPU Time =    0.00341  (0.00 / step)
-     31: E[user-defined] = -1.298446984615  <S**2> = +0.000000  Fidelity = 0.217978  Grad = 1.89e-02  CPU Time =    0.00336  (0.00 / step)
-     32: E[user-defined] = -1.298532089998  <S**2> = +0.000000  Fidelity = 0.216815  Grad = 1.53e-02  CPU Time =    0.00324  (0.00 / step)
-     33: E[user-defined] = -1.298650553297  <S**2> = +0.000000  Fidelity = 0.215660  Grad = 2.15e-02  CPU Time =    0.00337  (0.00 / step)
-     34: E[user-defined] = -1.298973264461  <S**2> = +0.000000  Fidelity = 0.214239  Grad = 7.41e-02  CPU Time =    0.00331  (0.00 / step)
-     35: E[user-defined] = -1.299547534535  <S**2> = +0.000000  Fidelity = 0.216545  Grad = 8.78e-02  CPU Time =    0.00327  (0.00 / step)
-     36: E[user-defined] = -1.300295563448  <S**2> = +0.000000  Fidelity = 0.218912  Grad = 1.03e-01  CPU Time =    0.00445  (0.00 / step)
-     37: E[user-defined] = -1.301219691796  <S**2> = +0.000000  Fidelity = 0.239998  Grad = 9.88e-02  CPU Time =    0.00331  (0.00 / step)
-     38: E[user-defined] = -1.302998616934  <S**2> = +0.000000  Fidelity = 0.241297  Grad = 7.94e-02  CPU Time =    0.00326  (0.00 / step)
-     39: E[user-defined] = -1.304336691141  <S**2> = +0.000000  Fidelity = 0.243355  Grad = 9.79e-02  CPU Time =    0.00443  (0.00 / step)
-     40: E[user-defined] = -1.305554292048  <S**2> = +0.000000  Fidelity = 0.258347  Grad = 1.42e-01  CPU Time =    0.00282  (0.00 / step)
-     41: E[user-defined] = -1.306242693036  <S**2> = +0.000000  Fidelity = 0.262381  Grad = 1.65e-01  CPU Time =    0.00284  (0.00 / step)
-     42: E[user-defined] = -1.308933403134  <S**2> = +0.000000  Fidelity = 0.268959  Grad = 1.06e-01  CPU Time =    0.00285  (0.00 / step)
-     43: E[user-defined] = -1.310858321969  <S**2> = +0.000000  Fidelity = 0.284196  Grad = 1.50e-01  CPU Time =    0.00283  (0.00 / step)
-     44: E[user-defined] = -1.311516595901  <S**2> = +0.000000  Fidelity = 0.280137  Grad = 1.26e-01  CPU Time =    0.00282  (0.00 / step)
-     45: E[user-defined] = -1.313605668323  <S**2> = +0.000000  Fidelity = 0.281071  Grad = 1.13e-01  CPU Time =    0.00283  (0.00 / step)
-     46: E[user-defined] = -1.314592787218  <S**2> = +0.000000  Fidelity = 0.280382  Grad = 1.75e-01  CPU Time =    0.00283  (0.00 / step)
-     47: E[user-defined] = -1.316125002849  <S**2> = +0.000000  Fidelity = 0.276047  Grad = 8.71e-02  CPU Time =    0.00285  (0.00 / step)
-     48: E[user-defined] = -1.316696524911  <S**2> = +0.000000  Fidelity = 0.273915  Grad = 4.92e-02  CPU Time =    0.00284  (0.00 / step)
-     49: E[user-defined] = -1.316898489257  <S**2> = +0.000000  Fidelity = 0.272132  Grad = 2.62e-02  CPU Time =    0.00281  (0.00 / step)
-     50: E[user-defined] = -1.317019756225  <S**2> = +0.000000  Fidelity = 0.274173  Grad = 2.70e-02  CPU Time =    0.00280  (0.00 / step)
-     51: E[user-defined] = -1.317277031323  <S**2> = +0.000000  Fidelity = 0.275219  Grad = 3.49e-02  CPU Time =    0.00280  (0.00 / step)
-     52: E[user-defined] = -1.317946794268  <S**2> = +0.000000  Fidelity = 0.277278  Grad = 4.32e-02  CPU Time =    0.00284  (0.00 / step)
-     53: E[user-defined] = -1.318024877595  <S**2> = +0.000000  Fidelity = 0.273433  Grad = 3.41e-02  CPU Time =    0.00404  (0.00 / step)
-     54: E[user-defined] = -1.318130336561  <S**2> = +0.000000  Fidelity = 0.274167  Grad = 1.06e-02  CPU Time =    0.00284  (0.00 / step)
-     55: E[user-defined] = -1.318165456200  <S**2> = +0.000000  Fidelity = 0.274716  Grad = 1.09e-02  CPU Time =    0.00282  (0.00 / step)
-     56: E[user-defined] = -1.318207628041  <S**2> = +0.000000  Fidelity = 0.274165  Grad = 1.36e-02  CPU Time =    0.00283  (0.00 / step)
-     57: E[user-defined] = -1.318276430896  <S**2> = +0.000000  Fidelity = 0.273961  Grad = 1.21e-02  CPU Time =    0.00283  (0.00 / step)
-     58: E[user-defined] = -1.318320943465  <S**2> = +0.000000  Fidelity = 0.272124  Grad = 2.16e-02  CPU Time =    0.00401  (0.00 / step)
-     59: E[user-defined] = -1.318372864462  <S**2> = +0.000000  Fidelity = 0.272572  Grad = 1.03e-02  CPU Time =    0.00284  (0.00 / step)
-     60: E[user-defined] = -1.318383961518  <S**2> = +0.000000  Fidelity = 0.272522  Grad = 6.10e-03  CPU Time =    0.00282  (0.00 / step)
-     61: E[user-defined] = -1.318387072180  <S**2> = +0.000000  Fidelity = 0.272350  Grad = 2.52e-03  CPU Time =    0.00283  (0.00 / step)
-     62: E[user-defined] = -1.318388808389  <S**2> = +0.000000  Fidelity = 0.272310  Grad = 2.01e-03  CPU Time =    0.00287  (0.00 / step)
-     63: E[user-defined] = -1.318389834762  <S**2> = +0.000000  Fidelity = 0.272539  Grad = 1.24e-03  CPU Time =    0.00283  (0.00 / step)
-     64: E[user-defined] = -1.318390255546  <S**2> = +0.000000  Fidelity = 0.272586  Grad = 8.64e-04  CPU Time =    0.00281  (0.00 / step)
-     65: E[user-defined] = -1.318390654609  <S**2> = +0.000000  Fidelity = 0.272721  Grad = 9.93e-04  CPU Time =    0.00323  (0.00 / step)
-     66: E[user-defined] = -1.318391127274  <S**2> = +0.000000  Fidelity = 0.272633  Grad = 2.48e-03  CPU Time =    0.00346  (0.00 / step)
-     67: E[user-defined] = -1.318391702326  <S**2> = +0.000000  Fidelity = 0.272626  Grad = 1.68e-03  CPU Time =    0.00326  (0.00 / step)
-     68: E[user-defined] = -1.318392559295  <S**2> = +0.000000  Fidelity = 0.272465  Grad = 1.09e-03  CPU Time =    0.00293  (0.00 / step)
-     69: E[user-defined] = -1.318392856534  <S**2> = +0.000000  Fidelity = 0.272380  Grad = 7.91e-04  CPU Time =    0.00284  (0.00 / step)
-     70: E[user-defined] = -1.318392929639  <S**2> = +0.000000  Fidelity = 0.272455  Grad = 9.93e-04  CPU Time =    0.00403  (0.00 / step)
-     71: E[user-defined] = -1.318392981036  <S**2> = +0.000000  Fidelity = 0.272415  Grad = 2.77e-04  CPU Time =    0.00284  (0.00 / step)
-     72: E[user-defined] = -1.318392988643  <S**2> = +0.000000  Fidelity = 0.272428  Grad = 1.80e-04  CPU Time =    0.00282  (0.00 / step)
-     73: E[user-defined] = -1.318392998903  <S**2> = +0.000000  Fidelity = 0.272446  Grad = 1.76e-04  CPU Time =    0.00282  (0.00 / step)
-     74: E[user-defined] = -1.318393014378  <S**2> = +0.000000  Fidelity = 0.272457  Grad = 2.37e-04  CPU Time =    0.00282  (0.00 / step)
-     75: E[user-defined] = -1.318393020893  <S**2> = +0.000000  Fidelity = 0.272493  Grad = 6.51e-04  CPU Time =    0.00280  (0.00 / step)
-     76: E[user-defined] = -1.318393042679  <S**2> = +0.000000  Fidelity = 0.272465  Grad = 2.42e-04  CPU Time =    0.00284  (0.00 / step)
-     77: E[user-defined] = -1.318393052057  <S**2> = +0.000000  Fidelity = 0.272450  Grad = 1.68e-04  CPU Time =    0.00283  (0.00 / step)
-     78: E[user-defined] = -1.318393062196  <S**2> = +0.000000  Fidelity = 0.272447  Grad = 2.16e-04  CPU Time =    0.00281  (0.00 / step)
-     79: E[user-defined] = -1.318393075151  <S**2> = +0.000000  Fidelity = 0.272467  Grad = 2.04e-04  CPU Time =    0.00285  (0.00 / step)
-     80: E[user-defined] = -1.318393077485  <S**2> = +0.000000  Fidelity = 0.272471  Grad = 2.47e-04  CPU Time =    0.00402  (0.00 / step)
-     81: E[user-defined] = -1.318393082079  <S**2> = +0.000000  Fidelity = 0.272497  Grad = 7.59e-05  CPU Time =    0.00280  (0.00 / step)
-     82: E[user-defined] = -1.318393082660  <S**2> = +0.000000  Fidelity = 0.272504  Grad = 2.74e-05  CPU Time =    0.00323  (0.00 / step)
-  Final: E[user-defined] = -1.318393082660  <S**2> = +0.000000  Fidelity = 0.272504  rho = 1 
+Initial: E[user-defined] = +0.233197829586  <S**2> = +0.000000  Fidelity = 0.049331  rho = 1  
+      1: E[user-defined] = -0.087115186626  <S**2> = +0.000000  Fidelity = 0.022709  Grad = 2.45e+00  CPU Time =    0.01401  (0.00 / step)
+      2: E[user-defined] = -0.748557760979  <S**2> = +0.000000  Fidelity = 0.056152  Grad = 1.54e+00  CPU Time =    0.00614  (0.00 / step)
+      3: E[user-defined] = -0.824201103925  <S**2> = +0.000000  Fidelity = 0.084829  Grad = 1.12e+00  CPU Time =    0.00962  (0.00 / step)
+      4: E[user-defined] = -0.915308401580  <S**2> = +0.000000  Fidelity = 0.117326  Grad = 6.75e-01  CPU Time =    0.00673  (0.00 / step)
+      5: E[user-defined] = -0.990722675303  <S**2> = +0.000000  Fidelity = 0.229161  Grad = 7.10e-01  CPU Time =    0.00652  (0.00 / step)
+      6: E[user-defined] = -1.032189110690  <S**2> = +0.000000  Fidelity = 0.317900  Grad = 5.84e-01  CPU Time =    0.00657  (0.00 / step)
+      7: E[user-defined] = -1.080132748792  <S**2> = +0.000000  Fidelity = 0.466865  Grad = 3.73e-01  CPU Time =    0.00673  (0.00 / step)
+      8: E[user-defined] = -1.098105325878  <S**2> = +0.000000  Fidelity = 0.527321  Grad = 3.00e-01  CPU Time =    0.00681  (0.00 / step)
+      9: E[user-defined] = -1.111510396146  <S**2> = +0.000000  Fidelity = 0.601169  Grad = 2.85e-01  CPU Time =    0.00715  (0.00 / step)
+     10: E[user-defined] = -1.117370499157  <S**2> = +0.000000  Fidelity = 0.664545  Grad = 1.95e-01  CPU Time =    0.00663  (0.00 / step)
+     11: E[user-defined] = -1.120029737369  <S**2> = +0.000000  Fidelity = 0.661519  Grad = 1.15e-01  CPU Time =    0.00717  (0.00 / step)
+     12: E[user-defined] = -1.123157923298  <S**2> = +0.000000  Fidelity = 0.681662  Grad = 1.03e-01  CPU Time =    0.00708  (0.00 / step)
+     13: E[user-defined] = -1.127867218366  <S**2> = +0.000000  Fidelity = 0.718298  Grad = 1.52e-01  CPU Time =    0.00722  (0.00 / step)
+     14: E[user-defined] = -1.137957617508  <S**2> = +0.000000  Fidelity = 0.786122  Grad = 3.09e-01  CPU Time =    0.00655  (0.00 / step)
+     15: E[user-defined] = -1.169051091752  <S**2> = +0.000000  Fidelity = 0.863446  Grad = 8.28e-01  CPU Time =    0.01297  (0.00 / step)
+     16: E[user-defined] = -1.170675170918  <S**2> = +0.000000  Fidelity = 0.862320  Grad = 8.69e-01  CPU Time =    0.00990  (0.00 / step)
+     17: E[user-defined] = -1.201740214225  <S**2> = +0.000000  Fidelity = 0.856568  Grad = 7.72e-01  CPU Time =    0.00687  (0.00 / step)
+     18: E[user-defined] = -1.231863387785  <S**2> = +0.000000  Fidelity = 0.861326  Grad = 8.17e-01  CPU Time =    0.00657  (0.00 / step)
+     19: E[user-defined] = -1.257392855153  <S**2> = +0.000000  Fidelity = 0.902655  Grad = 6.79e-01  CPU Time =    0.00651  (0.00 / step)
+     20: E[user-defined] = -1.277036655218  <S**2> = +0.000000  Fidelity = 0.919964  Grad = 3.07e-01  CPU Time =    0.00665  (0.00 / step)
+     21: E[user-defined] = -1.293798652765  <S**2> = +0.000000  Fidelity = 0.946329  Grad = 2.19e-01  CPU Time =    0.00656  (0.00 / step)
+     22: E[user-defined] = -1.308802372360  <S**2> = +0.000000  Fidelity = 0.970993  Grad = 2.70e-01  CPU Time =    0.00660  (0.00 / step)
+     23: E[user-defined] = -1.321096428397  <S**2> = +0.000000  Fidelity = 0.980793  Grad = 2.54e-01  CPU Time =    0.00662  (0.00 / step)
+     24: E[user-defined] = -1.327570572997  <S**2> = +0.000000  Fidelity = 0.991316  Grad = 1.98e-01  CPU Time =    0.00669  (0.00 / step)
+     25: E[user-defined] = -1.330666946748  <S**2> = +0.000000  Fidelity = 0.992882  Grad = 6.79e-02  CPU Time =    0.00653  (0.00 / step)
+     26: E[user-defined] = -1.331140212751  <S**2> = +0.000000  Fidelity = 0.993753  Grad = 3.80e-02  CPU Time =    0.00658  (0.00 / step)
+     27: E[user-defined] = -1.331417625077  <S**2> = +0.000000  Fidelity = 0.994565  Grad = 2.94e-02  CPU Time =    0.00661  (0.00 / step)
+     28: E[user-defined] = -1.331701049408  <S**2> = +0.000000  Fidelity = 0.995284  Grad = 2.93e-02  CPU Time =    0.00667  (0.00 / step)
+     29: E[user-defined] = -1.332032655216  <S**2> = +0.000000  Fidelity = 0.995159  Grad = 2.73e-02  CPU Time =    0.00664  (0.00 / step)
+     30: E[user-defined] = -1.332334691011  <S**2> = +0.000000  Fidelity = 0.994133  Grad = 2.13e-02  CPU Time =    0.00661  (0.00 / step)
+     31: E[user-defined] = -1.332602437560  <S**2> = +0.000000  Fidelity = 0.993655  Grad = 3.20e-02  CPU Time =    0.00652  (0.00 / step)
+     32: E[user-defined] = -1.332733866809  <S**2> = +0.000000  Fidelity = 0.993057  Grad = 5.11e-02  CPU Time =    0.00656  (0.00 / step)
+     33: E[user-defined] = -1.332892510372  <S**2> = +0.000000  Fidelity = 0.994453  Grad = 1.16e-02  CPU Time =    0.00666  (0.00 / step)
+     34: E[user-defined] = -1.332905299614  <S**2> = +0.000000  Fidelity = 0.994568  Grad = 7.30e-03  CPU Time =    0.00660  (0.00 / step)
+     35: E[user-defined] = -1.332920908348  <S**2> = +0.000000  Fidelity = 0.994741  Grad = 8.82e-03  CPU Time =    0.00658  (0.00 / step)
+     36: E[user-defined] = -1.332945241478  <S**2> = +0.000000  Fidelity = 0.994972  Grad = 1.06e-02  CPU Time =    0.00654  (0.00 / step)
+     37: E[user-defined] = -1.332987682130  <S**2> = +0.000000  Fidelity = 0.995449  Grad = 1.26e-02  CPU Time =    0.00659  (0.00 / step)
+     38: E[user-defined] = -1.333000533967  <S**2> = +0.000000  Fidelity = 0.995381  Grad = 9.71e-03  CPU Time =    0.00955  (0.00 / step)
+     39: E[user-defined] = -1.333008926049  <S**2> = +0.000000  Fidelity = 0.995410  Grad = 2.85e-03  CPU Time =    0.00674  (0.00 / step)
+     40: E[user-defined] = -1.333010437268  <S**2> = +0.000000  Fidelity = 0.995425  Grad = 1.59e-03  CPU Time =    0.00714  (0.00 / step)
+     41: E[user-defined] = -1.333011126730  <S**2> = +0.000000  Fidelity = 0.995409  Grad = 1.33e-03  CPU Time =    0.00731  (0.00 / step)
+     42: E[user-defined] = -1.333011835676  <S**2> = +0.000000  Fidelity = 0.995349  Grad = 1.94e-03  CPU Time =    0.00720  (0.00 / step)
+     43: E[user-defined] = -1.333012128458  <S**2> = +0.000000  Fidelity = 0.995341  Grad = 9.83e-04  CPU Time =    0.00717  (0.00 / step)
+     44: E[user-defined] = -1.333012218134  <S**2> = +0.000000  Fidelity = 0.995338  Grad = 2.62e-04  CPU Time =    0.00712  (0.00 / step)
+     45: E[user-defined] = -1.333012230057  <S**2> = +0.000000  Fidelity = 0.995335  Grad = 1.62e-04  CPU Time =    0.00719  (0.00 / step)
+     46: E[user-defined] = -1.333012235647  <S**2> = +0.000000  Fidelity = 0.995330  Grad = 1.36e-04  CPU Time =    0.00666  (0.00 / step)
+     47: E[user-defined] = -1.333012237614  <S**2> = +0.000000  Fidelity = 0.995330  Grad = 4.24e-05  CPU Time =    0.00660  (0.00 / step)
+     48: E[user-defined] = -1.333012237808  <S**2> = +0.000000  Fidelity = 0.995331  Grad = 1.56e-05  CPU Time =    0.00667  (0.00 / step)
+  Final: E[user-defined] = -1.333012237808  <S**2> = +0.000000  Fidelity = 0.995331  rho = 1 
 
 (user-defined state)
   Basis          Coef
-| 000 > : +0.1562 +0.0136i
-| 001 > : -0.1915 -0.0166i
-| 010 > : -0.0627 +0.7216i
-| 100 > : +0.0143 -0.1646i
-| 101 > : +0.0287 -0.3304i
-| 110 > : +0.3241 +0.0282i
-| 111 > : -0.4064 -0.0353i
+| 000 > : +0.0580 -0.1357i
+| 001 > : -0.1987 +0.4648i
+| 010 > : +0.5329 +0.2278i
+| 100 > : -0.3102 -0.1326i
+| 101 > : -0.1294 -0.0553i
+| 110 > : +0.1713 -0.4008i
+| 111 > : -0.0984 +0.2303i
 
 
-VQE Done: CPU Time =          1.3809
+VQE Done: CPU Time =          0.3536
 
 Saved in ./random_hamiltonian.qkt.
 +-------------+
@@ -740,64 +553,24 @@ Initial state:
 | 101 > : +0.0000 -0.7071i
 
 user-defined pauli_list found.
-Tapering-Off Results:
-List of redundant qubits:  None
+Sequential Tapering-Off Results:
+No symmetry found.
 
-First perform tapering.run(). No transformation done
 user-defined pauli_list found.
-Tapering-Off Results:
-List of redundant qubits:  None
+Sequential Tapering-Off Results:
+No symmetry found.
 
-First perform tapering.run(). No transformation done
+Davidson convergence achieved.
 FCI in Qubits
-(FCI state : E = -1.6308884926)
+(FCI state : E = -1.3334245569)
   Basis          Coef
-| 010 > : -0.7236 +0.0000i
-| 011 > : -0.1918 -0.0000i
-| 101 > : +0.6048 +0.0000i
-| 110 > : +0.0000 -0.2004i
-| 111 > : +0.0000 -0.1282i
-
-(FCI state : E = -1.3999704350)
-  Basis          Coef
-| 000 > : -0.0000 -0.4251i
-| 001 > : +0.0000 +0.2761i
-| 011 > : -0.3523 -0.0000i
-| 100 > : -0.4749 +0.0000i
-| 101 > : +0.1189 +0.0000i
-| 110 > : -0.0000 -0.1195i
-| 111 > : +0.0000 +0.5714i
-
-(FCI state : E = -1.3488026372)
-  Basis          Coef
-| 000 > : +0.1466 -0.0000i
-| 001 > : -0.4868 -0.0000i
-| 010 > : +0.0000 +0.5981i
-| 100 > : -0.0000 -0.3254i
-| 101 > : +0.0000 -0.1601i
-| 110 > : +0.4350 -0.0000i
-| 111 > : -0.2720 +0.0000i
-
-(FCI state : E = -1.2452357064)
-  Basis          Coef
-| 001 > : +0.5511 +0.0000i
-| 010 > : -0.0000 +0.4485i
-| 011 > : +0.0000 -0.1546i
-| 100 > : -0.0000 +0.3687i
-| 101 > : -0.0000 -0.3967i
-| 110 > : -0.1085 +0.0000i
-| 111 > : -0.4016 -0.0000i
-
-(FCI state : E = -0.7372624464)
-  Basis          Coef
-| 000 > : -0.0000 -0.2278i
-| 001 > : -0.0000 +0.2971i
-| 010 > : -0.1957 +0.0000i
-| 011 > : +0.5585 +0.0000i
-| 100 > : -0.5029 +0.0000i
-| 101 > : -0.1314 +0.0000i
-| 110 > : +0.0000 -0.2805i
-| 111 > : +0.0000 -0.3608i
+| 000 > : -0.1497 +0.0074i
+| 001 > : +0.4671 -0.0231i
+| 010 > : -0.0300 -0.6084i
+| 100 > : +0.0156 +0.3162i
+| 101 > : +0.0084 +0.1692i
+| 110 > : -0.4249 +0.0210i
+| 111 > : +0.2786 -0.0138i
 
 Entered VQE driver
 Performing VQE for user-defined
@@ -806,72 +579,54 @@ Initial configuration:  +1.0000+0.0000j * |011> -0.0000-1.0000j * |101>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
-Initial: E[user-defined] = +0.400000949563  <S**2> = +0.000000  Fidelity = 0.201348  rho = 1  
-      1: E[user-defined] = -0.535653735676  <S**2> = +0.000000  Fidelity = 0.153878  Grad = 1.80e+00  CPU Time =    0.52897  (0.00 / step)
-      2: E[user-defined] = -1.018402894006  <S**2> = +0.000000  Fidelity = 0.182189  Grad = 1.17e+00  CPU Time =    0.07687  (0.00 / step)
-      3: E[user-defined] = -1.176369693869  <S**2> = +0.000000  Fidelity = 0.223713  Grad = 6.41e-01  CPU Time =    0.00560  (0.00 / step)
-      4: E[user-defined] = -1.219337232643  <S**2> = +0.000000  Fidelity = 0.251484  Grad = 4.63e-01  CPU Time =    0.00449  (0.00 / step)
-      5: E[user-defined] = -1.228343381595  <S**2> = +0.000000  Fidelity = 0.313154  Grad = 3.63e-01  CPU Time =    0.00402  (0.00 / step)
-      6: E[user-defined] = -1.235536309179  <S**2> = +0.000000  Fidelity = 0.285644  Grad = 1.50e-01  CPU Time =    0.00351  (0.00 / step)
-      7: E[user-defined] = -1.238459255813  <S**2> = +0.000000  Fidelity = 0.280969  Grad = 1.19e-01  CPU Time =    0.00329  (0.00 / step)
-      8: E[user-defined] = -1.244386653235  <S**2> = +0.000000  Fidelity = 0.279429  Grad = 1.32e-01  CPU Time =    0.00306  (0.00 / step)
-      9: E[user-defined] = -1.247073256964  <S**2> = +0.000000  Fidelity = 0.290818  Grad = 8.97e-02  CPU Time =    0.00337  (0.00 / step)
-     10: E[user-defined] = -1.249140845743  <S**2> = +0.000000  Fidelity = 0.304858  Grad = 6.62e-02  CPU Time =    0.00362  (0.00 / step)
-     11: E[user-defined] = -1.249523212572  <S**2> = +0.000000  Fidelity = 0.311931  Grad = 6.06e-02  CPU Time =    0.00350  (0.00 / step)
-     12: E[user-defined] = -1.249770190152  <S**2> = +0.000000  Fidelity = 0.307289  Grad = 2.28e-02  CPU Time =    0.00346  (0.00 / step)
-     13: E[user-defined] = -1.249875047138  <S**2> = +0.000000  Fidelity = 0.305911  Grad = 1.94e-02  CPU Time =    0.00303  (0.00 / step)
-     14: E[user-defined] = -1.250231557900  <S**2> = +0.000000  Fidelity = 0.302079  Grad = 4.27e-02  CPU Time =    0.00296  (0.00 / step)
-     15: E[user-defined] = -1.250602209815  <S**2> = +0.000000  Fidelity = 0.299724  Grad = 5.76e-02  CPU Time =    0.00298  (0.00 / step)
-     16: E[user-defined] = -1.251294083815  <S**2> = +0.000000  Fidelity = 0.297042  Grad = 6.62e-02  CPU Time =    0.00334  (0.00 / step)
-     17: E[user-defined] = -1.251434283364  <S**2> = +0.000000  Fidelity = 0.298722  Grad = 6.08e-02  CPU Time =    0.00454  (0.00 / step)
-     18: E[user-defined] = -1.251876964930  <S**2> = +0.000000  Fidelity = 0.299858  Grad = 2.94e-02  CPU Time =    0.00336  (0.00 / step)
-     19: E[user-defined] = -1.252034293894  <S**2> = +0.000000  Fidelity = 0.304120  Grad = 2.09e-02  CPU Time =    0.00321  (0.00 / step)
-     20: E[user-defined] = -1.252092494605  <S**2> = +0.000000  Fidelity = 0.304510  Grad = 1.80e-02  CPU Time =    0.00307  (0.00 / step)
-     21: E[user-defined] = -1.252133930959  <S**2> = +0.000000  Fidelity = 0.305107  Grad = 1.38e-02  CPU Time =    0.00295  (0.00 / step)
-     22: E[user-defined] = -1.252188625505  <S**2> = +0.000000  Fidelity = 0.305398  Grad = 5.43e-03  CPU Time =    0.00297  (0.00 / step)
-     23: E[user-defined] = -1.252197296108  <S**2> = +0.000000  Fidelity = 0.305294  Grad = 4.65e-03  CPU Time =    0.00303  (0.00 / step)
-     24: E[user-defined] = -1.252201457494  <S**2> = +0.000000  Fidelity = 0.304989  Grad = 2.91e-03  CPU Time =    0.00295  (0.00 / step)
-     25: E[user-defined] = -1.252202768799  <S**2> = +0.000000  Fidelity = 0.304957  Grad = 8.62e-04  CPU Time =    0.00297  (0.00 / step)
-     26: E[user-defined] = -1.252202847710  <S**2> = +0.000000  Fidelity = 0.305083  Grad = 5.19e-04  CPU Time =    0.00294  (0.00 / step)
-     27: E[user-defined] = -1.252202867151  <S**2> = +0.000000  Fidelity = 0.305045  Grad = 1.83e-04  CPU Time =    0.00294  (0.00 / step)
-     28: E[user-defined] = -1.252202874905  <S**2> = +0.000000  Fidelity = 0.305030  Grad = 1.51e-04  CPU Time =    0.00303  (0.00 / step)
-     29: E[user-defined] = -1.252202879937  <S**2> = +0.000000  Fidelity = 0.305033  Grad = 1.36e-04  CPU Time =    0.00298  (0.00 / step)
-     30: E[user-defined] = -1.252202881251  <S**2> = +0.000000  Fidelity = 0.305035  Grad = 3.21e-04  CPU Time =    0.00295  (0.00 / step)
-     31: E[user-defined] = -1.252202886583  <S**2> = +0.000000  Fidelity = 0.305042  Grad = 1.28e-04  CPU Time =    0.00293  (0.00 / step)
-     32: E[user-defined] = -1.252202889501  <S**2> = +0.000000  Fidelity = 0.305046  Grad = 1.10e-04  CPU Time =    0.00298  (0.00 / step)
-     33: E[user-defined] = -1.252202899758  <S**2> = +0.000000  Fidelity = 0.305053  Grad = 2.17e-04  CPU Time =    0.00292  (0.00 / step)
-     34: E[user-defined] = -1.252202917345  <S**2> = +0.000000  Fidelity = 0.305062  Grad = 3.66e-04  CPU Time =    0.00297  (0.00 / step)
-     35: E[user-defined] = -1.252202964311  <S**2> = +0.000000  Fidelity = 0.305074  Grad = 5.96e-04  CPU Time =    0.00300  (0.00 / step)
-     36: E[user-defined] = -1.252203061588  <S**2> = +0.000000  Fidelity = 0.305104  Grad = 8.40e-04  CPU Time =    0.00302  (0.00 / step)
-     37: E[user-defined] = -1.252203156619  <S**2> = +0.000000  Fidelity = 0.305063  Grad = 1.72e-03  CPU Time =    0.00363  (0.00 / step)
-     38: E[user-defined] = -1.252203379802  <S**2> = +0.000000  Fidelity = 0.305090  Grad = 8.40e-04  CPU Time =    0.00328  (0.00 / step)
-     39: E[user-defined] = -1.252203681019  <S**2> = +0.000000  Fidelity = 0.305070  Grad = 8.04e-04  CPU Time =    0.00306  (0.00 / step)
-     40: E[user-defined] = -1.252203845357  <S**2> = +0.000000  Fidelity = 0.305041  Grad = 1.12e-03  CPU Time =    0.00370  (0.00 / step)
-     41: E[user-defined] = -1.252204051205  <S**2> = +0.000000  Fidelity = 0.304988  Grad = 1.26e-03  CPU Time =    0.00367  (0.00 / step)
-     42: E[user-defined] = -1.252204229789  <S**2> = +0.000000  Fidelity = 0.305065  Grad = 1.43e-03  CPU Time =    0.00321  (0.00 / step)
-     43: E[user-defined] = -1.252204274170  <S**2> = +0.000000  Fidelity = 0.304885  Grad = 2.03e-03  CPU Time =    0.00303  (0.00 / step)
-     44: E[user-defined] = -1.252204447162  <S**2> = +0.000000  Fidelity = 0.304988  Grad = 7.13e-04  CPU Time =    0.00299  (0.00 / step)
-     45: E[user-defined] = -1.252204527341  <S**2> = +0.000000  Fidelity = 0.305030  Grad = 5.34e-04  CPU Time =    0.00296  (0.00 / step)
-     46: E[user-defined] = -1.252204679042  <S**2> = +0.000000  Fidelity = 0.305047  Grad = 6.16e-04  CPU Time =    0.00296  (0.00 / step)
-     47: E[user-defined] = -1.252204798250  <S**2> = +0.000000  Fidelity = 0.305069  Grad = 4.72e-04  CPU Time =    0.00293  (0.00 / step)
-     48: E[user-defined] = -1.252204817489  <S**2> = +0.000000  Fidelity = 0.305018  Grad = 3.06e-04  CPU Time =    0.00414  (0.00 / step)
-     49: E[user-defined] = -1.252204826140  <S**2> = +0.000000  Fidelity = 0.305018  Grad = 7.73e-05  CPU Time =    0.00299  (0.00 / step)
-     50: E[user-defined] = -1.252204827430  <S**2> = +0.000000  Fidelity = 0.305016  Grad = 4.97e-05  CPU Time =    0.00291  (0.00 / step)
-     51: E[user-defined] = -1.252204827745  <S**2> = +0.000000  Fidelity = 0.305017  Grad = 1.72e-05  CPU Time =    0.00297  (0.00 / step)
-  Final: E[user-defined] = -1.252204827745  <S**2> = +0.000000  Fidelity = 0.305017  rho = 1 
+Initial: E[user-defined] = +0.399999298212  <S**2> = +0.000000  Fidelity = 0.014415  rho = 1  
+      1: E[user-defined] = -0.455584867158  <S**2> = +0.000000  Fidelity = 0.136390  Grad = 1.18e+00  CPU Time =    0.02795  (0.00 / step)
+      2: E[user-defined] = -0.455586278876  <S**2> = +0.000000  Fidelity = 0.136371  Grad = 1.18e+00  CPU Time =    0.00919  (0.00 / step)
+      3: E[user-defined] = -0.561551762100  <S**2> = +0.000000  Fidelity = 0.193281  Grad = 1.01e+00  CPU Time =    0.01281  (0.00 / step)
+      4: E[user-defined] = -0.728816218132  <S**2> = +0.000000  Fidelity = 0.340226  Grad = 1.17e+00  CPU Time =    0.00957  (0.00 / step)
+      5: E[user-defined] = -0.912445438745  <S**2> = +0.000000  Fidelity = 0.519843  Grad = 1.27e+00  CPU Time =    0.00656  (0.00 / step)
+      6: E[user-defined] = -1.012673576764  <S**2> = +0.000000  Fidelity = 0.538685  Grad = 1.22e+00  CPU Time =    0.00661  (0.00 / step)
+      7: E[user-defined] = -1.097593442563  <S**2> = +0.000000  Fidelity = 0.627702  Grad = 3.94e-01  CPU Time =    0.00649  (0.00 / step)
+      8: E[user-defined] = -1.126603737248  <S**2> = +0.000000  Fidelity = 0.654506  Grad = 3.20e-01  CPU Time =    0.00648  (0.00 / step)
+      9: E[user-defined] = -1.155285222254  <S**2> = +0.000000  Fidelity = 0.603854  Grad = 5.40e-01  CPU Time =    0.00663  (0.00 / step)
+     10: E[user-defined] = -1.194972437193  <S**2> = +0.000000  Fidelity = 0.715326  Grad = 6.33e-01  CPU Time =    0.00657  (0.00 / step)
+     11: E[user-defined] = -1.253694416988  <S**2> = +0.000000  Fidelity = 0.867681  Grad = 7.81e-01  CPU Time =    0.00671  (0.00 / step)
+     12: E[user-defined] = -1.288998173099  <S**2> = +0.000000  Fidelity = 0.931602  Grad = 5.03e-01  CPU Time =    0.00960  (0.00 / step)
+     13: E[user-defined] = -1.304736883495  <S**2> = +0.000000  Fidelity = 0.959280  Grad = 3.45e-01  CPU Time =    0.00655  (0.00 / step)
+     14: E[user-defined] = -1.313096248384  <S**2> = +0.000000  Fidelity = 0.947557  Grad = 1.95e-01  CPU Time =    0.00672  (0.00 / step)
+     15: E[user-defined] = -1.319068639844  <S**2> = +0.000000  Fidelity = 0.956019  Grad = 1.77e-01  CPU Time =    0.00664  (0.00 / step)
+     16: E[user-defined] = -1.328657837888  <S**2> = +0.000000  Fidelity = 0.986009  Grad = 1.80e-01  CPU Time =    0.00727  (0.00 / step)
+     17: E[user-defined] = -1.329521848982  <S**2> = +0.000000  Fidelity = 0.992357  Grad = 2.50e-01  CPU Time =    0.00711  (0.00 / step)
+     18: E[user-defined] = -1.330672120137  <S**2> = +0.000000  Fidelity = 0.991079  Grad = 1.96e-01  CPU Time =    0.00711  (0.00 / step)
+     19: E[user-defined] = -1.332819951366  <S**2> = +0.000000  Fidelity = 0.994375  Grad = 2.14e-02  CPU Time =    0.00726  (0.00 / step)
+     20: E[user-defined] = -1.332883363004  <S**2> = +0.000000  Fidelity = 0.994481  Grad = 1.38e-02  CPU Time =    0.00721  (0.00 / step)
+     21: E[user-defined] = -1.332943005156  <S**2> = +0.000000  Fidelity = 0.994639  Grad = 7.44e-03  CPU Time =    0.00664  (0.00 / step)
+     22: E[user-defined] = -1.332955367250  <S**2> = +0.000000  Fidelity = 0.994750  Grad = 7.43e-03  CPU Time =    0.00663  (0.00 / step)
+     23: E[user-defined] = -1.332960454594  <S**2> = +0.000000  Fidelity = 0.994703  Grad = 3.78e-03  CPU Time =    0.00666  (0.00 / step)
+     24: E[user-defined] = -1.332961916292  <S**2> = +0.000000  Fidelity = 0.994747  Grad = 1.36e-03  CPU Time =    0.00660  (0.00 / step)
+     25: E[user-defined] = -1.332962474833  <S**2> = +0.000000  Fidelity = 0.994775  Grad = 8.38e-04  CPU Time =    0.00670  (0.00 / step)
+     26: E[user-defined] = -1.332962694143  <S**2> = +0.000000  Fidelity = 0.994815  Grad = 1.84e-03  CPU Time =    0.00653  (0.00 / step)
+     27: E[user-defined] = -1.332962889843  <S**2> = +0.000000  Fidelity = 0.994798  Grad = 6.09e-04  CPU Time =    0.00671  (0.00 / step)
+     28: E[user-defined] = -1.332962948923  <S**2> = +0.000000  Fidelity = 0.994790  Grad = 5.30e-04  CPU Time =    0.00663  (0.00 / step)
+     29: E[user-defined] = -1.332963069832  <S**2> = +0.000000  Fidelity = 0.994776  Grad = 4.75e-04  CPU Time =    0.00711  (0.00 / step)
+     30: E[user-defined] = -1.332963099839  <S**2> = +0.000000  Fidelity = 0.994770  Grad = 6.81e-04  CPU Time =    0.00709  (0.00 / step)
+     31: E[user-defined] = -1.332963122043  <S**2> = +0.000000  Fidelity = 0.994775  Grad = 3.43e-04  CPU Time =    0.00718  (0.00 / step)
+     32: E[user-defined] = -1.332963128616  <S**2> = +0.000000  Fidelity = 0.994776  Grad = 7.05e-05  CPU Time =    0.00730  (0.00 / step)
+     33: E[user-defined] = -1.332963129192  <S**2> = +0.000000  Fidelity = 0.994777  Grad = 3.78e-05  CPU Time =    0.00691  (0.00 / step)
+  Final: E[user-defined] = -1.332963129192  <S**2> = +0.000000  Fidelity = 0.994777  rho = 1 
 
 (user-defined state)
   Basis          Coef
-| 001 > : -0.3964 +0.3966i
-| 010 > : -0.2933 -0.2931i
-| 011 > : +0.1257 +0.1256i
-| 100 > : -0.2736 -0.2734i
-| 101 > : +0.2657 +0.2656i
-| 110 > : +0.0950 -0.0951i
-| 111 > : +0.2936 -0.2938i
+| 000 > : +0.0529 +0.1423i
+| 001 > : -0.1480 -0.3985i
+| 010 > : -0.5975 +0.2219i
+| 100 > : +0.2746 -0.1020i
+| 101 > : +0.1868 -0.0694i
+| 110 > : +0.1436 +0.3866i
+| 111 > : -0.1070 -0.2880i
 
 
-VQE Done: CPU Time =          0.7731
+VQE Done: CPU Time =          0.2670
 
 Saved in ./random_hamiltonian.qkt.
 +-------------+
@@ -891,62 +646,24 @@ Initial state:
 | 101 > : +0.0000 -0.7071i
 
 user-defined pauli_list found.
-Tapering-Off Results:
-List of redundant qubits:  None
+Sequential Tapering-Off Results:
+No symmetry found.
 
-First perform tapering.run(). No transformation done
 user-defined pauli_list found.
-Tapering-Off Results:
-List of redundant qubits:  None
+Sequential Tapering-Off Results:
+No symmetry found.
 
-First perform tapering.run(). No transformation done
+Davidson convergence achieved.
 FCI in Qubits
-(FCI state : E = -1.7541198655)
+(FCI state : E = -1.3334245569)
   Basis          Coef
-| 000 > : +0.1032 +0.0000i
-| 001 > : -0.4474 +0.0000i
-| 010 > : -0.0000 +0.2155i
-| 011 > : +0.0000 +0.5245i
-| 100 > : +0.0000 -0.4990i
-| 110 > : +0.3393 +0.0000i
-| 111 > : -0.3869 -0.0000i
-
-(FCI state : E = -1.3752854419)
-  Basis          Coef
-| 010 > : -0.7802 -0.0000i
-| 011 > : +0.2318 -0.0000i
-| 101 > : +0.2972 -0.0000i
-| 110 > : -0.0000 +0.2718i
-| 111 > : +0.0000 -0.3694i
-
-(FCI state : E = -1.2718113713)
-  Basis          Coef
-| 001 > : -0.3148 +0.0000i
-| 010 > : +0.0000 -0.6406i
-| 100 > : -0.0000 -0.3031i
-| 101 > : -0.0000 +0.4424i
-| 110 > : -0.1085 -0.0000i
-| 111 > : +0.4314 +0.0000i
-
-(FCI state : E = -1.0506564558)
-  Basis          Coef
-| 000 > : +0.0000 -0.4355i
-| 001 > : -0.0000 +0.1125i
-| 100 > : -0.7688 -0.0000i
-| 101 > : -0.3411 +0.0000i
-| 110 > : +0.0000 +0.1272i
-| 111 > : -0.0000 -0.2521i
-
-(FCI state : E = -0.7880362534)
-  Basis          Coef
-| 000 > : -0.1809 +0.0000i
-| 001 > : -0.6117 -0.0000i
-| 010 > : -0.0000 +0.3316i
-| 011 > : -0.0000 -0.4680i
-| 100 > : +0.0000 +0.2563i
-| 101 > : +0.0000 +0.2115i
-| 110 > : +0.3221 +0.0000i
-| 111 > : +0.1812 -0.0000i
+| 000 > : -0.1497 +0.0074i
+| 001 > : +0.4671 -0.0231i
+| 010 > : -0.0300 -0.6084i
+| 100 > : +0.0156 +0.3162i
+| 101 > : +0.0084 +0.1692i
+| 110 > : -0.4249 +0.0210i
+| 111 > : +0.2786 -0.0138i
 
 Entered VQE driver
 Performing VQE for user-defined
@@ -955,70 +672,100 @@ Initial configuration:  +1.0000+0.0000j * |011> -0.0000-1.0000j * |101>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
-Initial: E[user-defined] = +0.400000879533  <S**2> = +0.000000  Fidelity = 0.137673  rho = 1  
-      1: E[user-defined] = -0.286365367899  <S**2> = +0.000000  Fidelity = 0.145298  Grad = 1.87e+00  CPU Time =    1.06600  (0.00 / step)
-      2: E[user-defined] = -0.357977519881  <S**2> = +0.000000  Fidelity = 0.165681  Grad = 1.81e+00  CPU Time =    0.07552  (0.00 / step)
-      3: E[user-defined] = -0.568328090789  <S**2> = +0.000000  Fidelity = 0.250823  Grad = 2.93e+00  CPU Time =    0.01631  (0.00 / step)
-      4: E[user-defined] = -1.045717932056  <S**2> = +0.000000  Fidelity = 0.349338  Grad = 8.84e-01  CPU Time =    0.01337  (0.00 / step)
-      5: E[user-defined] = -1.131253222649  <S**2> = +0.000000  Fidelity = 0.420573  Grad = 6.16e-01  CPU Time =    0.01409  (0.00 / step)
-      6: E[user-defined] = -1.184530502693  <S**2> = +0.000000  Fidelity = 0.362871  Grad = 6.73e-01  CPU Time =    0.01385  (0.00 / step)
-      7: E[user-defined] = -1.217171747087  <S**2> = +0.000000  Fidelity = 0.362634  Grad = 2.80e-01  CPU Time =    0.00372  (0.00 / step)
-      8: E[user-defined] = -1.223534888785  <S**2> = +0.000000  Fidelity = 0.357888  Grad = 1.94e-01  CPU Time =    0.00353  (0.00 / step)
-      9: E[user-defined] = -1.234750119994  <S**2> = +0.000000  Fidelity = 0.312315  Grad = 1.92e-01  CPU Time =    0.00344  (0.00 / step)
-     10: E[user-defined] = -1.238825155566  <S**2> = +0.000000  Fidelity = 0.251234  Grad = 1.43e-01  CPU Time =    0.00331  (0.00 / step)
-     11: E[user-defined] = -1.240555796717  <S**2> = +0.000000  Fidelity = 0.271258  Grad = 3.91e-02  CPU Time =    0.00324  (0.00 / step)
-     12: E[user-defined] = -1.240754866160  <S**2> = +0.000000  Fidelity = 0.266663  Grad = 1.16e-02  CPU Time =    0.00327  (0.00 / step)
-     13: E[user-defined] = -1.240779921768  <S**2> = +0.000000  Fidelity = 0.264817  Grad = 6.57e-03  CPU Time =    0.00330  (0.00 / step)
-     14: E[user-defined] = -1.240801044586  <S**2> = +0.000000  Fidelity = 0.265071  Grad = 7.46e-03  CPU Time =    0.00314  (0.00 / step)
-     15: E[user-defined] = -1.240971926346  <S**2> = +0.000000  Fidelity = 0.267185  Grad = 3.64e-02  CPU Time =    0.00285  (0.00 / step)
-     16: E[user-defined] = -1.241242682847  <S**2> = +0.000000  Fidelity = 0.272371  Grad = 1.03e-01  CPU Time =    0.00413  (0.00 / step)
-     17: E[user-defined] = -1.241515292036  <S**2> = +0.000000  Fidelity = 0.281043  Grad = 1.98e-01  CPU Time =    0.00289  (0.00 / step)
-     18: E[user-defined] = -1.247161701647  <S**2> = +0.000000  Fidelity = 0.320124  Grad = 2.97e-01  CPU Time =    0.00448  (0.00 / step)
-     19: E[user-defined] = -1.255455618433  <S**2> = +0.000000  Fidelity = 0.378523  Grad = 3.92e-01  CPU Time =    0.00446  (0.00 / step)
-     20: E[user-defined] = -1.267102118157  <S**2> = +0.000000  Fidelity = 0.460267  Grad = 7.81e-01  CPU Time =    0.00336  (0.00 / step)
-     21: E[user-defined] = -1.277837529633  <S**2> = +0.000000  Fidelity = 0.492990  Grad = 7.00e-01  CPU Time =    0.00426  (0.00 / step)
-     22: E[user-defined] = -1.291373934173  <S**2> = +0.000000  Fidelity = 0.519935  Grad = 5.12e-01  CPU Time =    0.00410  (0.00 / step)
-     23: E[user-defined] = -1.311170014512  <S**2> = +0.000000  Fidelity = 0.508229  Grad = 3.70e-01  CPU Time =    0.00290  (0.00 / step)
-     24: E[user-defined] = -1.318922462716  <S**2> = +0.000000  Fidelity = 0.531822  Grad = 3.06e-01  CPU Time =    0.00292  (0.00 / step)
-     25: E[user-defined] = -1.326868807249  <S**2> = +0.000000  Fidelity = 0.539964  Grad = 1.25e-01  CPU Time =    0.00291  (0.00 / step)
-     26: E[user-defined] = -1.328759454190  <S**2> = +0.000000  Fidelity = 0.548271  Grad = 8.62e-02  CPU Time =    0.00290  (0.00 / step)
-     27: E[user-defined] = -1.330061549223  <S**2> = +0.000000  Fidelity = 0.549911  Grad = 8.60e-02  CPU Time =    0.00295  (0.00 / step)
-     28: E[user-defined] = -1.331614339836  <S**2> = +0.000000  Fidelity = 0.552412  Grad = 7.43e-02  CPU Time =    0.00291  (0.00 / step)
-     29: E[user-defined] = -1.332038917883  <S**2> = +0.000000  Fidelity = 0.553498  Grad = 4.38e-02  CPU Time =    0.00287  (0.00 / step)
-     30: E[user-defined] = -1.332183175974  <S**2> = +0.000000  Fidelity = 0.553941  Grad = 2.33e-02  CPU Time =    0.00326  (0.00 / step)
-     31: E[user-defined] = -1.332250140777  <S**2> = +0.000000  Fidelity = 0.554391  Grad = 2.09e-02  CPU Time =    0.00325  (0.00 / step)
-     32: E[user-defined] = -1.332286198125  <S**2> = +0.000000  Fidelity = 0.553590  Grad = 1.35e-02  CPU Time =    0.00325  (0.00 / step)
-     33: E[user-defined] = -1.332319917049  <S**2> = +0.000000  Fidelity = 0.553225  Grad = 1.00e-02  CPU Time =    0.00305  (0.00 / step)
-     34: E[user-defined] = -1.332451439971  <S**2> = +0.000000  Fidelity = 0.551289  Grad = 1.90e-02  CPU Time =    0.00333  (0.00 / step)
-     35: E[user-defined] = -1.332578398791  <S**2> = +0.000000  Fidelity = 0.549853  Grad = 2.64e-02  CPU Time =    0.00328  (0.00 / step)
-     36: E[user-defined] = -1.332757293075  <S**2> = +0.000000  Fidelity = 0.549845  Grad = 4.32e-02  CPU Time =    0.00336  (0.00 / step)
-     37: E[user-defined] = -1.332856419886  <S**2> = +0.000000  Fidelity = 0.547176  Grad = 3.43e-02  CPU Time =    0.00389  (0.00 / step)
-     38: E[user-defined] = -1.332937054501  <S**2> = +0.000000  Fidelity = 0.550644  Grad = 9.02e-03  CPU Time =    0.00366  (0.00 / step)
-     39: E[user-defined] = -1.332953297104  <S**2> = +0.000000  Fidelity = 0.551892  Grad = 5.41e-03  CPU Time =    0.00348  (0.00 / step)
-     40: E[user-defined] = -1.332961041838  <S**2> = +0.000000  Fidelity = 0.552967  Grad = 5.41e-03  CPU Time =    0.00313  (0.00 / step)
-     41: E[user-defined] = -1.332962437450  <S**2> = +0.000000  Fidelity = 0.553364  Grad = 1.99e-03  CPU Time =    0.00466  (0.00 / step)
-     42: E[user-defined] = -1.332962894878  <S**2> = +0.000000  Fidelity = 0.553393  Grad = 9.27e-04  CPU Time =    0.00356  (0.00 / step)
-     43: E[user-defined] = -1.332963054912  <S**2> = +0.000000  Fidelity = 0.553439  Grad = 4.15e-04  CPU Time =    0.00328  (0.00 / step)
-     44: E[user-defined] = -1.332963109901  <S**2> = +0.000000  Fidelity = 0.553495  Grad = 3.14e-04  CPU Time =    0.00306  (0.00 / step)
-     45: E[user-defined] = -1.332963116075  <S**2> = +0.000000  Fidelity = 0.553520  Grad = 3.16e-04  CPU Time =    0.00330  (0.00 / step)
-     46: E[user-defined] = -1.332963123193  <S**2> = +0.000000  Fidelity = 0.553515  Grad = 1.14e-04  CPU Time =    0.00288  (0.00 / step)
-     47: E[user-defined] = -1.332963125170  <S**2> = +0.000000  Fidelity = 0.553515  Grad = 8.19e-05  CPU Time =    0.00290  (0.00 / step)
-     48: E[user-defined] = -1.332963128108  <S**2> = +0.000000  Fidelity = 0.553517  Grad = 7.59e-05  CPU Time =    0.00289  (0.00 / step)
-     49: E[user-defined] = -1.332963129420  <S**2> = +0.000000  Fidelity = 0.553524  Grad = 6.33e-05  CPU Time =    0.00290  (0.00 / step)
-  Final: E[user-defined] = -1.332963129420  <S**2> = +0.000000  Fidelity = 0.553524  rho = 1 
+Initial: E[user-defined] = +0.399999459631  <S**2> = +0.000000  Fidelity = 0.014410  rho = 1  
+      1: E[user-defined] = -0.740498872335  <S**2> = +0.000000  Fidelity = 0.011704  Grad = 8.39e-01  CPU Time =    0.02854  (0.00 / step)
+      2: E[user-defined] = -0.740500119844  <S**2> = +0.000000  Fidelity = 0.011676  Grad = 8.38e-01  CPU Time =    0.00927  (0.00 / step)
+      3: E[user-defined] = -0.753324716428  <S**2> = +0.000000  Fidelity = 0.010312  Grad = 7.52e-01  CPU Time =    0.00665  (0.00 / step)
+      4: E[user-defined] = -0.795105453784  <S**2> = +0.000000  Fidelity = 0.013647  Grad = 7.75e-01  CPU Time =    0.00670  (0.00 / step)
+      5: E[user-defined] = -0.819819786726  <S**2> = +0.000000  Fidelity = 0.011427  Grad = 3.32e-01  CPU Time =    0.00658  (0.00 / step)
+      6: E[user-defined] = -1.004289249433  <S**2> = +0.000000  Fidelity = 0.114143  Grad = 7.10e-01  CPU Time =    0.01572  (0.00 / step)
+      7: E[user-defined] = -1.019607897530  <S**2> = +0.000000  Fidelity = 0.127916  Grad = 7.35e-01  CPU Time =    0.00975  (0.00 / step)
+      8: E[user-defined] = -1.098017627265  <S**2> = +0.000000  Fidelity = 0.152145  Grad = 6.80e-01  CPU Time =    0.00658  (0.00 / step)
+      9: E[user-defined] = -1.176700498959  <S**2> = +0.000000  Fidelity = 0.111135  Grad = 6.07e-01  CPU Time =    0.00659  (0.00 / step)
+     10: E[user-defined] = -1.212820924584  <S**2> = +0.000000  Fidelity = 0.064078  Grad = 7.82e-01  CPU Time =    0.00658  (0.00 / step)
+     11: E[user-defined] = -1.236389424415  <S**2> = +0.000000  Fidelity = 0.057458  Grad = 2.08e-01  CPU Time =    0.00679  (0.00 / step)
+     12: E[user-defined] = -1.240486882114  <S**2> = +0.000000  Fidelity = 0.051355  Grad = 1.35e-01  CPU Time =    0.00653  (0.00 / step)
+     13: E[user-defined] = -1.243085293588  <S**2> = +0.000000  Fidelity = 0.045760  Grad = 1.12e-01  CPU Time =    0.00663  (0.00 / step)
+     14: E[user-defined] = -1.244999616438  <S**2> = +0.000000  Fidelity = 0.042599  Grad = 9.16e-02  CPU Time =    0.00662  (0.00 / step)
+     15: E[user-defined] = -1.246716894119  <S**2> = +0.000000  Fidelity = 0.042118  Grad = 6.16e-02  CPU Time =    0.00665  (0.00 / step)
+     16: E[user-defined] = -1.247470520788  <S**2> = +0.000000  Fidelity = 0.041087  Grad = 4.75e-02  CPU Time =    0.00661  (0.00 / step)
+     17: E[user-defined] = -1.247976516958  <S**2> = +0.000000  Fidelity = 0.042673  Grad = 5.49e-02  CPU Time =    0.00657  (0.00 / step)
+     18: E[user-defined] = -1.248265493924  <S**2> = +0.000000  Fidelity = 0.038112  Grad = 4.22e-02  CPU Time =    0.00650  (0.00 / step)
+     19: E[user-defined] = -1.248696506314  <S**2> = +0.000000  Fidelity = 0.035179  Grad = 3.42e-02  CPU Time =    0.00657  (0.00 / step)
+     20: E[user-defined] = -1.249185429974  <S**2> = +0.000000  Fidelity = 0.028569  Grad = 3.91e-02  CPU Time =    0.00663  (0.00 / step)
+     21: E[user-defined] = -1.249907996273  <S**2> = +0.000000  Fidelity = 0.019140  Grad = 4.12e-02  CPU Time =    0.00652  (0.00 / step)
+     22: E[user-defined] = -1.250340184161  <S**2> = +0.000000  Fidelity = 0.003945  Grad = 1.53e-01  CPU Time =    0.00647  (0.00 / step)
+     23: E[user-defined] = -1.251447742173  <S**2> = +0.000000  Fidelity = 0.003400  Grad = 5.95e-02  CPU Time =    0.00661  (0.00 / step)
+     24: E[user-defined] = -1.251770023439  <S**2> = +0.000000  Fidelity = 0.005475  Grad = 3.37e-02  CPU Time =    0.00669  (0.00 / step)
+     25: E[user-defined] = -1.252032533269  <S**2> = +0.000000  Fidelity = 0.003444  Grad = 1.80e-02  CPU Time =    0.00718  (0.00 / step)
+     26: E[user-defined] = -1.252106738464  <S**2> = +0.000000  Fidelity = 0.002588  Grad = 1.54e-02  CPU Time =    0.00712  (0.00 / step)
+     27: E[user-defined] = -1.252177805701  <S**2> = +0.000000  Fidelity = 0.002186  Grad = 1.32e-02  CPU Time =    0.00729  (0.00 / step)
+     28: E[user-defined] = -1.252247274133  <S**2> = +0.000000  Fidelity = 0.001590  Grad = 1.41e-02  CPU Time =    0.00741  (0.00 / step)
+     29: E[user-defined] = -1.252269199135  <S**2> = +0.000000  Fidelity = 0.001604  Grad = 6.76e-03  CPU Time =    0.00714  (0.00 / step)
+     30: E[user-defined] = -1.252276818360  <S**2> = +0.000000  Fidelity = 0.001606  Grad = 5.21e-03  CPU Time =    0.00668  (0.00 / step)
+     31: E[user-defined] = -1.252292638924  <S**2> = +0.000000  Fidelity = 0.001775  Grad = 4.55e-03  CPU Time =    0.00659  (0.00 / step)
+     32: E[user-defined] = -1.252295660878  <S**2> = +0.000000  Fidelity = 0.001981  Grad = 7.09e-03  CPU Time =    0.00665  (0.00 / step)
+     33: E[user-defined] = -1.252299129261  <S**2> = +0.000000  Fidelity = 0.002012  Grad = 1.77e-03  CPU Time =    0.00671  (0.00 / step)
+     34: E[user-defined] = -1.252299694990  <S**2> = +0.000000  Fidelity = 0.001999  Grad = 1.58e-03  CPU Time =    0.00675  (0.00 / step)
+     35: E[user-defined] = -1.252300595796  <S**2> = +0.000000  Fidelity = 0.001988  Grad = 3.87e-03  CPU Time =    0.00674  (0.00 / step)
+     36: E[user-defined] = -1.252302153844  <S**2> = +0.000000  Fidelity = 0.002065  Grad = 1.97e-03  CPU Time =    0.00658  (0.00 / step)
+     37: E[user-defined] = -1.252303287877  <S**2> = +0.000000  Fidelity = 0.002129  Grad = 2.13e-03  CPU Time =    0.00661  (0.00 / step)
+     38: E[user-defined] = -1.252305897869  <S**2> = +0.000000  Fidelity = 0.002277  Grad = 3.23e-03  CPU Time =    0.00654  (0.00 / step)
+     39: E[user-defined] = -1.252311260095  <S**2> = +0.000000  Fidelity = 0.002573  Grad = 5.14e-03  CPU Time =    0.00658  (0.00 / step)
+     40: E[user-defined] = -1.252329644923  <S**2> = +0.000000  Fidelity = 0.003730  Grad = 9.44e-03  CPU Time =    0.00659  (0.00 / step)
+     41: E[user-defined] = -1.252362261218  <S**2> = +0.000000  Fidelity = 0.006218  Grad = 2.12e-02  CPU Time =    0.00970  (0.00 / step)
+     42: E[user-defined] = -1.252387681617  <S**2> = +0.000000  Fidelity = 0.008157  Grad = 3.43e-02  CPU Time =    0.00952  (0.00 / step)
+     43: E[user-defined] = -1.252442158067  <S**2> = +0.000000  Fidelity = 0.013084  Grad = 7.73e-02  CPU Time =    0.00655  (0.00 / step)
+     44: E[user-defined] = -1.252627796147  <S**2> = +0.000000  Fidelity = 0.011190  Grad = 4.92e-02  CPU Time =    0.00667  (0.00 / step)
+     45: E[user-defined] = -1.253118790983  <S**2> = +0.000000  Fidelity = 0.015039  Grad = 3.81e-02  CPU Time =    0.00675  (0.00 / step)
+     46: E[user-defined] = -1.253656463538  <S**2> = +0.000000  Fidelity = 0.023711  Grad = 8.02e-02  CPU Time =    0.00960  (0.00 / step)
+     47: E[user-defined] = -1.254084090360  <S**2> = +0.000000  Fidelity = 0.032833  Grad = 1.12e-01  CPU Time =    0.00964  (0.00 / step)
+     48: E[user-defined] = -1.254772371026  <S**2> = +0.000000  Fidelity = 0.044302  Grad = 8.69e-02  CPU Time =    0.00665  (0.00 / step)
+     49: E[user-defined] = -1.255551737154  <S**2> = +0.000000  Fidelity = 0.065699  Grad = 1.09e-01  CPU Time =    0.00651  (0.00 / step)
+     50: E[user-defined] = -1.259092544037  <S**2> = +0.000000  Fidelity = 0.156465  Grad = 1.53e-01  CPU Time =    0.00653  (0.00 / step)
+     51: E[user-defined] = -1.261879201313  <S**2> = +0.000000  Fidelity = 0.217682  Grad = 1.52e-01  CPU Time =    0.00956  (0.00 / step)
+     52: E[user-defined] = -1.266015611324  <S**2> = +0.000000  Fidelity = 0.279643  Grad = 2.66e-01  CPU Time =    0.00967  (0.00 / step)
+     53: E[user-defined] = -1.272261520993  <S**2> = +0.000000  Fidelity = 0.394537  Grad = 2.57e-01  CPU Time =    0.00677  (0.00 / step)
+     54: E[user-defined] = -1.278573002027  <S**2> = +0.000000  Fidelity = 0.422774  Grad = 2.62e-01  CPU Time =    0.01013  (0.00 / step)
+     55: E[user-defined] = -1.285174513889  <S**2> = +0.000000  Fidelity = 0.535351  Grad = 2.27e-01  CPU Time =    0.00736  (0.00 / step)
+     56: E[user-defined] = -1.291022609525  <S**2> = +0.000000  Fidelity = 0.563940  Grad = 1.67e-01  CPU Time =    0.00719  (0.00 / step)
+     57: E[user-defined] = -1.297742267731  <S**2> = +0.000000  Fidelity = 0.679697  Grad = 1.48e-01  CPU Time =    0.00702  (0.00 / step)
+     58: E[user-defined] = -1.308731501651  <S**2> = +0.000000  Fidelity = 0.820614  Grad = 2.14e-01  CPU Time =    0.00667  (0.00 / step)
+     59: E[user-defined] = -1.316461445091  <S**2> = +0.000000  Fidelity = 0.928401  Grad = 2.59e-01  CPU Time =    0.01010  (0.00 / step)
+     60: E[user-defined] = -1.323786315512  <S**2> = +0.000000  Fidelity = 0.967354  Grad = 1.84e-01  CPU Time =    0.00995  (0.00 / step)
+     61: E[user-defined] = -1.326930062810  <S**2> = +0.000000  Fidelity = 0.978047  Grad = 1.09e-01  CPU Time =    0.00700  (0.00 / step)
+     62: E[user-defined] = -1.328018356467  <S**2> = +0.000000  Fidelity = 0.970933  Grad = 1.29e-01  CPU Time =    0.00685  (0.00 / step)
+     63: E[user-defined] = -1.330164647647  <S**2> = +0.000000  Fidelity = 0.984317  Grad = 8.18e-02  CPU Time =    0.00673  (0.00 / step)
+     64: E[user-defined] = -1.331539322471  <S**2> = +0.000000  Fidelity = 0.991903  Grad = 8.40e-02  CPU Time =    0.00666  (0.00 / step)
+     65: E[user-defined] = -1.332289411566  <S**2> = +0.000000  Fidelity = 0.993392  Grad = 7.13e-02  CPU Time =    0.00652  (0.00 / step)
+     66: E[user-defined] = -1.332557315292  <S**2> = +0.000000  Fidelity = 0.994479  Grad = 2.11e-02  CPU Time =    0.00651  (0.00 / step)
+     67: E[user-defined] = -1.332594093656  <S**2> = +0.000000  Fidelity = 0.994590  Grad = 1.27e-02  CPU Time =    0.00663  (0.00 / step)
+     68: E[user-defined] = -1.332625678002  <S**2> = +0.000000  Fidelity = 0.994573  Grad = 1.09e-02  CPU Time =    0.00676  (0.00 / step)
+     69: E[user-defined] = -1.332713815131  <S**2> = +0.000000  Fidelity = 0.994570  Grad = 1.36e-02  CPU Time =    0.00680  (0.00 / step)
+     70: E[user-defined] = -1.332814488411  <S**2> = +0.000000  Fidelity = 0.994657  Grad = 1.65e-02  CPU Time =    0.00717  (0.00 / step)
+     71: E[user-defined] = -1.332850067020  <S**2> = +0.000000  Fidelity = 0.994976  Grad = 3.29e-02  CPU Time =    0.00716  (0.00 / step)
+     72: E[user-defined] = -1.332960547259  <S**2> = +0.000000  Fidelity = 0.994828  Grad = 4.15e-03  CPU Time =    0.00733  (0.00 / step)
+     73: E[user-defined] = -1.332962454394  <S**2> = +0.000000  Fidelity = 0.994815  Grad = 2.03e-03  CPU Time =    0.00717  (0.00 / step)
+     74: E[user-defined] = -1.332962936688  <S**2> = +0.000000  Fidelity = 0.994803  Grad = 8.91e-04  CPU Time =    0.00719  (0.00 / step)
+     75: E[user-defined] = -1.332963090131  <S**2> = +0.000000  Fidelity = 0.994786  Grad = 4.39e-04  CPU Time =    0.00712  (0.00 / step)
+     76: E[user-defined] = -1.332963122283  <S**2> = +0.000000  Fidelity = 0.994776  Grad = 2.82e-04  CPU Time =    0.00698  (0.00 / step)
+     77: E[user-defined] = -1.332963125568  <S**2> = +0.000000  Fidelity = 0.994774  Grad = 3.06e-04  CPU Time =    0.00651  (0.00 / step)
+     78: E[user-defined] = -1.332963128786  <S**2> = +0.000000  Fidelity = 0.994777  Grad = 6.61e-05  CPU Time =    0.00661  (0.00 / step)
+     79: E[user-defined] = -1.332963129225  <S**2> = +0.000000  Fidelity = 0.994777  Grad = 3.85e-05  CPU Time =    0.00686  (0.00 / step)
+  Final: E[user-defined] = -1.332963129225  <S**2> = +0.000000  Fidelity = 0.994777  rho = 1 
 
 (user-defined state)
   Basis          Coef
-| 000 > : +0.1411 -0.0560i
-| 001 > : -0.3952 +0.1567i
-| 010 > : +0.2350 +0.5924i
-| 100 > : -0.1080 -0.2723i
-| 101 > : -0.0735 -0.1852i
-| 110 > : +0.3834 -0.1521i
-| 111 > : -0.2855 +0.1132i
+| 000 > : +0.1074 -0.1073i
+| 001 > : -0.3008 +0.3005i
+| 010 > : +0.4504 +0.4509i
+| 100 > : -0.2070 -0.2072i
+| 101 > : -0.1408 -0.1410i
+| 110 > : +0.2918 -0.2915i
+| 111 > : -0.2173 +0.2171i
 
 
-VQE Done: CPU Time =          1.3484
+VQE Done: CPU Time =          0.6063
 
 Saved in ./random_hamiltonian.qkt.
-Normal termination of quket at 2022-08-07 01:08:01.554989
+Normal termination of quket at 2022-09-16 00:10:01.316407

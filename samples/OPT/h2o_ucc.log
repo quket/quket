@@ -9,17 +9,17 @@
 ///             Q   Q       U    U      K   K       E    E       T              ///
 ///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
 ///                                                                             ///
-///                      Quantum Computing Simulator Ver 0.9.1                  ///
+///                      Quantum Computing Simulator Ver 0.9.4                  ///
 ///                                                                             ///
 ///        Copyright 2019-2022                                                  ///
 ///        The Quket Developers                                                 ///
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-08-07 01:06:17.090495: 
-8 processes x 4 = Total 32 cores
-API for qulacs: None
-Number of cpus in the main node (pinode01): 8
+2022-09-16 00:07:41.435291: 
+16 processes x 2 = Total 32 cores
+API for qulacs: openmp
+Number of cpus in the main node (pinode01): 16
 
 ##################### INPUT ########################
  basis        = STO-6G
@@ -49,7 +49,7 @@ Basis set = STO-6G
 *******************************************
 
 Symmetry Cs : Cs(Abelian)
-E[FCI]    = -75.719215312767     (Spin = 1   Ms = 0)
+E[FCI]    = -75.719215312768     (Spin = 1   Ms = 0)
 E[HF]     = -75.678679186538     (Spin = 1   Ms = 0)
 Tapering-Off Results:
 List of redundant qubits:  [0, 1, 4]
@@ -57,6 +57,10 @@ Qubit: 0    Tau: 1.0 [Z0 Z2 Z5 Z6 Z8]
 Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
 Qubit: 4    Tau: 1.0 [Z4 Z5]
 
+Symmetry-forbidden pauli operators are removed.
+Existing theta_list is inconsistent :
+   size of pauli_list 54 != size of theta_list 30.
+Ovewrite theta_list by zero.
 NBasis = 7
 
 [Molecular Orbitals]
@@ -80,21 +84,19 @@ Qubit: 4    Tau: 1.0 [Z4 Z5]
 
 Entered VQE driver
 Performing VQE for uccsd
-Number of VQE parameters: 30
+Number of VQE parameters: 54
 Initial configuration: |0000111111>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
-Dimensions of theta_list (54) and pauli_list (30) are not consistent.
-Take over theta_list and force it to have 30 zero elements (guess will be gone!).
 Circuit order: Exp[T1] Exp[T2] |0>
 Initial: E[uccsd] = -75.678679186538  <S**2> = +0.000000  rho = 1  
-      1: E[uccsd] = -75.717454620922  <S**2> = +0.000000  Grad = 8.53e-02  CPU Time =    0.07987  (0.00 / step)
-      2: E[uccsd] = -75.718905154306  <S**2> = +0.000000  Grad = 2.57e-02  CPU Time =    0.02537  (0.00 / step)
-      3: E[uccsd] = -75.719101818547  <S**2> = +0.000000  Grad = 1.10e-02  CPU Time =    0.02611  (0.00 / step)
-      4: E[uccsd] = -75.719146755659  <S**2> = +0.000000  Grad = 3.03e-03  CPU Time =    0.02038  (0.00 / step)
-      5: E[uccsd] = -75.719148079037  <S**2> = +0.000000  Grad = 1.04e-03  CPU Time =    0.03426  (0.00 / step)
-      6: E[uccsd] = -75.719148262129  <S**2> = +0.000000  Grad = 1.26e-04  CPU Time =    0.02038  (0.00 / step)
-      7: E[uccsd] = -75.719148265928  <S**2> = +0.000000  Grad = 4.63e-05  CPU Time =    0.02018  (0.00 / step)
+      1: E[uccsd] = -75.717454620923  <S**2> = +0.000000  Grad = 8.53e-02  CPU Time =    0.09813  (0.00 / step)
+      2: E[uccsd] = -75.718905154306  <S**2> = +0.000000  Grad = 2.57e-02  CPU Time =    0.02550  (0.00 / step)
+      3: E[uccsd] = -75.719101818547  <S**2> = +0.000000  Grad = 1.10e-02  CPU Time =    0.02684  (0.00 / step)
+      4: E[uccsd] = -75.719146755659  <S**2> = +0.000000  Grad = 3.03e-03  CPU Time =    0.02657  (0.00 / step)
+      5: E[uccsd] = -75.719148079037  <S**2> = +0.000000  Grad = 1.04e-03  CPU Time =    0.04557  (0.00 / step)
+      6: E[uccsd] = -75.719148262130  <S**2> = +0.000000  Grad = 1.26e-04  CPU Time =    0.02657  (0.00 / step)
+      7: E[uccsd] = -75.719148265928  <S**2> = +0.000000  Grad = 4.63e-05  CPU Time =    0.02644  (0.00 / step)
   Final: E[uccsd] = -75.719148265928  <S**2> = +0.000000  rho = 1 
 
 (uccsd state)
@@ -102,7 +104,7 @@ Initial: E[uccsd] = -75.678679186538  <S**2> = +0.000000  rho = 1
 | 0000111111 > : +0.9869 +0.0000i
 
 
-VQE Done: CPU Time =          0.2404
+VQE Done: CPU Time =          0.2896
 
 uccsd (vqe) 
      Basis             Coef
@@ -146,13 +148,17 @@ Qubit: 0    Tau: 1.0 [Z0 Z2 Z5 Z6 Z8]
 Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
 Qubit: 4    Tau: 1.0 [Z4 Z5]
 
-      1: E[uccsd] = -75.721561135804  <S**2> = +0.000000  Grad = 8.70e-02  CPU Time =    0.05246  (0.00 / step)
-      2: E[uccsd] = -75.723134671938  <S**2> = +0.000000  Grad = 2.58e-02  CPU Time =    0.03399  (0.00 / step)
-      3: E[uccsd] = -75.723337788664  <S**2> = +0.000000  Grad = 1.06e-02  CPU Time =    0.02474  (0.00 / step)
-      4: E[uccsd] = -75.723380641651  <S**2> = +0.000000  Grad = 2.36e-03  CPU Time =    0.02456  (0.00 / step)
-      5: E[uccsd] = -75.723381253796  <S**2> = +0.000000  Grad = 1.60e-03  CPU Time =    0.02449  (0.00 / step)
-      6: E[uccsd] = -75.723381694446  <S**2> = +0.000000  Grad = 7.48e-05  CPU Time =    0.02460  (0.00 / step)
-      7: E[uccsd] = -75.723381695505  <S**2> = +0.000000  Grad = 1.05e-05  CPU Time =    0.02451  (0.00 / step)
+Symmetry-forbidden pauli operators are removed.
+Existing theta_list is inconsistent :
+   size of pauli_list 54 != size of theta_list 30.
+Ovewrite theta_list by zero.
+      1: E[uccsd] = -75.721561135804  <S**2> = +0.000000  Grad = 8.70e-02  CPU Time =    0.05835  (0.00 / step)
+      2: E[uccsd] = -75.723134671938  <S**2> = +0.000000  Grad = 2.58e-02  CPU Time =    0.02703  (0.00 / step)
+      3: E[uccsd] = -75.723337788664  <S**2> = +0.000000  Grad = 1.06e-02  CPU Time =    0.02695  (0.00 / step)
+      4: E[uccsd] = -75.723380641651  <S**2> = +0.000000  Grad = 2.36e-03  CPU Time =    0.02687  (0.00 / step)
+      5: E[uccsd] = -75.723381253796  <S**2> = +0.000000  Grad = 1.60e-03  CPU Time =    0.02668  (0.00 / step)
+      6: E[uccsd] = -75.723381694446  <S**2> = +0.000000  Grad = 7.48e-05  CPU Time =    0.02690  (0.00 / step)
+      7: E[uccsd] = -75.723381695505  <S**2> = +0.000000  Grad = 1.05e-05  CPU Time =    0.02697  (0.00 / step)
   Final: E[uccsd] = -75.723381695505  <S**2> = +0.000000  rho = 1 
 
 (uccsd state)
@@ -190,13 +196,17 @@ Qubit: 0    Tau: 1.0 [Z0 Z2 Z5 Z6 Z8]
 Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
 Qubit: 4    Tau: 1.0 [Z4 Z5]
 
-      1: E[uccsd] = -75.721590356620  <S**2> = +0.000000  Grad = 8.73e-02  CPU Time =    0.05536  (0.00 / step)
-      2: E[uccsd] = -75.723181359586  <S**2> = +0.000000  Grad = 2.60e-02  CPU Time =    0.03063  (0.00 / step)
-      3: E[uccsd] = -75.723388842122  <S**2> = +0.000000  Grad = 1.07e-02  CPU Time =    0.03036  (0.00 / step)
-      4: E[uccsd] = -75.723432819707  <S**2> = +0.000000  Grad = 2.39e-03  CPU Time =    0.03026  (0.00 / step)
-      5: E[uccsd] = -75.723433436099  <S**2> = +0.000000  Grad = 1.63e-03  CPU Time =    0.03089  (0.00 / step)
-      6: E[uccsd] = -75.723433896832  <S**2> = +0.000000  Grad = 7.34e-05  CPU Time =    0.02458  (0.00 / step)
-      7: E[uccsd] = -75.723433897864  <S**2> = +0.000000  Grad = 9.41e-06  CPU Time =    0.02464  (0.00 / step)
+Symmetry-forbidden pauli operators are removed.
+Existing theta_list is inconsistent :
+   size of pauli_list 54 != size of theta_list 30.
+Ovewrite theta_list by zero.
+      1: E[uccsd] = -75.721590356621  <S**2> = +0.000000  Grad = 8.73e-02  CPU Time =    0.05741  (0.00 / step)
+      2: E[uccsd] = -75.723181359586  <S**2> = +0.000000  Grad = 2.60e-02  CPU Time =    0.02657  (0.00 / step)
+      3: E[uccsd] = -75.723388842122  <S**2> = +0.000000  Grad = 1.07e-02  CPU Time =    0.02696  (0.00 / step)
+      4: E[uccsd] = -75.723432819707  <S**2> = +0.000000  Grad = 2.39e-03  CPU Time =    0.02683  (0.00 / step)
+      5: E[uccsd] = -75.723433436099  <S**2> = +0.000000  Grad = 1.63e-03  CPU Time =    0.02683  (0.00 / step)
+      6: E[uccsd] = -75.723433896832  <S**2> = +0.000000  Grad = 7.34e-05  CPU Time =    0.02685  (0.00 / step)
+      7: E[uccsd] = -75.723433897864  <S**2> = +0.000000  Grad = 9.41e-06  CPU Time =    0.02685  (0.00 / step)
   Final: E[uccsd] = -75.723433897864  <S**2> = +0.000000  rho = 1 
 
 (uccsd state)
@@ -234,13 +244,17 @@ Qubit: 0    Tau: 1.0 [Z0 Z2 Z5 Z6 Z8]
 Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
 Qubit: 4    Tau: 1.0 [Z4 Z5]
 
-      1: E[uccsd] = -75.721597103408  <S**2> = +0.000000  Grad = 8.73e-02  CPU Time =    0.05086  (0.00 / step)
-      2: E[uccsd] = -75.723185689015  <S**2> = +0.000000  Grad = 2.59e-02  CPU Time =    0.02981  (0.00 / step)
-      3: E[uccsd] = -75.723391523399  <S**2> = +0.000000  Grad = 1.06e-02  CPU Time =    0.02523  (0.00 / step)
-      4: E[uccsd] = -75.723434993714  <S**2> = +0.000000  Grad = 2.38e-03  CPU Time =    0.02455  (0.00 / step)
-      5: E[uccsd] = -75.723435613384  <S**2> = +0.000000  Grad = 1.61e-03  CPU Time =    0.02447  (0.00 / step)
-      6: E[uccsd] = -75.723436062945  <S**2> = +0.000000  Grad = 7.35e-05  CPU Time =    0.02452  (0.00 / step)
-      7: E[uccsd] = -75.723436063971  <S**2> = +0.000000  Grad = 9.35e-06  CPU Time =    0.02463  (0.00 / step)
+Symmetry-forbidden pauli operators are removed.
+Existing theta_list is inconsistent :
+   size of pauli_list 54 != size of theta_list 30.
+Ovewrite theta_list by zero.
+      1: E[uccsd] = -75.721597103408  <S**2> = +0.000000  Grad = 8.73e-02  CPU Time =    0.05711  (0.00 / step)
+      2: E[uccsd] = -75.723185689015  <S**2> = +0.000000  Grad = 2.59e-02  CPU Time =    0.02687  (0.00 / step)
+      3: E[uccsd] = -75.723391523399  <S**2> = +0.000000  Grad = 1.06e-02  CPU Time =    0.02697  (0.00 / step)
+      4: E[uccsd] = -75.723434993714  <S**2> = +0.000000  Grad = 2.38e-03  CPU Time =    0.02678  (0.00 / step)
+      5: E[uccsd] = -75.723435613384  <S**2> = +0.000000  Grad = 1.61e-03  CPU Time =    0.02692  (0.00 / step)
+      6: E[uccsd] = -75.723436062945  <S**2> = +0.000000  Grad = 7.35e-05  CPU Time =    0.02664  (0.00 / step)
+      7: E[uccsd] = -75.723436063971  <S**2> = +0.000000  Grad = 9.35e-06  CPU Time =    0.02689  (0.00 / step)
   Final: E[uccsd] = -75.723436063971  <S**2> = +0.000000  rho = 1 
 
 (uccsd state)
@@ -278,13 +292,17 @@ Qubit: 0    Tau: 1.0 [Z0 Z2 Z5 Z6 Z8]
 Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
 Qubit: 4    Tau: 1.0 [Z4 Z5]
 
-      1: E[uccsd] = -75.721597214405  <S**2> = +0.000000  Grad = 8.73e-02  CPU Time =    0.05090  (0.00 / step)
-      2: E[uccsd] = -75.723185569967  <S**2> = +0.000000  Grad = 2.59e-02  CPU Time =    0.02510  (0.00 / step)
-      3: E[uccsd] = -75.723391798915  <S**2> = +0.000000  Grad = 1.06e-02  CPU Time =    0.02434  (0.00 / step)
-      4: E[uccsd] = -75.723435405368  <S**2> = +0.000000  Grad = 2.38e-03  CPU Time =    0.02424  (0.00 / step)
-      5: E[uccsd] = -75.723436023769  <S**2> = +0.000000  Grad = 1.61e-03  CPU Time =    0.02425  (0.00 / step)
-      6: E[uccsd] = -75.723436475642  <S**2> = +0.000000  Grad = 7.34e-05  CPU Time =    0.02424  (0.00 / step)
-      7: E[uccsd] = -75.723436476669  <S**2> = +0.000000  Grad = 9.36e-06  CPU Time =    0.02422  (0.00 / step)
+Symmetry-forbidden pauli operators are removed.
+Existing theta_list is inconsistent :
+   size of pauli_list 54 != size of theta_list 30.
+Ovewrite theta_list by zero.
+      1: E[uccsd] = -75.721597214405  <S**2> = +0.000000  Grad = 8.73e-02  CPU Time =    0.05694  (0.00 / step)
+      2: E[uccsd] = -75.723185569967  <S**2> = +0.000000  Grad = 2.59e-02  CPU Time =    0.02694  (0.00 / step)
+      3: E[uccsd] = -75.723391798915  <S**2> = +0.000000  Grad = 1.06e-02  CPU Time =    0.02711  (0.00 / step)
+      4: E[uccsd] = -75.723435405368  <S**2> = +0.000000  Grad = 2.38e-03  CPU Time =    0.02668  (0.00 / step)
+      5: E[uccsd] = -75.723436023769  <S**2> = +0.000000  Grad = 1.61e-03  CPU Time =    0.02641  (0.00 / step)
+      6: E[uccsd] = -75.723436475642  <S**2> = +0.000000  Grad = 7.34e-05  CPU Time =    0.02685  (0.00 / step)
+      7: E[uccsd] = -75.723436476669  <S**2> = +0.000000  Grad = 9.36e-06  CPU Time =    0.02686  (0.00 / step)
   Final: E[uccsd] = -75.723436476669  <S**2> = +0.000000  rho = 1 
 
 (uccsd state)
@@ -311,4 +329,4 @@ Geometry Optimization Converged in 3 cycles
 *******************************************
 
 Saved in ./h2o_ucc.qkt.
-Normal termination of quket at 2022-08-07 01:06:23.268866
+Normal termination of quket at 2022-09-16 00:07:48.056668

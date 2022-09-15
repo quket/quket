@@ -9,17 +9,17 @@
 ///             Q   Q       U    U      K   K       E    E       T              ///
 ///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
 ///                                                                             ///
-///                      Quantum Computing Simulator Ver 0.9.1                  ///
+///                      Quantum Computing Simulator Ver 0.9.4                  ///
 ///                                                                             ///
 ///        Copyright 2019-2022                                                  ///
 ///        The Quket Developers                                                 ///
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-08-07 00:57:44.917847: 
-8 processes x 4 = Total 32 cores
-API for qulacs: None
-Number of cpus in the main node (pinode01): 8
+2022-09-16 00:02:43.219959: 
+16 processes x 2 = Total 32 cores
+API for qulacs: openmp
+Number of cpus in the main node (pinode01): 16
 
 ##################### INPUT ########################
 basis        = sto-6G
@@ -57,7 +57,7 @@ Basis set = sto-6G
 *******************************************
 
 Symmetry C2v : C2v(Abelian)
-E[FCI]    = -75.463315580348     (Spin = 1   Ms = 0)
+E[FCI]    = -75.463315580368     (Spin = 1   Ms = 0)
 E[HF]     = -74.990092518846     (Spin = 1   Ms = 0)
 Tapering-Off Results:
 List of redundant qubits:  [0, 1, 2, 4]
@@ -66,6 +66,10 @@ Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
 Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
 Qubit: 4    Tau: 1.0 [Z4 Z5 Z6 Z7]
 
+Symmetry-forbidden pauli operators are removed.
+Existing theta_list is inconsistent :
+   size of pauli_list 27 != size of theta_list 10.
+Ovewrite theta_list by zero.
 NBasis = 7
 
 [Molecular Orbitals]
@@ -74,11 +78,11 @@ NBasis = 7
 ---+-------+------------+------------------
  0 |   A1  |   -20.5644 | Frozen Core
  1 |   A1  |    -1.1333 | Frozen Core
- 2 |   B2  |    -0.4142 | Active (occupied)
- 3 |   B1  |    -0.2535 | Active (occupied)
+ 2 |   B1  |    -0.4142 | Active (occupied)
+ 3 |   B2  |    -0.2535 | Active (occupied)
  4 |   A1  |    -0.2445 | Active (occupied)
  5 |   A1  |     0.0585 | Active (virtual)
- 6 |   B1  |     0.0717 | Active (virtual)
+ 6 |   B2  |     0.0717 | Active (virtual)
 ---+-------+------------+------------------
 
 Tapering-Off Results:
@@ -104,7 +108,7 @@ Basis set = sto-6G
 *******************************************
 
 Symmetry C2v : C2v(Abelian)
-E[FCI]    = -75.460357183497     (Spin = 1   Ms = 0)
+E[FCI]    = -75.460357183595     (Spin = 1   Ms = 0)
 E[HF]     = -74.926806371698     (Spin = 1   Ms = 0)
 Tapering-Off Results:
 List of redundant qubits:  [0, 1, 2, 4]
@@ -113,6 +117,10 @@ Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7 Z9]
 Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
 Qubit: 4    Tau: 1.0 [Z4 Z5 Z6 Z7]
 
+Symmetry-forbidden pauli operators are removed.
+Existing theta_list is inconsistent :
+   size of pauli_list 27 != size of theta_list 10.
+Ovewrite theta_list by zero.
 NBasis = 7
 
 [Molecular Orbitals]
@@ -121,11 +129,11 @@ NBasis = 7
 ---+-------+------------+------------------
  0 |   A1  |   -20.5576 | Frozen Core
  1 |   A1  |    -1.1310 | Frozen Core
- 2 |   B2  |    -0.4128 | Active (occupied)
- 3 |   B1  |    -0.2298 | Active (occupied)
+ 2 |   B1  |    -0.4128 | Active (occupied)
+ 3 |   B2  |    -0.2298 | Active (occupied)
  4 |   A1  |    -0.2236 | Active (occupied)
  5 |   A1  |     0.0390 | Active (virtual)
- 6 |   B1  |     0.0481 | Active (virtual)
+ 6 |   B2  |     0.0481 | Active (virtual)
 ---+-------+------------+------------------
 
 Tapering-Off Results:
@@ -137,62 +145,60 @@ Qubit: 4    Tau: 1.0 [Z4 Z5 Z6 Z7]
 
 Entered VQE driver
 Performing VQE for sauccsd
-Number of VQE parameters: 10
+Number of VQE parameters: 27
 Initial configuration: |0000111111>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
-Dimensions of theta_list (27) and pauli_list (10) are not consistent.
-Take over theta_list and force it to have 10 zero elements (guess will be gone!).
 Circuit order: Exp[T1] Exp[T2] |0>
 Initial: E[sauccsd] = -74.926806371698  <S**2> = +0.000000  rho = 10  
-      1: E[sauccsd] = -75.199041156778  <S**2> = +0.000085  Grad = 1.09e+00  CPU Time =    0.11647  (0.00 / step)
-      2: E[sauccsd] = -75.337963264974  <S**2> = +0.000037  Grad = 8.38e-01  CPU Time =    0.06031  (0.00 / step)
-      3: E[sauccsd] = -75.434460951045  <S**2> = +0.000007  Grad = 2.75e-01  CPU Time =    0.10064  (0.00 / step)
-      4: E[sauccsd] = -75.446241930110  <S**2> = +0.000041  Grad = 1.92e-01  CPU Time =    0.06134  (0.00 / step)
-      5: E[sauccsd] = -75.452395722342  <S**2> = +0.000061  Grad = 6.70e-02  CPU Time =    0.06122  (0.00 / step)
-      6: E[sauccsd] = -75.453635457757  <S**2> = +0.000070  Grad = 4.79e-02  CPU Time =    0.05502  (0.00 / step)
-      7: E[sauccsd] = -75.454877045154  <S**2> = +0.000087  Grad = 2.95e-02  CPU Time =    0.05492  (0.00 / step)
-      8: E[sauccsd] = -75.454972757663  <S**2> = +0.000083  Grad = 1.44e-02  CPU Time =    0.09453  (0.00 / step)
-      9: E[sauccsd] = -75.455009028938  <S**2> = +0.000078  Grad = 5.31e-03  CPU Time =    0.05496  (0.00 / step)
-     10: E[sauccsd] = -75.455011091851  <S**2> = +0.000080  Grad = 1.69e-03  CPU Time =    0.05492  (0.00 / step)
-     11: E[sauccsd] = -75.455011462251  <S**2> = +0.000080  Grad = 3.39e-04  CPU Time =    0.05493  (0.00 / step)
-     12: E[sauccsd] = -75.455011466155  <S**2> = +0.000080  Grad = 3.14e-04  CPU Time =    0.09479  (0.00 / step)
-  Final: E[sauccsd] = -75.455011466155  <S**2> = +0.000080  rho = 10 
+      1: E[sauccsd] = -75.199037525843  <S**2> = +0.000085  Grad = 1.09e+00  CPU Time =    0.10453  (0.00 / step)
+      2: E[sauccsd] = -75.337985023048  <S**2> = +0.000037  Grad = 8.38e-01  CPU Time =    0.04544  (0.00 / step)
+      3: E[sauccsd] = -75.434510327089  <S**2> = +0.000008  Grad = 2.75e-01  CPU Time =    0.07788  (0.00 / step)
+      4: E[sauccsd] = -75.446256661902  <S**2> = +0.000041  Grad = 1.91e-01  CPU Time =    0.04547  (0.00 / step)
+      5: E[sauccsd] = -75.452419048126  <S**2> = +0.000061  Grad = 6.66e-02  CPU Time =    0.04558  (0.00 / step)
+      6: E[sauccsd] = -75.453654342998  <S**2> = +0.000070  Grad = 4.76e-02  CPU Time =    0.04556  (0.00 / step)
+      7: E[sauccsd] = -75.454888275424  <S**2> = +0.000086  Grad = 2.84e-02  CPU Time =    0.04532  (0.00 / step)
+      8: E[sauccsd] = -75.454976690886  <S**2> = +0.000082  Grad = 1.32e-02  CPU Time =    0.07743  (0.00 / step)
+      9: E[sauccsd] = -75.455009215505  <S**2> = +0.000078  Grad = 5.22e-03  CPU Time =    0.04564  (0.00 / step)
+     10: E[sauccsd] = -75.455011256228  <S**2> = +0.000080  Grad = 1.95e-03  CPU Time =    0.04565  (0.00 / step)
+     11: E[sauccsd] = -75.455011445006  <S**2> = +0.000079  Grad = 2.21e-04  CPU Time =    0.04560  (0.00 / step)
+     12: E[sauccsd] = -75.455011449971  <S**2> = +0.000080  Grad = 6.08e-04  CPU Time =    0.04543  (0.00 / step)
+  Final: E[sauccsd] = -75.455011449971  <S**2> = +0.000080  rho = 10 
 
 (sauccsd state)
      Basis             Coef
 | 0000111111 > : +0.5780 +0.0000i
 | 0011001111 > : -0.3686 +0.0000i
-| 0110011011 > : -0.1836 +0.0000i
-| 0110100111 > : +0.2583 +0.0000i
-| 1001011011 > : +0.2583 +0.0000i
-| 1001100111 > : -0.1836 +0.0000i
+| 0110011011 > : +0.1836 +0.0000i
+| 0110100111 > : -0.2583 +0.0000i
+| 1001011011 > : -0.2583 +0.0000i
+| 1001100111 > : +0.1836 +0.0000i
 | 1100110011 > : -0.3516 +0.0000i
-| 1111000011 > : +0.4217 +0.0000i
+| 1111000011 > : +0.4216 +0.0000i
 
 
-VQE Done: CPU Time =          0.8898
+VQE Done: CPU Time =          0.6939
 
 sauccsd (vqe) 
      Basis             Coef
 | 0000111111 > : +0.5780 +0.0000i
 | 0011001111 > : -0.3686 +0.0000i
-| 0110011011 > : -0.1836 +0.0000i
-| 0110100111 > : +0.2583 +0.0000i
-| 1001011011 > : +0.2583 +0.0000i
-| 1001100111 > : -0.1836 +0.0000i
+| 0110011011 > : +0.1836 +0.0000i
+| 0110100111 > : -0.2583 +0.0000i
+| 1001011011 > : -0.2583 +0.0000i
+| 1001100111 > : +0.1836 +0.0000i
 | 1100110011 > : -0.3516 +0.0000i
-| 1111000011 > : +0.4217 +0.0000i
+| 1111000011 > : +0.4216 +0.0000i
 
  === Computing 1RDM === 
  === Computing 2RDM === 
 
 Dipole moment from 1RDM (in Debye):
-x = -0.00000  y = 0.01665  z = 0.00000
-| mu | = 0.01665
+x = -0.00000  y = 0.01666  z = 0.00000
+| mu | = 0.01666
 
 Dipole moment from relaxed 1RDM (in Debye):
-x = 0.00000     y = -0.00224    z = -0.00000
-| mu | = 0.00224
+x = -0.00000     y = -0.00214    z = -0.00000
+| mu | = 0.00214
 Saved in ./sauccsd_h2o.qkt.
-Normal termination of quket at 2022-08-07 00:57:48.146411
+Normal termination of quket at 2022-09-16 00:02:46.225688

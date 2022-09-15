@@ -9,17 +9,17 @@
 ///             Q   Q       U    U      K   K       E    E       T              ///
 ///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
 ///                                                                             ///
-///                      Quantum Computing Simulator Ver 0.9.1                  ///
+///                      Quantum Computing Simulator Ver 0.9.4                  ///
 ///                                                                             ///
 ///        Copyright 2019-2022                                                  ///
 ///        The Quket Developers                                                 ///
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-08-07 01:01:19.104186: 
-8 processes x 4 = Total 32 cores
-API for qulacs: None
-Number of cpus in the main node (pinode01): 8
+2022-09-16 00:06:53.630327: 
+16 processes x 2 = Total 32 cores
+API for qulacs: openmp
+Number of cpus in the main node (pinode01): 16
 
 ##################### INPUT ########################
 basis        = sto-3G
@@ -58,7 +58,6 @@ Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
 Qubit: 4    Tau: 1.0 [Z4 Z5 Z8 Z9 Z10 Z11]
 Qubit: 6    Tau: 1.0 [Z6 Z7 Z8 Z9 Z10 Z11]
 
-pauli_list found.
 TODO: Pauli_list is not supported for ansatz = 3-upccgsd.
 NBasis = 10
 
@@ -86,7 +85,6 @@ Qubit: 2    Tau: 1.0 [Z2 Z3 Z8 Z9]
 Qubit: 4    Tau: 1.0 [Z4 Z5 Z8 Z9 Z10 Z11]
 Qubit: 6    Tau: 1.0 [Z6 Z7 Z8 Z9 Z10 Z11]
 
-pauli_list found.
 Entered VQE driver
 Number of parameters: Singles 15    Doubles 15    Total 90
 Performing VQE for 3-upccgsd
@@ -95,39 +93,15 @@ Initial configuration: |000000111111>
 Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Derivatives: Analytical
 Circuit order: Exp[T1] Exp[T2] |0>
-    1: E[3-UpCCGSD] = -107.588100515355  <S**2> = +0.000000000000002  Grad = 3.55e-04  CPU Time =  1.20  (0.03 / step)
-Final: E[3-UpCCGSD] = -107.588100515355  <S**2> = +0.000000000000002
+    1: E[3-UpCCGSD] = -107.588100535527  <S**2> = -0.000000000000001  Grad = 6.92e-04  CPU Time =  0.59  (0.02 / step)
+Final: E[3-UpCCGSD] = -107.588100535527  <S**2> = -0.000000000000001
 
 (3-UpCCGSD state)
       Basis              Coef
 | 000000111111 > : +0.8957 +0.0000i
-| 000011001111 > : -0.2397 +0.0000i
+| 000011001111 > : -0.2398 +0.0000i
 | 000110011011 > : +0.1100 +0.0000i
 | 001001100111 > : +0.1100 +0.0000i
 | 001100110011 > : -0.2351 +0.0000i
 | 001111000011 > : +0.1094 +0.0000i
 
-
-VQE Done: CPU Time =          1.2415
-
-3-upccgsd (vqe) 
-      Basis              Coef
-| 000000111111 > : +0.8957 +0.0000i
-| 000011001111 > : -0.2397 +0.0000i
-| 000110011011 > : +0.1100 +0.0000i
-| 001001100111 > : +0.1100 +0.0000i
-| 001100110011 > : -0.2351 +0.0000i
-| 001111000011 > : +0.1094 +0.0000i
-
- === Computing 1RDM === 
- === Computing 2RDM === 
-
-Dipole moment from 1RDM (in Debye):
-x = -0.00025  y = 0.00039  z = -0.00424
-| mu | = 0.00427
-
-Dipole moment from relaxed 1RDM (in Debye):
-x = 0.00061     y = -0.00152    z = -0.00555
-| mu | = 0.00579
-Saved in ./3-upccgsd_N2.qkt.
-Normal termination of quket at 2022-08-07 01:01:21.564941

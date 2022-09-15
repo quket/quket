@@ -518,6 +518,7 @@ def update_pauli_test(n_qubits):
     for i in range(n_qubits):
         pauli.append([i, 'Z'])
     import time
+    _ = update_pauli1(pauli, state)
     t0 = time.time() 
     _ = update_pauli1(pauli, state)
     t1 = time.time() 
@@ -527,7 +528,8 @@ def update_pauli_test(n_qubits):
         cf._evolve = 1
     else:
         cf._evolve = 2
-    prints(f'Using update_pauli{cf._evolve} for evolve: {max(t1-t0, t2-t1) / min(t1-t0, t2-t1):.2f} times faster')
+    if cf.debug:
+        prints(f'Using update_pauli{cf._evolve} for evolve: {max(t1-t0, t2-t1) / min(t1-t0, t2-t1):.2f} times faster')
 
 def evolve(operator, wfn, mapping=None, parallel=False):
     """

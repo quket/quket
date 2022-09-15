@@ -9,17 +9,17 @@
 ///             Q   Q       U    U      K   K       E    E       T              ///
 ///              QQQ QQ      UUUU      KKK   KK    EEEEEEE      TTT             ///
 ///                                                                             ///
-///                      Quantum Computing Simulator Ver 0.9.1                  ///
+///                      Quantum Computing Simulator Ver 0.9.4                  ///
 ///                                                                             ///
 ///        Copyright 2019-2022                                                  ///
 ///        The Quket Developers                                                 ///
 ///        All rights Reserved.                                                 ///
 ///                                                                             ///
 ///////////////////////////////////////////////////////////////////////////////////
-2022-08-07 00:58:33.478826: 
-8 processes x 4 = Total 32 cores
-API for qulacs: None
-Number of cpus in the main node (pinode01): 8
+2022-09-16 00:03:31.954559: 
+16 processes x 2 = Total 32 cores
+API for qulacs: openmp
+Number of cpus in the main node (pinode01): 16
 
 ##################### INPUT ########################
 basis        = sto-3G
@@ -51,14 +51,13 @@ Basis set = sto-3G
 *******************************************
 
 Symmetry C1 : C1(Abelian)
-E[FCI]    = -1.969513702670     (Spin = 1   Ms = 0)
+E[FCI]    = -1.969513702656     (Spin = 1   Ms = 0)
 E[HF]     = -1.779275219294     (Spin = 1   Ms = 0)
 Tapering-Off Results:
 List of redundant qubits:  [0, 1]
 Qubit: 0    Tau: 1.0 [Z0 Z2 Z4 Z6]
 Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7]
 
-pauli_list found.
 NBasis = 4
 
 [Molecular Orbitals]
@@ -76,21 +75,20 @@ List of redundant qubits:  [0, 1]
 Qubit: 0    Tau: 1.0 [Z0 Z2 Z4 Z6]
 Qubit: 1    Tau: 1.0 [Z1 Z3 Z5 Z7]
 
-pauli_list found.
 Performing ADAPT-VQE [original]
 ADAPT Convergence criterion = 1E-02
 Initial configuration: | 00001111 >
 VQE Convergence criteria: ftol = 1E-09, gtol = 1E-05
 Number of operators in pool: 87
     1:   E[adapt] = -1.803805408638   <S**2> =  0.00000000000000   Grad = 1.16e+00   Fidelity = 0.000000   CPU Time =  0.02   <N> =  4.00000000000000   <Sz> =  0.00000000000000   CNOT = 13
-    2:   E[adapt] = -1.825904441768   <S**2> =  0.00000000000000   Grad = 9.49e-01   Fidelity = 0.000000   CPU Time =  0.03   <N> =  4.00000000000000   <Sz> =  0.00000000000000   CNOT = 26
-    3:   E[adapt] = -1.867072519343   <S**2> =  0.08655191517173   Grad = 7.46e-01   Fidelity = 0.000000   CPU Time =  0.03   <N> =  4.00000000000001   <Sz> =  0.00000000000000   CNOT = 60
-    4:   E[adapt] = -1.888806498374   <S**2> =  0.00138859411766   Grad = 5.34e-01   Fidelity = 0.000000   CPU Time =  0.05   <N> =  3.99999999999999   <Sz> =  0.00000000000000   CNOT = 94
-    5:   E[adapt] = -1.944976401596   <S**2> =  0.03567246541070   Grad = 3.70e-01   Fidelity = 0.000000   CPU Time =  0.06   <N> =  3.99999999999999   <Sz> =  0.00000000000000   CNOT = 107
-    6:   E[adapt] = -1.960113227160   <S**2> =  0.04287656921086   Grad = 6.36e-01   Fidelity = 0.000000   CPU Time =  0.06   <N> =  4.00000000000000   <Sz> =  0.00000000000000   CNOT = 120
-    7:   E[adapt] = -1.967526530877   <S**2> =  0.00000000004054   Grad = 1.83e-01   Fidelity = 0.000000   CPU Time =  0.09   <N> =  4.00000000000000   <Sz> =  0.00000000000000   CNOT = 154
-    8:   E[adapt] = -1.969513701133   <S**2> =  0.00000000004498   Grad = 4.93e-02   Fidelity = 0.000000   CPU Time =  0.13   <N> =  4.00000000000002   <Sz> = -0.00000000000000   CNOT = 188
-gradient norm = 1.502942e-04 < 1.000000e-02
+    2:   E[adapt] = -1.825904441768   <S**2> =  0.00000000000000   Grad = 9.49e-01   Fidelity = 0.000000   CPU Time =  0.02   <N> =  4.00000000000001   <Sz> =  0.00000000000000   CNOT = 26
+    3:   E[adapt] = -1.867072519343   <S**2> =  0.08655191517155   Grad = 7.46e-01   Fidelity = 0.000000   CPU Time =  0.03   <N> =  4.00000000000000   <Sz> =  0.00000000000000   CNOT = 60
+    4:   E[adapt] = -1.888806498374   <S**2> =  0.00138859411767   Grad = 5.34e-01   Fidelity = 0.000000   CPU Time =  0.05   <N> =  3.99999999999999   <Sz> =  0.00000000000000   CNOT = 94
+    5:   E[adapt] = -1.944976401596   <S**2> =  0.03567246541048   Grad = 3.70e-01   Fidelity = 0.000000   CPU Time =  0.06   <N> =  4.00000000000001   <Sz> =  0.00000000000000   CNOT = 107
+    6:   E[adapt] = -1.960113227159   <S**2> =  0.04287656921067   Grad = 6.36e-01   Fidelity = 0.000000   CPU Time =  0.06   <N> =  4.00000000000000   <Sz> =  0.00000000000000   CNOT = 120
+    7:   E[adapt] = -1.967526530876   <S**2> =  0.00000000004054   Grad = 1.83e-01   Fidelity = 0.000000   CPU Time =  0.09   <N> =  3.99999999999999   <Sz> = -0.00000000000000   CNOT = 154
+    8:   E[adapt] = -1.969513701133   <S**2> =  0.00000000004498   Grad = 4.93e-02   Fidelity = 0.000000   CPU Time =  0.13   <N> =  4.00000000000001   <Sz> = -0.00000000000000   CNOT = 188
+gradient norm = 1.503190e-04 < 1.000000e-02
 
 -----------ADAPT-VQE finished----------
 number of parameter is  8
@@ -102,7 +100,7 @@ Final: E[adapt] = -1.969513701133   <S**2> = 0.000000000044982   Fidelity = 0.00
 | 10010110 > : -0.1550 +0.0000i
 
 
- Done: CPU Time =            0.7847
+ Done: CPU Time =            0.8054
 adapt (vqe) 
     Basis            Coef
 | 00001111 > : +0.6773 +0.0000i
@@ -121,4 +119,4 @@ Dipole moment from relaxed 1RDM (in Debye):
 x = 0.00000     y = -0.00000    z = -0.00004
 | mu | = 0.00004
 Saved in ./adapt_h4.qkt.
-Normal termination of quket at 2022-08-07 00:58:35.053332
+Normal termination of quket at 2022-09-16 00:03:33.465387
