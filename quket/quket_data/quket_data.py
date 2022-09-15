@@ -2357,7 +2357,7 @@ class QuketData():
             self.init_state = set_state(self.det, self._n_qubits, mapping=self.cf.mapping)
             self.current_det = self.det
             if self.tapered['states']:
-                self.init_state = self.transform_state(self.init_state, backtransform=False)
+                self.init_state, success = self.transform_state(self.init_state, backtransform=False)
                 prints('Tapered-off initial state...')
             if self.tapered['pauli_list']:
                 self.get_pauli_list()
@@ -2429,7 +2429,7 @@ class QuketData():
                 prints(f"ansatz is now {ansatz} (previously {self.ansatz}).")
                 self.ansatz = ansatz
             if self.tapered['states']:
-                self.init_state = self.transform_state(self.init_state, backtransform=False)
+                self.init_state, success = self.transform_state(self.init_state, backtransform=False)
                 prints('Tapered-off initial state...')
             if self.tapered['pauli_list']:
                 self.get_pauli_list()
