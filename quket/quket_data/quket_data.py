@@ -1888,14 +1888,14 @@ class QuketData():
         if self.tapering.redundant_bits is None:
             prints('First perform tapering.run().')
             return
+        if self.pauli_list is None or self.pauli_list == []:
+            #prints('pauli_list not found.')
+            return
         if self.tapering.redundant_bits == []:
             self.allowed_pauli_list = [True for _ in range(len(self.pauli_list))]
             return
         if self.tapered['pauli_list']:
             prints('pauli_list already transformed and tapered-off.')
-            return
-        if self.pauli_list is None or self.pauli_list == []:
-            #prints('pauli_list not found.')
             return
 
         from quket.pauli import get_allowed_pauli_list
