@@ -1,8 +1,8 @@
-# quket 0.9.3
+# quket 0.9.4
 ```
 
  Quket: Quantum Unified Kernel for Emulator Toolbox 
- Official Version 0.9.3
+ Official Version 0.9.4
  
      Copyright 2019-2022 Takashi Tsuchimochi, Yuto Mori, Yuma Shimomoto, Taisei Nishimaki, Yoohee Ryo,
                          Masaki Taii, Takahiro Yoshikura, TsangSiuChung, Kazuki Sasasako, Kengo Yoshimura. All rights Reserved.
