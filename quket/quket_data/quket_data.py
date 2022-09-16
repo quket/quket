@@ -1218,11 +1218,10 @@ class QuketData():
                 from quket.tapering.tapering import sequential_run
                 self.tapering = sequential_run(self.tapering, self.n_qubits, det, mapping=self.cf.mapping)
                 prints(self.tapering)
-
                 self.get_allowed_pauli_list()
                 if self.cf.do_taper_off and self.method != 'mbe':
                     self.transform_all(reduce=True)
-                else:
+                elif self.cf.symmetry_pauli:
                     self.update_pauli_list()
             else:
                 if self.pauli_list is not None:
@@ -1389,7 +1388,7 @@ class QuketData():
                     self.n_qubits = self.tapering.n_qubits_sym
                     self.tapered["states"] = True
                 self.transform_all(reduce=True)
-            else:
+            elif self.cf.symmetry_pauli:
                 self.update_pauli_list()
         else:
             if self.pauli_list is not None:
@@ -2115,7 +2114,7 @@ class QuketData():
         if backtransform:
             self.H_n_qubits = self._n_qubits
         elif reduce:
-            self.H_n_qubits -= len(self.tapering.redundant_bits)
+            self.H_n_qubits = self._n_qubits - len(self.tapering.redundant_bits)
         self.openfermion_to_qulacs()
 
     def transform_theta_list(self, backtransform=False, reduce=True):
